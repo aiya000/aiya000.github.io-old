@@ -1,8 +1,8 @@
 # ブログをFC2ブログからHakyll + github-pagesを使うようにした
 
-　以前書いた [退職記事](ここに場所) がありましたが、あれはpandocでmarkdownからhtmlに変換してからFC2ブログに投稿していました。
-
-しかし事件がここで起こり、具体的にはolとulがネストしている部分のStyleがだめになっていました。 [ありふれた悲しみのhtml](https://www.amazon.co.jp/gp/product/B00J8D5WV2?ie=UTF8&*Version*=1&*entries*=0)。
+　以前書いた [退職記事](./2016-05-26-C#で仕事してましたが退職しました.html) がありましたが、あれはpandocでmarkdownからhtmlに変換してからFC2ブログに投稿していました。
+http://127.0.0.1:8000/posts/
+しかし事件がここで起こり、具体的にはolとulがネストしている部分のStyleがだめになっていました。 [ありふれたhtmlの果て](https://www.amazon.co.jp/gp/product/B00J8D5WV2?ie=UTF8&*Version*=1&*entries*=0)。
 
 ブログ環境を・・・ウッ・・・ガエダイ！！！
 
@@ -72,20 +72,13 @@ zshは全く知らない。
 
 ## 構造
 
-　今回はHakyllで作ってるブログ楮自体も管理したかったので、以下の2つのリポジトリを用意。
+　今回はHakyllで作ってるブログ楮自体も管理したかったのでこちらを参考に。
 
-- [aiya000.github.io-owner](https://github.com/aiya000/aiya000.github.io-owner)
+- [Hakyll - Using Hakyll with GitHub Pages](https://jaspervdj.be/hakyll/tutorials/github-pages-tutorial.html)
+
+成果物のリポジトリはこちら。
+
 - [aiya000.github.io](https://github.com/aiya000/aiya000.github.io)
-
-　上のプロジェクトで\_siteを生成して、下のプロジェクトで\_siteを管理する。  
-\_siteは公開されている[github-pages](http://aiya000.github.io)(今貴方が見てくれているここ)そのものなので、
-
-1. aiya000.github.io-ownerリポジトリで記事を書く
-2. aiya000.github.io-ownerリポジトリをcommit + push
-3. aiya000.github.ioリポジトリをcommit + push
-
-という3手順でブログ記事を投稿できる。  
-冗長？ いや楽です。
 
 
 ## まとめ
