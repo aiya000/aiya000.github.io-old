@@ -1,6 +1,6 @@
 # ブログをFC2ブログからHakyll + github-pagesを使うようにした
 
-　以前書いた [退職記事](./2016-05-26-C#で仕事してましたが退職しました.html) がありましたが、あれはpandocでmarkdownからhtmlに変換してからFC2ブログに投稿していました。
+　以前書いた [退職記事](./2016-05-26-C%23で仕事してましたが退職しました.html) がありましたが、あれはpandocでmarkdownからhtmlに変換してからFC2ブログに投稿していました。
 http://127.0.0.1:8000/posts/
 しかし事件がここで起こり、具体的にはolとulがネストしている部分のStyleがだめになっていました。 [ありふれたhtmlの果て](https://www.amazon.co.jp/gp/product/B00J8D5WV2?ie=UTF8&*Version*=1&*entries*=0)。
 
