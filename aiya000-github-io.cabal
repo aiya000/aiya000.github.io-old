@@ -24,7 +24,5 @@ executable deploy-to-master
   default-language:    Haskell2010
   ghc-options:         -threaded
   build-depends:       base == 4.*
-                     , directory
                      , shelly
-                     , temporary
                      , text

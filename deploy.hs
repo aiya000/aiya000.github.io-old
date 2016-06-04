@@ -2,10 +2,7 @@
 {-# LANGUAGE ExtendedDefaultRules #-}
 import Control.Monad ( forM_ )
 import Shelly
-import System.Directory ( getTemporaryDirectory )
-import System.IO.Temp ( withTempDirectory )
 import qualified Data.Text as Text
-import qualified Data.Text.IO as TIO
 
 default ( Text.Text )
 
