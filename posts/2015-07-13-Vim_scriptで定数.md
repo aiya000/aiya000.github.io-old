@@ -64,4 +64,4 @@ let B = {'hoge' : {'baz' : 10}} | lockvar! B
 let B.hoge.baz = 20  " 例外
 ```
 
-koturnさん、おしょーさん、ありがとうございます！
+koturnさん、バンビさん、ありがとうございます！
