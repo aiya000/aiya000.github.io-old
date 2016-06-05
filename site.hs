@@ -15,9 +15,16 @@ main = hakyll $ do
     route   idRoute
     compile compressCssCompiler
 
-  match (fromList ["about.md", "contact.md"]) $ do
+  match "about.md" $ do
     route   $ setExtension "html"
     compile $ pandocCompiler
+      >>= loadAndApplyTemplate "templates/default.html" defaultContext
+      >>= relativizeUrls
+
+  match "profile.html" $ do
+    route idRoute
+    compile $ pandocCompiler
+      >>= loadAndApplyTemplate "templates/profile.html" defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
@@ -59,4 +66,4 @@ main = hakyll $ do
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
-postCtx = dateField "date" "%B %e, %Y" `mappend` defaultContext
+postCtx = dateField "date" "%Y/%m/%d" `mappend` defaultContext

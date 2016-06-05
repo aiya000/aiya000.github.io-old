@@ -1,8 +1,9 @@
 body {
     color: black;
     font-size: 16px;
-    margin: 0px auto 0px auto;
-    width: 600px;
+    margin: auto 32px auto 32px;
+    width: auto;
+    background-color: #add8e6
 }
 
 div#header {
