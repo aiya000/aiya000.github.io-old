@@ -18,6 +18,7 @@ executable aiya000-github-io
   ghc-options:         -threaded
   build-depends:       base == 4.*
                      , hakyll == 4.7.*
+                     , highlighting-kate
 
 executable deploy-to-master
   main-is:             deploy.hs

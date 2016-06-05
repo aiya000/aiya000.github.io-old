@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Data.Monoid ( mappend )
 import Hakyll
-
+import qualified Text.Highlighting.Kate as HKate
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -62,6 +62,10 @@ main = hakyll $ do
         >>= relativizeUrls
 
   match "templates/*" $ compile templateCompiler
+
+  create ["css/highlight.css"] $ do
+    route idRoute
+    compile $ makeItem (compressCss . HKate.styleToCss $ HKate.pygments)
 
 
 --------------------------------------------------------------------------------

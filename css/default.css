@@ -55,3 +55,13 @@ div.info {
     font-style: italic;
 }
 
+/* --- --- --- _ --- --- --- */
+
+pre {
+    background-color: silver;
+    display: block;
+    overflow: scroll;
+    width: 70%;
+    margin-left: 3%;
+    padding: 8px 0 8px 16px;
+}
