@@ -20,7 +20,7 @@ executable aiya000-github-io
                      , hakyll == 4.7.*
                      , highlighting-kate
 
-executable deploy-to-master
+executable deploy
   main-is:             deploy.hs
   default-language:    Haskell2010
   ghc-options:         -threaded
