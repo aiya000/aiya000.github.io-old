@@ -3,7 +3,7 @@ body {
     font-size: 16px;
     margin: auto 32px auto 32px;
     width: auto;
-    background-color: #add8e6
+    background: #add8e6 url(/images/background_weed.png) no-repeat right bottom;
 }
 
 div#header {
@@ -54,8 +54,6 @@ div.info {
     font-size: 14px;
     font-style: italic;
 }
-
-/* --- --- --- _ --- --- --- */
 
 pre {
     background-color: silver;
