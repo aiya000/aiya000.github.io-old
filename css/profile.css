@@ -1,19 +1,19 @@
-img.sns_icon {
+img.sns-icon {
     height: 100px;
 }
 
-/*
-.profile_sns {
-}
-*/
-
-ul {
+ul.profile-sns {
     list-style: none;
     display: table-row;
 }
 
-ul li {
+ul.profile-sns li {
     margin-top: 32px;
     float: left;
     margin-right: 16px;
+}
+
+hr.short-bar {
+    width: 50%;
+    margin: 30px 0 30px 0;
 }
