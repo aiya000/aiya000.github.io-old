@@ -23,7 +23,7 @@ main = hakyll $ do
 
   match "profile.html" $ do
     route idRoute
-    compile $ pandocCompiler
+    compile $ getResourceBody
       >>= loadAndApplyTemplate "templates/profile.html" defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
