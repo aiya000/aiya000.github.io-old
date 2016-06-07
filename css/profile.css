@@ -1,13 +1,17 @@
+img.smart-icon {
+    border-radius: 20px;
+}
+
 img.sns-icon {
     height: 100px;
 }
 
-ul.profile-sns {
+ul.vertical-enum {
     list-style: none;
     display: table-row;
 }
 
-ul.profile-sns li {
+ul.vertical-enum li {
     margin-top: 32px;
     float: left;
     margin-right: 16px;
