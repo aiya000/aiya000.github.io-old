@@ -6,3 +6,17 @@ hr.short-bar {
     width: 50%;
     margin: 30px 0 30px 0;
 }
+
+div.sentence {
+    background-color: white;
+    width: 70%;
+}
+
+div.sentence p.attribute {
+    background-color: silver;
+    margin: 0;
+}
+
+div.sentence p {
+    margin: 8px;
+}
