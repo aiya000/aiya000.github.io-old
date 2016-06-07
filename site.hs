@@ -7,7 +7,7 @@ import qualified Text.Highlighting.Kate as HKate
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-  match "images/*" $ do
+  match "images/**" $ do
     route   idRoute
     compile copyFileCompiler
 
@@ -66,6 +66,13 @@ main = hakyll $ do
   create ["css/highlight.css"] $ do
     route idRoute
     compile $ makeItem (compressCss . HKate.styleToCss $ HKate.pygments)
+
+  match "works.html" $ do
+    route idRoute
+    compile $ getResourceBody
+      >>= loadAndApplyTemplate "templates/works.html"   defaultContext
+      >>= loadAndApplyTemplate "templates/default.html" defaultContext
+      >>= relativizeUrls
 
 
 --------------------------------------------------------------------------------
