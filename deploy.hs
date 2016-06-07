@@ -12,7 +12,7 @@ main = shelly . verbosely $
 
 deploy :: Sh ()
 deploy = do
-  run_ "stack" ["exec", "aiya000-github-io", "build"]
+  run_ "stack" ["exec", "site", "build"]
   run_ "cp"    ["-r", "./_site", "/tmp/_site"]
   run_ "git"   ["checkout", "master"]
 
