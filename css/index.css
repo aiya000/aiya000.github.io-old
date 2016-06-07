@@ -1,0 +1,11 @@
+a.title {
+    font-size: 150%;
+}
+
+br.after-margin {
+    margin-bottom: 32px;
+}
+
+hr {
+    margin: 32px 0 32px 0;
+}
