@@ -3,12 +3,12 @@
 jQueryだけでなく、angular.jsなども使えます。
 
 * [tsd](https://github.com/DefinitelyTyped/tsd) : JavaScriptファイルをTypeScriptで扱うための型情報ファイルを簡単に落としてこれる
-  - 型ファイルは[ここ](https://github.com/borisyankov/DefinitelyTyped)から落とされる
+    - 型ファイルは[ここ](https://github.com/borisyankov/DefinitelyTyped)から落とされる
 
 * 前提条件
-  - npmコマンドが使える
-  - tscコンパイラを扱う環境が整っている -> [Ubuntu15.04にnodejsとtypescriptを入れた](/posts/2015-08-15-Ubuntu15.04にnodejsとtypescriptを入れた.html)
-  - gitコマンドが使える
+    - npmコマンドが使える
+    - tscコンパイラを扱う環境が整っている -> [Ubuntu15.04にnodejsとtypescriptを入れた](/posts/2015-08-15-Ubuntu15.04にnodejsとtypescriptを入れた.html)
+    - gitコマンドが使える
 
 
 以下手順。
@@ -91,8 +91,8 @@ $ tsc hello.ts
 
 
 ## できた。
-ブラウザでhello.htmlを開いてみます。
-![Result](/images/2015-08-19-TypeScriptでjQueryを扱う_with_tsd-1.png)
+ブラウザでhello.htmlを開いてみます。  
+![Result](/images/posts/2015-08-19-TypeScriptでjQueryを扱う_with_tsd/1.png)
 
 
 できた！
