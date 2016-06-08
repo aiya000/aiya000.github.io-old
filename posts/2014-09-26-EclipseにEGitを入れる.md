@@ -11,7 +11,7 @@
 
 ## 1. The Project
 はい、プロジェクトを作りました。  
-![project](/images/2014-09-26-EclipseにEGitを入れる-1.png)  
+![project](/images/posts/2014-09-26-EclipseにEGitを入れる/1.png)  
 
 
 ## 2. The Remote
@@ -23,33 +23,33 @@ GithubあたりにGitリモートリポジトリを作ります。
 ## 3. The Register
 プロジェクトを右クリックはい。  
 Team > Share Project  
-![share-pro](/images/2014-09-26-EclipseにEGitを入れる-2.png)  
+![share-pro](/images/posts/2014-09-26-EclipseにEGitを入れる/2.png)  
 
 Gitを選択してNext。  
-![select-git](/images/2014-09-26-EclipseにEGitを入れる-3.png)  
+![select-git](/images/posts/2014-09-26-EclipseにEGitを入れる/3.png)  
   
 RepositoryにはGitのデータを置くディレクトリを指定。  
 適当な場所でいいです、デスクトップ上のディレクトリでもいいです。  
 Repositoryを入力すると他が自動入力されます。  
-![place-git](/images/2014-09-26-EclipseにEGitを入れる-4.png)  
+![place-git](/images/posts/2014-09-26-EclipseにEGitを入れる/4.png)  
   
 ***ローカルリポジトリができました。***  
 
 
 ## 4. The Push
 はい、プロジェクトを、はい右クリック。  
-![commit-git](/images/2014-09-26-EclipseにEGitを入れる-5.png)  
+![commit-git](/images/posts/2014-09-26-EclipseにEGitを入れる/5.png)  
 はい、Team > Commit  
   
 メッセージを入力。 "Initilize."  
 [Commit]ボタンをおすっ！！  
-![commit2-git](/images/2014-09-26-EclipseにEGitを入れる-6.png)  
+![commit2-git](/images/posts/2014-09-26-EclipseにEGitを入れる/6.png)  
   
   
 ここでGitのリモートリポジトリのクローンURLをURIに入力します。  
 [便利](http://google.co.jp/search?q=github+clone+URL)  
   
-![uri-git](/images/2014-09-26-EclipseにEGitを入れる-7.png)  
+![uri-git](/images/posts/2014-09-26-EclipseにEGitを入れる/7.png)  
   
 Authenticationに自分のGithubアカウント情報を入力。  
 Store in Secure Storeへのチェックは…とりあえずしておく。  
@@ -57,13 +57,13 @@ Store in Secure Storeへのチェックは…とりあえずしておく。
   
   
 Source refにはmasterを選択しておきます。  
-![ref-git](/images/2014-09-26-EclipseにEGitを入れる-8.png)  
+![ref-git](/images/posts/2014-09-26-EclipseにEGitを入れる/8.png)  
 >> [Finish]!!
 
 
 ## $. The End
 できたっ！！  
-![end-git](/images/2014-09-26-EclipseにEGitを入れる-9.png)  
+![end-git](/images/posts/2014-09-26-EclipseにEGitを入れる/9.png)  
   
   
   
