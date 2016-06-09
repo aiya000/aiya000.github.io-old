@@ -1,11 +1,18 @@
-a.title {
-    font-size: 150%;
-}
-
-br.after-margin {
-    margin-bottom: 32px;
-}
-
 hr {
     margin: 32px 0 32px 0;
+}
+
+img.wani-san {
+    width: 252px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+}
+
+div.screen-left {
+    float: left;
+    margin-right: 64px;
+}
+
+div.screen-right {
+    text-align: right;
 }

@@ -2,13 +2,19 @@
 title: Home
 ---
 
-<a class="title">(*^-^) { あいや☆ぱぶりっしゅぶろぐ！</a> <br class="after-margin"/>
+<h1 class="title">(*＾_＾) { あいや☆ぱぶりっしゅぶろぐ！</h1>
+<br/>
 
-<img src="/images/wani-san.png" alt="wani-san-image"/> <br/>
+<div class="screen-left">
+    <h2>記事</h2>
+    $partial("templates/post-list.html")$
+    <a href="/archive.html">これ以前の記事</a>
+</div>
 
-<hr />
-
-<h2>記事</h2>
-$partial("templates/post-list.html")$
-
-<a href="/archive.html">これ以前の記事</a>
+<div class="screen-right">
+    <img class="wani-san" src="/images/wani-san.png" alt="wani-san-image"/>
+    <div>
+        <a class="twitter-timeline" data-width="252" data-height="381" data-theme="dark" data-link-color="#E95F28" href="https://twitter.com/public_ai000ya">Tweets by public_ai000ya</a>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</div>
