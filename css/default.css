@@ -6,32 +6,6 @@ body {
     background: #add8e6 url(/images/background_weed.png) no-repeat right bottom;
 }
 
-div#header {
-    border-bottom: 2px solid black;
-    margin-bottom: 30px;
-    padding: 12px 0px 12px 0px;
-}
-
-div#logo a {
-    color: black;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-div#header #navigation {
-    text-align: left;
-}
-
-div#header #navigation a {
-    color: black;
-    font-size: 18px;
-    font-weight: bold;
-    margin-right: 12px;
-    text-decoration: none;
-}
-
 div#footer {
     border-top: solid 2px black;
     color: #555;
@@ -47,12 +21,6 @@ h1 {
 
 h2 {
     font-size: 20px;
-}
-
-div.info {
-    color: #555;
-    font-size: 14px;
-    font-style: italic;
 }
 
 pre {

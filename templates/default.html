@@ -1,30 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>あいや☆ぱぶりっしゅぶろぐ！ - $title$</title>
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="/css/default.css"/>
         <link rel="stylesheet" type="text/css" href="/css/highlight.css"/>
-        <script type="text/javascript" src="/js/bootstrap.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div id="header">
-            <div id="logo">
-                <a href="/">あいや☆ぱぶりっしゅぶろぐ！</a>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">あいや☆ぱぶりっしゅぶろぐ！</a>
             </div>
-            <br><br>
-            <div id="navigation">
-                <a href="/">Home</a>
-                <a href="/about.html">About</a>
-                <a href="/profile.html">Profile</a>
-                <a href="/works.html">Works</a>
-                <a href="/archive.html">Archive</a>
-            </div>
-        </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/profile.html">Profile</a></li>
+                <li><a href="/works.html">Works</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+            </ul>
+        </nav>
 
         <div id="content">
             <h4>$title$</h4>
@@ -32,7 +27,8 @@
         </div>
 
         <div id="footer">
-            This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> }(^o^*)
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br/>
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
         </div>
     </body>
 </html>
