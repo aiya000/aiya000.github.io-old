@@ -75,6 +75,10 @@ main = hakyll $ do
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
+  match "pickup-post.html" $ do
+    route idRoute
+    compile templateCompiler
+
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
