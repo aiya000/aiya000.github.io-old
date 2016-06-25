@@ -79,7 +79,7 @@
 
 - - -
 
-　日常生活に飽き飽きしている人、ちょっとギャルゲー(!)にのめり込みたい人、作品に影響されやすい中二気質の人。  
+　日常生活に飽き飽きしている人、ちょっと世界にのめり込みたい人。  
 NOeSISおすすめなのでやってみてください！
 
 [![これ](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/NOeSIS_remake-icon.png)](https://play.google.com/store/apps/details?id=jp.spw.noe01)  
