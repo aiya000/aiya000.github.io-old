@@ -1,9 +1,15 @@
 h1 {
     margin-bottom: 32px;
+    background-image: -moz-linear-gradient(top, #efefef, #ccc);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc));
+    padding: 8px;
 }
 
 h2 {
     margin-top: 32px;
+    background-image: -moz-linear-gradient(top, #efefef, #ccc);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc));
+    padding: 4px;
 }
 
 img {
