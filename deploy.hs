@@ -30,6 +30,7 @@ deploy = do
 
   -- Clean temporary directory
   run_ "rm"  ["-rf", "/tmp/_site"]
+  run_ "rm"  ["-rf", "./_cache"]
 
   -- Deploy to repository
   run_ "git" ["add", "--all"]
