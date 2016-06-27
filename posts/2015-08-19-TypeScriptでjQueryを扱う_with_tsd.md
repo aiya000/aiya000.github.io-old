@@ -1,3 +1,7 @@
+---
+title: TypeScriptでjQueryを扱う with tsd
+tags: Node.js, TypeScript, 環境
+---
 # TypeScriptでjQueryを扱う with tsd
 
 jQueryだけでなく、angular.jsなども使えます。

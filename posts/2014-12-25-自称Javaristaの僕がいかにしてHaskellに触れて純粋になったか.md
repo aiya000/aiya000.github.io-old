@@ -1,3 +1,7 @@
+---
+title: 自称Javaristaの僕がいかにしてHaskellに触れて純粋になったか
+tags: ポエム, Haskell
+---
 2014-12-24
 
 # 自称Javaristaの僕がいかにしてHaskellに触れて純粋になったか

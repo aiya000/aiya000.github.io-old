@@ -1,3 +1,7 @@
+---
+title: HackageにHaskellライブラリを上げてみた
+tags: Haskell, 日記
+---
 # HackageとHaskellライブラリを上げてみた
 
 Hackageデビュー。

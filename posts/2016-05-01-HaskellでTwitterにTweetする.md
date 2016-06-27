@@ -1,3 +1,7 @@
+---
+title: HaskellでTwitterにTweetする
+tags: プログラミング, Haskell
+---
 # HaskellでTwitterにTweetする
 
 ## About

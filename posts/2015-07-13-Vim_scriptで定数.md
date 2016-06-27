@@ -1,4 +1,8 @@
-### Vim scriptで定数
+---
+title: Vim_scriptで定数
+tags: Vim, プログラミング
+---
+# Vim scriptで定数
 
 ```
 let A = 10

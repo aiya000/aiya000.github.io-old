@@ -1,3 +1,7 @@
+---
+title: ブログをFC2ブログからHakyll + github-pagesを使うようにした
+tags: Haskell, Shell, 環境, 日記
+---
 # ブログをFC2ブログからHakyll + github-pagesを使うようにした
 
 　以前書いた [退職記事](./2016-05-26-C%23で仕事してましたが退職しました.html) がありましたが、あれはpandocでmarkdownからhtmlに変換してからFC2ブログに投稿していました。

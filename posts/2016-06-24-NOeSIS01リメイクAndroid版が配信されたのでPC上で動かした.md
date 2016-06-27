@@ -1,3 +1,7 @@
+---
+title: NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした
+tags: Linux, ゲーム, 環境, 日記
+---
 # NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした
 
 　ドーモ、人です。

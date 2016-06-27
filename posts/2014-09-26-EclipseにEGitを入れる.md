@@ -1,4 +1,7 @@
-
+---
+title: EclipseにEGitを入れる
+tags: git
+---
 # EclipseにEGitを入れる
   
 ***省略***
