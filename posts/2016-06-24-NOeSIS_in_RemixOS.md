@@ -45,7 +45,7 @@ tags: Linux, ゲーム, 環境, 日記
 
 ## どれ？
 
-[![これ](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/NOeSIS_remake-icon.png)](https://play.google.com/store/apps/details?id=jp.spw.noe01)  
+[![これ](/images/posts/2016-06-24-NOeSIS_in_RemixOS/NOeSIS_remake-icon.png)](https://play.google.com/store/apps/details?id=jp.spw.noe01)  
 [これ](https://play.google.com/store/apps/details?id=jp.spw.noe01)
 
 
@@ -59,16 +59,16 @@ tags: Linux, ゲーム, 環境, 日記
 
 ※ クリックすると大きくなる
 
-[![1](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/1.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/1-full.png)
-[![2](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/2.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/2-full.png)
-[![3](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/3.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/3-full.png)
-[![4](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/4.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/4-full.png)
-[![5](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/5.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/5-full.png)
-[![6](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/6.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/6-full.png)
-[![7](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/7.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/7-full.png)
-[![8](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/8.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/8-full.png)
-[![9](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/9.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/9-full.png)
-[![10](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/10.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/10-full.png)
+[![1](/images/posts/2016-06-24-NOeSIS_in_RemixOS/1.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/1-full.png)
+[![2](/images/posts/2016-06-24-NOeSIS_in_RemixOS/2.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/2-full.png)
+[![3](/images/posts/2016-06-24-NOeSIS_in_RemixOS/3.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/3-full.png)
+[![4](/images/posts/2016-06-24-NOeSIS_in_RemixOS/4.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/4-full.png)
+[![5](/images/posts/2016-06-24-NOeSIS_in_RemixOS/5.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/5-full.png)
+[![6](/images/posts/2016-06-24-NOeSIS_in_RemixOS/6.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/6-full.png)
+[![7](/images/posts/2016-06-24-NOeSIS_in_RemixOS/7.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/7-full.png)
+[![8](/images/posts/2016-06-24-NOeSIS_in_RemixOS/8.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/8-full.png)
+[![9](/images/posts/2016-06-24-NOeSIS_in_RemixOS/9.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/9-full.png)
+[![10](/images/posts/2016-06-24-NOeSIS_in_RemixOS/10.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/10-full.png)
 
 
 ## ヤッタ！
@@ -78,7 +78,7 @@ tags: Linux, ゲーム, 環境, 日記
 
 ## デキナイ
 
-[![11](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/11.png)](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/11-full.png)  
+[![11](/images/posts/2016-06-24-NOeSIS_in_RemixOS/11.png)](/images/posts/2016-06-24-NOeSIS_in_RemixOS/11-full.png)  
 僕のPCじゃダブルタップできない X(
 
 - - -
@@ -86,4 +86,4 @@ tags: Linux, ゲーム, 環境, 日記
 　日常生活に飽き飽きしている人、ちょっと世界にのめり込みたい人。  
 NOeSISおすすめなのでやってみてください！
 
-[![これ](/images/posts/2016-06-24-NOeSIS01リメイクAndroid版が配信されたのでPC上で動かした/NOeSIS_remake-icon.png)](https://play.google.com/store/apps/details?id=jp.spw.noe01)  
+[![これ](/images/posts/2016-06-24-NOeSIS_in_RemixOS/NOeSIS_remake-icon.png)](https://play.google.com/store/apps/details?id=jp.spw.noe01)  

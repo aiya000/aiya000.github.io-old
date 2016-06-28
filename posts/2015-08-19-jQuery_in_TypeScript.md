@@ -96,7 +96,7 @@ $ tsc hello.ts
 
 ## できた。
 ブラウザでhello.htmlを開いてみます。  
-![Result](/images/posts/2015-08-19-TypeScriptでjQueryを扱う_with_tsd/1.png)
+![Result](/images/posts/2015-08-19-jQuery_in_TypeScript/1.png)
 
 
 できた！
