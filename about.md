@@ -3,6 +3,9 @@ title: About
 ---
 
 ![aiya000-icon](/images/aiya000-profile_icon.png)  
+　イベントの参加記事、日記や私的な記事を書いていきます。  
+私的でない技術的な記事については主に[Qiita](http://qiita.com/aiya000)に投稿しています。
+
 (\*＾\_＾)
 
 　当サイトはHaskell製の静的ブログジェネレータ、[Hakyll](http://jaspervdj.be/hakyll)を、  
