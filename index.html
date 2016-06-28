@@ -4,18 +4,24 @@ title: Home
 
 <h1>(*＾_＾) { あいや☆ぱぶりっしゅぶろぐ！</h1>
 
-$partial("pickup-post.html")$
+<div class="home-content">
+    <div class="screen-left">
+        <img class="wani-san" src="/images/wani-san.png" alt="wani-san-image"/>
+        <div class="tagcloud">
+            $tagcloud$
+        </div>
+        <div class="twitter-widget">
+            <a class="twitter-timeline" data-width="300" data-height="381" data-link-color="#E95F28" href="https://twitter.com/public_ai000ya">Tweets by public_ai000ya</a>
+            <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+    </div>
 
-<div class="screen-left">
-    <h2>記事</h2>
-    $partial("templates/post-list.html")$
-    <a href="/archive.html">これ以前の記事</a>
-</div>
-
-<div class="screen-right">
-    <img class="wani-san" src="/images/wani-san.png" alt="wani-san-image"/>
-    <div>
-        <a class="twitter-timeline" data-width="300" data-height="381" data-link-color="#E95F28" href="https://twitter.com/public_ai000ya">Tweets by public_ai000ya</a>
-        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div class="screen-right">
+        $partial("pickup-post.html")$
+        <h2>記事</h2>
+        $partial("templates/post-list.html")$
+        <a href="/archive.html">これ以前の記事</a>
     </div>
 </div>
+
+<br class="end-of-content"/>

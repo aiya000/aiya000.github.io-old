@@ -1,14 +1,38 @@
-img.wani-san {
-    width: 300px;
-    margin-bottom: 16px;
-    border-radius: 8px;
+div.home-content {
+    margin-top: 32px;
 }
 
 div.screen-left {
     float: left;
-    margin-right: 64px;
+    width: 25%;
 }
 
 div.screen-right {
-    text-align: right;
+    float: left;
+    width: 75%;
+    padding-left: 32px;
+}
+
+div.screen-left img.wani-san {
+    width: 300px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+div.screen-left div.tagcloud {
+    text-align: left;
+    width: 300px;
+    background-color: white;
+    border-style: solid;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 8px;
+}
+
+div.screen-left div.twitter-widget {
+    border-radius: 8px;
+}
+
+br.end-of-content {
+    clear: both;
 }

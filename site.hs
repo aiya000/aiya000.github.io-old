@@ -66,10 +66,12 @@ main = hakyll $ do
   match "index.html" $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts    <- fmap (take 30) . recentFirst =<< loadAll "posts/*"
+      tagCloud <- renderTagCloud 80.0 200.0 tags
       let indexCtx =
-            listField "posts" (postCtx tags) (return posts) `mappend`
-            constField "title" "Home"                       `mappend`
+            listField  "posts"   (postCtx tags) (return posts) `mappend`
+            constField "title"   "Home"                        `mappend`
+            constField "tagcloud" tagCloud                     `mappend`
             defaultContext
       getResourceBody
         >>= applyAsTemplate indexCtx
