@@ -14,14 +14,14 @@ div.screen-right {
 }
 
 div.screen-left img.wani-san {
-    width: 300px;
+    width: 100%;
     border-radius: 8px;
     margin-bottom: 16px;
 }
 
 div.screen-left div.tagcloud {
     text-align: left;
-    width: 300px;
+    width: 100%;
     background-color: white;
     border-style: solid;
     border-radius: 8px;
