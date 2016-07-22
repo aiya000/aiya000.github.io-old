@@ -35,6 +35,39 @@ reportResult (Right r) = putStrLn $ "input: " ++ r
 reportResult (Left  l) = putStrLn $ "bad input (" ++ (show l) ++ ")"
 ```
 
+### もっとイケてるソース！ (2016-07-22追記)
+　イマドキのHaskellでは、`EitherT`を隠蔽するのがいいらしい！  
+また、`catch`もしてみました :P
+```haskell
+{-# LANGUAGE ScopedTypeVariables #-}
+
+import Control.Monad.Catch
+import Control.Monad.IO.Class (MonadIO)
+import Control.Monad.Trans (liftIO)
+import Control.Monad.Trans.Either
+
+data StringFail = StringEmpty deriving (Show)
+instance Exception StringFail
+
+
+main :: IO ()
+main = do
+  Right x <- runEitherT $ getLineNotEmpty `catch` \(e :: SomeException) -> return "alternative string"
+  putStr "x value is always right: "
+  print x
+
+getLineNotEmpty :: (MonadCatch m, MonadIO m) => m String
+getLineNotEmpty = do
+  s <- liftIO getLine
+  if (null s)
+     then throwM StringEmpty
+     else return s
+```
+
+- `catch`することで、常にRight値を得られます
+- `EitherT`を隠蔽することで、(`MonadCatch`及び)`MonadIO`の文脈であることが強調されます
+- `left`は`MonadThrow`の`throwM`によって隠蔽されます
+
 
 ## なんなの？
 　か…カッケー！！！！！  
