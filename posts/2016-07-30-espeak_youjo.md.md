@@ -11,6 +11,7 @@ tags: 環境, Linux, Shell
 
 ## 喋らせる
 　Linux環境で、合成音声で日本語を話してもらう方法を考えた。
+
 1. open-jtalk
     - 全然インストールできないし、インストールできてもエラー吐くし、もうめんどい
 2. eSpeak + kakasi
@@ -33,13 +34,14 @@ tags: 環境, Linux, Shell
     - 設定ファイルをschemeで記述する面白そうなやつ
     - でも英語ならeSpeakでいいじゃん…って感じなのでやめた
 2. eSpeak + mbrola
-    - [AURにmbrolaの日本語Voice](https://aur.archlinux.org/packages/mbrola-voices-jp2/)をeSpeakから利用しようかと
+    - [AURにあるmbrolaの日本語Voice](https://aur.archlinux.org/packages/mbrola-voices-jp2/)をeSpeakから利用しようかと
     - 日本語用女性音声なら可愛い声を期待できそうだったし絶対可愛い
     - eSpeakさんがmbrola-voicesさんを認識しないのでダメ
 
 
 ## もう疲れたよパトラッシュ…
 　というわけで、一日を費やして考えた今回のユースケースへの最適解はこれでした。
+
 - eSpeak + eSpeakのvoiceファイル自作
     - eSpeakでは`{espeak-dir}/espeak-data/voices/`あたりにvoiceファイルがいっぱいある
     - 自作できそうだったので自作して`+f3`を元に`{espeak-dir}/espeak-data/voices/!v/fex`というファイルで作った
