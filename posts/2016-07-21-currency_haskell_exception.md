@@ -2,6 +2,14 @@
 title: Haskellの例外、今はコレ！ EitherT型
 tags: プログラミング, Haskell
 ---
+
+- - -
+
+[Qiita](http://qiita.com/aiya000/items/6700753df2dfb9ae942e)にもっと詳しくちゃんとした記事を書きました :D
+
+- - -
+
+
 # Haskellの例外、今はコレ！ EitherT型
 　Twitterで、Haskellのいい感じの型の使い方を聞きまくって、例外についての知見を得たので記事書きます :)
 
