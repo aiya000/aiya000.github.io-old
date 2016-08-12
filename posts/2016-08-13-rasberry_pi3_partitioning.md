@@ -28,6 +28,7 @@ tags: Linux, RasberryPi, 環境
     - 書き込みアクセスが少しありそうなので一応分割する
 - /root
     - ここにswapファイル作って仮想メモリ入れたいので巻き添え
+    - Rasbianにはdphys-swapfileというswap管理用デーモンがあるのですが、知らん。 dphys-swapfileをdisableにしてfstabを使う
 
 
 ## パーティションデザイン
