@@ -36,3 +36,7 @@ div.screen-left div.twitter-widget {
 br.end-of-content {
     clear: both;
 }
+
+div.i-want-to-this a {
+    font-size: 40px;
+}
