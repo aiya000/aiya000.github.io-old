@@ -11,8 +11,8 @@ main = do
     x <- getFooMaybe  -- indent 1
     case x of
         Nothing -> ...
-        Just x' -> do  // indent 2
-            ...  // indent 3
+        Just x' -> do  -- indent 2
+            ...  -- indent 3
             ...
 ```
 
