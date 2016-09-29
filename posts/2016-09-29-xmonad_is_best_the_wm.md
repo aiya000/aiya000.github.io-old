@@ -20,6 +20,7 @@ tags: Linux
   誰でもxmonadをカスタマイズできるようになっている
     - [xmonad標準](http://xmonad.org/xmonad-docs/xmonad/)にはないレイアウトとかツールが有志によって提供されている
 - キーマッピングをxmonadで設定できるので、autokeyなどのツールが不要
+    - Appごとのキーマッピングは…できな…い？？
 - 結構枯れている
 
 
