@@ -1,4 +1,5 @@
 h1 {
+    font-size: 150%;
     margin-bottom: 32px;
     background-image: -moz-linear-gradient(top, #efefef, #ccc);
     background-image: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc));
@@ -6,9 +7,18 @@ h1 {
 }
 
 h2 {
+    font-size: 100%;
     margin-top: 32px;
     background-image: -moz-linear-gradient(top, #efefef, #ccc);
     background-image: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc));
+    padding: 4px;
+}
+
+/* For title */
+h4 {
+    font-size: 200%;
+    background-image: -moz-linear-gradient(top, whitesmoke, lightsteelblue);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(whitesmoke), to(lightsteelblue));
     padding: 4px;
 }
 
@@ -18,4 +28,12 @@ img {
 
 li {
     font-size: 95%;
+}
+
+.info {
+    background-color: white;
+    padding: 4px;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 1px;
 }
