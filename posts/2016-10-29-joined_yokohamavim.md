@@ -41,18 +41,21 @@ Vimmerは意外とキーマッピングを頭で覚えていないようで、�
 # 発表
 ## [DSL でナンデモプログラミング!? ～TeX と Vim script を比較してみた～](https://speakerdeck.com/watsondna/dsl-programming)
 - @Watson_DNAさん
+
 TeXでプログラミングするアレです。  
 やべえ。
 
 ## Vim script で C のコンパイラを作ろうとしてる話
 - @Linda_ppさん
 - [repository - 8cc.vim](https://github.com/rhysd/8cc.vim)
+
 ELVMというのを使ってなんかするやばいやつ。  
 何らかの言語で？ ELVM用のコードを書いて？ ELVMが何らかの言語のコードを？ 出力するらしい。
 多分近い未来では、Vim scriptでVim scriptを書くことができるようになりそう。
 
 ## Vim8のドキュメント読み
 - @thincaさん
+
 すごい。  
 完全に読んでいて、説明力だった。
 
