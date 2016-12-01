@@ -45,6 +45,7 @@ PRをすることにより、以下の効能があります。
 直近だとこんなPRした。
 
 - [yi-editor/yi - Add vim ex command :registers to listing register details](https://github.com/yi-editor/yi/pull/936)
+- [vim-jp/vimdoc-ja-working - Translate test functions in eval.jax](https://github.com/vim-jp/vimdoc-ja-working/pull/86)
 
 
 # PR投げる際の心配事とか
@@ -65,15 +66,14 @@ PRをすることにより、以下の効能があります。
 
 
 # あ、
-　そういえばvim-jpでVimの:helpの翻訳で、人手が欲しいそうです。  
-翻訳を手伝うと、Vimの:helpにcontributerとして名前が載るらしい…載りたい。  
+　そういえばvim-jpで行われているVimの:helpの翻訳(vimdoc-ja)で、人手が欲しいそうです。  
+Vimにcontributeするチャンス！
 PRのチャンス！
 
-詳しくはここ
+詳しくはここを参照！
 
-- [lingr/vim](http://lingr.com/room/vim)
-
-で話を聞けば、誰かしら答えてくれそう！ :D
+- [vim-jp/vimdoc-ja-working Wiki](https://github.com/vim-jp/vimdoc-ja-working/wiki)
+    - [eval.jax の未訳文を翻訳する](https://github.com/vim-jp/vimdoc-ja-working/issues/48)
 
 以上！  
 かしこまっ！
