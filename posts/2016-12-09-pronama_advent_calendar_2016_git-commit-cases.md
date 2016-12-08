@@ -7,6 +7,15 @@ tags: git, AdventCalendar
 昨日の記事は[Unityからマウスカーソルを操作する](http://qiita.com/kirurobo/items/fb6b39a6097338f02eb4)でした :D  
 えっ、なにこれ、プロ生ちゃんがこっちのマウスカーソルを制御してるの？ すごい。
 
+
+# 宣伝
+[マスコットアプリ文化祭2016](https://mascot-apps-contest.azurewebsites.net/2016/About)では
+
+![僕の作品の画像](/images/posts/2016-12-09-pronama_advent_calendar_2016_git-commit-cases/my.png)
+
+こういうものを登録しました :D  
+某所でこれでLTしたりもした。
+
 - - -
 
 　ちょうど1つのcommitを分解したい事案が出てきたので、備考録として残しておく。  
