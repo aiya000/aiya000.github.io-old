@@ -1,6 +1,6 @@
 ---
 title: aref-web.vimの紹介 - Vimアドベントカレンダー2016 - 14日目
-tag: Vim, AdventCalendar
+tags: Vim, AdventCalendar
 ---
 　ドーモ、この前「HaskellでTwitterのbot作ってるんですよー」って言ったら  
 「ああ、このアカウントですよね！」って言われて、僕のメインアカウントを指されたあいやです :D
