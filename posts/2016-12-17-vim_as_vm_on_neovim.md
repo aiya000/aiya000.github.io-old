@@ -21,7 +21,7 @@ VimとNeoVimの非同期APIが非互換なので、NeoVimに対応してませ�
 ちゅーこってこんなコマンドを定義する。
 
 ```vim
-command! -bar -nargs=* -complete=file VimDo terminal vim -c <q-args>
+command! -bar -nargs=* -complete=file VimRunDo terminal vim -c <q-args>
 ```
 
 するとこんなんできます。
@@ -34,13 +34,20 @@ command! -bar -nargs=* -complete=file VimDo terminal vim -c <q-args>
 ちなみに↑で使用したキーマッピングはこんな感じ。
 
 ```vim
-nnoremap <leader>K :<C-u>vsp \| VimDo Aref weblio <C-r>=expand('<cword>')<CR><CR>
-nnoremap <leader>S :<C-u>vsp \| VimDo Aref stackage <C-r>=expand('<cword>')<CR><CR>
-vnoremap <leader>K "zy:<C-u>vsp \| VimDo Aref weblio <C-r>z<CR>
-vnoremap <leader>S "zy:<C-u>vsp \| VimDo Aref stackage <C-r>z<CR>
+nnoremap <leader>K :<C-u>vsp \| VimRunDo Aref weblio <C-r>=expand('<cword>')<CR><CR>
+nnoremap <leader>S :<C-u>vsp \| VimRunDo Aref stackage <C-r>=expand('<cword>')<CR><CR>
+vnoremap <leader>K "zy:<C-u>vsp \| VimRunDo Aref weblio <C-r>z<CR>
+vnoremap <leader>S "zy:<C-u>vsp \| VimRunDo Aref stackage <C-r>z<CR>
 ```
 
 - - -
 
 ということで実用性は限られますが、辞書を引いたりオセロをしたりっていうカレントバッファに作用する感じではない感じの、
 NeoVimに対応してないVimプラグインもNeoVimで動かせ~~たかのように見せることができ~~ます :D
+
+- - -
+
+# 追記
+　プラグイン化したよ！
+
+[nvim-vim-runner / GitHub](https://github.com/aiya000/nvim-vim-runner)
