@@ -1,5 +1,5 @@
 ---
-title: お母さんとお父さんにHHKB Lite2 JP配列のクリスマスプレゼントを貰った
+title: HHKB Lite2 JP配列のクリスマスプレゼントを貰った
 tags: 日記
 ---
 　とても嬉しい！  
