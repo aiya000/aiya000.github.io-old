@@ -1,6 +1,6 @@
 ---
 title: ラブライブ！ スクフェスACをやってきた！ with 穂乃果ちゃん
-tags: 日記, Haskell
+tags: 日記
 ---
 
 　[ラブライブ！ スクールアイドルフェスティバル 〜after school ACTIVITY〜](http://www.lovelive-sifac.jp/)を初体験すべく昨日、
