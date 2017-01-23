@@ -37,3 +37,14 @@ li {
     border-radius: 8px;
     border-width: 1px;
 }
+
+ul.bookmarkers {
+    list-style: none;
+    display: table-row;
+}
+
+ul.bookmarkers li {
+    float: left;
+    margin-top: 8px;
+    margin-left: 8px;
+}
