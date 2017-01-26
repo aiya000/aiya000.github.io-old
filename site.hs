@@ -89,10 +89,10 @@ main = hakyll $ do
     route idRoute
     compile $ makeItem (compressCss . HKate.styleToCss $ HKate.pygments)
 
-  match "works.html" $ do
+  match "products.html" $ do
     route idRoute
     compile $ getResourceBody
-      >>= loadAndApplyTemplate "templates/works.html"   defaultContext
+      >>= loadAndApplyTemplate "templates/products.html"   defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
