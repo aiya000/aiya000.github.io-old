@@ -10,7 +10,7 @@ title: About
 (\*＾\_＾)
 
 　当サイトはHaskell製の静的ブログジェネレータ、[Hakyll](http://jaspervdj.be/hakyll)及び  
-CSSフレームワーク ~~海未ちゃん~~ [Umi](http://nkmr6194.github.io/Umi/) を使用しています。
+CSSフレームワーク [Umi](http://nkmr6194.github.io/Umi/) を使用しています。
 
 ***[Bootstrap Theme Umi](http://nkmr6194.github.io/Umi/)***  
 [![umi-image](/images/umi.png)](http://nkmr6194.github.io/Umi/)
