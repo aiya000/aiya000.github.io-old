@@ -16,11 +16,11 @@ deploy = do
   run_ "cp"    ["-r", "./_site", "/tmp/_site"]
   run_ "git"   ["checkout", "master"]
 
-  -- Remove all file
+  -- Remove all file in the master branch
   existFiles <- ls "."
   forM_ existFiles $ \file -> do
     if toTextIgnore file == "./.git"
-       then liftIO $ putStrLn ".git directory was found, it didn't deleted"
+       then return ()  -- Don't delete .git
        else run_ "rm"  ["-rf", toTextIgnore file]
 
   -- Copy backed up files
