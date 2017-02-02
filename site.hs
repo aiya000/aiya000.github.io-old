@@ -1,10 +1,18 @@
---------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import Data.Monoid ( mappend )
-import Hakyll
-import qualified Text.Highlighting.Kate as HKate
 
---------------------------------------------------------------------------------
+import Data.Monoid ((<>))
+import Hakyll
+import Text.Highlighting.Kate (styleToCss, pygments)
+
+
+postCtx :: Tags -> Context String
+postCtx tags =
+  dateField "date" "%Y/%m/%d" <>
+  teaserField "teaser" "content" <>
+  tagsField "tags" tags <>
+  defaultContext
+
+
 main :: IO ()
 main = hakyll $ do
   tags <- buildTags "posts/*" (fromCapture "tags/*.html")
@@ -12,11 +20,10 @@ main = hakyll $ do
   tagsRules tags $ \tag pattern -> do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll pattern
-      let tagCtx =
-            constField "title" ("Posts tagged " ++ tag)      `mappend`
-            listField  "posts" (postCtx tags) (return posts) `mappend`
-            defaultContext
+      posts <- loadAll pattern >>= recentFirst
+      let tagCtx = constField "title" ("Posts tagged " ++ tag) <>
+                   listField "posts" (postCtx tags) (return posts) <>
+                   defaultContext
       makeItem ""
         >>= loadAndApplyTemplate "templates/tag.html"     tagCtx
         >>= loadAndApplyTemplate "templates/default.html" tagCtx
@@ -57,11 +64,10 @@ main = hakyll $ do
   create ["archive.html"] $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
-      let archiveCtx =
-            listField "posts" (postCtx tags) (return posts) `mappend`
-            constField "title" "Archives"                   `mappend`
-            defaultContext
+      posts <- loadAll "posts/*" >>= recentFirst
+      let archiveCtx = listField "posts" (postCtx tags) (return posts) <>
+                       constField "title" "Archives" <>
+                       defaultContext
       makeItem ""
         >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
         >>= loadAndApplyTemplate "templates/default.html" archiveCtx
@@ -70,41 +76,32 @@ main = hakyll $ do
   match "index.html" $ do
     route idRoute
     compile $ do
-      posts    <- fmap (take 30) . recentFirst =<< loadAll "posts/*"
+      posts    <- loadAll "posts/*" >>= fmap (take 30) . recentFirst
       tagCloud <- renderTagCloud 80.0 200.0 tags
-      let indexCtx =
-            listField  "posts"   (postCtx tags) (return posts) `mappend`
-            constField "title"   "Home"                        `mappend`
-            constField "tagcloud" tagCloud                     `mappend`
-            defaultContext
+      let indexCtx = listField "posts" (postCtx tags) (return posts) <>
+                     constField "title" "Home" <>
+                     constField "tagcloud" tagCloud <>
+                     defaultContext
       getResourceBody
         >>= applyAsTemplate indexCtx
         >>= loadAndApplyTemplate "templates/index.html"   indexCtx
         >>= loadAndApplyTemplate "templates/default.html" indexCtx
         >>= relativizeUrls
 
-  match "templates/*" $ compile templateCompiler
+  match "templates/*" $ do
+    compile templateCompiler
 
   create ["css/highlight.css"] $ do
     route idRoute
-    compile $ makeItem (compressCss . HKate.styleToCss $ HKate.pygments)
+    compile $ makeItem (compressCss . styleToCss $ pygments)
 
   match "products.html" $ do
     route idRoute
     compile $ getResourceBody
-      >>= loadAndApplyTemplate "templates/products.html"   defaultContext
+      >>= loadAndApplyTemplate "templates/products.html" defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
   match "pickup-post.html" $ do
     route idRoute
     compile templateCompiler
-
-
---------------------------------------------------------------------------------
-postCtx :: Tags -> Context String
-postCtx tags =
-  dateField   "date"   "%Y/%m/%d" `mappend`
-  teaserField "teaser" "content"  `mappend`
-  tagsField   "tags"   tags       `mappend`
-  defaultContext
