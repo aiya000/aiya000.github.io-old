@@ -7,8 +7,13 @@ import Data.Text ( Text, strip, append )
 default ( Text )
 
 main :: IO ()
-main = shelly . verbosely $
-  deploy `finally_sh` run_ "git" ["checkout", "develop"]
+main = shelly . verbosely $ do
+  -- Backup .stack-work, because .stack-work will be removed when git checked out
+  run_ "cp" ["-r", ".stack-work", "/tmp/.stack-work"]
+  deploy `finally_sh` do
+    run_ "git" ["checkout", "develop"]
+    -- Restore .stack-work
+    run_ "mv" ["/tmp/.stack-work", "."]
 
 deploy :: Sh ()
 deploy = do
