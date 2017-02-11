@@ -8,7 +8,6 @@ import Text.Highlighting.Kate (styleToCss, pygments)
 postCtx :: Tags -> Context String
 postCtx tags =
   dateField "date" "%Y/%m/%d" <>
-  teaserField "teaser" "content" <>
   tagsField "tags" tags <>
   defaultContext
 
