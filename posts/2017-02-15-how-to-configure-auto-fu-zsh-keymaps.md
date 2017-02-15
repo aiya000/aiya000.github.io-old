@@ -95,7 +95,9 @@ bindkey -M afu '^p' afu+up-history
 # おっ
 　最後に。  
 ここで問題になることがあって、auto-fu.zshは、viinsとvicmdのキーマッピングの一部しか再定義していません。  
-使いたいキーマッピングが再定義されていない場合は、PRを送るのがいいと思います。
+使いたいキーマッピングが再定義されていない場合は、PRを送るか、
+.zshrc内で`afu-initialize-zle-afu`及び`afu-initialize-zle-afu-vicmd`と同等のことをすれば
+いいかと思います。
 
 auto-fu.zshの最新版で、コードの構造が変更されていなければ  
 [`$afu_zles`](https://github.com/aiya000/auto-fu.zsh/blob/84c71c506c136536bc7bda52e76d18ef7b2c8516/auto-fu.zsh#L285)
