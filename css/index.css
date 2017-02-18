@@ -33,10 +33,15 @@ div.screen-left div.twitter-widget {
     border-radius: 8px;
 }
 
-br.end-of-content {
-    clear: both;
-}
-
 div.i-want-to-this a {
     font-size: 40px;
+}
+
+hr.short-bar {
+    width: 50%;
+    margin: 30px 0 30px 0;
+}
+
+br.clear-styles {
+    clear: both;
 }
