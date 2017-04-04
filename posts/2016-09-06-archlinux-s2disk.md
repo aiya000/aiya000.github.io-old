@@ -18,7 +18,11 @@ uswsuspはユーザースペースでのsuspendを可能にするツールで、
 　スワップメモリにはパーティションではなくスワップファイルを使う。  
 (スワップファイルは/root/swapに置いた)
 
+- [スワップ - ArchWiki](https://wiki.archlinuxjp.org/index.php/%E3%82%B9%E3%83%AF%E3%83%83%E3%83%97#.E3.82.B9.E3.83.AF.E3.83.83.E3.83.97.E3.83.95.E3.82.A1.E3.82.A4.E3.83.AB.E3.81.AE.E4.BD.9C.E6.88.90)
+
+
 # インストール
+
 ```console
 $ yaourt -S uswsusp pm-utils
 ```
@@ -41,7 +45,7 @@ threads = y
 
 　pm-utilsがバックエンドにuswsuspを使うようにする。
 
-/etc/pmm/config.d/module
+/etc/pm/config.d/module
 ```conf
 SLEEP_MODULE=uswsusp
 ```
