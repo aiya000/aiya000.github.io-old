@@ -46,7 +46,7 @@ tags: イベント
 
 # 早くない！？
 　なんとお目当てのうち一つであった「技術者のためのやさしい数学」が完売してしまいました！  
-多分13:10くらいの入場だったかなあ。
+多分10:10くらいの入場だったかなあ。
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">大盛況 <a href="https://t.co/noYVVF0JcQ">pic.twitter.com/noYVVF0JcQ</a></p>&mdash; KTRP (@310_ktr) <a href="https://twitter.com/310_ktr/status/850914620852256768">2017年4月9日</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
