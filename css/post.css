@@ -58,3 +58,9 @@ p.about-pr {
     margin-bottom: 16px;
     padding: 4px;
 }
+
+p.dodon {
+    font-size: 40px;
+    font-weight: bold;
+    font-style: italic;
+}
