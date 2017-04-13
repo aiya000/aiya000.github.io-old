@@ -1,10 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 title="$1"
-localeditor="$2"
-
-# Example: "2016-12-30-example_name"
-postname="$(date +'%Y-%m-%d')-${title}"
+postname="$(date +'%Y-%m-%d')-${title}"  # Example: "2016-12-30-example_name"
 
 # Create image dir for current post
 if [ ! -d "./images/posts/${postname}" ] ; then
@@ -12,4 +9,4 @@ if [ ! -d "./images/posts/${postname}" ] ; then
 fi
 
 # Open editor
-$localeditor "./posts/${postname}.md"
+touch "./posts/${postname}.md"
