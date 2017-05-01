@@ -1,3 +1,17 @@
+div.blog-title {
+    /* 2ADACC is message of dream */
+    background-color: #2ADACC;
+    text-align: center;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+img.icon-of-me {
+    width: 64px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
 div.home-content {
     margin-top: 32px;
 }
