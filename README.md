@@ -7,10 +7,11 @@ This repository powered by Hakyll :smile:
 
 ## How to write a post
 1. `$ git checkout develop`
-2. `$ ./create-post.sh {post-title} $EDITOR`
-    - Your editor will be opened
-3. Write your report
-4. Commit
+2. `$ ./create-post.sh {post-title}`
+    - `posts/%Y-%m-%d-{post-titile}.md` will be created
+3. Edit it
+4. Commit it
+5. Execute deploying
 
 
 ## How to build and deploy
@@ -18,9 +19,7 @@ This repository powered by Hakyll :smile:
 
 
 ## Pull Request is welcome
-You can fix the posts on GitHub !  
-
 1. Please access to [here](https://github.com/aiya000/aiya000.github.io/tree/develop/posts)
-2. Open some post
-3. Click the icon of the pen (to edit)
-4. Do 'Commit changes' (to open the pull request)
+2. Open the target post
+3. Click the icon of the pen
+4. Do 'Commit changes' (and open the pull request)
