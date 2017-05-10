@@ -5,30 +5,32 @@ import Hakyll
 import Text.Highlighting.Kate (styleToCss, pygments)
 
 
-postCtx :: Tags -> Context String
-postCtx tags =
+postCtx :: Context String
+postCtx =
   dateField "date" "%Y/%m/%d" <>
-  tagsField "tags" tags <>
   defaultContext
 
 
 main :: IO ()
 main = hakyll $ do
+  tags <- buildTags "posts/*" $ fromCapture "tags/*.html"
+  let tagCtx   = tagsField "tags" tags
+      postCtx' = postCtx <> tagCtx
 
   match "images/**" $ do
-    route   idRoute
+    route idRoute
     compile copyFileCompiler
 
   match "css/*" $ do
-    route   idRoute
+    route idRoute
     compile compressCssCompiler
 
   match "js/*" $ do
-    route   idRoute
+    route idRoute
     compile copyFileCompiler
 
   match "about.md" $ do
-    route   $ setExtension "html"
+    route $ setExtension "html"
     compile $ pandocCompiler
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
@@ -41,17 +43,17 @@ main = hakyll $ do
       >>= relativizeUrls
 
   match "posts/*" $ do
-    route   $ setExtension "html"
+    route $ setExtension "html"
     compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/post.html"    (postCtx tags)
-      >>= loadAndApplyTemplate "templates/default.html" (postCtx tags)
+      >>= loadAndApplyTemplate "templates/post.html" postCtx'
+      >>= loadAndApplyTemplate "templates/default.html" postCtx'
       >>= relativizeUrls
 
   create ["archive.html"] $ do
     route idRoute
     compile $ do
       posts <- loadAll "posts/*" >>= recentFirst
-      let archiveCtx = listField "posts" (postCtx tags) (return posts) <>
+      let archiveCtx = listField "posts" postCtx' (return posts) <>
                        constField "title" "Archives" <>
                        defaultContext
       makeItem ""
@@ -64,7 +66,7 @@ main = hakyll $ do
     compile $ do
       posts    <- loadAll "posts/*" >>= fmap (take 30) . recentFirst
       tagCloud <- renderTagCloud 80.0 200.0 tags
-      let indexCtx = listField "posts" (postCtx tags) (return posts) <>
+      let indexCtx = listField "posts" postCtx' (return posts) <>
                      constField "title" "Home" <>
                      constField "tagcloud" tagCloud <>
                      defaultContext
@@ -79,7 +81,7 @@ main = hakyll $ do
 
   create ["css/highlight.css"] $ do
     route idRoute
-    compile $ makeItem (compressCss . styleToCss $ pygments)
+    compile $ makeItem (compressCss $ styleToCss pygments)
 
   match "products.html" $ do
     route idRoute
@@ -88,12 +90,10 @@ main = hakyll $ do
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
-  -- This is the part of index.html
+  -- These are the part of index.html
   match "pickup-post.html" $ do
     route idRoute
     compile templateCompiler
-
-  -- This is the part of index.html
   match "affiliate.html" $ do
     route idRoute
     compile templateCompiler
