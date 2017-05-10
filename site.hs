@@ -14,19 +14,6 @@ postCtx tags =
 
 main :: IO ()
 main = hakyll $ do
-  tags <- buildTags "posts/*" (fromCapture "tags/*.html")
-
-  tagsRules tags $ \tag pattern -> do
-    route idRoute
-    compile $ do
-      posts <- loadAll pattern >>= recentFirst
-      let tagCtx = constField "title" ("Posts tagged " ++ tag) <>
-                   listField "posts" (postCtx tags) (return posts) <>
-                   defaultContext
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/tag.html"     tagCtx
-        >>= loadAndApplyTemplate "templates/default.html" tagCtx
-        >>= relativizeUrls
 
   match "images/**" $ do
     route   idRoute
