@@ -29,7 +29,7 @@ n個の事柄を1つのcommitに混ぜてしまった場合を仮定する。
 
 commitの統合及び分解の具体的手法については以下。
 
-- [今日のgit-tips (簡単で便利なrebaseによるcommit編集)](http://aiya000.github.io/posts/2016-07-19-todays_git_tips.html)
+- [今日のgit-tips (簡単で便利なrebaseによるcommit編集)](https://$host$/posts/2016-07-19-todays_git_tips.html)
 - [gitでコミットを分解する](http://www.cocoalife.net/2010/11/post_857.html)
     - これをやった後に`git add -p`でよしなにするといい
 

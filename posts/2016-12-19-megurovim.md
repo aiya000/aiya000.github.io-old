@@ -15,7 +15,7 @@ tags: イベント
 # やったこと
 　まず、この記事を書きました :)
 
-- [使いたいVimプラグインがNeoVimで対応してない？ NeoVimは環境、VimはVMだよ？](http://aiya000.github.io/posts/2016-12-17-vim_as_vm_on_neovim.html)
+- [使いたいVimプラグインがNeoVimで対応してない？ NeoVimは環境、VimはVMだよ？](https://$host$/posts/2016-12-17-vim_as_vm_on_neovim.html)
 
 - - -
 
@@ -40,7 +40,7 @@ Haskellの抽象性にまた負けました……これだからHaskellはやめ
 
 - - -
 
-　最後にNeoVim上でVimを起動して、Vim専用プラグインを動かすという[これ](http://aiya000.github.io/posts/2016-12-17-vim_as_vm_on_neovim.html)
+　最後にNeoVim上でVimを起動して、Vim専用プラグインを動かすという[これ](https://$host$/posts/2016-12-17-vim_as_vm_on_neovim.html)
 の実演を進捗報告会で、しました。
 
 - - -
