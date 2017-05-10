@@ -8,6 +8,7 @@ import Text.Highlighting.Kate (styleToCss, pygments)
 postCtx :: Context String
 postCtx =
   dateField "date" "%Y/%m/%d" <>
+  constField "host" "aiya000.github.io" <>
   defaultContext
 
 
