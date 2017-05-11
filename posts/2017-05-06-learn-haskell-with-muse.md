@@ -233,6 +233,8 @@ Member "kotori" 16
 
 （次回に続く）
 
+- [次回（ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」）](./2017-05-11-learn-haskell-with-muse.html)
+
 
 # 参考にしたページ
 
