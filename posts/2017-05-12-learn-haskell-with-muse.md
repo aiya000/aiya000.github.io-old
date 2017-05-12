@@ -184,8 +184,8 @@ main = do
 
 prettyPrintMember :: Member -> IO ()
 prettyPrintMember (Member herName herAge) = do
-  putStrLn ("name: " ++ name honoka)
-  putStrLn ("age: " ++ show (age honoka))
+  putStrLn ("name: " ++ herName)
+  putStrLn ("age: " ++ show herAge)
 ```
 
 穂乃果「`prettyPrintMember`は`Member`を受け取って、それを表示する関数……だよね。　あれ、仮引数ってどこにいっちゃったの？」  
