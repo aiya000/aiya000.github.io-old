@@ -12,6 +12,12 @@ tags: ラブライブ！で学ぶ, ことり、穂乃果と一緒に学ぶHaskel
 海未「キャラ崩壊を含む可能性があります。　ご容赦くださいますよう」  
 海未「それでは、よろしくお願いします 」  
 
+- - -
+
+- [更新履歴 - ことり、穂乃果と一緒に学ぶHaskell（入門）](https://github.com/aiya000/aiya000.github.io/search?utf8=%E2%9C%93&q=%22Haskell%2FMuse%3A%22&type=Commits)
+
+- - -
+
 
 # ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」
 
