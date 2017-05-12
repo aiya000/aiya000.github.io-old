@@ -148,7 +148,7 @@ public class Program {
 ことり「次に`Show a => a`っていう表現だね。　これは」  
 ことり「さっきの`a`が『任意の型a（何でも）』だったのに比べて、『Showを実装する任意の型a（Showを実装するなら何でも）』って言えるかな」  
 
-穂乃果「じゃあ`show :: Show a => a -> String`っていうのは……Showを実装する型aを受け取って、文字列（`String`）をする関数show？」  
+穂乃果「じゃあ`show :: Show a => a -> String`っていうのは……Showを実装する型aを受け取って、文字列（`String`）を返す関数`show`？」  
 ことり「そのとおりです！」  
 
 ことり「実はIntもCharもBoolもShowを実装するので、こんなことができるよ」  
