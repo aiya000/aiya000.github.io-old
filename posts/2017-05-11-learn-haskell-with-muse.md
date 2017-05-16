@@ -226,3 +226,8 @@ public String show() {
 （次回に続く）
 
 - [次回 - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」](./2017-05-12-learn-haskell-with-muse.html)
+
+- - -
+
+　疑問点があれば、Twitterでリプライくれれば（そのリプライを見逃してなければ）返すよ！  
+[\@public_ai000ya - Twitter](https://twitter.com/public_ai000ya)

@@ -250,3 +250,8 @@ Member "kotori" 16
 - [Learn You a Haskell for Great Good!（原著） - Types and Typeclasses](http://learnyouahaskell.com/types-and-typeclasses#believe-the-type)
 - [μ's - Wikipedia](https://ja.wikipedia.org/wiki/%CE%9C%27s#.E5.8D.97_.E3.81.93.E3.81.A8.E3.82.8A.EF.BC.88.E3.81.BF.E3.81.AA.E3.81.BF_.E3.81.93.E3.81.A8.E3.82.8A.EF.BC.89)
 - [ Haskellでの文字コードの扱い方が分かってきた - より良い環境を求めて](http://d.hatena.ne.jp/n314/20100624/1277366395)
+
+- - -
+
+　疑問点があれば、Twitterでリプライくれれば（そのリプライを見逃してなければ）返すよ！  
+[\@public_ai000ya - Twitter](https://twitter.com/public_ai000ya)
