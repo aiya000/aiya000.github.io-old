@@ -18,6 +18,18 @@ main = hakyll $ do
   let tagCtx   = tagsField "tags" tags
       postCtx' = postCtx <> tagCtx
 
+  tagsRules tags $ \tag pattern -> do
+    route idRoute
+    compile $ do
+      posts <- loadAll pattern >>= recentFirst
+      let ctx = constField "title" ("Posts tagged " ++ tag) <>
+                listField "posts" postCtx' (return posts) <>
+                defaultContext
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/tag.html" ctx
+        >>= loadAndApplyTemplate "templates/default.html" ctx
+        >>= relativizeUrls
+
   match "images/**" $ do
     route idRoute
     compile copyFileCompiler
