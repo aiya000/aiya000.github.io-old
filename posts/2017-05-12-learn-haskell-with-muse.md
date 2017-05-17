@@ -388,8 +388,8 @@ data Student = OtonokiStudent String Int
 ことり「ちょっとコードが長くなるよ……注意してね」  
 
 ```java
-class Student {}
-class OtonokiStudent extends Student {
+interface Student {}
+class OtonokiStudent implements Student {
 	public String name;
 	public int age;
 	public OtonokiStudent(String name, int age) {
@@ -397,7 +397,7 @@ class OtonokiStudent extends Student {
 		this.age = age;
 	}
 }
-class UranohoshiStudent extends Student {
+class UranohoshiStudent implements Student {
 	public String name;
 	public int age;
 	public boolean likeMikan;
@@ -446,8 +446,10 @@ public class Program {
 // みかんのこと好き？: false
 ```
 
+ことり「表現はHaskellに準拠してるよ」  
+
 穂乃果「なるほど……`Student`クラスを継承することで、その子としての属性を与えるんだね……」  
-ことり「うん。　通フィールドである`name`と`age`を`Student`に与えてあげてもよあったんだけど、Haskellに合わせて書いてみると、だいたい誰が書いてもこうなるかな」  
+ことり「うん。　共通フィールドである`name`と`age`を`Student`に与えてあげてもよあったんだけど、Haskellに合わせて書いてみると、だいたい誰が書いてもこうなるかな」  
 
 穂乃果「よしこ……ヨハネ？　って誰知り合い？」  
 ことり「うんん、全然違うよ♪」  
