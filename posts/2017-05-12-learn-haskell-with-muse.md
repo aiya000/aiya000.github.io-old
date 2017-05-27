@@ -351,11 +351,24 @@ helloTo x  -- 仮引数部に名前（変数、具体的な値でないもの）
 ことり「直和型は、列挙型と直積型が合わさったようなもので、列挙子がフィールドを持ちます！」  
 
 ```haskell
+data Student = OtonokiStudent String Int
+             | UranohoshiStudent String Int Bool
+  deriving (Show)
+```
+
+ことり「もちろんレコードも使えるよ」  
+
+```haskell
 -- 直和型
 data Student = OtonokiStudent { otonokiName :: String, otonokiAge :: Int }
              | UranohoshiStudent { uranohoshiName :: String, uranohoshiAge :: Int, likeMikan :: Bool }
   deriving (Show)
+```
 
+ことり「今回のコード例はこちら」  
+ことり「名前空間がバッティングするので、`OtonokiStudent`と`UranohoshiStudent`のレコード名は固有のものにしてあるよ」  
+
+```haskell
 prettyPrintStudent :: Student -> IO ()
 prettyPrintStudent (OtonokiStudent herName herAge) = do
   putStrLn "音ノ木坂学院生徒"
@@ -369,8 +382,8 @@ prettyPrintStudent (UranohoshiStudent herName herAge sheLikesMikan) = do
 
 main :: IO ()
 main = do
-  let umi     = OtonokiStudent "園田海未" 16
-      yoshiko = UranohoshiStudent "ヨハネ" 15 False
+  let umi     = OtonokiStudent "園田海未" 16         --
+      yoshiko = UranohoshiStudent "ヨハネ" 15 False  -- do式内のletブロックは、複数の名前を定義できるよ
   prettyPrintStudent umi
   prettyPrintStudent yoshiko
 
@@ -382,15 +395,6 @@ main = do
 -- name: ヨハネ
 -- age: 15
 -- みかんのこと好き？: False
-```
-
-ことり「名前空間がバッティングするので、`OtonokiStudent`と`UranohoshiStudent`のレコード名は固有のものにしてあるよ」  
-ことり「もちろんレコードなくても書けます」  
-
-```haskell
-data Student = OtonokiStudent String Int
-             | UranohoshiStudent String Int Bool
-  deriving (Show)
 ```
 
 穂乃果「えーっ！　これは……Javaで書くとどうなるんだろう……」  
