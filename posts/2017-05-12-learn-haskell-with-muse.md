@@ -483,6 +483,12 @@ public class Program {
 穂乃果（Zzz）ｽﾋﾟｰ  
 ことり（ふふ、おやすみなさい）  
 
+…………
+
+（次回に続く）
+
+- [次回（ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」）](./2017-05-27-learn-haskell-with-muse.html)
+
 
 # 参考にしたページ
 - [アニメ/ラブライブ/呼称表](http://www.palantir-k.net/palawiki/index.php?%E3%82%A2%E3%83%8B%E3%83%A1%2F%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%2F%E5%91%BC%E7%A7%B0%E8%A1%A8)
