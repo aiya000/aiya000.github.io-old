@@ -39,6 +39,7 @@ tags: ラブライブ！で学ぶ, ことり、穂乃果と一緒に学ぶHaskel
     2. Rust
     3. C++
 
+
 - - -
 
 穂乃果「前にJavaは習ったんだけど、HaskellってJavaとは全然違うみたいで、頭が追いつかなくて」  
@@ -74,7 +75,6 @@ tags: ラブライブ！で学ぶ, ことり、穂乃果と一緒に学ぶHaskel
 
 
 ## 代数的データ型の定義 <a name='datatype-definition'></a>
-
 穂乃果「この前は『代数的データ型』っていうのについて習ったんだけど……今日はここを教えて欲しいなあ」  
 ことり「代数的データ型はHaskellの最もたる優れた要素だね！」  
 
@@ -163,7 +163,7 @@ public class Test {
 ```haskell
 main :: IO ()
 main = do
-  let kotori = Member "kotori" 16
+  let kotori = Member "南ことり" 16
   return ()
 ```
 
@@ -172,19 +172,8 @@ main = do
 ことり「`return ()`は……今は単なるno operationだと思っておいて欲しいな☆」  
 穂乃果「no operationは、何もしない命令だったよね。　わかりましたっ！」  
 
-穂乃果「ってあれ、"kotori"？　"南ことり"じゃだめなの？」  
-ことり「うっ、穂乃果ちゃんするどいね……実はHaskell、そのままじゃ日本語を扱うときに色々と不安定なんだ。
-　表示できたりできなかったり……シンプルに表示するくらいはできるんだけど
-……`String`で直接マルチバイト文字列を使わない方がいいんだ」  
-
-ことり「ある型を使えば問題ないんだけど、今回の内容とは外れちゃうから、これも今は無視してくれる……かな」  
-穂乃果「ある型？　はーい」  
-
-ことり（今回はごく基本に絞ってるから無視してほしいものが多くって、困っちゃうなー……）ｳｰ  
-
 
 ## 型クラスの自動導出
-
 ことり「次は、Memberデータ型を`main`で表示してみるよ」  
 
 ことり「Javaでは、`toString()`っていうメソッドをオーバーライドすることがあったよね」  
@@ -221,7 +210,7 @@ data Member = Member String Int
 ```haskell
 main :: IO ()
 main = do
-  let kotori = Member "kotori" 16
+  let kotori = Member "南ことり" 16
   print kotori
 ```
 
@@ -229,7 +218,7 @@ main = do
 
 ```console
 $ stack runghc -- DataType.hs
-Member "kotori" 16
+Member "南ことり" 16
 ```
 
 穂乃果「すごーい！　ちゃんと表示されたー！」  
@@ -249,7 +238,6 @@ Member "kotori" 16
 
 - [Learn You a Haskell for Great Good!（原著） - Types and Typeclasses](http://learnyouahaskell.com/types-and-typeclasses#believe-the-type)
 - [μ's - Wikipedia](https://ja.wikipedia.org/wiki/%CE%9C%27s#.E5.8D.97_.E3.81.93.E3.81.A8.E3.82.8A.EF.BC.88.E3.81.BF.E3.81.AA.E3.81.BF_.E3.81.93.E3.81.A8.E3.82.8A.EF.BC.89)
-- [ Haskellでの文字コードの扱い方が分かってきた - より良い環境を求めて](http://d.hatena.ne.jp/n314/20100624/1277366395)
 
 - - -
 
