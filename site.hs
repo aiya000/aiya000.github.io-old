@@ -33,15 +33,13 @@ listContextWith ctx thisFieldName targetFieldName = listField thisFieldName ctx 
 main :: IO ()
 main = hakyll $ do
   tags <- buildTags "posts/*" $ fromCapture "tags/*.html"
-  let tagCtx   = tagsField "tags" tags
-      postCtx' = postCtx <> tagCtx
 
   tagsRules tags $ \tag pattern -> do
     route idRoute
     compile $ do
       posts <- loadAll pattern >>= recentFirst
       let ctx = constField "title" ("Posts tagged " ++ tag) <>
-                listField "posts" postCtx' (return posts) <>
+                listField "posts" postCtx (return posts) <>
                 defaultContext
       makeItem ""
         >>= loadAndApplyTemplate "templates/tag.html" ctx
@@ -76,15 +74,15 @@ main = hakyll $ do
   match "posts/*" $ do
     route $ setExtension "html"
     compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/post.html" postCtx'
-      >>= loadAndApplyTemplate "templates/default.html" postCtx'
+      >>= loadAndApplyTemplate "templates/post.html" postCtx
+      >>= loadAndApplyTemplate "templates/default.html" postCtx
       >>= relativizeUrls
 
   create ["archive.html"] $ do
     route idRoute
     compile $ do
       posts <- loadAll "posts/*" >>= recentFirst
-      let archiveCtx = listField "posts" postCtx' (return posts) <>
+      let archiveCtx = listField "posts" postCtx (return posts) <>
                        constField "title" "Archives" <>
                        defaultContext
       makeItem ""
@@ -97,7 +95,7 @@ main = hakyll $ do
     compile $ do
       posts    <- loadAll "posts/*" >>= fmap (take 30) . recentFirst
       tagCloud <- renderTagCloud 80.0 200.0 tags
-      let indexCtx = listField "posts" postCtx' (return posts) <>
+      let indexCtx = listField "posts" postCtx (return posts) <>
                      constField "title" "Home" <>
                      constField "tagcloud" tagCloud <>
                      defaultContext
