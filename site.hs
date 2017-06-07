@@ -9,7 +9,25 @@ postCtx :: Context String
 postCtx =
   dateField "date" "%Y/%m/%d" <>
   constField "host" "aiya000.github.io" <>
+  --NOTE: Why "name" can be got if I use titleField ?
+  listContextWith (titleField "tagName") "tagNames" "tags" <>
   defaultContext
+
+
+-- See http://mattwetmore.me/posts/hakyll-list-metadata.html
+-- |
+-- listContextWith looks up @targetFieldName@,
+-- splits the looking up result by ",",
+-- set the split result as the field of @thisFieldName@ .
+-- And the final result is taken as 'Context a'.
+listContextWith :: Context String -> String -> String -> Context a
+listContextWith ctx thisFieldName targetFieldName = listField thisFieldName ctx $ do
+  metadata <- getUnderlying >>= getMetadata
+  let metas = maybe [] (map trim . splitAll ",") $ lookupString targetFieldName metadata
+  return $ map (twice $ Item . fromFilePath) metas
+  where
+    twice :: (a -> a -> b) -> a -> b
+    twice f x = f x x
 
 
 main :: IO ()
