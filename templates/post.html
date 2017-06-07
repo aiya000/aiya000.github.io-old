@@ -5,9 +5,11 @@
     $if(author)$
         by $author$ <br/>
     $endif$
-    $if(tags)$
-        Tags: $tags$ <br/>
-    $endif$
+
+    Tags:
+    $for(tagNames)$
+        [<a href="/tags/$tagName$.html">$tagName$</a>]
+    $endfor$
 
     <ul class="bookmarkers">
         <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
