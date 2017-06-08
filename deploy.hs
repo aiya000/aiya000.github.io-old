@@ -11,18 +11,18 @@ default (Text)
 
 main :: IO ()
 main = shelly . verbosely $ do
-  (onBegin >> deploy) `finally_sh` onEnd
+  (prepare >> deploy) `finally_sh` cleanUp
 
 
-onBegin :: Sh ()
-onBegin = do
+prepare :: Sh ()
+prepare = do
   run_ "stack" ["exec", "site", "build"]
   run_ "cp" ["-r", ".stack-work", "/tmp/.stack-work"]
   run_ "cp" ["-r", "_site", "/tmp/_site"]
   run_ "git" ["checkout", "master"]
 
-onEnd :: Sh ()
-onEnd = do
+cleanUp :: Sh ()
+cleanUp = do
   run_ "git" ["checkout", "develop"]
   run_ "mv" ["/tmp/.stack-work", ".stack-work"]
   run_ "rm" ["-rf", "/tmp/_site"]
