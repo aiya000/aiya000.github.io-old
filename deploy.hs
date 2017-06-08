@@ -24,7 +24,7 @@ onBegin = do
 onEnd :: Sh ()
 onEnd = do
   run_ "git" ["checkout", "develop"]
-  run_ "cp" ["-r", "/tmp/.stack-work", ".stack-work"]
+  run_ "mv" ["/tmp/.stack-work", ".stack-work"]
   run_ "rm" ["-rf", "/tmp/_site"]
 
 
