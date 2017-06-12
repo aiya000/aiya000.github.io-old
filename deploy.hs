@@ -24,7 +24,7 @@ prepare = do
 cleanUp :: Sh ()
 cleanUp = do
   run_ "git" ["checkout", "develop"]
-  run_ "mv" ["/tmp/.stack-work", ".stack-work"]
+  run_ "mv" ["/tmp/.stack-work", "."]
   run_ "rm" ["-rf", "/tmp/_site"]
 
 
@@ -49,4 +49,4 @@ deploy = do
   now <- strip <$> run "date" ["-R"]
   let message = "Build at [" <> now <> "]"
   run_ "git" ["commit", "-m", message]
-  run_ "git" ["push", "-u", "origin", "master"]
+  run_ "git" ["push", "-uf", "origin", "master"]
