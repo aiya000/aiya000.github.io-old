@@ -1,5 +1,5 @@
 ---
-title: 【結論】Textの中のStringにmap：：String → StringするにはProfunctorが一番！
+title: 【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！
 tags: Haskell
 ---
 # 起
@@ -33,6 +33,8 @@ main = do
 `(->)`Profunctorを使えばdomainとcodomainの変更を一気にできるので、
 `Text -> String`と`String -> String`と`String -> Text`を格好良くできる！（まあ中身は👆と全くおんなじなんだけどでも見栄えいい）
 
+　これはその型と同型の型への操作に一般化できますので、`newtype`にも応用できます。
+
 ```haskell
 {-# LANGUAGE OverloadedStrings #-}
 
@@ -52,6 +54,11 @@ main :: IO ()
 main = do
   let niconico = dimap T.unpack T.pack upper x -- 平坦な構文に見えるので、見やすい
   TIO.putStrLn niconico
+```
+
+```haskell
+-- newtype Identity a = Identity { runIdentity :: a }
+dimap runIdentity Identity f x
 ```
 
 
