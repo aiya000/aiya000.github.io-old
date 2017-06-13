@@ -23,7 +23,7 @@ prepare = do
 
 cleanUp :: Sh ()
 cleanUp = do
-  run_ "git" ["checkout", "develop"]
+  run_ "git" ["checkout", "src"]
   run_ "mv" ["/tmp/.stack-work", "."]
   run_ "rm" ["-rf", "/tmp/_site"]
 
