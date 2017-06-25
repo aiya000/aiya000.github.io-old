@@ -27,6 +27,8 @@ tags: Haskell
 
 <!-- 出力結果 {{{ -->
 
+出力結果
+
 ```console
 SHamburger (Space Space Space Space)
 SHamburger (Cheese Space Space Space)
