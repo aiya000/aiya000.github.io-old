@@ -19,11 +19,3 @@ executable site
   build-depends:       base
                      , hakyll
                      , highlighting-kate
-
-executable deploy
-  main-is:             deploy.hs
-  default-language:    Haskell2010
-  ghc-options:         -threaded
-  build-depends:       base
-                     , shelly
-                     , text
