@@ -71,6 +71,12 @@ main = hakyll $ do
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
+  match "recruit.html" $ do
+    route idRoute
+    compile $ getResourceBody
+      >>= loadAndApplyTemplate "templates/default.html" defaultContext
+      >>= relativizeUrls
+
   match "posts/*" $ do
     route $ setExtension "html"
     compile $ pandocCompiler
