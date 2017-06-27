@@ -207,7 +207,7 @@ defineInstances = do
 
 詳細にはこんな感じ。
 
-1. 5つ以上の`Topping`を追加されると（`x5を介して`）コンパイルエラーになります
+1. 5つ以上の`Topping`を追加されると（`x5`を介して）コンパイルエラーになります
 2. `Topping`の追加はTypeFamiliesの型関数`AddTopping`によって追加されます
 3. `Topping`の追加は種`HamburgerT`の型`Hamburger a b c d`に対して行われます
     - `type family AddTopping (h :: HamburgerT) (t :: Topping) :: HamburgerT`
