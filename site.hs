@@ -3,15 +3,8 @@
 import Data.Monoid ((<>))
 import Hakyll
 import Text.Highlighting.Kate (styleToCss, pygments)
-
-
-postCtx :: Context String
-postCtx =
-  dateField "date" "%Y/%m/%d" <>
-  constField "host" "aiya000.github.io" <>
-  --NOTE: Why "name" can be got if I use titleField ?
-  listContextWith (titleField "tagName") "tagNames" "tags" <>
-  defaultContext
+import Text.Pandoc.Options (ReaderOptions(readerExtensions), Extension(Ext_emoji))
+import qualified Data.Set as Set
 
 
 -- See http://mattwetmore.me/posts/hakyll-list-metadata.html
@@ -60,7 +53,7 @@ main = hakyll $ do
 
   match "about.md" $ do
     route $ setExtension "html"
-    compile $ pandocCompiler
+    compile $ pandocCompilerWithEmoji
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
@@ -79,7 +72,7 @@ main = hakyll $ do
 
   match "posts/*" $ do
     route $ setExtension "html"
-    compile $ pandocCompiler
+    compile $ pandocCompilerWithEmoji
       >>= loadAndApplyTemplate "templates/post.html" postCtx
       >>= loadAndApplyTemplate "templates/default.html" postCtx
       >>= relativizeUrls
@@ -132,3 +125,21 @@ main = hakyll $ do
   match "affiliate.html" $ do
     route idRoute
     compile templateCompiler
+
+    where
+      -- See /posts/*.md and templates/post.html
+      postCtx :: Context String
+      postCtx =
+        dateField "date" "%Y/%m/%d" <>
+        constField "host" "aiya000.github.io" <>
+        --NOTE: Why "name" can be got if I use titleField ?
+        listContextWith (titleField "tagName") "tagNames" "tags" <>
+        defaultContext
+
+      -- :dog2:
+      pandocCompilerWithEmoji :: Compiler (Item String)
+      pandocCompilerWithEmoji =
+        let readerExtensions' = readerExtensions defaultHakyllReaderOptions
+        in pandocCompilerWith
+          defaultHakyllReaderOptions { readerExtensions = Set.insert Ext_emoji readerExtensions' }
+          defaultHakyllWriterOptions
