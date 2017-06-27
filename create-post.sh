@@ -9,4 +9,9 @@ if [ ! -d "./images/posts/${postname}" ] ; then
 fi
 
 # Open editor
-touch "./posts/${postname}.md"
+cat > "./posts/${postname}.md" << EOF
+---
+title: 
+tags: 
+---
+EOF
