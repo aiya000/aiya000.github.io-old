@@ -1,8 +1,10 @@
 ---
-title: extensible-effects使ってみたので解説してみた
+title: extensible-effects入門者が教えるextensible-effects入門
 tags: haskell
 ---
-　成果はこちらです :+1:
+　extensible-effectsに入門してみたので入門記事を書きました :laughing:
+
+ちなみに今回の成果はこちらです :+1:
 
 - [Use Eff - aiya000/hs-zuramaru@6219179 - GitHub](https://github.com/aiya000/hs-zuramaru/commit/62191798c0d305b5ad0bedf32a8dc3b9b63793f6)
 
