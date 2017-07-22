@@ -1,6 +1,6 @@
 ---
 title: GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ
-tags: haskell
+tags: Haskell
 ---
 Test.hs
 ```haskell

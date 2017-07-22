@@ -1,6 +1,6 @@
 ---
 title: Effモナドの効果のうち1つだけをrunする
-tags: haskell
+tags: Haskell
 ---
 　例えばこのような`partialContext`関数と`totalContext`関数があるとき
 
