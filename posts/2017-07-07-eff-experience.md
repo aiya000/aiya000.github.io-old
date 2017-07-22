@@ -1,6 +1,6 @@
 ---
 title: extensible-effects入門者がextensible-effectsをやってみた軌跡
-tags: haskell
+tags: Haskell
 ---
 今回の成果はこちらです :+1:
 

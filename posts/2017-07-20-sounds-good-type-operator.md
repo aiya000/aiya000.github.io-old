@@ -1,6 +1,6 @@
 ---
 title: 見た目がひどい型をTypeOperatorsで改善したらロジックと同じ見た目になった
-tags: haskell
+tags: Haskell
 ---
 
 before

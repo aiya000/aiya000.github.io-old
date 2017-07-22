@@ -1,6 +1,6 @@
 ---
-title: extensible-effectsのEffでMaybeを使う（使えない）
-tags: haskell
+title: extensible-effectsのEffでMaybeを使う（Failを使う）
+tags: Haskell
 ---
 　extensible-effectsには`Fail`という型（作用）があるので、そちらを使うのが一番楽かと思います :dog2:
 
