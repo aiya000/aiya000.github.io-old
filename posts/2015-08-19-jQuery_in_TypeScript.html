@@ -1,0 +1,144 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - TypeScriptでjQueryを扱う with tsd</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>TypeScriptでjQueryを扱う with tsd</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2015/08/19 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Node.html">Node</a>]
+    
+        [<a href="../tags/TypeScript.html">TypeScript</a>]
+    
+        [<a href="../tags/環境.html">環境</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2015-08-19-jQuery_in_TypeScript.html" class="hatena-bookmark-button" data-hatena-bookmark-title="TypeScriptでjQueryを扱う with tsd - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2015-08-19-jQuery_in_TypeScript.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="typescriptでjqueryを扱う-with-tsd">TypeScriptでjQueryを扱う with tsd</h1>
+<p>jQueryだけでなく、angular.jsなども使えます。</p>
+<ul>
+<li><a href="https://github.com/DefinitelyTyped/tsd">tsd</a> : JavaScriptファイルをTypeScriptで扱うための型情報ファイルを簡単に落としてこれる
+<ul>
+<li>型ファイルは<a href="https://github.com/borisyankov/DefinitelyTyped">ここ</a>から落とされる</li>
+</ul></li>
+<li>前提条件
+<ul>
+<li>npmコマンドが使える</li>
+<li>tscコンパイラを扱う環境が整っている -&gt; <a href="../posts/2015-08-15-Ubuntu15.04にnodejsとtypescriptを入れた.html">Ubuntu15.04にnodejsとtypescriptを入れた</a></li>
+<li>gitコマンドが使える</li>
+</ul></li>
+</ul>
+<p>以下手順。</p>
+<h2 id="tsdのインストール">tsdのインストール</h2>
+<pre><code>$ npm install -g tsd</code></pre>
+<h2 id="tsdを使ってjqueryを型情報ファイルをカレントディレクトリに落としてくる">tsdを使ってjQueryを型情報ファイルを(カレントディレクトリに)落としてくる</h2>
+<p>　型情報ファイルは./typingsディレクトリ以下に自動で落とされるので、ファイルが散らばるとかはありません。</p>
+<pre><code>$ tsd install jquery</code></pre>
+<h2 id="jquery自体を落とすのを忘れずに">jQuery自体を落とすのを忘れずに</h2>
+<p><code>$ wget http://code.jquery.com/jquery-2.1.4.min.js</code> ( ブラウザなどで落としてきてもいい )</p>
+<h2 id="jqueryを使った型安全プログラミング">jQueryを使った型安全プログラミング</h2>
+<p>　まずは、なんの変哲もないhtmlファイルです。</p>
+<p>hello.html</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;ja&quot;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;title&gt;&lt;/title&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="ot"> src=</span><span class="st">&quot;./jquery-2.1.4.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="ot"> src=</span><span class="st">&quot;./hello.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+  <span class="kw">&lt;/head&gt;</span>
+  <span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
+<p>　次にTypeScriptをコンパイルしてみます。<br />
+まずは、ちゃんと型エラーが出るか確認。</p>
+<p>hello.ts</p>
+<pre class="typescript"><code>// jQueryの型情報を読み込みます
+/// &lt;reference path=&quot;./typings/jquery/jquery.d.ts&quot;/&gt;
+$(() =&gt; { $(&quot;body&quot;).html(10); });</code></pre>
+<pre><code>$ tsc hello.ts
+hello.ts(2,26): error TS2345: Argument of type 'number' is not assignable to parameter of type '(index: number, oldhtml: string) =&gt; string'.</code></pre>
+<p>多分、別のオーバーロードと思われてますね。<br />
+コンパイル弾かれたので成功っ！</p>
+<p>　今度は正しく動くか試してみます。</p>
+<p>hello.ts</p>
+<pre class="typescript"><code>// jQueryの型情報を読み込みます
+/// &lt;reference path=&quot;./typings/jquery/jquery.d.ts&quot;/&gt;
+$(() =&gt; { $(&quot;body&quot;).html(&quot;Hello, jQuery from TypeScript !!&quot;); });</code></pre>
+<pre><code>$ tsc hello.ts</code></pre>
+<p>　エラーが出ませんでした！<br />
+カレントディレクトリを見てみると、<strong>hello.js</strong>というファイルができています。</p>
+<h2 id="できた">できた。</h2>
+<p>ブラウザでhello.htmlを開いてみます。<br />
+<img src="../images/posts/2015-08-19-jQuery_in_TypeScript/1.png" alt="Result" /></p>
+<p>できた！</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/develop/posts/2015-08-19-jQuery_in_TypeScript.md">TypeScriptでjQueryを扱う with tsd - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

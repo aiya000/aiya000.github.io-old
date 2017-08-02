@@ -1,21 +1,45 @@
----
-title: Home
----
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - Home</title>
+        <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="./css/default.css" />
+        <link rel="stylesheet" type="text/css" href="./css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="./">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="./">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./profile.html">Profile</a></li>
+                <li><a href="./products.html">Products</a></li>
+                <li><a href="./archive.html">Archive</a></li>
+            </ul>
+        </nav>
 
+        <div id="content">
+            <h4>Home</h4>
+            <link rel="stylesheet" type="text/css" href="./css/index.css" />
 
 <div class="blog-title">
     <div class="blog-title-internal">
         <h1>
-            <img class="icon-of-me" src="/images/me.png" alt="icon-of-me"/> ＜{あいや☆ぱぶりっしゅぶろぐ！}
+            <img class="icon-of-me" src="./images/me.png" alt="icon-of-me" /> ＜{あいや☆ぱぶりっしゅぶろぐ！}
         </h1>
     </div>
 </div>
 
 <div class="home-content">
     <div class="screen-left">
-        <img class="wani-san" src="/images/wani-san.png" alt="wani-san-image"/>
+        <img class="wani-san" src="./images/wani-san.png" alt="wani-san-image" />
         <div class="tagcloud">
-            $tagcloud$
+            <a style="font-size: 89%" href="./tags/AdventCalendar.html">AdventCalendar</a> <a style="font-size: 80%" href="./tags/Android.html">Android</a> <a style="font-size: 196%" href="./tags/Haskell.html">Haskell</a> <a style="font-size: 80%" href="./tags/JavaScript.html">JavaScript</a> <a style="font-size: 127%" href="./tags/Linux.html">Linux</a> <a style="font-size: 80%" href="./tags/NeoVim.html">NeoVim</a> <a style="font-size: 86%" href="./tags/Node.js.html">Node.js</a> <a style="font-size: 83%" href="./tags/RasberryPi.html">RasberryPi</a> <a style="font-size: 83%" href="./tags/Shell.html">Shell</a> <a style="font-size: 80%" href="./tags/TypeScript.html">TypeScript</a> <a style="font-size: 92%" href="./tags/Vim.html">Vim</a> <a style="font-size: 83%" href="./tags/git.html">git</a> <a style="font-size: 80%" href="./tags/shell.html">shell</a> <a style="font-size: 92%" href="./tags/%E3%81%93%E3%81%A8%E3%82%8A%E3%80%81%E7%A9%82%E4%B9%83%E6%9E%9C%E3%81%A8%E4%B8%80%E7%B7%92%E3%81%AB%E5%AD%A6%E3%81%B6Haskell.html">ことり、穂乃果と一緒に学ぶHaskell</a> <a style="font-size: 83%" href="./tags/%E3%81%AB%E3%81%93%E3%80%81%E5%B8%8C%E3%81%A8%E4%B8%80%E7%B7%92%E3%81%AB%E5%AD%A6%E3%81%B6Haskell.html">にこ、希と一緒に学ぶHaskell</a> <a style="font-size: 102%" href="./tags/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88.html">イベント</a> <a style="font-size: 83%" href="./tags/%E3%82%B2%E3%83%BC%E3%83%A0.html">ゲーム</a> <a style="font-size: 98%" href="./tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0.html">プログラミング</a> <a style="font-size: 80%" href="./tags/%E3%83%9D%E3%82%A8%E3%83%A0.html">ポエム</a> <a style="font-size: 98%" href="./tags/%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%EF%BC%81%E3%81%A7%E5%AD%A6%E3%81%B6.html">ラブライブ！で学ぶ</a> <a style="font-size: 80%" href="./tags/%E5%81%A5%E5%BA%B7.html">健康</a> <a style="font-size: 89%" href="./tags/%E5%82%99%E8%80%83%E9%8C%B2.html">備考録</a> <a style="font-size: 143%" href="./tags/%E6%97%A5%E8%A8%98.html">日記</a> <a style="font-size: 111%" href="./tags/%E7%92%B0%E5%A2%83.html">環境</a>
         </div>
         <div class="twitter-widget">
             <a class="twitter-timeline" data-width="300" data-height="381" data-link-color="#E95F28" href="https://twitter.com/public_ai000ya">Tweets by public_ai000ya</a>
@@ -27,14 +51,224 @@ title: Home
     </div>
 
     <div class="screen-right">
-        $partial("pickup-post.html")$
+        <link rel="stylesheet" type="text/css" href="./css/pickup-post.css" />
+
+<div class="pickup-post">
+    <span class="label label-info">Pick up</span>
+
+    <a href="./posts/2017-07-22-learn-haskell-with-muse-extra-for-nico-birthday.html">
+        にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里
+    </a>
+</div>
+
         <h2>記事</h2>
-        $partial("templates/post-list.html")$
-        <a href="/archive.html">これ以前の記事</a>
+        <ul>
+    
+        <li>
+            2017/08/03 - <a href="./posts/2017-08-03-learn-haskell-with-muse-happy-birthday-honoka.html">ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」</a>
+        </li>
+    
+        <li>
+            2017/07/28 - <a href="./posts/2017-07-28-different-type-definitions.html">typeで型引数をつけるか付けないかで変わる意味がある（instance編）</a>
+        </li>
+    
+        <li>
+            2017/07/27 - <a href="./posts/2017-07-27-extract-the-one-with-pattern-synonyms.html">PatternSynonymsを用いて利用側コードを変更せずにある値構築子を削除する</a>
+        </li>
+    
+        <li>
+            2017/07/26 - <a href="./posts/2017-07-26-about-snowtify.html">Haskellのstack-build（test）の結果をGUI通知するsnowtify作ったよ</a>
+        </li>
+    
+        <li>
+            2017/07/25 - <a href="./posts/2017-07-25-origin.html">モノを作りたいからプログラミングをするんじゃない、プログラミングをしたいからモノを作るんだ</a>
+        </li>
+    
+        <li>
+            2017/07/22 - <a href="./posts/2017-07-22-learn-haskell-with-muse-extra-for-nico-birthday.html">にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里</a>
+        </li>
+    
+        <li>
+            2017/07/20 - <a href="./posts/2017-07-20-sounds-good-type-operator.html">見た目がひどい型をTypeOperatorsで改善したらロジックと同じ見た目になった</a>
+        </li>
+    
+        <li>
+            2017/07/20 - <a href="./posts/2017-07-20-maybe-on-extensible-effects.html">extensible-effectsのEffでMaybeを使う（Failを使う）</a>
+        </li>
+    
+        <li>
+            2017/07/15 - <a href="./posts/2017-07-15-interviewee.html">Haskell入門ハンズオンでschooさんにインタビューを受けてきた</a>
+        </li>
+    
+        <li>
+            2017/07/09 - <a href="./posts/2017-07-09-partial-eff.html">Effモナドの効果のうち1つだけをrunする</a>
+        </li>
+    
+        <li>
+            2017/07/07 - <a href="./posts/2017-07-07-eff-experience.html">extensible-effects入門者がextensible-effectsをやってみた軌跡</a>
+        </li>
+    
+        <li>
+            2017/07/04 - <a href="./posts/2017-07-04-ghc-wtype-defaults.html">GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ</a>
+        </li>
+    
+        <li>
+            2017/07/01 - <a href="./posts/2017-07-01-MaybeT-zura.html">MaybeTを使ってリファクタリングしたずら</a>
+        </li>
+    
+        <li>
+            2017/06/27 - <a href="./posts/2017-06-27-hakyll-emoji.html">HakyllのCompilerでemoji（：dogs：）をコンパイルする</a>
+        </li>
+    
+        <li>
+            2017/06/26 - <a href="./posts/2017-06-26-typelevel-programming-dependent-type-template-haskell.html">型レベルハンバーガーについての報告</a>
+        </li>
+    
+        <li>
+            2017/06/24 - <a href="./posts/2017-06-24-ghci-type-level-debug.html">Haskellのtypeの中身はkind!で！（型レベルハンバーガーの型やいかに？）</a>
+        </li>
+    
+        <li>
+            2017/06/12 - <a href="./posts/2017-06-12-profunctor-benri.html">【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！</a>
+        </li>
+    
+        <li>
+            2017/06/10 - <a href="./posts/2017-06-10-play-flash-audio-in-firefox-with-pulseaudio-alsa.html">Firefoxのflash動画再生で音が出なかったから直った</a>
+        </li>
+    
+        <li>
+            2017/06/09 - <a href="./posts/2017-06-09-join-vital-vim-meeting.html">vital.vim開発者会言ぎに行ってきた</a>
+        </li>
+    
+        <li>
+            2017/06/08 - <a href="./posts/2017-06-08-hakyll-taglinks.html">Hakyllの各記事ページのタグにリンクを付けた</a>
+        </li>
+    
+        <li>
+            2017/06/05 - <a href="./posts/2017-06-05-omit-ssh-key-passphrase.html">Linuxとxfce4でSSH鍵のパスフレーズ入力を永続的に省略する</a>
+        </li>
+    
+        <li>
+            2017/05/30 - <a href="./posts/2017-05-30-tasty-discover-experience.html">tasty-discoverを使ってみた</a>
+        </li>
+    
+        <li>
+            2017/05/27 - <a href="./posts/2017-05-27-learn-haskell-with-muse.html">ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」</a>
+        </li>
+    
+        <li>
+            2017/05/27 - <a href="./posts/2017-05-27-learn-haskell-with-muse-extra.html">にこ、希と一緒に学ぶHaskell（番外）そのA「型クラスの定義と実装（Extra）」</a>
+        </li>
+    
+        <li>
+            2017/05/12 - <a href="./posts/2017-05-12-learn-haskell-with-muse.html">ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」</a>
+        </li>
+    
+        <li>
+            2017/05/11 - <a href="./posts/2017-05-11-learn-haskell-with-muse.html">ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」</a>
+        </li>
+    
+        <li>
+            2017/05/06 - <a href="./posts/2017-05-06-learn-haskell-with-muse.html">ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」</a>
+        </li>
+    
+        <li>
+            2017/04/22 - <a href="./posts/2017-04-22-my-power-of-haskell.html">とれたてHaskellまるごと１日分の入ったHaskellプロジェクトがこれです</a>
+        </li>
+    
+        <li>
+            2017/04/12 - <a href="./posts/2017-04-12-how-to-fix-libncurses-problem-of-stack.html">haskell-stackでcan't load .so/.DLL for 〜/libncurses.soが出た場合の対処</a>
+        </li>
+    
+        <li>
+            2017/04/09 - <a href="./posts/2017-04-09-techbookfest2.html">技術書展2に行ってきた！ めっちゃ楽しかった！</a>
+        </li>
+    
+</ul>
+
+        <a href="./archive.html">これ以前の記事</a>
     </div>
 </div>
 
-<br class="clear-styles"/>
-<hr class="short-bar"/>
+<br class="clear-styles" />
+<hr class="short-bar" />
 
-$partial("affiliate.html")$
+<link rel="stylesheet" type="text/css" href="./css/affiliate.css" />
+
+<!-- How to add the item
+    1. Open https://affiliate.amazon.co.jp/home and login to there
+    2. Search something
+    3. Click 「▼」 button that is put the right of 「リンクを作成」
+    4. Click 「HTMLで取得する場合はこちら」 button
+    5. Copy the html code
+    6. Add it with item name to li
+-->
+
+<h3>あいやが最近買って良かったもの（アフィリエイト）</h3>
+
+<ul class="affiliate">
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B01N9SHVRJ&linkId=48cb107a881362bcfa5e39a734ff34e1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B00DED8FI4&linkId=af967bf1a9a45b3a10c21434b4648a55&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B00VWCBDLU&linkId=447d741a921754f99c51cdb0c0b29c7a&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B01NCA4FBB&linkId=d850caa10114c9e5a664ae2c81303cf1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B000KUHFGM&linkId=e794cb0ff444808ad1ba8714acf12996&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B016U4C2OQ&linkId=813f1c599fe81f56f6b6f51fca538d6d&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B00Y05BQ9A&linkId=2d0dd8dd406407e14af7fcf43986ceec&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B00B59AEF6&linkId=97d3d93aaf6384faa64fe5e22fbdac87&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B0071N61JS&linkId=f55dd114a44202ae3f3867f811f5ab37&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B00FYHEHK8&linkId=9af276948421c96fccbee036981aa999&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4621063243&linkId=b70f8d7ad4d071ce14ff13c76503508f&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4535787204&linkId=f185beaa91cbad96d16cd6221257f795&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+
+    <li>
+        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=aiya00003-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4873115655&linkId=f1afde2362e2fd5d66144657b2c0ac41&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+    </li>
+</ul>
+
+<br class="clear-styles" />
+
+
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

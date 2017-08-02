@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - PullRequestをしよう！ - プロ生アドベントカレンダー2016 - 1日目</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>PullRequestをしよう！ - プロ生アドベントカレンダー2016 - 1日目</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2016/11/23 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/AdventCalendar.html">AdventCalendar</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2016-11-23-pronama_advent_calendar_2016.html" class="hatena-bookmark-button" data-hatena-bookmark-title="PullRequestをしよう！ - プロ生アドベントカレンダー2016 - 1日目 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2016-11-23-pronama_advent_calendar_2016.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>この記事は<a href="http://qiita.com/advent-calendar/2016/pronama-chan">Qiitaプロ生アドベントカレンダー2016</a>、一日目の記事です！ :)</p>
+<h1 id="起">起</h1>
+<p>　プログラマ諸君、PRをしましょう！（唐突）</p>
+<p>　Qiitaプロ生アドベントカレンダーはIT関連の記事なら何でもOKということで、珍しくGenericな記事を書いてみます。<br />
+ちなみに<a href="https://mascot-apps-contest.azurewebsites.net/2016/About">マスコットアプリ文化祭</a>では</p>
+<div class="figure">
+<img src="../images/posts/2016-11-23-pronama_advent_calendar_2016/my.png" alt="僕の作品の画像" />
+<p class="caption">僕の作品の画像</p>
+</div>
+<p>こういうものを登録しました :D</p>
+<h1 id="僕">僕</h1>
+<p>　僕は…Unityの物理演算、VR、スマホアプリ作成やコミPo!などが(Twitter上で)多く観測されるプロ生界隈の中では 少数派かもしれない…非メディア系の技術を好んで学んでいます。</p>
+<p>現在だと、型システム入門を頑張って読んで、構造的操作的意味論をいい感じにアレしてたり<br />
+HaskellでTwitter bot書いてたり。</p>
+<p>　そうすると割と他者に披露する際に、視覚的印象が少ない分、ウケがよくないかなとか思ったり。<br />
+そこで自己顕示欲を保つための行動としてPRしよう！！ って感じのアレです。</p>
+<h1 id="pullrequestprとは">PullRequest(PR)とは</h1>
+<p>　OSSへの機能追加や修正などの修正を自前で行って、その変更をそのOSSにマージしてもらうように提案すること。</p>
+<p>PRをすることにより、以下の効能があります。</p>
+<ul>
+<li>自己顕示欲が満たされる
+<ul>
+<li>自分の行った変更がマージされると、自分の作った変更がそのOSSユーザの人達に使われることになる</li>
+<li>そのOSSのメンバーの人達と会話する機会が少し生まれるので、良い</li>
+</ul></li>
+<li>そのOSSへの理解が生まれる
+<ul>
+<li>OSSが使用している言語の知識がアレする</li>
+<li>OSS独自の知識がアレする</li>
+</ul></li>
+</ul>
+<p>なんか有名なOSSにPR投げてマージされると、そのOSS使ってる知人に<br />
+「それ俺が実装した機能だぜ」<br />
+とか言える。</p>
+<p>直近だとこんなPRした。</p>
+<ul>
+<li><a href="https://github.com/yi-editor/yi/pull/936">yi-editor/yi - Add vim ex command :registers to listing register details</a></li>
+<li><a href="https://github.com/vim-jp/vimdoc-ja-working/pull/86">vim-jp/vimdoc-ja-working - Translate test functions in eval.jax</a></li>
+</ul>
+<h1 id="pr投げる際の心配事とか">PR投げる際の心配事とか</h1>
+<ul>
+<li>英語でやりとりしなきゃいけないけど、英語あんまりわかんない</li>
+</ul>
+<p>　僕の未熟な英語でもなんかちゃんと接してくれた感じがする。<br />
+「最近は『しっかりした英語』よりも『意味が伝わる程度の英語』が重要」とか聞いた気もするので、きっと大丈夫では。（無責任）</p>
+<ul>
+<li>PRでやるべきことは？</li>
+</ul>
+<p>　もちろん、機能の修正や追加などのメインの目的が主なんだけど、<strong>テスト</strong>の修正や追加を気にしたりすると良さそう。<br />
+この前、これ忘れそうになった。</p>
+<h1 id="結">結</h1>
+<p>　PRしよう。</p>
+<h1 id="あ">あ、</h1>
+<p>　そういえばvim-jpで行われているVimの:helpの翻訳(vimdoc-ja)で、人手が欲しいそうです。<br />
+Vimにcontributeするチャンス！ PRのチャンス！</p>
+<p>詳しくはここを参照！</p>
+<ul>
+<li><a href="https://github.com/vim-jp/vimdoc-ja-working/wiki">vim-jp/vimdoc-ja-working Wiki</a>
+<ul>
+<li><a href="https://github.com/vim-jp/vimdoc-ja-working/issues/48">eval.jax の未訳文を翻訳する</a></li>
+</ul></li>
+</ul>
+<p>以上！<br />
+かしこまっ！</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/develop/posts/2016-11-23-pronama_advent_calendar_2016.md">PullRequestをしよう！ - プロ生アドベントカレンダー2016 - 1日目 - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

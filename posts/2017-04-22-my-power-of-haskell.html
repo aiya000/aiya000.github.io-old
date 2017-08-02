@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - とれたてHaskellまるごと１日分の入ったHaskellプロジェクトがこれです</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>とれたてHaskellまるごと１日分の入ったHaskellプロジェクトがこれです</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/04/22 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/備考録.html">備考録</a>]
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-04-22-my-power-of-haskell.html" class="hatena-bookmark-button" data-hatena-bookmark-title="とれたてHaskellまるごと１日分の入ったHaskellプロジェクトがこれです - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-04-22-my-power-of-haskell.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>　今日はこんなのを作りました。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-hucheduler/tree/696fcff88229fe2b6e034092c1d7761006b811c5">GitHub - aiya000/hs-hucheduler at 696fcff88229fe2b6e034092c1d7761006b811c5</a></li>
+</ul>
+<p>例により、<a href="https://twitter.com/blac_k_ey">@blac_k_ey</a>、<a href="https://twitter.com/yassu0320">@yassu0320</a>と謎の店に集まり、作業しました。</p>
+<hr />
+<p>　これは、実行されると予め設定ファイルに書いておいた、曜日ごとの予定を表示してくれる、簡単なCLIアプリです。<br />
+例えば、<code>.zshrc</code>や<code>.zshenv</code>的なものに、これを実行させるように書いておけば、一日の最初にシェルを開いたときに、予定を教えてくれます。<br />
+「あとでまた教えて！」って言っておけば、そうしてくれます。</p>
+<p>ずっとこんな感じのが欲しかったので、作りました。</p>
+<p>作業時間は5時間いかない程度なので、ちょうど人間的な１日分の作業まるごとって感じです。<br />
+つまり、<strong>これが僕の今のHaskell力なのではないか？</strong> と思い、備考録がてらこの日記を書きました。</p>
+<h1 id="感想">感想</h1>
+<p>　先程 お風呂の中でてきとうに、Twitterに書いておいた感想をこちらにも書いておきます。</p>
+<ul>
+<li>よくできたと思うところ
+<ul>
+<li><strong>適切な粒度の関数分割</strong>ができたと思う</li>
+<li><strong>適切なライブラリを選んで</strong>、アプリ固有のロジックに絡まないものはライブラリに頼れたと思う</li>
+<li><strong>可読性</strong>を気にした（インデントが最大だと、関数から見て4レベルいってるけど抑えた）</li>
+<li>型に現れないエラーを気にした</li>
+<li>README.mdをemojiで装飾してみた</li>
+</ul></li>
+<li>気になるところ
+<ul>
+<li>モジュール分割してない（小物だし、メンテナンスアビリティ高くなくてもいいかな？ とか考えて、やってないだけ）</li>
+<li>’mark’という名前が曖昧なので、他の言葉に置き換えた方が良さそう</li>
+<li><code>f $ g x</code>でいいところを<code>f . g $ x</code>としてる（気にしすぎといえば、そう）</li>
+<li>145行目の’remember’が先頭小文字（他は大文字始まり）（気にしすぎといえば、そう）</li>
+</ul></li>
+</ul>
+<h1 id="参考にしたページ">参考にしたページ</h1>
+<p>　参考にした、というよりも、stackageのAPIを引くなどして、見つけたドキュメントですね。<br />
+stackageのAPIを引くのに、以下のVimプラグインを使用してます。 宣伝ですので、スターくれてもいいんですよ？</p>
+<ul>
+<li><a href="https://github.com/aiya000/aref-web.vim">GitHub - aiya000/aref-web.vim: Web dictionaries on the vim with async.</a></li>
+</ul>
+<p>はい、以下が参考にしたページです。</p>
+<ul>
+<li><a href="https://www.stackage.org/haddock/lts-7.7/safe-0.3.9/index.html">safe - stackage</a>
+<ul>
+<li>Haskellの危うい標準ライブラリ周り……<code>head</code>や<code>read</code>を安全に提供してくれるライブラリです</li>
+</ul></li>
+<li><a href="https://www.stackage.org/haddock/lts-7.7/text-show-3.4/index.html">text-show - stackage</a>
+<ul>
+<li>Show型クラスのText版を提供してくれるライブラリです</li>
+<li>fromTextを使えば、難しいことは何もないはずです</li>
+</ul></li>
+<li><a href="http://hackage.haskell.org/package/time-1.8.0.1">time - hackage</a>
+<ul>
+<li>日付、時刻を扱うライブラリです</li>
+<li>明示的には曜日を扱っていないようです（目標を正確に捉える姿勢、流石です）</li>
+</ul></li>
+</ul>
+<hr />
+<p>　ところで、この記事を書くのに要した時間は約30分でした（特に何があるわけではありませんが、備考録ですので）。</p>
+<p>食べても食べても太らない焼肉とｽｼが食べたいなー。</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/develop/posts/2017-04-22-my-power-of-haskell.md">とれたてHaskellまるごと１日分の入ったHaskellプロジェクトがこれです - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

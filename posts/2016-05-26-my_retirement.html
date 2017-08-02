@@ -1,0 +1,229 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - C#で仕事してましたが退職しました</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>C#で仕事してましたが退職しました</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2016/05/26 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/備考録.html">備考録</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2016-05-26-my_retirement.html" class="hatena-bookmark-button" data-hatena-bookmark-title="C#で仕事してましたが退職しました - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2016-05-26-my_retirement.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="cで仕事してましたが退職しました">C#で仕事してましたが退職しました</h1>
+<p>　諸事情で4月から2ヶ月間の休職をしていましたが、この会社 (以下、N社と記述します) では2ヶ月を超える休職は許されていないため、 先ほど正式に退職をしてきました。<br />
+N社は僕が2年制の専門学校を卒業し、新卒で入社し丁度2年間務めた初めての入社先でした。</p>
+<p>　諸事情とは抑うつ状態と呼ばれるもので、まず一番語りたいこととは別なので別の記事に書くことにします。 (現在治療中)</p>
+<p>　この記事は備考録がてら、僕の職歴<del>やポエム</del>を書いたものです。</p>
+<hr />
+<ol style="list-style-type: decimal">
+<li>N社での主な職務
+<ul>
+<li><a href="#infrastructure_in_corp">新卒だけど社内インフラ作るマン</a></li>
+<li><a href="#c_sharp_very_eat_man">C#バリバリ食べるマン(受託案件,業務アプリ)</a></li>
+<li><a href="#introduce_dev_tools">開発チームの開発環境の整備(Redmineなどのチームへの導入)</a>
+<ul>
+<li>Redmine導入</li>
+<li>gitbucket導入</li>
+</ul></li>
+<li><a href="#iroiro_introduce">他の受託案件用の色々を導入するマン</a></li>
+</ul></li>
+<li><a href="#unko">休職に向けた引き継ぎ作業</a></li>
+<li><a href="#closing">次の入社に向けた想い</a></li>
+</ol>
+<hr />
+<h2 id="新卒だけど社内インフラ作るマン"><a name="infrastructure_in_corp">新卒だけど社内インフラ作るマン</a></h2>
+<p>　さて僕の初めてのお仕事ですが、社内のインフラ環境をコスト削減のために 自前でホスティングするようにしよう…というものでした。</p>
+<p>　例えば、以前はメールサーバを外部のSaasで運用していたそうですが、 今回レンタルサーバ上にPOP3,IMAP,SMTPサーバを乗せる形でリプレースしました。 ( 結果から言うとメールサーバについては失敗しました…すまぬ…すまぬ… )</p>
+<ul>
+<li>Saasからレンタルサーバ上での運用にリプレース
+<ol style="list-style-type: decimal">
+<li>メールサーバ</li>
+<li>N社ホームページ(Apache httpd), SSL対応</li>
+</ol></li>
+<li>新規導入
+<ol style="list-style-type: decimal">
+<li>社内SNS (Apache httpd – VirtualHost)</li>
+<li>DNSサーバ(セカンダリ)</li>
+</ol></li>
+</ul>
+<p>またプライマリDNSサーバはお名前.comを使用しました。</p>
+<p>　<del>今更だけど、新卒に任せていい仕事だったんでしょうか？ これ。</del><br />
+いい機会を僕にくれるために、機会を提供してくださったのだと思います。</p>
+<p>　その後、僕は受託系案件の唯一のインフラ管理者になるのでした。</p>
+<p><del>結局Nginx触れてない！！</del></p>
+<h2 id="cバリバリ食べるマン受託案件業務アプリ"><a name="c_sharp_very_eat_man">C#バリバリ食べるマン(受託案件,業務アプリ)</a></h2>
+<p>　社内インフラのお仕事がある程度落ち着きましたので、受託開発事業がスタートしました。</p>
+<p>　見出しの通りですが主に<strong>C#</strong>を使っていわゆる<strong>業務アプリケーション</strong>の開発を2件ほど行いました。</p>
+<ol style="list-style-type: decimal">
+<li>WinForms + MySQL (工事会社の材料在庫,赤字黒字の計算,顧客管理用ソフト)</li>
+<li>WPF + MS SQL Server 2014 (工事状況,子会社と顧客の管理用ソフト)</li>
+</ol>
+<hr />
+<p>　僕はここでC#のよさに完全に目覚めたので、今まではOCJPIIを取るほどJavaに頼っていましたが 最近はJavaを使うならC#というレベルです。</p>
+<hr />
+<p>こちらの2件をスパイラル開発しながら、顧客環境に対して更新のその都度納品していました。</p>
+<p>　ここで人によく驚かれるのが開発体制ですが、開発チームは以下のような構成でした。</p>
+<ul>
+<li>プログラマ(僕) – <strong>1名</strong></li>
+<li>テスター 兼 デバッガ (新入社員の誰かが時期によって割り当てられ、よく入れ替わる) – <strong>1名</strong></li>
+<li>SE (顧客要件のまとめ役) – 1名</li>
+</ul>
+<p>　PMはいません。</p>
+<p>　まず’WinForms + MySQL’の構成で作ったものがN社の初受託案件でしたので、開発体制が整っていません。<br />
+なので新卒な僕でしたが必死こいてなんとか現状で出来る開発環境の整備を行いました。</p>
+<h2 id="開発チームの開発環境の整備redmineなどのチームへの導入"><a name="introduce_dev_tools">開発チームの開発環境の整備(Redmineなどのチームへの導入)</a></h2>
+<h3 id="redmine導入">Redmine導入</h3>
+<p>　開発初期にはテスターさんさえいませんでしたがそれはさておき。<br />
+最低限、PGとテスターさんのやり取りは空中で行うよりもプロジェクト管理ツールを使ったほうがいいだろうと思ったので Redmineをクラウドサーバに導入しました。</p>
+<p>Redmineは以下の用途で使用しました。</p>
+<ul>
+<li>僕がチケットとしてテストして欲しい内容を発行し、(OK|NG)判定をしてもらう</li>
+<li>テスターさんがデバッグして見つけたバグをチケットとして発行し、僕がそれを見てプログラムをFixする</li>
+</ul>
+<p>　このRedmineさんは本当によくて、僕が退職する最後まで僕を支えてくれました。<br />
+ありがとう…ありがとう…。</p>
+<h3 id="gitbucket導入">gitbucket導入</h3>
+<p>　開発案件にはVCSが必須です。<br />
+ですのでgitを採用している<a href="https://github.com/gitbucket/gitbucket">gitbucket</a>を導入しました。</p>
+<p>　jarを起動するだけでも十分すぎるどころか、 いつも僕が使用しているGitHubと同じレベルで使えるすごいものです。<br />
+(Pull Requestも使えます)</p>
+<p>　もしgitサーバを採用したいどなたかがいれば、GitLabと比べてこちらの採用も考えてみてはいかがでしょうか。</p>
+<ul>
+<li>1つ目の案件では1人でgitgitしてました</li>
+<li>2つ目の案件ではUI部分の半分以上をテスターさんが担当してくれたので(！？)、UI部分はGitHubフローで開発しました</li>
+</ul>
+<hr />
+<p>　その他Slackなどの導入も考えましたが、要員が全然いないし、やめました。<br />
+CIも導入したかったですが、テストを書く暇がなく、またテストの利点を上長に説明しきれず断念。</p>
+<h2 id="他の受託案件用の色々を導入するマン"><a name="iroiro_introduce">他の受託案件用の色々を導入するマン</a></h2>
+<p>　さて、僕が入社してから1年後くらいでしょうか、本社に新しい方が未経験既卒で入ってきました。<br />
+受託案件要員とのこと。 おおっ！ と思いましたが、開発案件要員ではなかったようです…。</p>
+<p>　その方はデザイナなので、N社HPのリファインやWebサイト作成案件を担当していました。<br />
+その方の担当案件用に<a href="https://ja.wordpress.org/">WordPress</a>を建てて欲しいと頼まれることがとてもよくあったので、 僕は開発の傍らでWordPressめっちゃ建てるマンを担当していました。</p>
+<ol style="list-style-type: decimal">
+<li>(その案件用の)レンタルサーバにhttpdを導入する</li>
+<li>httpdにWordPressを導入する
+<ul>
+<li>MySQLデーモンの導入</li>
+<li>初期設定</li>
+</ul></li>
+<li>導入したWordPressをVirtualHostとして登録したりしなかったり</li>
+</ol>
+<hr />
+<h2 id="休職に向けた引き継ぎ作業"><a name="unko">休職に向けた引き継ぎ作業</a></h2>
+<p>　結局これが僕の最後の仕事になりました。</p>
+<p>　実は上に書いた僕の担当してきた全てのプロジェクトは、 要件定義書も受け入れテストも、操作ドキュメントもプロジェクト仕様書的なものもありませんでした。<br />
+( DB定義書は僕の脳内では管理しきれないので、個人的に書いてた )</p>
+<p>　操作ドキュメントについては「作ろう！」という動きがあったのですが、PMが不在のためいつの間にか潰れていました。<br />
+(操作ドキュメントを作ってもバージョンが上がるとあっさり仕様が変えられるため、 操作ドキュメントを更新する要員がいないと追随できない故、潰れた)</p>
+<p>　そのまま僕がフェードアウトしていっては全て崩れるので、新規にプロジェクトの仕様書を作成することになりました。</p>
+<ul>
+<li>超ツライ</li>
+<li>過去の作業を洗い出すような作業ツライ</li>
+<li>何かを作る作業がしたい</li>
+</ul>
+<p>　その際の使用ツールは以下</p>
+<ul>
+<li>画面遷移図はMS OfficeのPowerPoint</li>
+<li>CRUD図はMS OfficeのExcel</li>
+<li>それ以外はMarkdownで<a href="https://github.com/GitbookIO/gitbook">gitbook</a></li>
+</ul>
+<p>　上記の選択は「速さ優先」で選びました。<br />
+図的なものに対してPowerPointは超優秀で、文書的なもの対してはMakdownが超優秀です。 マトリクス的なものを作りたいのならExcel方眼紙が優秀ですね。<br />
+そしてMarkdownをドキュメント用にまとめるためにGitBookを使いました。</p>
+<hr />
+<p>　かつてGitBookでこんなものを作ったのですが、超いいですよ。<br />
+<a href="https://www.gitbook.com/book/aiya000/haskell_de_groupstructure/details">Haskellでわかる群論の代数的構造</a></p>
+<p>そうです、gitbookは本来技術書を書いたりするものですが、ドキュメント作成用にも使えるのです。</p>
+<hr />
+<h2 id="最後"><a name="closing">最後</a></h2>
+<p>　N社に入社し、色々本社環境(受託案件に対する環境)が整備されていなかったり、 よくわからないことを言われて傷ついたりすることは多くありましたが<br />
+得たものは大きいです。…C#のレベルが上がったとか、実際に色々できた…とか。</p>
+<p>　強いて言うとすれば、僕が復職せずに退職を決めた理由は<br />
+<strong>「N社には職業エンジニアしかいなかったから」</strong><br />
+でした。</p>
+<p>このような環境は、趣味もプログラミングな僕にはあまりにも過酷でした。</p>
+<p>僕らN社本社の従業員はほぼ毎日定時帰り、休出も1年に1~2日あるくらいでした。 超いい環境だったと思います。</p>
+<p>でも、僕にとって最近の技術動向や好きな言語, 熱意の語り合いのできない環境は… 仲間が全くいないと錯覚してしまうには十分なものでした。 (失礼な物言いです、すみません)</p>
+<p>　願わくば、次の勤め先では<strong>「仲間」</strong>が欲しいです。 残業が必要になったりしても、休出が必要になったりしても…仲間と一緒にそれすら楽しめるような… そんな会社に勤めたいです。</p>
+<hr />
+<p>　さて、締りのないものになってしまいましたが、この退職記事は以上です。</p>
+<p>　一応…ですが、こんな僕に連絡をいただける奇特な社がいた時のために僕のプロフィール兼連絡先を載せておきます。<br />
+その時は…ぜひ挨拶させてください。</p>
+<ul>
+<li>名前: aiya000 ( あいや )</li>
+<li><a href="https://github.com/aiya000">GitHubアカウント</a></li>
+<li><a href="https://twitter.com/public_ai000ya">Twitterアカウント</a></li>
+<li>メールアドレス ( aiya000.develop |at| gmail.com )</li>
+</ul>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/develop/posts/2016-05-26-my_retirement.md">C#で仕事してましたが退職しました - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

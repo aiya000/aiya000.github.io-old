@@ -1,0 +1,276 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/08/03 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/ラブライブ！で学ぶ.html">ラブライブ！で学ぶ</a>]
+    
+        [<a href="../tags/ことり、穂乃果と一緒に学ぶHaskell.html">ことり、穂乃果と一緒に学ぶHaskell</a>]
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-08-03-learn-haskell-with-muse-happy-birthday-honoka.html" class="hatena-bookmark-button" data-hatena-bookmark-title="ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-08-03-learn-haskell-with-muse-happy-birthday-honoka.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<ul>
+<li><a href="./2017-05-27-learn-haskell-with-muse.html">前回 - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」</a></li>
+<li><a href="https://github.com/aiya000/aiya000.github.io/search?utf8=%E2%9C%93&amp;q=%22Haskell%2FMuse%3A%22&amp;type=Commits">更新履歴 - μ’sと一緒に学ぶHaskell</a></li>
+</ul>
+<h1 id="happybirthday">Happy☆Birthday！</h1>
+<p>ことり「穂乃果ちゃん、ハッピーバースデー！」<br />
+海未「穂乃果、誕生日おめでとうございます！」</p>
+<p>🎉</p>
+<p>穂乃果「ことりちゃん、海未ちゃん、ありがとー！」</p>
+<hr />
+<p>ことり「今日は穂乃果ちゃんの誕生日なので、海未ちゃんもお呼びしたよ♪」<br />
+海未「私はHaskellをやっているわけではありませんが、前々からお二人だけで勉強会をしているとのことで。 　穂乃果の誕生日でしたし気になっていたので、お祝いがてらお邪魔させていただきます」</p>
+<p>穂乃果「ごめんね海未ちゃん、別に海未ちゃんを蔑ろにしてたわけじゃなかったんだけど。 　ちょうどことりちゃんがHaskell経験者だったから教えて貰ってたんだ！」<br />
+海未「気にしていませんよ。 　どちらかというと気になっているのは、穂乃果がちゃんと勉強しているのか……ということですね」<br />
+穂乃果「し……してるもん！！　わ、割と！」</p>
+<p>海未「割と、ですか。　ふふ、冗談ですよ。　ことりもついていますし、心配はしていません」</p>
+<h1 id="overloadedstrings">OverloadedStrings</h1>
+<p>海未「さて私は傍らで見学していますので。 　今日は誕生日パーティーの時間になるまで勉強会をするんでしたよね」<br />
+穂乃果「うん、雪穂が『料理できるまで遊んでて』って言ってたから、Haskell教えてもらおうと思って！」</p>
+<p>ことり「今日は型クラスの応用のうち一つである、<code>IsString</code>型クラスと<code>OverloadedStrings</code>GHC拡張についてやっていくよ」<br />
+穂乃果「型クラスは<code>deriving</code>か<code>instance</code>で実装するんだったよね。 　<code>IsString</code>は<code>deriving</code>できるの？ 　それと……GHC拡張って？」</p>
+<p>ことり「<code>IsString</code>は<code>deriving</code>できないから、手動で<code>instance</code>する必要があるんだ。 　でもね、<code>IsString</code>は<code>Show</code>や<code>Eq</code>などと違って、そんなには自分で作ることはあんまりないかなぁ」</p>
+<p>ことり「GHC拡張……っていうのは、Haskellのコンパイラの一つである『Glasgow Haskell Compiler』が独自実装する、Haskellの言語規格にはない機能を提供するもののことだよ」</p>
+<ul>
+<li><a href="https://www.haskell.org/ghc/">Home — The Glasgow Haskell Compiler</a></li>
+</ul>
+<p>穂乃果「？？？」</p>
+<p>ことり「穂乃果ちゃんはHaskellの環境にhaskell-stackを使ってるよね？ 　haskell-stackはコンパイラとして、デフォルトでGHCを使ってるんだ。 　穂乃果ちゃんは何をせずとも、普通にhaskell-stackを使ってれば、GHC拡張を使えるよ♪」</p>
+<p>穂乃果「へ〜。　ってことは、GHC以外を使ってる場合はGHC拡張は使えないのかな？」<br />
+ことり「それはそう……なんだよね〜。 　まあ今の主流はGHCだし、GHCが破綻したりしない限りは大丈夫なはずだから、そんなに気にしなくても平気かな」</p>
+<p>ことり「古今のHaskellはよくGHC拡張に依存しすぎているって言われたりもするけど、 Haskell98レポート『あらすじ&gt;言語とライブラリ』の章に書いてあるHaskellの理念からして GHC拡張はHaskellの正当な進化系だと思うんだ。 心配ないよ♡」</p>
+<ul>
+<li><a href="http://www.sampou.org/haskell/report-revised-j/preface-jfp.html">Haskell98レポート - あらすじ</a></li>
+<li><a href="https://www.haskell.org/onlinereport/preface-jfp.html">The Haskell 98 Report - Preface</a></li>
+</ul>
+<p>穂乃果「なるほどね？」</p>
+<h2 id="bytestringとtext">ByteStringとText</h2>
+<p>ことり「今回はHaskell特有の話になるから、Javaの話はあんまり交えられないかも……」<br />
+ことり「逆に言うとJavaと対比することもないくらいで、そんなに複雑な話ではないんだ」</p>
+<p>ことり「前提知識として、Haskellには大きく分けて3つ、細かく分けて7つくらいの、文字列を表す型があるんだ」<br />
+穂乃果「ななつ……どうゆうことなの！？」</p>
+<p>ことり「うーん、かつてのHaskellが<code>String</code>で日本語とかを扱うことが苦手だったっていう歴史的経緯が含まれたりもするんだけど……」<br />
+ことり「実は<code>String</code>って、単なる<code>[Char]</code>の別名でね。　これは<code>String</code>をリストとしての側面を与える代わりに、処理効率はよくないとされてるんだ。　一般的には。」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">String</span> <span class="fu">=</span> [<span class="dt">Char</span>]</code></pre></div>
+<p>ことり「それを改善するために作られたのがこの2つ」</p>
+<ul>
+<li><a href="https://hackage.haskell.org/package/text-1.2.2.2">text: An efficient packed Unicode text type.</a></li>
+<li><a href="https://hackage.haskell.org/package/bytestring-0.10.8.2">bytestring: Fast, compact, strict and lazy byte strings with a list interface</a></li>
+</ul>
+<p>ことり「その2つの中にそれぞれLazy版、Strict版が含まれる」<br />
+ことり「<code>ByteString</code>に至ってはそれに加えて<code>Char8</code>モジュールがあるよ」</p>
+<ul>
+<li>Prelude(String)</li>
+<li>Data.Text （Strict版）
+<ul>
+<li>Data.Text.Lazy （Lazy版）</li>
+</ul></li>
+<li>Data.ByteString （Strict版）
+<ul>
+<li>Data.ByteString.Lazy （Lazy版）</li>
+<li>Data.ByteString.Char8 （Strict版亜種）</li>
+<li>Data.ByteString.Lazy.Char8 （Lazy版亜種）</li>
+</ul></li>
+</ul>
+<p>ことり「一般的なユースケースでは……Strict版の方が処理効率がよくて、その代わりLazy版の方がHaskell特有の評価戦略が活かせるって感じかな」</p>
+<p>穂乃果「評価戦略……授業で習ったような……。 　遅延評価ってやつ？」<br />
+ことり「それそれ♪ 　正確に言うと、必要時評価で名前呼びでメモ化されるの！」</p>
+<p>穂乃果「？」<br />
+ことり「えーと……ごめんね。　これについて語るには、今回の枠じゃちょっと時間が足りないかなあ……」<br />
+ことり「でも大丈夫。　わたしは今のHaskellなら、不都合がない限り<code>String</code>だけで良いかなって思うよ。　O(n^m)とかのループを何回もも回すとかじゃない限りはね♪」</p>
+<p>穂乃果「えーと、<code>String</code>使っていいの？」<br />
+ことり「うん♪」</p>
+<h3 id="bytestring">ByteString</h3>
+<p>穂乃果「<code>ByteString</code>の<code>Char8</code>ってなに？」</p>
+<ul>
+<li>Data.ByteString
+<ul>
+<li>Data.ByteString.Char8</li>
+</ul></li>
+</ul>
+<p>ことり「えっとね、<code>Char8</code>じゃない<code>ByteString</code>が、<code>Char8</code>の<code>ByteString</code>のオリジナルになっているの」</p>
+<p>ことり「<code>Char8</code>の<code>ByteString</code>が<code>String</code>と同じように文字型として<code>Char</code>を扱うのに対して、 <code>Char8</code>じゃない<code>ByteString</code>は文字列型として<code>Word8</code>を使うよ」<br />
+ことり「<code>Word8</code>は8-bitで表現できるうちの整数……つまりutf-8の文字コードを現してて……」</p>
+<p>ことり「それを列としたものが<code>Char8</code>じゃない方の<code>ByteString</code>」<br />
+ことり「またそれをラップして、<code>Char</code>を扱うようにしたのが<code>Char8</code>の<code>ByteString</code>だよ♪」</p>
+<ul>
+<li><a href="https://hackage.haskell.org/package/bytestring-0.10.8.2/docs/Data-ByteString.html#t:ByteString">Data.ByteString</a></li>
+</ul>
+<p>穂乃果「なるほど。 　utf-8文字列<code>ByteString</code>と、そのラップの<code>Char8.ByteString</code>なんだね！」<br />
+ことり「そうそう♪」</p>
+<!-- TODO
+### Text
+穂乃果「じゃあ`Text`の方はどんなのなの？」  
+-->
+<h2 id="overloadedstringsとisstring">OverloadedStringsとIsString</h2>
+<p>ことり「今度は<code>IsString</code>について」</p>
+<p>ことり「<code>IsString</code>……はね。　ここで出てきた<code>ByteString</code>と<code>Text</code>が<code>IsString</code>インスタンスなんだ」<br />
+穂乃果「ほむ……<code>IsString</code>ってどんな型クラスなの？」</p>
+<p>ことり「Javaで文字列型っていうと、普通はString型だけでしょ？　こうやって簡単に代入できる」</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="bu">String</span> powerful = <span class="st">&quot;wao-wao&quot;</span>;</code></pre></div>
+<p>ことり「でもHaskellでは<code>Text</code>や<code>ByteString</code>みたいに文字列型を自由に定義できることを許されているんだ」<br />
+ことり「そこで問題になるのが、<code>&quot;wao-wao&quot;</code>みたいなリテラルが<code>String</code>型である。 　ってところなんだ」</p>
+<p>ことり「<code>String</code>型の名前（変数）を定義するには、こうするよね」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">powerful ::</span> <span class="dt">String</span>
+powerful <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span></code></pre></div>
+<p>ことり「でも同じことを<code>Text</code>や<code>ByteString</code>に対してやると、普通はこんな感じになっちゃうの」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>) <span class="co">-- ByteStringを使いたいならChar8（or Lazy.Char8）がおすすめだよ！</span>
+<span class="kw">import </span><span class="dt">Data.Text</span> (<span class="dt">Text</span>)
+<span class="kw">import qualified</span> <span class="dt">Data.ByteString.Char8</span> <span class="kw">as</span> <span class="dt">B</span>
+<span class="kw">import qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span>
+
+<span class="co">-- B.pack :: String -&gt; ByteString</span>
+<span class="ot">powerfulB ::</span> <span class="dt">ByteString</span>
+powerfulB <span class="fu">=</span> B.pack <span class="st">&quot;wao-wao&quot;</span>
+
+<span class="co">-- T.pack :: String -&gt; Text</span>
+<span class="ot">powerfulT ::</span> <span class="dt">Text</span>
+powerfulT <span class="fu">=</span> T.pack <span class="st">&quot;wao-wao&quot;</span></code></pre></div>
+<h3 id="overloadedstrings-1">OverloadedStrings</h3>
+<p>穂乃果「<code>pack</code>っていう関数が、<code>String</code>からそれぞれへの変換をしてるんだよね、これ」<br />
+ことり「その通り。 　<code>String</code>が<code>pack</code>無しで扱えるのに対して、<code>ByteString</code>と<code>Text</code>は<code>pack</code>が必要になっちゃう」</p>
+<p>ことり「せっかくHaskellが文字列型を自由に定義することを許してるのに、これは面倒だよね」</p>
+<p>ことり「そこでファイルの<strong>先頭</strong>に、LANGUAGEプラグマって呼ばれるものを書いてあげると、なんと<code>pack</code>が必要なくなるの☆」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
+
+<span class="kw">import </span><span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>)
+<span class="kw">import </span><span class="dt">Data.Text</span> (<span class="dt">Text</span>)
+<span class="kw">import qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span>
+
+<span class="ot">powerfulB ::</span> <span class="dt">ByteString</span>
+powerfulB <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span>
+
+<span class="ot">powerfulT ::</span> <span class="dt">Text</span>
+powerfulT <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span>
+
+<span class="co">-- TIO.putStrLnはTextを画面に出力する</span>
+<span class="co">-- TIO.putStrLn :: Text -&gt; IO ()</span>
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> TIO.putStrLn (<span class="st">&quot;powerful day !&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)</code></pre></div>
+<h3 id="isstring">IsString</h3>
+<p>穂乃果「えっ、<code>&quot;wao-wao&quot;</code>がそれぞれ違う型の値になるってこと？？？」<br />
+穂乃果「それってすごいね！　……でもなんだろう、なんだかわからないんだけど、ちょっともやもやする……」</p>
+<p>ことり「多分、なんだけど。　Javaで<code>&quot;wao-wao&quot;</code>っていうリテラルを使うとそれは必ず<code>String</code>型になる」<br />
+ことり「でも<code>OverloadedStrings</code>を導入したHaskellでは、それはどの文字列型になるかわからない。 　……っていう不安なのかも」<br />
+ことり「例えば、ある文字列の後ろに<code>&quot;ラブアローシュート！&quot;</code>を付け足す関数<code>shoot</code>に<code>&quot;wao-wao&quot;</code>を適用した形<code>shoot &quot;wao-wao&quot;</code>。 　その<code>shoot</code>の型を<code>Text -&gt; Text</code>にすべきか<code>ByteString -&gt; ByteString</code>にすべきか、っていうのがわからないんじゃないかな？」</p>
+<p>海未「！？」</p>
+<p>穂乃果「そうなのかな？」<br />
+ことり「きっとそう！　わたし、穂乃果ちゃんの気持ちならいつでもわかるから！」</p>
+<p>穂乃果「えっ」</p>
+<p>ことり「それはね穂乃果ちゃん、わたしが穂乃果ちゃんをいっぱい想ってるから☆☆…… 穂乃果ちゃんの思ってること、ことりはぜーんぶわかるんだよ♪」</p>
+<p>穂乃果「……それは嬉しいんだけど……えっとえっと、今はそっちじゃなくって……」</p>
+<p>ことり「ふふふ。 　大丈夫だよ、そういう不健全さはHaskellには（ほとんど）ないの！」</p>
+<p>ことり「<code>OverloadedStrings</code>を使った後は、文字列リテラルは<code>IsString a =&gt; a</code>として扱われます」<br />
+ことり「具体的には、以下を可能にするよ」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
+
+<span class="kw">import </span><span class="dt">Data.String</span> (<span class="dt">IsString</span>)
+<span class="kw">import qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span>
+
+<span class="ot">powerful' ::</span> <span class="dt">IsString</span> a <span class="ot">=&gt;</span> a
+powerful' <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span>
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> TIO.putStrLn powerful'</code></pre></div>
+<p>ことり「そして<code>TIO.putStrLn powerful'</code>時点で<code>powerful'</code>が<code>Text</code>として推論されます！ 　<code>TIO.putStrLn</code>が<code>Text -&gt; IO ()</code>だからね♪」</p>
+<p>穂乃果「なるほど……リテラルが多相的な型として扱われるんだ。 　なんか少し変な感じだけど、さっきの変な感じはなくなったなあ」</p>
+<p>穂乃果「すごいねー。　ありがと、ことりちゃん！」<br />
+ことり「えっへへ、どういたしまして！」</p>
+<h1 id="おはようpowerful-day">おはようPowerful day!</h1>
+<p>海未「ことり、穂乃果。　雪穂から伝言です。　『準備できたよ〜』とのことです」<br />
+ことり「……ということで、ちょうどいい感じのタイミングで終われたね♪」<br />
+穂乃果「今日もありがとう、ことりちゃん！　海未ちゃんも、伝言ありがと！」</p>
+<p>………</p>
+<h1 id="誕生日おめでとう">誕生日おめでとう！</h1>
+<p>雪穂「はい、お姉ちゃん。　誕生日プレゼントだよ！　最近、Haskell頑張ってるみたいだから……」<br />
+穂乃果「！　『すごいHaskell楽しく学ぼう！』だ！　すごい読みやすいっていう話だし、嬉しいよ雪穂ー！」</p>
+<p>ことり「わたしからも誕生日プレゼントだよ、はい♪」<br />
+穂乃果「わー、『プログラミングHaskell』だ〜〜！」<br />
+ことり「これはちょうど『すごいHaskell楽しく学ぼう！』を読んだ後に読むのがいいかも！」</p>
+<p>海未「それではこちらは、私からです。　最近はとてもよく勉強できているようですから」<br />
+穂乃果「海未ちゃんからは何かなー……。　…………こ……これは……まさか」</p>
+<p>『型システム入門 -プログラミング言語と型の理論−』</p>
+<p>穂乃果「これ……初学者には結構難しいって聞いたことあるんだけど……。 　海未ちゃん？　私は……私には……これは重いんじゃないかなあ。 　『私からのプレゼントは不服ですか？』……って？ 　違う……違うよ、そうじゃないけど……そうじゃないけど…… うああ、ありがとう海未ちゃん、嬉しいよーーーーー！！！」</p>
+<h1 id="参考にしたページだよ">参考にしたページだよ☆</h1>
+<ul>
+<li><a href="http://www.kasi-time.com/item-77730.html">WAO-WAO Powerful day!　　Printemps - 歌詞タイム</a></li>
+</ul>
+<h1 id="備考">備考</h1>
+<p>　型システム入門は丁寧に書かれていて、親切な構成になっています。 その上、理解に必要な前提知識も、ほとんどがその中に書かれています。 穂乃果もきっと、読みだしたらこの素晴らしさをわかってくれることでしょう。 皆様も是非、読んでみてはいかがでしょうか。</p>
+<p>園田海未より</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/develop/posts/2017-08-03-learn-haskell-with-muse-happy-birthday-honoka.md">ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」 - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

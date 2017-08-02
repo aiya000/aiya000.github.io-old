@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - Ubuntu15.04にnodejsとtypescriptを入れた</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>Ubuntu15.04にnodejsとtypescriptを入れた</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2015/08/15 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/環境.html">環境</a>]
+    
+        [<a href="../tags/Node.html">Node</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2015-08-15-nodeJS_and_TypeScript_in_ubuntu.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Ubuntu15.04にnodejsとtypescriptを入れた - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2015-08-15-nodeJS_and_TypeScript_in_ubuntu.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="ubuntu15.04にnodejsとtypescriptを入れた">Ubuntu15.04にnodejsとtypescriptを入れた</h1>
+<h2 id="目的-typescript実行環境を整える">目的 : TypeScript実行環境を整える</h2>
+<h3 id="どのパッケージをインストールすればいい">1. どのパッケージをインストールすればいい？</h3>
+<p>参考ページ<br />
+<a href="http://y-anz-m.blogspot.jp/2012/11/ubuntu-typescript.html" class="uri">http://y-anz-m.blogspot.jp/2012/11/ubuntu-typescript.html</a></p>
+<p>ただし<strong>リポジトリを追加する必要はなかった</strong>。<br />
+実際に行った作業は以下の通り。<br />
+これを実行するとnpm及びnodejsの実行環境が入る。</p>
+<pre><code>$ sudo apt-get install npm nodejs</code></pre>
+<p>次にTypeScriptをインストールする。</p>
+<pre><code>$ sudo npm install -g typescript</code></pre>
+<p>これでTypeScriptの実行環境が整った。<br />
+…が、実際にTypeScriptを実行するにはもうひとつだけ作業が必要だ。</p>
+<p>だって、TypeScriptのコンパイラであるtscコマンドを叩くとこんなん言われるもん。</p>
+<pre><code>$ tsc -v
+/usr/bin/env: node: そのようなファイルやディレクトリはありません</code></pre>
+<h3 id="tscコマンドを実行できるようにする">2. tscコマンドを実行できるようにする</h3>
+<p>参考ページ<br />
+<a href="http://improve.hatenablog.com/entry/2015/03/05/190251" class="uri">http://improve.hatenablog.com/entry/2015/03/05/190251</a></p>
+<p>ただし<strong>tsc自体を修正するのは嫌だったので</strong>、update-alternativesコマンドを使って<br />
+nodejsパッケージによりインストールされたnodejsコマンドをnodeコマンドに仕立て上げた。<br />
+( nodejsパッケージでnodeコマンドが入らない理由は上記サイト参照 )</p>
+<p>作業は以下。</p>
+<pre><code>$ sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+update-alternatives: /usr/bin/node (node) を提供するために自動モードで /usr/bin/nodejs を使います</code></pre>
+<p>これで/usr/bin/nodeに/usr/bin/nodejsへのリンクが貼られる。<br />
+alternativesが何かわからない、もしくは管理が面倒、という方は以下でいいと思う。 ( 非推奨 )</p>
+<pre><code>$ sudo ln -s /usr/bin/node /usr/bin/nodejs</code></pre>
+<h3 id="結果">結果</h3>
+<p>tcsコマンドで.tsファイルを.jsファイルにコンパイルできた。</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/develop/posts/2015-08-15-nodeJS_and_TypeScript_in_ubuntu.md">Ubuntu15.04にnodejsとtypescriptを入れた - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>
