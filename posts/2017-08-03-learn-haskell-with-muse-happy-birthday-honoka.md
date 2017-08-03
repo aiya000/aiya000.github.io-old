@@ -134,11 +134,6 @@ type String = [Char]
 　utf-8文字列`ByteString`と、そのラップの`Char8.ByteString`なんだね！」  
 ことり「そうそう♪」  
 
-<!-- TODO
-### Text
-穂乃果「じゃあ`Text`の方はどんなのなの？」  
--->
-
 
 ## OverloadedStringsとIsString
 ことり「今度は`IsString`について」  
