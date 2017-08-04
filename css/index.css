@@ -65,13 +65,3 @@ hr.short-bar {
 br.clear-styles {
     clear: both;
 }
-
-div.tagcloud a:link {
-    /* Umi's default */
-    color: #18bc9c;
-}
-
-div.tagcloud a:visited {
-    /* Umi's default */
-    color: #18bc9c;
-}
