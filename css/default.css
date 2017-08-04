@@ -31,3 +31,11 @@ pre {
     margin-left: 3%;
     padding: 8px 0 8px 16px;
 }
+
+a:link {
+    color: #2f4f4f;
+}
+
+a:visited {
+    color: #5f9ea0;
+}
