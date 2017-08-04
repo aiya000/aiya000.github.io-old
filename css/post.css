@@ -30,6 +30,14 @@ li {
     font-size: 95%;
 }
 
+a:link {
+    color: chocolate;
+}
+
+a:visited {
+    color: chocolate;
+}
+
 .info {
     background-color: white;
     padding: 4px;

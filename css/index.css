@@ -1,5 +1,5 @@
 div.blog-title {
-    /* 2ADACC is message of dream */
+    /* 2ADACC is that message, do you remember ? */
     background-color: #2ADACC;
     border-radius: 4px;
     padding: 8px;
@@ -47,6 +47,14 @@ div.screen-left div.tagcloud {
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 8px;
+}
+
+div.screen-left div.tagcloud a:link {
+    color: #18bc9c;
+}
+
+div.screen-left div.tagcloud a:visited {
+    color: #18bc9c;
 }
 
 div.screen-left div.twitter-widget {
