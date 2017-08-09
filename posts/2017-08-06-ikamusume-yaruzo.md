@@ -12,7 +12,7 @@ tags: イベント, 備考録
 ![cover-illust](/images/posts/2017-08-06-ikamusume-yaruzo/cover.png)
 
 
-　これは、書内各記事の紹介を兼ねて本書を読んでみた、先行感想記事です :D
+　本記事は、本書を読んでみての感想かつ紹介記事になります :D
 
 
 # 参考
@@ -70,20 +70,25 @@ Coqをワシ好みに改造すれば、ひょっとしたら宿題が楽に解�
 
 
 # 静的コード解析はいいぞ！（[\@master_qさん](https://twitter.com/masterq_mogumog)）
-　CとJavaのコード検証器verifastの基本をイカ娘さんが教えてくれる！
-検証器の概念から基本的な使い方までを書いてあって、かつ読み物形式で読みやすい。
+　CとJavaのコード検証器verifastの基本をイカ娘さんが教えてくれる！  
+検証器の概念から基本的な使い方までを書いてあって、かつ読み物形式で読みやすい。  
 verifastを使ってみるつもりの人から「検証器ってなに？」って人まで幅広く読めそう :D
 
 - [GitHub - verifast/verifast: Research prototype tool for modular formal verification of C and Java programs](https://github.com/verifast/verifast)
 
 
 # VeriFastチュートリアル（訳:[\@eldesh](https://twitter.com/eldesh), [\@master_q](https://twitter.com/eldesh), 著: Bart Jacobs）
-　verifastの公式チュートリアルの翻訳。
+　verifastの公式チュートリアルの翻訳。  
 『静的コード解析はいいぞ！』は柔らかく表面を解説していたのに対して、
 こちらは公式なので深く解説をしている。
 
 - - -
 
-　当日は一部の時間の間、売り子として僕も行くのでよろしくお願いします :dog2:
+　当日は一部の時間の間、売り子として僕も行くのでよろしくお願いします :dog2:  
+元々λカ娘は興味が合って巻の物理版の方を買いたかったのですが、つてがなく諦めていました。
+しかしこのような機会があり、大変ありがたいです！
 
-　ちなみに「会員名簿じゃなイカ？」の僕の欄は、ZZガンダムのジュドー・アーシタのセリフのオマージュです。
+　また、自分で技術本をいて売り出すのも夢の１つでしたので、その大きな第一歩となります。
+ヨッシャ！
+
+　「会員名簿じゃなイカ？」の僕の欄は、ZZガンダムのジュドー・アーシタのセリフのオマージュです。
