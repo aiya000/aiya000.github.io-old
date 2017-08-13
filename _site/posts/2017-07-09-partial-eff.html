@@ -1,0 +1,152 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - Effモナドの効果のうち1つだけをrunする</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>Effモナドの効果のうち1つだけをrunする</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/07/09 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-07-09-partial-eff.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Effモナドの効果のうち1つだけをrunする - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-07-09-partial-eff.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>　例えばこのような<code>partialContext</code>関数と<code>totalContext</code>関数があるとき</p>
+<p><del>partialContext :: forall s. (Member (Reader Logs) s, SetMember Lift (Lift IO) s) =&gt; Eff s ()</del></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">partialContext ::</span> <span class="dt">Eff</span> (<span class="dt">Reader</span> <span class="dt">Logs</span> <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>) ()
+<span class="ot">totalContext ::</span> <span class="dt">Eff</span> (<span class="dt">Writer</span> <span class="dt">Logs</span> <span class="fu">:&gt;</span> <span class="dt">Reader</span> <span class="dt">Logs</span> <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>) ()</code></pre></div>
+<p><code>partialContext</code>内で<code>totalContext</code>を走らせることができる。 （今回の試みでは<code>partialContext</code>を<br />
+<code>partialContext :: (Member (Reader Logs) s, SetMember Lift (Lift IO) s) =&gt; Eff s ()</code><br />
+のように多相化することには失敗していて、ただし<code>totalContext</code>は以下のように多相化してもよい<br />
+<code>totalContext :: (Member (Writer Logs) r, Member (Reader Logs) r, SetMember Lift (Lift IO) r) =&gt; Eff r ()</code><br />
+）</p>
+<h1 id="コード実例">コード（実例）</h1>
+<p>output</p>
+<pre><code>[&quot;nozomi&quot;,&quot;eli&quot;] was added
+([&quot;nozomi&quot;,&quot;eli&quot;,&quot;nico&quot;,&quot;maki&quot;],())
+()</code></pre>
+<p>実例</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE FlexibleContexts #-}</span>
+<span class="ot">{-# LANGUAGE TypeOperators #-}</span>
+
+<span class="kw">import </span><span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, <span class="dt">Member</span>, run, (:&gt;), <span class="dt">SetMember</span>)
+<span class="kw">import </span><span class="dt">Control.Eff.Lift</span> (<span class="dt">Lift</span>, lift, runLift)
+<span class="kw">import </span><span class="dt">Control.Eff.Reader.Lazy</span> (<span class="dt">Reader</span>, ask, runReader)
+<span class="kw">import </span><span class="dt">Control.Eff.State.Lazy</span> (<span class="dt">State</span>, get, put, runState)
+<span class="kw">import </span><span class="dt">Control.Eff.Writer.Lazy</span> (<span class="dt">Writer</span>, tell, runWriter, runMonoidWriter)
+<span class="kw">import </span><span class="dt">Data.Void</span> (<span class="dt">Void</span>)
+
+<span class="kw">type</span> <span class="dt">Logs</span> <span class="fu">=</span> [<span class="dt">String</span>]
+
+<span class="co">-- Writer Logs, Reader Logs, Lift IOを使う文脈があるじゃろ</span>
+<span class="ot">totalContext ::</span> (<span class="dt">Member</span> (<span class="dt">Writer</span> <span class="dt">Logs</span>) r, <span class="dt">Member</span> (<span class="dt">Reader</span> <span class="dt">Logs</span>) r, <span class="dt">SetMember</span> <span class="dt">Lift</span> (<span class="dt">Lift</span> <span class="dt">IO</span>) r) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r ()
+totalContext <span class="fu">=</span> <span class="kw">do</span>
+  logs <span class="ot">&lt;-</span> ask
+  tell (<span class="ot">logs ::</span> <span class="dt">Logs</span>)
+  lift <span class="fu">.</span> putStrLn <span class="fu">$</span> show logs <span class="fu">++</span> <span class="st">&quot; was added&quot;</span>
+
+<span class="co">-- そのうちReader Logs, Lift IOのみを使う文脈がある</span>
+<span class="co">--partialContext :: forall s. (Member (Reader Logs) s, SetMember Lift (Lift IO) s) =&gt; Eff s ()</span>
+<span class="ot">partialContext ::</span> <span class="dt">Eff</span> (<span class="dt">Reader</span> <span class="dt">Logs</span> <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>) ()
+partialContext <span class="fu">=</span> <span class="kw">do</span>
+  x <span class="ot">&lt;-</span> runWriter' totalContext
+  lift <span class="fu">$</span> print x
+  <span class="kw">where</span>
+    <span class="co">-- そうすると、なんとWriter Logs効果だけを消費することができるのじゃ！</span>
+    <span class="co">--TODO: totalContextを単相化する必要があるので、それを含むpartialContextを多相化できない。どうすればいい？</span>
+<span class="ot">    runWriter' ::</span> <span class="dt">Eff</span> (<span class="dt">Writer</span> <span class="dt">Logs</span> <span class="fu">:&gt;</span> s) () <span class="ot">-&gt;</span> <span class="dt">Eff</span> s (<span class="dt">Logs</span>, ())
+    runWriter' <span class="fu">=</span> runWriter (<span class="fu">++</span>) [<span class="st">&quot;nico&quot;</span>, <span class="st">&quot;maki&quot;</span>]
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> <span class="kw">do</span>
+  x <span class="ot">&lt;-</span> runLift <span class="fu">$</span> runReader partialContext [<span class="st">&quot;nozomi&quot;</span>, <span class="st">&quot;eli&quot;</span>]
+  print x</code></pre></div>
+<h1 id="解説">解説</h1>
+<p>　まずここでは<code>Eff</code>型コンストラクタの第一引数に指定される型を効果と呼んでいる🐕<br />
+（Monad……と呼称するのが一番しっくりくると思うけど、残念ながら現時点でextensible-effectsの<code>Writer</code>や<code>Reader</code>はMonadインスタンスになってないので！）</p>
+<p>で、<code>partialContext</code>は効果の数が少ないという意味で<code>totalContext</code>よりも小さい。<br />
+なので<code>totalContext</code>の効果のうち<code>partialContext</code>の持っていない<code>Write Logs</code>効果を引いてしまえば、 <code>partialContext</code>の効果と<code>totalContext</code>の持つ効果が等しくなるので、同じ文脈として（同じ<code>Eff a</code>モナドとして）使えるのではないかと思った。 そして、やったらできた。</p>
+<p>　件の、効果の引き算になっているのはこれ</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">runWriter' ::</span> <span class="dt">Eff</span> (<span class="dt">Writer</span> <span class="dt">Logs</span> <span class="fu">:&gt;</span> s) () <span class="ot">-&gt;</span> <span class="dt">Eff</span> s (<span class="dt">Logs</span>, ())
+runWriter' <span class="fu">=</span> runWriter (<span class="fu">++</span>) [<span class="st">&quot;nico&quot;</span>, <span class="st">&quot;maki&quot;</span>]</code></pre></div>
+<p>引き算の性質は型に表れていて、<code>Writer Logs :&gt; s</code>から<code>Writer Logs</code>を引いている。 なので<code>runWriter' totalContext</code>は</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">runWriter'<span class="ot"> totalContext ::</span> (<span class="dt">Member</span> (<span class="dt">Reader</span> <span class="dt">Logs</span>) s', <span class="dt">SetMember</span> <span class="dt">Lift</span> (<span class="dt">Lift</span> <span class="dt">IO</span>) s') <span class="ot">=&gt;</span> <span class="dt">Eff</span> s' (<span class="dt">Logs</span>, ())</code></pre></div>
+<p>という型になって、単相化するとこれは<code>partialContext</code>の文脈（<code>Eff a</code>モナドの形）と等しいので、</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">runWriter'<span class="ot"> totalContext ::</span> <span class="dt">Eff</span> (<span class="dt">Reader</span> <span class="dt">Logs</span> <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>) (<span class="dt">Logs</span>, ())
+<span class="co">--                         ^==================================v</span>
+<span class="ot">partialContext          ::</span> <span class="dt">Eff</span> (<span class="dt">Reader</span> <span class="dt">Logs</span> <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>) ()</code></pre></div>
+<p><code>runWriter' totalContext</code>は<code>partialContext</code>の中で<code>&lt;-</code>できる！ （<code>partialContext</code>が単相的なので、<code>runWriter' totalContext</code>は型推論により単相化される）</p>
+<h1 id="何に使えるの">何に使えるの？</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">base ::</span> (<span class="dt">Member</span> (<span class="dt">State</span> <span class="dt">Foo</span>) r, <span class="dt">SetMember</span> <span class="dt">Lift</span> (<span class="dt">Lift</span> <span class="dt">IO</span>) r) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r ()</code></pre></div>
+<p>という文脈がある中で、局所的に失敗する文脈を扱える。 （以下は、局所的に失敗する文脈<code>child</code>）</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">child ::</span> (<span class="dt">Member</span> (<span class="dt">Exc</span> <span class="dt">String</span>) r, <span class="dt">Member</span> (<span class="dt">State</span> <span class="dt">Foo</span>) r, <span class="dt">SetMember</span> <span class="dt">Lift</span> (<span class="dt">Lift</span> <span class="dt">IO</span>) r) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r ()</code></pre></div>
+<p>（と言いたいんだけど実際は、実用するには<code>base</code>を単相化する必要があって……誰か<code>base</code>…… 実例における<code>partialContext</code>……を多相的なままにしておける方法知らない？）</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-07-09-partial-eff.md">Effモナドの効果のうち1つだけをrunする - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

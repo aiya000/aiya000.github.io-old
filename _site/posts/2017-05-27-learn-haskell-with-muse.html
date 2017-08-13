@@ -1,0 +1,228 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/05/27 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/ラブライブ！で学ぶ.html">ラブライブ！で学ぶ</a>]
+    
+        [<a href="../tags/ことり、穂乃果と一緒に学ぶHaskell.html">ことり、穂乃果と一緒に学ぶHaskell</a>]
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-05-27-learn-haskell-with-muse.html" class="hatena-bookmark-button" data-hatena-bookmark-title="ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-05-27-learn-haskell-with-muse.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<ul>
+<li><a href="./2017-05-12-learn-haskell-with-muse.html">前回 - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」</a></li>
+<li><a href="https://github.com/aiya000/aiya000.github.io/search?utf8=%E2%9C%93&amp;q=%22Haskell%2FMuse%3A%22&amp;type=Commits">更新履歴 - μ’sと一緒に学ぶHaskell</a></li>
+</ul>
+<h1 id="前回">前回</h1>
+<p>ことり「穂乃果ちゃんとの2人お風呂をしてきた」<br />
+穂乃果「言ってくれれば海未ちゃんも呼んで、みんなでお風呂入ったりできたのに」<br />
+ことり「えっ……♡♡」</p>
+<hr />
+<p>ことり「Cの構造体みたいなデータ型、あれは直積型って言うよ！」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Member</span> <span class="fu">=</span> <span class="dt">Member</span>
+  {<span class="ot"> name ::</span> <span class="dt">String</span>
+  ,<span class="ot"> age ::</span> <span class="dt">Int</span>
+  }</code></pre></div>
+<p>ことり「オブジェクト指向のクラスと比べた<strong>代数的データ型の最大の利点は、その網羅性</strong>って言われたりするくらいだしね」<br />
+ことり「その裏付けをするのがパターンマッチだよ」</p>
+<hr />
+<p>ことり「列挙型について」<br />
+ことり「わたしたちμ’ｓは、こうやって書けるよ」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Muse</span> <span class="fu">=</span> <span class="dt">Hanayo</span> <span class="fu">|</span> <span class="dt">Rin</span> <span class="fu">|</span> <span class="dt">Maki</span> <span class="fu">|</span> <span class="dt">Umi</span> <span class="fu">|</span> <span class="dt">Kotori</span> <span class="fu">|</span> <span class="dt">Honoka</span> <span class="fu">|</span> <span class="dt">Eli</span> <span class="fu">|</span> <span class="dt">Nico</span> <span class="fu">|</span> <span class="dt">Nozomi</span></code></pre></div>
+<hr />
+<p>ことり「直和型は、列挙型と直積型が合わさったようなもので、列挙子がフィールドを持ちます！」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Student</span> <span class="fu">=</span> <span class="dt">OtonokiStudent</span> <span class="dt">String</span> <span class="dt">Int</span>
+             <span class="fu">|</span> <span class="dt">UranohoshiStudent</span> <span class="dt">String</span> <span class="dt">Int</span> <span class="dt">Bool</span>
+  <span class="kw">deriving</span> (<span class="dt">Show</span>)</code></pre></div>
+<h1 id="型クラス">型クラス</h1>
+<p>ことり「こんにちは〜」<br />
+穂乃果「<a href="https://twitter.com/hashtag/%E6%97%A5%E6%9B%9C%E3%81%8A%E6%97%A5%E6%A7%98%E7%A9%82%E4%B9%83%E6%9E%9C%E3%81%A1%E3%82%83%E3%82%93">日曜おひさま ほのHaskell</a>だよ！」<br />
+ことり「今日は日曜日じゃないけどね♪」</p>
+<p>ことり「今日は型クラスについてやっていくよ！」</p>
+<h2 id="はい">はい</h2>
+<p>ことり「型クラスは<code>class</code>キーワードで定義するよ♪」<br />
+穂乃果「<code>class</code>？　Javaにも<code>class</code>キーワードがあったけど、Haskellでは型クラスに使うんだー！」<br />
+ことり「うん！　Javaの<code>class</code>はわからないけど、Haskellの<code>class</code>は『classify（分類する）』から来てるって説があるね」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">GobiPersons</span> a <span class="kw">where</span>
+  <span class="co">-- 人を受け取って、その人の語尾を返す関数</span>
+<span class="ot">  say ::</span> a <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
+<p>ことり「これは『<a href="http://dic.pixiv.net/a/%E5%8D%97%E3%81%BF%E3%82%8C%E3%81%83">語尾</a>持ちとしての性質』を表す型クラスだよ！」<br />
+穂乃果「うーん？？　凛ちゃんとかにこちゃんとか……希ちゃんもかな？……かな？」<br />
+ことり「うん！　希ちゃんの『やん！』とか『やねっ！』が語尾かは微妙だけど……ちょうど希ちゃんとにこちゃんはサブグループやってたよね」</p>
+<p><a href="http://books.rakuten.co.jp/rb/11612277/">乙女式れんあい塾</a><br />
+<a href="http://books.rakuten.co.jp/rb/11612277/"><img src="http://shop.r10s.jp/book/cabinet/9433/4540774409433.jpg" alt="乙女式れんあい塾" /></a></p>
+<p>ことり「はいっ」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">NozoNico</span> <span class="fu">=</span> <span class="dt">Nozomi</span> <span class="fu">|</span> <span class="dt">Nico</span></code></pre></div>
+<p>ことり「そうしたら、<code>NozoNico</code>を<code>GobiPersons</code>インスタンスで定義するよ」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> <span class="dt">GobiPersons</span> <span class="dt">NozoNico</span> <span class="kw">where</span>
+  say <span class="dt">Nozomi</span> <span class="fu">=</span>  <span class="st">&quot;やねっ！&quot;</span>
+  say <span class="dt">Nico</span> <span class="fu">=</span>  <span class="st">&quot;ニコッ！&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> <span class="kw">do</span>
+  putStrLn (say <span class="dt">Nozomi</span>)
+  putStrLn (say <span class="dt">Nico</span>)
+
+<span class="co">-- vvv 出力 vvv</span>
+<span class="co">-- やねっ！</span>
+<span class="co">-- ニコッ！</span></code></pre></div>
+<p>ことり「たまに『型クラスはインターフェースに似ている』とか言われるんだ。　……賛否両論が多数あるけどね」<br />
+穂乃果「あー、でも確かに少し似てるかも……？　こんな感じかな？」</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">interface</span> GobiPersons {
+	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">say</span>();
+}
+
+<span class="kw">enum</span> NozoNico <span class="kw">implements</span> GobiPersons {
+	Nozomi, Nico;
+
+	<span class="at">@Override</span>
+	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">say</span>() {
+		<span class="kw">if</span> (<span class="kw">this</span> == Nozomi) {
+			<span class="kw">return</span> <span class="st">&quot;やねっ！&quot;</span>;
+		} <span class="kw">else</span> <span class="kw">if</span> (<span class="kw">this</span> == Nico) {
+			<span class="kw">return</span> <span class="st">&quot;ニコッ！&quot;</span>;
+		} <span class="kw">else</span> {
+			<span class="kw">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span>();
+		}
+	}
+}
+
+<span class="kw">public</span> <span class="kw">class</span> Program {
+	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {
+		NozoNico nozomi = NozoNico.<span class="fu">Nozomi</span>;
+		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(nozomi.<span class="fu">say</span>());
+
+		NozoNico nico = NozoNico.<span class="fu">Nico</span>;
+		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(nico.<span class="fu">say</span>());
+	}
+}
+
+<span class="co">// vvv 出力 vvv</span>
+<span class="co">// やねっ！</span>
+<span class="co">// ニコッ！</span></code></pre></div>
+<p>ことり「Congratulation！」<br />
+穂乃果「えへへ〜」</p>
+<h1 id="型クラスとインターフェースって何が違うの">型クラスとインターフェースって、何が違うの？</h1>
+<p>ことり「ここでひとつ、インターフェースと型クラスの拭えない相違点が浮かんできたよ」<br />
+穂乃果「ぬぐえないそういてん？」<br />
+ことり「うん。　型クラスはね、<code>deriving</code>を除いて、<strong>具体データ型とインスタンス定義が明確に別れてるんだ</strong>！」<br />
+穂乃果「？？？　どういうこと？」</p>
+<p>ことり「例を見てみよう。　穂乃果ちゃん、ちょっと<code>NozoNico</code>データ型をもう1回書いてみてもらってもいい？」<br />
+穂乃果「うん！　やってみるね！」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">NozoNico</span> <span class="fu">=</span> <span class="dt">Nozomi</span> <span class="fu">|</span> <span class="dt">Nico</span></code></pre></div>
+<p>ことり「じゃあ次は<code>GobiPersons</code>インスタンスももう1回書いてくれるかな」<br />
+穂乃果「はーい」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> <span class="dt">GobiPersons</span> <span class="dt">NozoNico</span> <span class="kw">where</span>
+  say <span class="dt">Nozomi</span> <span class="fu">=</span>  <span class="st">&quot;やねっ！&quot;</span>
+  say <span class="dt">Nico</span> <span class="fu">=</span>  <span class="st">&quot;ニコッ！&quot;</span></code></pre></div>
+<p>ことり「ほら、具体データ型の定義とインスタンス定義。　2つの工程が明確に分割されてるんだ」<br />
+ことり「対してJavaのインターフェース実装は、必ずクラス定義と同時に行わなくちゃいけない。　って感じかな」</p>
+<p>穂乃果「あ、確かに。　でもそれって、便利なの？」<br />
+ことり「うん、とても便利だよ！　例えば……ある性質を持つ型クラスをここに定義しました」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- aとaを足し合わせることができる性質</span>
+<span class="kw">class</span> <span class="dt">Magma</span> a <span class="kw">where</span>
+<span class="ot">  magAppend ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</code></pre></div>
+<p>ことり「Intって足し算ができるよね？」<br />
+穂乃果「うん。　足し算できる」<br />
+ことり「でもIntは標準で定義されてるから、後から定義を変更すること……Intに<code>implements Magma</code>みたいなのを付け足すことができないんだ」<br />
+穂乃果「……あっ！」</p>
+<p>ことり「そう、ここで『インスタンス定義が独立していること』が効いてくるよ」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> <span class="dt">Magma</span> <span class="dt">Int</span> <span class="kw">where</span>  <span class="co">-- 任意の時点でIntのインスタンス定義ができる</span>
+  magAppend x y <span class="fu">=</span> x <span class="fu">+</span> y
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> <span class="kw">do</span>
+  print (magAppend <span class="dv">10</span> <span class="dv">20</span><span class="ot"> ::</span> <span class="dt">Int</span>)
+
+<span class="co">-- vvv 出力 vvv</span>
+<span class="co">-- 30</span></code></pre></div>
+<p>穂乃果「ほんとうだ！　Haskellすごーい！　Haskellすごーい！！」<br />
+ことり「でしょー！　えへへ」照れり</p>
+<h1 id="マグマってだれですか">マグマってだれですか？</h1>
+<p>穂乃果「そういえば、ことりちゃんがさっき書いてた<code>Magma</code>って何？」<br />
+ことり「ふふっ。　数学者さんでも専門外だと知りすらしない、ちょっと不遇な子かな♪」</p>
+<h1 id="参考にしたページ">参考にしたページ</h1>
+<ul>
+<li><a href="http://odasusu.hatenablog.com/entry/20080216/1203168579">enum(列挙型)でinterfaceを使う - Javaと情熱のあいだ</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%B0%E3%83%9E_(%E6%95%B0%E5%AD%A6)">マグマ（数学） - Wikipedia</a></li>
+</ul>
+<h1 id="こんにちは">💎 こんにちは 💎</h1>
+<p>　この続きはTwitterへの共有ツイート、はてなブックマークへのブックマーク登録、Facebookへのいいね及びシェア、Pocketへの登録<br />
+そして僕のモチベーションによって書かれます。<br />
+シェアして欲しいな〜〜（シェアはこのページの上部ボタンから！）</p>
+<p>　疑問点があれば、Twitterでリプライくれれば（そのリプライを見逃してなければ）返すよ！<br />
+<a href="https://twitter.com/public_ai000ya">@public_ai000ya - Twitter</a></p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-05-27-learn-haskell-with-muse.md">ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」 - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

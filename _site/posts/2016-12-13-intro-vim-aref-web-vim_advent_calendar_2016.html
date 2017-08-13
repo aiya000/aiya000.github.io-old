@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - aref-web.vimの紹介 - Vimアドベントカレンダー2016 - 14日目</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>aref-web.vimの紹介 - Vimアドベントカレンダー2016 - 14日目</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2016/12/13 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Vim.html">Vim</a>]
+    
+        [<a href="../tags/AdventCalendar.html">AdventCalendar</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2016-12-13-intro-vim-aref-web-vim_advent_calendar_2016.html" class="hatena-bookmark-button" data-hatena-bookmark-title="aref-web.vimの紹介 - Vimアドベントカレンダー2016 - 14日目 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2016-12-13-intro-vim-aref-web-vim_advent_calendar_2016.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>　ドーモ、この前「HaskellでTwitterのbot作ってるんですよー」って言ったら<br />
+「ああ、このアカウントですよね！」って言われて、僕のメインアカウントを指されたあいやです :D</p>
+<p><a href="https://github.com/aiya000/aref-web.vim">aref-web.vim</a>の紹介をします！<br />
+インストールしてね！</p>
+<h1 id="aref-web.vimとは">aref-web.vimとは</h1>
+<p>　<a href="http://ejje.weblio.jp/">weblio翻訳</a>やHaskellの<a href="https://www.haskell.org/hoogle/">Hoogle</a>など… いわゆるWeb辞書をVim上から扱うプラグインです。<br />
+Webページを開いたり、開いたページの次ページへ行ったり(※)できます。</p>
+<p>MSDNとかJavadocとかも使えるかもしれん :D</p>
+<div class="figure">
+<img src="https://github.com/aiya000/aref-web.vim/raw/master/aref-web-vim_preview.gif" alt="sample-view" />
+<p class="caption">sample-view</p>
+</div>
+<hr />
+<p>※ちょっと今は設定インターフェースが悪いので、Issue来たら直す</p>
+<pre><code>&lt;Plug&gt;(aref_web_show_next_page)		*&lt;Plug&gt;(aref_web_show_next_page)*
+	有効モード: normal mode
+
+　もし 'https://www.stackage.org/lts-6.6/hoogle?q=Int+-&gt;+Int&amp;page=1'
+のように、 URLの整数型のクエリ文字列があれば
+'https://www.stackage.org/lts-6.6/hoogle?q=Int+-&gt;+Int&amp;page=2'
+のような、末尾のクエリ文字列の整数値を +1 したURLを
+現在のaref_webバッファに (非同期的に) 読み込みます。</code></pre>
+<pre><code>&lt;Plug&gt;(aref_web_show_prev_page)		*&lt;Plug&gt;(aref_web_show_prev_page)*
+	有効モード: normal mode
+
+&lt;Plug&gt;(aref_web_show_next_page)と似たような動作をしますが、
+こちらは、その整数値を -1 したURLを (非同期に) 読み込みます。</code></pre>
+<hr />
+<p>aref-web.vimとStackage検索(Hoogleと似たもの)を使っての作業風景をYouTubeで見ることができます。</p>
+<hr />
+<p><a href="https://www.youtube.com/watch?v=lQ-QpPtGck4&amp;feature=youtu.be">The scene of using aref-web.vim - YouTube</a></p>
+<hr />
+<p>　helpは以下で見ることができます :D</p>
+<hr />
+<p><a href="https://github.com/aiya000/aref-web.vim/blob/master/doc/aref_web.jax">aref-web.vim/aref_web.jax - GitHub</a></p>
+<hr />
+<p>　w3mコマンドに依存していて、Vim8以降で動きます。<br />
+<a href="https://github.com/tyru/open-browser.vim">open-browser.vim</a>が入っていると、Vimで開いたページをブラウザで開けます :)</p>
+<h1 id="なぜ作った">なぜ作った</h1>
+<p>　今までthincaさんの<a href="https://github.com/thinca/vim-ref/">vim-ref</a>のweb-dictを使っていたのですが、丁度Vimにasync系の関数が入ってきたので、 そうなるとweb-dictを非同期で開きたいじゃないですか。<br />
+作りました :)</p>
+<h1 id="使ってね">使ってね</h1>
+<p>　使ってね :D</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2016-12-13-intro-vim-aref-web-vim_advent_calendar_2016.md">aref-web.vimの紹介 - Vimアドベントカレンダー2016 - 14日目 - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

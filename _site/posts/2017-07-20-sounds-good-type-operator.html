@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - 見た目がひどい型をTypeOperatorsで改善したらロジックと同じ見た目になった</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>見た目がひどい型をTypeOperatorsで改善したらロジックと同じ見た目になった</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/07/20 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-07-20-sounds-good-type-operator.html" class="hatena-bookmark-button" data-hatena-bookmark-title="見た目がひどい型をTypeOperatorsで改善したらロジックと同じ見た目になった - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-07-20-sounds-good-type-operator.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>before</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">myLayoutHook ::</span> <span class="dt">Choose</span> (<span class="dt">ModifiedLayout</span> <span class="dt">Gaps</span> (<span class="dt">Choose</span> (<span class="dt">ModifiedLayout</span> (<span class="dt">Decoration</span> <span class="dt">TabbedDecoration</span> <span class="dt">DefaultShrinker</span>) (<span class="dt">ModifiedLayout</span> (<span class="dt">Sublayout</span> <span class="dt">Simplest</span>) <span class="dt">TwoPane</span>)) <span class="dt">Grid</span>)) <span class="dt">Full</span> <span class="dt">Window</span>
+myLayoutHook <span class="fu">=</span> (taskbarMargin <span class="fu">$</span> twoTabbedPane <span class="fu">|||</span> <span class="dt">Grid</span>) <span class="fu">|||</span> <span class="dt">Full</span>
+  <span class="kw">where</span>
+    taskbarMargin <span class="fu">=</span> gaps [(<span class="dt">D</span>, <span class="dv">40</span>)]
+    twoTabbedPane <span class="fu">=</span> subTabbed <span class="fu">$</span> <span class="dt">TwoPane</span> (<span class="dv">1</span><span class="fu">/</span><span class="dv">55</span>) (<span class="dv">1</span><span class="fu">/</span><span class="dv">2</span>)</code></pre></div>
+<p>after</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">infixr</span> <span class="dv">1</span> <span class="fu">:$</span>
+<span class="kw">type</span> (<span class="fu">:$</span>) <span class="fu">=</span> <span class="dt">ModifiedLayout</span>
+
+<span class="kw">type</span> (<span class="fu">:.</span>) x y z <span class="fu">=</span> x <span class="fu">:$</span> (y <span class="fu">:$</span> z)
+
+<span class="kw">infixr</span> <span class="dv">2</span> <span class="fu">:|||</span>
+<span class="kw">type</span> (<span class="fu">:|||</span>) <span class="fu">=</span> <span class="dt">Choose</span>
+
+<span class="kw">type</span> <span class="dt">MyLayoutHook</span>  <span class="fu">=</span> (<span class="dt">TaskbarMargin</span> <span class="fu">:$</span> <span class="dt">TwoTabbedPane</span> <span class="fu">:|||</span> <span class="dt">Grid</span>) <span class="fu">:|||</span> <span class="dt">Full</span>
+<span class="kw">type</span> <span class="dt">TaskbarMargin</span> <span class="fu">=</span> <span class="dt">Gaps</span>
+<span class="kw">type</span> <span class="dt">TwoTabbedPane</span> <span class="fu">=</span> <span class="dt">SubTabbed</span> <span class="dt">TwoPane</span>
+<span class="kw">type</span> <span class="dt">SubTabbed</span> x   <span class="fu">=</span> (<span class="dt">Decoration</span> <span class="dt">TabbedDecoration</span> <span class="dt">DefaultShrinker</span> <span class="fu">:.</span> <span class="dt">Sublayout</span> <span class="dt">Simplest</span>) x
+
+<span class="ot">myLayoutHook ::</span> <span class="dt">MyLayoutHook</span> <span class="dt">Window</span>
+myLayoutHook <span class="fu">=</span> (taskbarMargin <span class="fu">$</span> twoTabbedPane <span class="fu">|||</span> <span class="dt">Grid</span>) <span class="fu">|||</span> <span class="dt">Full</span>
+  <span class="kw">where</span>
+    taskbarMargin <span class="fu">=</span> gaps [(<span class="dt">D</span>, <span class="dv">40</span>)]
+    twoTabbedPane <span class="fu">=</span> subTabbed <span class="fu">$</span> <span class="dt">TwoPane</span> (<span class="dv">1</span><span class="fu">/</span><span class="dv">55</span>) (<span class="dv">1</span><span class="fu">/</span><span class="dv">2</span>)</code></pre></div>
+<p>比較</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">MyLayoutHook</span> <span class="fu">=</span> (<span class="dt">TaskbarMargin</span> <span class="fu">:$</span> <span class="dt">TwoTabbedPane</span> <span class="fu">:|||</span> <span class="dt">Grid</span>) <span class="fu">:|||</span> <span class="dt">Full</span>
+<span class="co">{--}</span> myLayoutHook <span class="fu">=</span> (taskbarMargin  <span class="fu">$</span> twoTabbedPane  <span class="fu">|||</span> <span class="dt">Grid</span>)  <span class="fu">|||</span> <span class="dt">Full</span></code></pre></div>
+<p>Haskellの表現力はすごい 🐕</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-07-20-sounds-good-type-operator.md">見た目がひどい型をTypeOperatorsで改善したらロジックと同じ見た目になった - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

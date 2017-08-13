@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - Haskellのtypeの中身はkind!で！（型レベルハンバーガーの型やいかに？）</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>Haskellのtypeの中身はkind!で！（型レベルハンバーガーの型やいかに？）</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/06/24 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-06-24-ghci-type-level-debug.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Haskellのtypeの中身はkind!で！（型レベルハンバーガーの型やいかに？） - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-06-24-ghci-type-level-debug.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>　ここ4日間ぐらい、主に<code>DataKinds</code>と<code>TypeFamilies</code>を用いた型レベルハンバーガーの開発（型レベルプログラミング）を行っていた。</p>
+<p>成果物はここにあるよ。</p>
+<ul>
+<li><a href="https://github.com/aiya000/learning-Haskell/blob/d4d29ad26673e828bc0b0358d1cde42c295eb50b/Language/Haskell/Extension/Room/Hamburger.hs">Hamburger.hs</a></li>
+<li><a href="https://github.com/aiya000/learning-Haskell/blob/d4d29ad26673e828bc0b0358d1cde42c295eb50b/Language/Haskell/Extension/Room/Hamburger/TH.hs">Hamburger/TH.hs</a></li>
+</ul>
+<h1 id="typeした型の中身を表示するkind">typeした型の中身を表示する:kind!</h1>
+<p>　Hamberger.hsではこんな感じで、型レベル関数の結果を左辺に格納している。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">BasicHamburgerC</span> <span class="fu">=</span> <span class="dt">HamburgerC</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span>
+
+<span class="kw">type</span> <span class="dt">HamburgerC1</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">BasicHamburgerC</span> <span class="dt">Cheese</span>
+<span class="kw">type</span> <span class="dt">HamburgerC2</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC1</span> <span class="dt">Tomato</span>
+<span class="kw">type</span> <span class="dt">HamburgerC3</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC2</span> <span class="dt">Meet</span>
+<span class="kw">type</span> <span class="dt">HamburgerC4</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC3</span> <span class="dt">Ushi</span>
+<span class="kw">type</span> <span class="dt">HamburgerC5</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC4</span> <span class="dt">Ushi</span></code></pre></div>
+<p>例えば<code>HamburgerC4</code>と<code>HamburgerC5</code>の結果が見たいとき、 もしこれらが（<code>Show</code>である）値であれば<code>print</code>してあげればいいものの、これらは型である。</p>
+<p>　<code>type</code>された型を展開して表示するには、GHCiで<code>:kind!</code>を使う。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>kind<span class="fu">!</span> <span class="dt">HamburgerC4</span>
+<span class="dt">HamburgerC4</span><span class="ot"> ::</span> <span class="dt">HamburgerT</span>
+<span class="fu">=</span> <span class="ch">'HamburgerC '</span><span class="dt">Cheese</span> <span class="ch">'Tomato '</span><span class="dt">Meet</span> <span class="ch">'Ushi</span>
+
+<span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>kind<span class="fu">!</span> <span class="dt">HamburgerC5</span>
+<span class="dt">HamburgerC5</span><span class="ot"> ::</span> <span class="dt">HamburgerT</span>
+<span class="fu">=</span> <span class="ch">'Fail</span></code></pre></div>
+<p>　ちなみに<code>:info</code>すれば、それらどうやって（値レベルでいう）束縛を行われたのか と 行われた箇所が見れる。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>info <span class="dt">HamburgerC4</span>
+<span class="kw">type</span> <span class="dt">HamburgerC4</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC3</span> <span class="ch">'Ushi :: HamburgerT</span>
+        <span class="co">-- Defined at Hamburger.hs:59:1</span>
+
+<span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>info <span class="dt">HamburgerC5</span>
+<span class="kw">type</span> <span class="dt">HamburgerC5</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC4</span> <span class="ch">'Ushi :: HamburgerT</span>
+        <span class="co">-- Defined at Hamburger.hs:60:1</span></code></pre></div>
+<h1 id="一言">一言</h1>
+<p>　ここの一連の<code>type</code>、よく関数ローカルでいくつかの名前を<code>let</code>していくのと似てるよねー。</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-06-24-ghci-type-level-debug.md">Haskellのtypeの中身はkind!で！（型レベルハンバーガーの型やいかに？） - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

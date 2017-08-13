@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - 今日のgit-tips (簡単で便利なrebaseによるcommit編集)</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>今日のgit-tips (簡単で便利なrebaseによるcommit編集)</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2016/07/19 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/プログラミング.html">プログラミング</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2016-07-19-todays_git_tips.html" class="hatena-bookmark-button" data-hatena-bookmark-title="今日のgit-tips (簡単で便利なrebaseによるcommit編集) - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2016-07-19-todays_git_tips.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="今日のgit-tips-簡単で便利なrebaseによるcommit編集">今日のgit-tips (簡単で便利なrebaseによるcommit編集)</h1>
+<p>　今日は未pushのいくつかのcommitの内容を<code>git rebase</code>で編集する方法を紹介します。<br />
+push済みのcommitは編集…できますが、<code>git push --force</code>をする必要があります。</p>
+<p>　<code>git push --force</code>が何かというと、複数人で共同作業をしているリポジトリの場合に、他の作業者を混乱させるコマンドです。<br />
+1人用リポジトリでも、–forceする癖をつけるのは危ないので非推奨とします。</p>
+<h2 id="step-1-準備">Step 1 (準備)</h2>
+<p>　まずこんな感じにリポジトリを作成、初期化します。</p>
+<pre class="console"><code>$ mkdir git-repo
+$ cd git-repo
+$ git init
+$ echo &quot;first commit&quot;  &gt; a &amp;&amp; git add -A &amp;&amp; git commit -m &quot;Create 'a'&quot;
+$ echo &quot;second commit&quot; &gt; b &amp;&amp; git add -A &amp;&amp; git commit -m &quot;Create 'b'&quot;
+$ echo &quot;third commit&quot;  &gt; c &amp;&amp; git add -A &amp;&amp; git commit -m &quot;Create 'c'&quot;
+$ git log --oneline</code></pre>
+<p>出力結果</p>
+<pre class="git-log--oneline"><code>acd21a4 Create 'c'
+0368ccb Create 'b'
+2c1f07a Create 'a'</code></pre>
+<h2 id="step-2-1つ前のcommitを編集する---rebase--i">Step 2 (1つ前のcommitを編集する - rebase -i)</h2>
+<p>　本題ですねー。<br />
+ここで僕は、1つ前のコミット(<code>HEAD~</code> または <code>0368ccb</code>)時点で、ファイル’aho’があったことにしたくなりました。<br />
+<code>git rebase -i HEAD~~</code>を使います。 ( <code>HEAD~</code> ではなく <code>HEAD~~</code>)</p>
+<pre class="console"><code>$ git rebase -i HEAD~~</code></pre>
+<p>($EDITORへの)出力結果</p>
+<pre class="git-rebase"><code>pick 0368ccb Create 'b'
+pick acd21a4 Create 'c'</code></pre>
+<p>編集したいcommitは<code>0368ccb</code>なので、以下のように編集します。</p>
+<pre class="git-rebase"><code>edit 0368ccb Create 'b'
+pick acd21a4 Create 'c'</code></pre>
+<p>　エディタを終了すると、諸メッセージが表示されます。<br />
+今からその諸メッセージに表示されたそれを使って、コミットを編集していきます。</p>
+<pre><code>Stopped at 0368ccb... Create 'b'
+You can amend the commit now, with
+
+    git commit --amend
+
+Once you are satisfied with your changes, run
+
+    git rebase --continue</code></pre>
+<h2 id="step-3-1つ前のcommitを編集する---rebase-continue">Step 3 (1つ前のcommitを編集する - rebase –continue)</h2>
+<ul>
+<li>すること
+<ol style="list-style-type: decimal">
+<li>ファイル’aho’を作成する</li>
+<li>現在のcommitの修正を実行する</li>
+<li>修正が終わったことを<code>git rebase -i</code>に報告する</li>
+</ol></li>
+</ul>
+<pre class="console"><code>$ echo &quot;I'm exists&quot; &gt; aho
+$ git add -A
+$ git commit --amend -m &quot;Create 'b' and 'aho'&quot;
+$ git rebase --continue</code></pre>
+<p>出力結果</p>
+<pre><code>Successfully rebased and updated refs/heads/{ブランチ名}.</code></pre>
+<h2 id="step-4-最終確認">Step 4 (最終確認)</h2>
+<p>　<code>git log --oneline</code>を確認すると、<code>HEAD~</code>の編集が確定されていることを確認できます。</p>
+<pre class="git-log--oneline"><code>d98cb68 Create 'c'
+4e07930 Create 'b' and 'aho'
+2c1f07a Create 'a'</code></pre>
+<p><code>Create 'b' and 'aho'</code>のcommitのidが変わっているのも、commitの修正ができた証ですねー。<br />
+(枠がさらに広がっちゃうので詳しくは語りませんが、これは「新しいcommitに<code>rebase</code>できた」ということです)</p>
+<p>以上！</p>
+<h2 id="おまけ">おまけ</h2>
+<p>　実は、Step 3ではファイルの作成以外にもあらゆる様々なことが行なえます。</p>
+<ul>
+<li>git add -p</li>
+<li>git stash pop</li>
+<li>git mv</li>
+<li>git rm</li>
+<li>ファイルの編集</li>
+</ul>
+<p>などなど。<br />
+しかし、歴史に矛盾が発生するレベルで操作できたり…それ以後のcommitの辻褄合わせを行わなければいけなくなったりするので、 自分が理解している範疇で使用することをオススメします。</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2016-07-19-todays_git_tips.md">今日のgit-tips (簡単で便利なrebaseによるcommit編集) - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

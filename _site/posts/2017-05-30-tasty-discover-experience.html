@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - tasty-discoverを使ってみた</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>tasty-discoverを使ってみた</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/05/30 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-05-30-tasty-discover-experience.html" class="hatena-bookmark-button" data-hatena-bookmark-title="tasty-discoverを使ってみた - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-05-30-tasty-discover-experience.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="参考ページ">参考ページ</h1>
+<ul>
+<li><a href="https://github.com/lwm/tasty-discover">lwm/tasty-discover: Test discovery for the tasty framework - Github</a></li>
+<li><a href="http://qiita.com/VoQn/items/fe7953aec010d8f68a59">OverloadedStringsとANNプラグマが干渉する場合の回避方法 - Qiita</a></li>
+</ul>
+<h1 id="何それ">何それ？</h1>
+<p>　Haskellプロジェクトのtest-suiteのmain-isなるソースを書かずに、test-suiteプロジェクトのディレクトリを再帰的に見て、テスト項目を自動抽出してくれるやつ。</p>
+<h1 id="良かったところ">良かったところ</h1>
+<p>　完全にいいのですが、裏技があって、(unit|prop|scprop|spec|test)_<strong>function_name</strong>となるfunction_nameをsneak_caseにしておくと、テスト実行時に項目名にしてくれます。</p>
+<h1 id="例">例</h1>
+<p>Step1Test.hs</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">test_parser_and_printer_converts_left_to_right ::</span> [<span class="dt">TestTree</span>]
+test_parser_and_printer_converts_left_to_right <span class="fu">=</span>
+  [ testCase <span class="st">&quot;'123' -&gt; '123'&quot;</span> <span class="fu">$</span> <span class="st">&quot;123&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;123&quot;</span>
+  , testCase <span class="st">&quot;'abc' -&gt; 'abc'&quot;</span> <span class="fu">$</span> <span class="st">&quot;abc&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;abc&quot;</span>
+  , testCase <span class="st">&quot;'(123 456)' -&gt; '(123 456)'&quot;</span> <span class="fu">$</span> <span class="st">&quot;(123 456)&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456)&quot;</span>
+  , testCase <span class="st">&quot;'( 123 456 789 )' -&gt; '(123 456 789)'&quot;</span> <span class="fu">$</span> <span class="st">&quot;( 123 456 789 )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456 789)&quot;</span>
+  , testCase <span class="st">&quot;'( + 2 (* 3 4) )' -&gt; '(+ 2 (* 3 4))'&quot;</span> <span class="fu">$</span> <span class="st">&quot;( + 2 (* 3 4) )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(+ 2 (* 3 4))&quot;</span>
+  ]
+  <span class="kw">where</span>
+<span class="ot">    isConvertedTo ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Assertion</span>
+    isConvertedTo code expected <span class="fu">=</span>
+      <span class="kw">case</span> Parser.parse code <span class="kw">of</span>
+        <span class="dt">Left</span>  e     <span class="ot">-&gt;</span> assertFailure <span class="fu">$</span> <span class="st">&quot;The parse is failed: &quot;</span> <span class="fu">++</span> Parser.parseErrorPretty e
+        <span class="dt">Right</span> sexpr <span class="ot">-&gt;</span> MT.toSyntax sexpr <span class="fu">@?=</span> expected</code></pre></div>
+<p>出力</p>
+<pre class="console"><code>Progress: 1/2tasty-discover
+  parser and printer converts left to right
+    '123' -&gt; '123':                       OK
+    'abc' -&gt; 'abc':                       OK
+    '(123 456)' -&gt; '(123 456)':           OK
+    '( 123 456 789 )' -&gt; '(123 456 789)': OK
+    '( + 2 (* 3 4) )' -&gt; '(+ 2 (* 3 4))': OK
+
+All 5 tests passed (0.00s)
+
+Completed 2 action(s).</code></pre>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-05-30-tasty-discover-experience.md">tasty-discoverを使ってみた - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

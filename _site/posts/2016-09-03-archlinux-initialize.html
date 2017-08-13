@@ -1,0 +1,210 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - 僕がArchLinuxインストール直後にインストールしたパッケージ全集</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>僕がArchLinuxインストール直後にインストールしたパッケージ全集</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2016/09/03 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Linux.html">Linux</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2016-09-03-archlinux-initialize.html" class="hatena-bookmark-button" data-hatena-bookmark-title="僕がArchLinuxインストール直後にインストールしたパッケージ全集 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2016-09-03-archlinux-initialize.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="公式リポジトリより">公式リポジトリより</h1>
+<ul>
+<li>基本
+<ul>
+<li>tmux</li>
+<li>git</li>
+<li>rsync</li>
+<li>pkgfile</li>
+<li>mlocate
+<ul>
+<li>updatedb + locate コマンド</li>
+</ul></li>
+<li>gvim</li>
+<li>w3m</li>
+<li>fzf</li>
+</ul></li>
+<li>カーネル/ブートローダ 周り
+<ul>
+<li>grub</li>
+<li>os-prober
+<ul>
+<li>grub-mkconfig時にWindows(とか？)を検知するために入れる</li>
+</ul></li>
+<li>linux-lts
+<ul>
+<li>今回そもそも最新linuxカーネルによって環境が死んだことによるOSのクリーンインストールなので、 カーネルをlinuxパッケージじゃなくてlinux-ltsでalternateする</li>
+<li>linuxの代わりにlinux-ltsを使うのは、linuxパッケージを削除した後にgrub-mkconfigすればいい</li>
+</ul></li>
+<li>linux-lts-headers
+<ul>
+<li>VirtualBox使いたい時に(linux-ltsとセットで？)必要になる</li>
+</ul></li>
+</ul></li>
+<li>X周り
+<ul>
+<li>xfce4-goodies</li>
+<li>xorg-server</li>
+<li>xorg-server-utils</li>
+<li>xorg-xinit</li>
+<li>dockbarx</li>
+<li>network-manager-applet
+<ul>
+<li>networkmanagerをxfce4のパネルで使う用</li>
+</ul></li>
+<li>xfce4-notifyd</li>
+<li>gamin
+<ul>
+<li>ごめんこれがなんだかよく調べてない</li>
+</ul></li>
+<li>xf86-input-synaptics
+<ul>
+<li>ノートPCのタッチパッドの挙動を正常にするため</li>
+</ul></li>
+</ul></li>
+<li>IME周り
+<ul>
+<li>fcitx</li>
+<li>fcitx-mozc</li>
+<li>fcitx-gtk3</li>
+<li>fcitx-configtool</li>
+</ul></li>
+<li>ネットワーク周り + 依存関係
+<ul>
+<li>networkmanager</li>
+<li>wifi-menu用
+<ul>
+<li>dialog</li>
+<li>wpa_supplicant</li>
+</ul></li>
+<li>rfkill
+<ul>
+<li>ハードウェアの無線LANロック状態確認用</li>
+</ul></li>
+<li>iwconfig</li>
+<li>wireless_tools</li>
+<li>dhclient
+<ul>
+<li>手動でdhcpサーバに問い合わせる用</li>
+</ul></li>
+</ul></li>
+<li>AUR用
+<ul>
+<li>yaourt</li>
+<li>namcap</li>
+</ul></li>
+<li>その他
+<ul>
+<li>slim</li>
+<li>haskell-stack
+<ul>
+<li>現在、pacmanからインストールすると<a href="https://github.com/commercialhaskell/stack/issues/257">これ</a>になるので yaourtで入れることが推奨されている</li>
+<li>僕の<code>ArchLinux 64bit</code>の場合、上記方法でも直らなかったので <code>sudo ln -s /usr/lib/libtinfo.so /usr/lib/libtinfo.so.5</code>というダーティハックした</li>
+</ul></li>
+<li>ruby</li>
+<li>python</li>
+<li>lua</li>
+<li>espeak
+<ul>
+<li><a href="../posts/2016-09-03-archlinux-initialize.html">喋らせる</a></li>
+</ul></li>
+<li>firefox</li>
+<li>flashplugin</li>
+<li>libreoffice
+<ul>
+<li>安定版を使いたいのでlibreoffice-stillパッケージグループからインストール</li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="aurより">AURより</h1>
+<ul>
+<li>ttf-ricty
+<ul>
+<li>必須、綺麗なフォント</li>
+</ul></li>
+<li>dockbarx</li>
+<li>xfce4-dockbarx-plugin
+<ul>
+<li>xfce4で Windowsキー + [1-9] を使う用</li>
+</ul></li>
+<li>mecab
+<ul>
+<li>hs-goriraの開発で使ってる</li>
+</ul></li>
+<li>mecab-ipadic
+<ul>
+<li>mecab用辞書</li>
+</ul></li>
+</ul>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2016-09-03-archlinux-initialize.md">僕がArchLinuxインストール直後にインストールしたパッケージ全集 - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>
