@@ -1,7 +1,34 @@
 ---
-title: typeで型引数をつけるか付けないかで変わる意味がある（instance編）
+title: typeでは型引数を省略しないと高階型クラスインスタンスにできない
 tags: Haskell
 ---
+
+```haskell
+class Foo (a :: * -> *)
+```
+
+　のように、高階型に実装されることを要求する型クラスに対して
+
+```haskell
+data Bar a = Bar Int a
+type Baz a b = Either (Bar a) b
+```
+
+のようにすると
+
+```haskell
+class Foo (Baz a)
+```
+
+できなくなってしまって
+
+```haskell
+type Baz a = Either (Bar a)
+```
+
+のようにするとできるという感じです。
+
+- - -
 
 ```haskell
 {-# LANGUAGE FlexibleInstances #-}
@@ -37,11 +64,4 @@ Test.hs|13 col 10| error:
 type Mine = Eff (Fail :> Void)
 ```
 
-- - -
-
-　完全に余談だけど、こうなるとMineにkind signature付けたくなるよね :dog2:  
-できるのかな？
-
-```haskell
-type Mine :: * -> * = Eff (Fail :> Void)
-```
+つまりモナドスタックのような構造のうち部分は、このような
