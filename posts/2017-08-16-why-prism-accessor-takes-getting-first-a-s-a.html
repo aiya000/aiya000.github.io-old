@@ -65,9 +65,13 @@
 <li><a href="./2017-08-13-lens-er-is-generalizing-of-ing.html">Lensの-erは-ingの一般化である（Getter,Setter）</a></li>
 </ul>
 <p>の続きです。</p>
+<h1 id="何の話">何の話？</h1>
+<p>　<code>Lens</code>には<code>(^.)</code>があるように、<code>Prism</code>には<code>(^?)</code>というものがあって、 <code>Prism</code>の性質である<code>Maybe</code>が含まれてる以外は、おおよそ役割が同じです。 その役割は取得方向のアクセサです。</p>
+<p>　なので<code>Getting</code>を受け取るのはそれはそうですが…… 僕が最初にこの型と出会った時に思ったのは「なんで<code>First</code>？」ということです。</p>
+<p>……</p>
 <h1 id="結論">結論</h1>
-<p>　<code>Getting (First a) s a</code>は<code>Maybe a</code>を返せるような<code>Prism' s a</code>の特殊化だから。 （<code>Getting (First a) s a</code>は<code>Prism' s a</code>）</p>
-<h1 id="とは">(^?)とは？</h1>
+<p>　<code>Getting (First a) s a</code>は<code>Maybe a</code>を返せるように、<code>Prism' s a</code>に対して十分な特殊化が行われたものだからです。 （<code>Getting (First a) s a</code>は<code>Prism' s a</code>）</p>
+<h1 id="改めてとは">改めて、(^?)とは？</h1>
 <p>　<code>Prism</code>のアクセサです。 ちょうど<code>Lens</code>の<code>(^.)</code>と同じですが、<code>Prism</code>なので<code>Maybe</code>で結果を返します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">(^?) ::</span> s <span class="ot">-&gt;</span> <span class="dt">Getting</span> (<span class="dt">First</span> a) s a <span class="ot">-&gt;</span> <span class="dt">Maybe</span> a</code></pre></div>
 <p>　このようなPrismを作った時に使います。</p>
