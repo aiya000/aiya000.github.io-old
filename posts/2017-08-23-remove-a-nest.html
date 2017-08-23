@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - ネストした分岐を消す方法（タプルを使う）</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>ネストした分岐を消す方法（タプルを使う）</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/08/23 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-08-23-remove-a-nest.html" class="hatena-bookmark-button" data-hatena-bookmark-title="ネストした分岐を消す方法（タプルを使う） - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-08-23-remove-a-nest.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>　まずはこのコードを見て欲しい。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Numeric.Extra</span> (intToDouble)
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> <span class="kw">do</span>
+  n <span class="ot">&lt;-</span> (readLn<span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">Int</span>)
+  xs <span class="ot">&lt;-</span> sequence <span class="fu">$</span> replicate n (readLn<span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">Int</span>)
+  <span class="kw">if</span> n <span class="fu">==</span> <span class="dv">3</span>
+     <span class="kw">then</span> <span class="kw">case</span> divTotal xs <span class="kw">of</span>
+               <span class="dt">Just</span> result <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result
+               <span class="dt">Nothing</span>     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span>
+     <span class="kw">else</span> putStrLn <span class="st">&quot;x(&quot;</span>
+
+<span class="ot">divTotal ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Int</span>
+divTotal [] <span class="fu">=</span> <span class="dt">Nothing</span>
+divTotal xs <span class="fu">=</span>
+  <span class="kw">let</span> (x'<span class="fu">:</span>xs') <span class="fu">=</span> map intToDouble xs
+  <span class="kw">in</span> truncate <span class="fu">&lt;$&gt;</span> foldr (flip (<span class="fu">/?</span>)) (<span class="dt">Just</span> x') xs'
+  <span class="kw">where</span>
+    <span class="co">-- Safe (/)</span>
+<span class="ot">    (/?) ::</span> <span class="dt">Maybe</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Double</span>
+    <span class="dt">Nothing</span> <span class="fu">/?</span> _  <span class="fu">=</span> <span class="dt">Nothing</span>
+    <span class="dt">Just</span> <span class="dv">0</span>  <span class="fu">/?</span> _  <span class="fu">=</span> <span class="dt">Nothing</span>
+    <span class="dt">Just</span> x  <span class="fu">/?</span> y  <span class="fu">=</span> <span class="dt">Just</span> <span class="fu">$</span> x <span class="fu">/</span> y</code></pre></div>
+<p>これは最初にユーザから整数値nの入力を受け取ってから、n個の整数値の入力を受け取った後に、 nが3であれば3つの整数値を左から右に割り算するプログラムだ。</p>
+<p>nが3でなければエラーメッセージAを、 割り算で0除算が起こったらエラーメッセージBを、 全て正しく成功したら結果を表示する。</p>
+<p>　しかし見て欲しい。 ifとcaseが醜くネストしている。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> n <span class="fu">==</span> <span class="dv">3</span>
+  <span class="kw">then</span> <span class="kw">case</span> divTotal xs <span class="kw">of</span>
+            <span class="dt">Just</span> result <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result
+            <span class="dt">Nothing</span>     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span>
+  <span class="kw">else</span> putStrLn <span class="st">&quot;x(&quot;</span></code></pre></div>
+<p>　皆もこんなネストは見たくないよね？ まあこのレベルならともかく、もっとネストしていたら冗談でなく見たくなくなる。</p>
+<p>　このようなパターンなら、タプルを使ってネストを減らすことができる。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">case</span> (n <span class="fu">==</span> <span class="dv">3</span>, divTotal xs) <span class="kw">of</span>
+  (<span class="dt">False</span>, _) <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;x(&quot;</span>
+  (<span class="dt">True</span>, <span class="dt">Nothing</span>)     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span>
+  (<span class="dt">True</span>, <span class="dt">Just</span> result) <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result</code></pre></div>
+<p>　もしdivTotal xsでerrorが返される場合でも、Haskellの評価戦略ならこの例をうまくやってくれるはずだ。</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-08-23-remove-a-nest.md">ネストした分岐を消す方法（タプルを使う） - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>
