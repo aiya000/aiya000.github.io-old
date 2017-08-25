@@ -90,15 +90,21 @@
 <span class="ot">upgrade ::</span> <span class="dt">Eff</span> r a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (w <span class="fu">:&gt;</span> r) a
 <span class="ot">upgrade ::</span> <span class="dt">PureComputation</span> a <span class="ot">-&gt;</span> <span class="dt">ImpureComputation</span> a</code></pre></div>
 <h1 id="解決自分で作る">解決（自分で作る）</h1>
-<p>　なので、一般的なものではないですが、より特殊的なものを自分で作って解決してみました。</p>
+<p>　<del>なので、一般的なものではないですが、より特殊的なものを自分で作って解決してみました。</del></p>
+<p>– 2017-08-25 追記<br />
+　<a href="https://github.com/as-capabl">@as-capbabl</a>さんがもっといいものを作ってくれたので、差し替えました！</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE TypeOperators #-}</span>
 
-<span class="kw">import </span><span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, (:&gt;), run) import <span class="dt">Control.Eff.Exception</span> (<span class="dt">Exc</span>, runExc, liftEither)
+<span class="kw">import </span><span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, (:&gt;), run)
+<span class="kw">import </span><span class="dt">Control.Eff.Exception</span> (<span class="dt">Exc</span>, runExc, liftEither)
 <span class="kw">import </span><span class="dt">Control.Eff.Lift</span> (<span class="dt">Lift</span>)
+<span class="kw">import </span><span class="dt">Control.Monad.Free.Reflection</span> (<span class="dt">FreeView</span>(..), fromView, toView)
+<span class="kw">import </span><span class="dt">Data.OpenUnion</span> (weaken)
+<span class="kw">import </span><span class="dt">Data.Typeable</span> (<span class="dt">Typeable</span>)
 <span class="kw">import </span><span class="dt">Data.Void</span> (<span class="dt">Void</span>)
 
 <span class="kw">type</span> <span class="dt">PureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)
-<span class="kw">type</span> <span class="dt">ImpureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>)
+<span class="kw">type</span> <span class="dt">ImpureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)
 
 <span class="co">-- 何らかの純粋な計算</span>
 <span class="ot">pureCompute ::</span> <span class="dt">PureComputation</span> ()
@@ -108,61 +114,19 @@ pureCompute <span class="fu">=</span> return ()
 <span class="ot">impureCompute ::</span> <span class="dt">ImpureComputation</span> ()
 impureCompute <span class="fu">=</span> return ()
 
-<span class="co">-- より特殊的だけど、目的の関数</span>
-<span class="ot">specialUpgrade ::</span> <span class="dt">PureComputation</span> a <span class="ot">-&gt;</span> <span class="dt">ImpureComputation</span> a
-specialUpgrade <span class="fu">=</span> runExc <span class="fu">&gt;&gt;&gt;</span> run <span class="fu">&gt;&gt;&gt;</span> liftEither
+<span class="co">-- 目的の関数</span>
+<span class="ot">upgrade ::</span> (<span class="dt">Functor</span> t, <span class="dt">Typeable</span> t) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (t <span class="fu">:&gt;</span> r) a
+upgrade <span class="fu">=</span> fromView <span class="fu">.</span> go <span class="fu">.</span> toView
+  <span class="kw">where</span>
+    go (<span class="dt">Impure</span> uni) <span class="fu">=</span> <span class="dt">Impure</span> <span class="fu">$</span> weaken (upgrade <span class="fu">&lt;$&gt;</span> uni)
+    go (<span class="dt">Pure</span> x) <span class="fu">=</span> <span class="dt">Pure</span> x
+<span class="co">--upgrade :: PureComputation a -&gt; ImpureComputation a</span>
+<span class="co">--upgrade = runExc &gt;&gt;&gt; run &gt;&gt;&gt; liftEither</span>
+
 
 <span class="co">-- 不純なものに拡大された純粋な計算</span>
 <span class="ot">impureCompute' ::</span> <span class="dt">ImpureComputation</span> ()
-impureCompute' <span class="fu">=</span> specialUpgrade pureCompute</code></pre></div>
-<p>　もう一例。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE TypeOperators #-}</span>
-
-<span class="kw">import </span><span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, (:&gt;), run)
-<span class="kw">import </span><span class="dt">Control.Eff.Exception</span> (<span class="dt">Exc</span>)
-<span class="kw">import </span><span class="dt">Control.Eff.Writer.Lazy</span> (<span class="dt">Writer</span>, runWriter)
-<span class="kw">import </span><span class="dt">Data.Void</span> (<span class="dt">Void</span>)
-
-<span class="kw">type</span> <span class="dt">MyEff</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> <span class="dt">String</span> <span class="fu">:&gt;</span> <span class="dt">Writer</span> <span class="dt">Int</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>)
-<span class="kw">type</span> <span class="dt">YourEff</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Writer</span> <span class="dt">Int</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>)
-
-<span class="ot">mine ::</span> <span class="dt">MyEff</span> ()
-mine <span class="fu">=</span> return ()
-
-<span class="ot">yours ::</span> <span class="dt">YourEff</span> ()
-yours <span class="fu">=</span> return ()
-
-<span class="ot">itIsMine ::</span> <span class="dt">YourEff</span> a <span class="ot">-&gt;</span> <span class="dt">MyEff</span> a
-itIsMine <span class="fu">=</span> return <span class="fu">.</span> snd <span class="fu">.</span> run <span class="fu">.</span> runWriter (<span class="fu">+</span>) <span class="dv">0</span>
-
-<span class="ot">mine' ::</span> <span class="dt">MyEff</span> ()
-mine' <span class="fu">=</span> itIsMine yours</code></pre></div>
-<hr />
-<hr />
-<p>　以下はぼやきです。</p>
-<h1 id="これはより推奨できる解決方法なのか">これは、より推奨できる解決方法なのか？</h1>
-<p>　これが、より推奨できる方法なのかがわかりません。</p>
-<p>　なぜならより一般的な関数<code>Eff r a -&gt; Eff (w :&gt; r) a</code>は作れていないのと</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- 作れなかった！</span>
-<span class="ot">upgrade ::</span> <span class="dt">Eff</span> r a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (w <span class="fu">:&gt;</span> r) a</code></pre></div>
-<p><strong>※←？</strong>に書いたことなのですが、直接<code>Free</code>とその中の<code>Union</code>に対する変換が書けていないからです。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- EffはFreeとUnionで出来ている</span>
-<span class="kw">type</span> <span class="dt">Eff</span> r <span class="fu">=</span> <span class="dt">Free</span> (<span class="dt">Union</span> r)
-<span class="kw">type</span> <span class="dt">PureComputation</span> <span class="fu">=</span> <span class="dt">Free</span> (<span class="dt">Union</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>))
-<span class="kw">type</span> <span class="dt">ImpureComputation</span> <span class="fu">=</span> <span class="dt">Free</span> (<span class="dt">Union</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>))
-
-<span class="ot">specialUpgrade ::</span> <span class="dt">Free</span> (<span class="dt">Union</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)) a <span class="ot">-&gt;</span> <span class="dt">Free</span> (<span class="dt">Union</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>)) a
-specialUpgrade <span class="fu">=</span>
-<span class="co">{- 一度Effを完全に -}</span> run            <span class="co">-- :: Eff Void (Either () a) -&gt; Either () a</span>
-<span class="co">{-   解除してから  -}</span> <span class="fu">&gt;&gt;&gt;</span> runExc     <span class="co">-- :: Eff (Exc () :&gt; Void) a -&gt; Eff Void (Either () a)</span>
-<span class="co">{- 一気にaに -}</span>       <span class="fu">&gt;&gt;&gt;</span> liftEither <span class="co">-- :: Either () a -&gt; Eff (Exc () :&gt; Lift IO :&gt; Void) a</span>
-<span class="co">{- ImpureComputationを被せている -}</span></code></pre></div>
-<p>　本当は</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Free</span> (<span class="dt">Union</span> r) a <span class="ot">-&gt;</span> (forall b<span class="fu">.</span> <span class="dt">Union</span> r b <span class="ot">-&gt;</span> <span class="dt">Union</span> (w <span class="fu">:&gt;</span> r) b) <span class="ot">-&gt;</span> <span class="dt">Free</span> (<span class="dt">Union</span> (w <span class="fu">:&gt;</span> r)) a</code></pre></div>
-<p>のような関数に</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Union</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>) b <span class="ot">-&gt;</span> <span class="dt">Union</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>) b</code></pre></div>
-<p>のような関数を適用してあげた方がいいのではないかと考えていて、 でも<code>Union r</code>が<code>Traversable</code>でなかった関係で、 僕では作れませんでした xD</p>
-<p>（できるというのなら誰か教えて！）</p>
+impureCompute' <span class="fu">=</span> upgrade pureCompute</code></pre></div>
 
 <hr />
 <hr />
