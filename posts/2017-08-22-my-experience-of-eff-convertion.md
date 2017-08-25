@@ -64,17 +64,24 @@ upgrade :: PureComputation a -> ImpureComputation a
 
 
 # 解決（自分で作る）
-　なので、一般的なものではないですが、より特殊的なものを自分で作って解決してみました。
+　~~なので、一般的なものではないですが、より特殊的なものを自分で作って解決してみました。~~
+
+-- 2017-08-25 追記  
+　[\@as-capbabl](https://github.com/as-capabl)さんがもっといいものを作ってくれたので、差し替えました！
 
 ```haskell
 {-# LANGUAGE TypeOperators #-}
 
-import Control.Eff (Eff, (:>), run) import Control.Eff.Exception (Exc, runExc, liftEither)
+import Control.Eff (Eff, (:>), run)
+import Control.Eff.Exception (Exc, runExc, liftEither)
 import Control.Eff.Lift (Lift)
+import Control.Monad.Free.Reflection (FreeView(..), fromView, toView)
+import Data.OpenUnion (weaken)
+import Data.Typeable (Typeable)
 import Data.Void (Void)
 
 type PureComputation = Eff (Exc () :> Void)
-type ImpureComputation = Eff (Exc () :> Lift IO :> Void)
+type ImpureComputation = Eff (Lift IO :> Exc () :> Void)
 
 -- 何らかの純粋な計算
 pureCompute :: PureComputation ()
@@ -84,87 +91,17 @@ pureCompute = return ()
 impureCompute :: ImpureComputation ()
 impureCompute = return ()
 
--- より特殊的だけど、目的の関数
-specialUpgrade :: PureComputation a -> ImpureComputation a
-specialUpgrade = runExc >>> run >>> liftEither
+-- 目的の関数
+upgrade :: (Functor t, Typeable t) => Eff r a -> Eff (t :> r) a
+upgrade = fromView . go . toView
+  where
+    go (Impure uni) = Impure $ weaken (upgrade <$> uni)
+    go (Pure x) = Pure x
+--upgrade :: PureComputation a -> ImpureComputation a
+--upgrade = runExc >>> run >>> liftEither
+
 
 -- 不純なものに拡大された純粋な計算
 impureCompute' :: ImpureComputation ()
-impureCompute' = specialUpgrade pureCompute
+impureCompute' = upgrade pureCompute
 ```
-
-　もう一例。
-
-```haskell
-{-# LANGUAGE TypeOperators #-}
-
-import Control.Eff (Eff, (:>), run)
-import Control.Eff.Exception (Exc)
-import Control.Eff.Writer.Lazy (Writer, runWriter)
-import Data.Void (Void)
-
-type MyEff = Eff (Exc String :> Writer Int :> Void)
-type YourEff = Eff (Writer Int :> Void)
-
-mine :: MyEff ()
-mine = return ()
-
-yours :: YourEff ()
-yours = return ()
-
-itIsMine :: YourEff a -> MyEff a
-itIsMine = return . snd . run . runWriter (+) 0
-
-mine' :: MyEff ()
-mine' = itIsMine yours
-```
-
-- - -
-- - -
-
-　以下はぼやきです。
-
-
-# これは、より推奨できる解決方法なのか？
-　これが、より推奨できる方法なのかがわかりません。
-
-　なぜならより一般的な関数`Eff r a -> Eff (w :> r) a`は作れていないのと
-
-```haskell
--- 作れなかった！
-upgrade :: Eff r a -> Eff (w :> r) a
-```
-
-**※←？**に書いたことなのですが、直接`Free`とその中の`Union`に対する変換が書けていないからです。
-
-```haskell
--- EffはFreeとUnionで出来ている
-type Eff r = Free (Union r)
-type PureComputation = Free (Union (Exc () :> Void))
-type ImpureComputation = Free (Union (Exc () :> Lift IO :> Void))
-
-specialUpgrade :: Free (Union (Exc () :> Void)) a -> Free (Union (Exc () :> Lift IO :> Void)) a
-specialUpgrade =
-{- 一度Effを完全に -} run            -- :: Eff Void (Either () a) -> Either () a
-{-   解除してから  -} >>> runExc     -- :: Eff (Exc () :> Void) a -> Eff Void (Either () a)
-{- 一気にaに -}       >>> liftEither -- :: Either () a -> Eff (Exc () :> Lift IO :> Void) a
-{- ImpureComputationを被せている -}
-```
-
-　本当は
-
-```haskell
-Free (Union r) a -> (forall b. Union r b -> Union (w :> r) b) -> Free (Union (w :> r)) a
-```
-
-のような関数に
-
-```haskell
-Union (Exc () :> Void) b -> Union (Exc () :> Lift IO :> Void) b
-```
-
-のような関数を適用してあげた方がいいのではないかと考えていて、
-でも`Union r`が`Traversable`でなかった関係で、
-僕では作れませんでした xD
-
-（できるというのなら誰か教えて！）
