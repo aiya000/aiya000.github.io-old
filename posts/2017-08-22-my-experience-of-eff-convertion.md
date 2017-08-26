@@ -1,16 +1,9 @@
 ---
-title: extensible-effectsの作用を拡大してみた（※）
+title: extensible-effectsの作用を拡大方向に変換する
 tags: Haskell
 ---
-
-# ※ ← ？
-　`Union r -> Union (w :> r)`や`Free f -> Free g`相当の変換ができなかったので、
-もしそれが可能であればこの方法は妥当ではないかなあと思います。の意。
-
-
-# 作用 ← ？
+# 作用とは
 　この記事では`Eff`型の第一型引数を指します。
-
 
 ```haskell
 -- Fooは作用
@@ -18,7 +11,7 @@ Eff Foo a
 ```
 
 
-# 拡大 ← ？
+# 拡大とは
 　この記事において、作用`A`が作用`B`より大きいとは
 
 ```haskell
@@ -33,11 +26,8 @@ Eff B a -> Eff A a
 ```
 
 のような（`(X :>)`を補填するような）操作を指します。
-
 （一般的になんと言うのかは知らない）
 
-- - -
-- - -
 
 # 問題
 　この問題についてのおおよその背景はみょんさんの記事を見た方がとてもわかりやすいと思いますが
@@ -54,20 +44,22 @@ type ImpureComputation = Eff (Exc () :> Lift IO :> Void)
 作用が小さいものを大きいものに拡大する一般的な関数が提供されていないということです。
 
 　直感的には、純粋な計算（`PureComputation`）というのは不純な計算（`ImpureComputation`）を含んでも問題がない気がします。
-（でも、それを実現する、より一般的な方法が用意されていない）
-
-```haskell
--- こんな関数が欲しいけどない
-upgrade :: Eff r a -> Eff (w :> r) a
-upgrade :: PureComputation a -> ImpureComputation a
-```
+（でも、それを実現する、より一般的な方法がexntensible-effectsでは用意されていない）
 
 
 # 解決（自分で作る）
-　~~なので、一般的なものではないですが、より特殊的なものを自分で作って解決してみました。~~
+　なのでこんな関数を定義します。
+（Thanks [\@as-capbabl](https://github.com/as-capabl)！）
 
--- 2017-08-25 追記  
-　[\@as-capbabl](https://github.com/as-capabl)さんがもっといいものを作ってくれたので、差し替えました！
+```haskell
+upgrade :: (Functor t, Typeable t) => Eff r a -> Eff (t :> r) a
+upgrade = fromView . go . toView
+  where
+    go (Impure uni) = Impure $ weaken (upgrade <$> uni)
+    go (Pure x) = Pure x
+```
+
+　こんな感じで使います。
 
 ```haskell
 {-# LANGUAGE TypeOperators #-}
@@ -91,17 +83,12 @@ pureCompute = return ()
 impureCompute :: ImpureComputation ()
 impureCompute = return ()
 
--- 目的の関数
-upgrade :: (Functor t, Typeable t) => Eff r a -> Eff (t :> r) a
-upgrade = fromView . go . toView
-  where
-    go (Impure uni) = Impure $ weaken (upgrade <$> uni)
-    go (Pure x) = Pure x
---upgrade :: PureComputation a -> ImpureComputation a
---upgrade = runExc >>> run >>> liftEither
-
-
 -- 不純なものに拡大された純粋な計算
 impureCompute' :: ImpureComputation ()
 impureCompute' = upgrade pureCompute
 ```
+
+
+# 余談
+　[extensibleのEffectモジュール](https://hackage.haskell.org/package/extensible-0.4.4/docs/Data-Extensible-Effect.html#v:castEff)
+には`castEff :: IncludeAssoc ys xs => Eff xs a -> Eff ys a `という関数が予め用意されています。
