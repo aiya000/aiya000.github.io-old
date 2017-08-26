@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>あいや☆ぱぶりっしゅぶろぐ！ - extensible-effectsの作用を拡大してみた（※）</title>
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - extensible-effectsの作用を拡大方向に変換する</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
@@ -24,7 +24,7 @@
         </nav>
 
         <div id="content">
-            <h4>extensible-effectsの作用を拡大してみた（※）</h4>
+            <h4>extensible-effectsの作用を拡大方向に変換する</h4>
             <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <div class="info">
@@ -43,7 +43,7 @@
         </li>
 
         <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-08-22-my-experience-of-eff-convertion.html" class="hatena-bookmark-button" data-hatena-bookmark-title="extensible-effectsの作用を拡大してみた（※） - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-08-22-my-experience-of-eff-convertion.html" class="hatena-bookmark-button" data-hatena-bookmark-title="extensible-effectsの作用を拡大方向に変換する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
             <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
@@ -60,22 +60,17 @@
 
 <hr />
 
-<h1 id="section">※ ← ？</h1>
-<p>　<code>Union r -&gt; Union (w :&gt; r)</code>や<code>Free f -&gt; Free g</code>相当の変換ができなかったので、 もしそれが可能であればこの方法は妥当ではないかなあと思います。の意。</p>
-<h1 id="作用">作用 ← ？</h1>
+<h1 id="作用とは">作用とは</h1>
 <p>　この記事では<code>Eff</code>型の第一型引数を指します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- Fooは作用</span>
 <span class="dt">Eff</span> <span class="dt">Foo</span> a</code></pre></div>
-<h1 id="拡大">拡大 ← ？</h1>
+<h1 id="拡大とは">拡大とは</h1>
 <p>　この記事において、作用<code>A</code>が作用<code>B</code>より大きいとは</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">A</span> <span class="fu">=</span> <span class="dt">X</span> <span class="fu">:&gt;</span> <span class="dt">Y</span> <span class="fu">:&gt;</span> <span class="dt">Z</span>
 <span class="kw">type</span> <span class="dt">B</span> <span class="fu">=</span> <span class="dt">Y</span> <span class="fu">:&gt;</span> <span class="dt">Z</span></code></pre></div>
 <p>このような<code>A ⊂ B</code>を指し、 「拡大」は、</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Eff</span> <span class="dt">B</span> a <span class="ot">-&gt;</span> <span class="dt">Eff</span> <span class="dt">A</span> a</code></pre></div>
-<p>のような（<code>(X :&gt;)</code>を補填するような）操作を指します。</p>
-<p>（一般的になんと言うのかは知らない）</p>
-<hr />
-<hr />
+<p>のような（<code>(X :&gt;)</code>を補填するような）操作を指します。 （一般的になんと言うのかは知らない）</p>
 <h1 id="問題">問題</h1>
 <p>　この問題についてのおおよその背景はみょんさんの記事を見た方がとてもわかりやすいと思いますが</p>
 <ul>
@@ -85,14 +80,15 @@
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">PureComputation</span>   <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)
 <span class="kw">type</span> <span class="dt">ImpureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>)</code></pre></div>
 <p>作用が小さいものを大きいものに拡大する一般的な関数が提供されていないということです。</p>
-<p>　直感的には、純粋な計算（<code>PureComputation</code>）というのは不純な計算（<code>ImpureComputation</code>）を含んでも問題がない気がします。 （でも、それを実現する、より一般的な方法が用意されていない）</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- こんな関数が欲しいけどない</span>
-<span class="ot">upgrade ::</span> <span class="dt">Eff</span> r a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (w <span class="fu">:&gt;</span> r) a
-<span class="ot">upgrade ::</span> <span class="dt">PureComputation</span> a <span class="ot">-&gt;</span> <span class="dt">ImpureComputation</span> a</code></pre></div>
+<p>　直感的には、純粋な計算（<code>PureComputation</code>）というのは不純な計算（<code>ImpureComputation</code>）を含んでも問題がない気がします。 （でも、それを実現する、より一般的な方法がexntensible-effectsでは用意されていない）</p>
 <h1 id="解決自分で作る">解決（自分で作る）</h1>
-<p>　<del>なので、一般的なものではないですが、より特殊的なものを自分で作って解決してみました。</del></p>
-<p>– 2017-08-25 追記<br />
-　<a href="https://github.com/as-capabl">@as-capbabl</a>さんがもっといいものを作ってくれたので、差し替えました！</p>
+<p>　なのでこんな関数を定義します。 （Thanks <a href="https://github.com/as-capabl">@as-capbabl</a>！）</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">upgrade ::</span> (<span class="dt">Functor</span> t, <span class="dt">Typeable</span> t) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (t <span class="fu">:&gt;</span> r) a
+upgrade <span class="fu">=</span> fromView <span class="fu">.</span> go <span class="fu">.</span> toView
+  <span class="kw">where</span>
+    go (<span class="dt">Impure</span> uni) <span class="fu">=</span> <span class="dt">Impure</span> <span class="fu">$</span> weaken (upgrade <span class="fu">&lt;$&gt;</span> uni)
+    go (<span class="dt">Pure</span> x) <span class="fu">=</span> <span class="dt">Pure</span> x</code></pre></div>
+<p>　こんな感じで使います。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE TypeOperators #-}</span>
 
 <span class="kw">import </span><span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, (:&gt;), run)
@@ -114,26 +110,18 @@ pureCompute <span class="fu">=</span> return ()
 <span class="ot">impureCompute ::</span> <span class="dt">ImpureComputation</span> ()
 impureCompute <span class="fu">=</span> return ()
 
-<span class="co">-- 目的の関数</span>
-<span class="ot">upgrade ::</span> (<span class="dt">Functor</span> t, <span class="dt">Typeable</span> t) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (t <span class="fu">:&gt;</span> r) a
-upgrade <span class="fu">=</span> fromView <span class="fu">.</span> go <span class="fu">.</span> toView
-  <span class="kw">where</span>
-    go (<span class="dt">Impure</span> uni) <span class="fu">=</span> <span class="dt">Impure</span> <span class="fu">$</span> weaken (upgrade <span class="fu">&lt;$&gt;</span> uni)
-    go (<span class="dt">Pure</span> x) <span class="fu">=</span> <span class="dt">Pure</span> x
-<span class="co">--upgrade :: PureComputation a -&gt; ImpureComputation a</span>
-<span class="co">--upgrade = runExc &gt;&gt;&gt; run &gt;&gt;&gt; liftEither</span>
-
-
 <span class="co">-- 不純なものに拡大された純粋な計算</span>
 <span class="ot">impureCompute' ::</span> <span class="dt">ImpureComputation</span> ()
 impureCompute' <span class="fu">=</span> upgrade pureCompute</code></pre></div>
+<h1 id="余談">余談</h1>
+<p>　<a href="https://hackage.haskell.org/package/extensible-0.4.4/docs/Data-Extensible-Effect.html#v:castEff">extensibleのEffectモジュール</a> には<code>castEff :: IncludeAssoc ys xs =&gt; Eff xs a -&gt; Eff ys a</code>という関数が予め用意されています。</p>
 
 <hr />
 <hr />
 
 <p class="about-pr">
 この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-08-22-my-experience-of-eff-convertion.md">extensible-effectsの作用を拡大してみた（※） - github</a> <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-08-22-my-experience-of-eff-convertion.md">extensible-effectsの作用を拡大方向に変換する - github</a> <br />
 ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
 </p>
 
