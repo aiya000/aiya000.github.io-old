@@ -67,6 +67,7 @@ main = hakyll $ do
   match "recruit.html" $ do
     route idRoute
     compile $ getResourceBody
+      >>= loadAndApplyTemplate "templates/profile.html" defaultContext -- recruit.html is a part of the profile.html's content
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
