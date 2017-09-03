@@ -4,7 +4,7 @@ tags: Haskell
 ---
 　ここ
 
-- [あいや☆ぱぶりっしゅぶろぐ！ - lensの(^?)はなぜGetting (First a) s aを引数に取るのか](http://aiya000.github.io/posts/2017-08-16-why-prism-accessor-takes-getting-first-a-s-a.html)
+- [あいや☆ぱぶりっしゅぶろぐ！ - lensの(^?)はなぜGetting (First a) s aを引数に取るのか](2017-08-16-why-prism-accessor-takes-getting-first-a-s-a.html)
 
 に書いた通り、
 `(^?)`はある`Prism`を引数に取る。
@@ -29,13 +29,11 @@ main = print $ x ^. _Right
 -- Sum {getSum = 0}
 ```
 
-
-# 本題
 　実用上、`Prism`の`(^.)`が（上記のように）失敗した場合は
 単位元が返されるのが便利なのはわかったけど、
 なんで`(^.)`に`Monoid`の`Prism`を指定できるのか？
 
-　簡約すれば全部わかる。（わかりたい）
+　型を簡約して、`_Right`が`(^.)`の型に合致することを確認してみる。
 
 
 ## なぜ(^.)にPrismを適用できるのか
