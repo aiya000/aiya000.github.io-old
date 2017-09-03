@@ -62,7 +62,7 @@
 
 <p>　ここ</p>
 <ul>
-<li><a href="http://aiya000.github.io/posts/2017-08-16-why-prism-accessor-takes-getting-first-a-s-a.html">あいや☆ぱぶりっしゅぶろぐ！ - lensの(^?)はなぜGetting (First a) s aを引数に取るのか</a></li>
+<li><a href="2017-08-16-why-prism-accessor-takes-getting-first-a-s-a.html">あいや☆ぱぶりっしゅぶろぐ！ - lensの(^?)はなぜGetting (First a) s aを引数に取るのか</a></li>
 </ul>
 <p>に書いた通り、 <code>(^?)</code>はある<code>Prism</code>を引数に取る。</p>
 <p>　でもPrismは必ず<code>(^?)</code>と一緒に使わなきゃいけないわけじゃなくって、 <code>Monoid r =&gt; Getting r s a</code>の形になった<code>Prism</code>は Lensの<code>(^.)</code>にも指定できる。 （例えば<code>_Right</code>）</p>
@@ -78,9 +78,8 @@ main <span class="fu">=</span> print <span class="fu">$</span> x <span class="fu
 
 <span class="co">-- {output}</span>
 <span class="co">-- Sum {getSum = 0}</span></code></pre></div>
-<h1 id="本題">本題</h1>
 <p>　実用上、<code>Prism</code>の<code>(^.)</code>が（上記のように）失敗した場合は 単位元が返されるのが便利なのはわかったけど、 なんで<code>(^.)</code>に<code>Monoid</code>の<code>Prism</code>を指定できるのか？</p>
-<p>　簡約すれば全部わかる。（わかりたい）</p>
+<p>　型を簡約して、<code>_Right</code>が<code>(^.)</code>の型に合致することを確認してみる。</p>
 <h2 id="なぜ.にprismを適用できるのか">なぜ(^.)にPrismを適用できるのか</h2>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- _RightはPrism</span>
 <span class="ot">_Right ::</span> <span class="dt">Prism</span> (<span class="dt">Either</span> c a) (<span class="dt">Either</span> c b) a b
