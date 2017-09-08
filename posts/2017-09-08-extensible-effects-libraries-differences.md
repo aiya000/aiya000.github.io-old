@@ -1,5 +1,5 @@
 ---
-title: extensible-effects/extensbile/freer-effectsの良いところ悪いところ
+title: extensible-effects/extensible/freer-effectsの良いところ悪いところ
 tags: Haskell
 ---
 　個人的には`extensible`を推したい。
