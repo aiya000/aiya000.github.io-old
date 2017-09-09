@@ -2,7 +2,7 @@
 title: extensible-effects/extensible/freer-effectsの良いところ悪いところ
 tags: Haskell
 ---
-　個人的には`extensible`を推したい。
+　個人的には`extensible`を使っている。
 
 　性能的には
 `extensible` >> `freer-effects` >>>>>> `extensible-effects`
@@ -52,6 +52,9 @@ main = print . EE.run . EE.runWriter (++) [] $ EE.runReader -- Monoidでなく�
 - `TypeApplications`と`OverloadedLabels`でガリガリ書く
 - 3つのうち一番速いらしい（実測なし）
 - （個人的には）`#foo`と`@bar`を書く必要性により、可読性は少し悪くなる気がする
+    - [手前味噌だがこのように](https://github.com/aiya000/hs-zuramaru/commit/4b7532582fb1890bd7b8ae9d3f10ba4494f0e569)、  
+      関数のexport元で`>:`の右辺左辺を締めることを徹底すれば問題ない
+- Symbol種を使う分、コンパイルエラーは難しくなる傾向にある
 
 　ただしそもそもこれは拡張可能作用専用のライブラリではない。
  （なぜか、みょんっと、拡張可能作用のモジュールが生えている）
@@ -103,6 +106,7 @@ main = print . FE.run . FE.runWriter $ FE.runReader
 
 　extensible-effectsよりも全然速いらしい。
 
+## freer？
 　freer-effectsの他にfreerというのもあるけど
 
     - 2つの内容はほとんど同じっぽくて
