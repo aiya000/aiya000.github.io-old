@@ -60,7 +60,7 @@
 
 <hr />
 
-<p>　個人的には<code>extensible</code>を推したい。</p>
+<p>　個人的には<code>extensible</code>を使っている。</p>
 <p>　性能的には <code>extensible</code> &gt;&gt; <code>freer-effects</code> &gt;&gt;&gt;&gt;&gt;&gt; <code>extensible-effects</code> らしい。</p>
 <hr />
 <ul>
@@ -99,7 +99,12 @@ main <span class="fu">=</span> print <span class="fu">.</span> EE.run <span clas
 <ul>
 <li><code>TypeApplications</code>と<code>OverloadedLabels</code>でガリガリ書く</li>
 <li>3つのうち一番速いらしい（実測なし）</li>
-<li>（個人的には）<code>#foo</code>と<code>@bar</code>を書く必要性により、可読性は少し悪くなる気がする</li>
+<li>（個人的には）<code>#foo</code>と<code>@bar</code>を書く必要性により、可読性は少し悪くなる気がする
+<ul>
+<li><a href="https://github.com/aiya000/hs-zuramaru/commit/4b7532582fb1890bd7b8ae9d3f10ba4494f0e569">手前味噌だがこのように</a>、<br />
+関数のexport元で<code>&gt;:</code>の右辺左辺を締めることを徹底すれば問題ない</li>
+</ul></li>
+<li>Symbol種を使う分、コンパイルエラーは難しくなる傾向にある</li>
 </ul>
 <p>　ただしそもそもこれは拡張可能作用専用のライブラリではない。 （なぜか、みょんっと、拡張可能作用のモジュールが生えている）</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- Symbol種の型と作用が紐付いてるので</span>
@@ -140,6 +145,7 @@ main <span class="fu">=</span> print <span class="fu">.</span> FE.run <span clas
 <span class="co">-- {output}</span>
 <span class="co">-- ((),[&quot;poi&quot;])</span></code></pre></div>
 <p>　extensible-effectsよりも全然速いらしい。</p>
+<h2 id="freer">freer？</h2>
 <p>　freer-effectsの他にfreerというのもあるけど</p>
 <pre><code>- 2つの内容はほとんど同じっぽくて
 - freerのauthorがfreer-effectsのauthorにもなっていて
