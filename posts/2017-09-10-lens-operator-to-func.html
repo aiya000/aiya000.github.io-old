@@ -92,6 +92,22 @@
 </tr>
 </tbody>
 </table>
+<p>　余談だけど、演算子でなく関数を使った方が綺麗に書けるパターンとして、以下のように <code>Functor</code>の内側にアクセッサを適用したいというものがある。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE TemplateHaskell #-}</span>
+
+<span class="kw">import </span><span class="dt">Control.Lens</span>
+
+makeLensesFor [(<span class="st">&quot;runIdentity&quot;</span>, <span class="st">&quot;_Identity&quot;</span>)] <span class="ch">''</span><span class="dt">Identity</span>
+
+<span class="ot">x ::</span> <span class="dt">Identity</span> (<span class="dt">Identity</span> <span class="dt">Int</span>)
+x <span class="fu">=</span> <span class="dt">Identity</span> <span class="fu">$</span> <span class="dt">Identity</span> <span class="dv">10</span>
+
+<span class="co">-- ここ</span>
+<span class="ot">z ::</span> <span class="dt">Identity</span> <span class="dt">Int</span>
+z <span class="fu">=</span> x <span class="fu">&lt;&amp;&gt;</span> view _Identity
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> print z</code></pre></div>
 
 <hr />
 <hr />
