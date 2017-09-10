@@ -20,4 +20,6 @@ executable site
                      , containers
                      , hakyll
                      , highlighting-kate
+                     , lens
                      , pandoc
+                     , tagsoup
