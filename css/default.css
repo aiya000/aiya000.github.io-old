@@ -39,3 +39,8 @@ a:link {
 a:visited {
     color: dimgray;
 }
+
+table {
+    background-color: white;
+    border-style: solid;
+}

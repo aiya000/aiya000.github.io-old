@@ -1,7 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ViewPatterns #-}
 
+import Control.Lens ((<&>))
+import Data.List (delete)
 import Data.Monoid ((<>))
 import Hakyll
+import Text.HTML.TagSoup (Tag(..), isTagOpenName, Attribute)
 import Text.Highlighting.Kate (styleToCss, pygments)
 import Text.Pandoc.Options (ReaderOptions(readerExtensions), Extension(Ext_emoji))
 import qualified Data.Set as Set
@@ -53,7 +57,7 @@ main = hakyll $ do
 
   match "about.md" $ do
     route $ setExtension "html"
-    compile $ pandocCompilerWithEmoji
+    compile $ modernPandocCompiler
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
@@ -73,7 +77,7 @@ main = hakyll $ do
 
   match "posts/*" $ do
     route $ setExtension "html"
-    compile $ pandocCompilerWithEmoji
+    compile $ modernPandocCompiler
       >>= loadAndApplyTemplate "templates/post.html" postCtx
       >>= loadAndApplyTemplate "templates/default.html" postCtx
       >>= relativizeUrls
@@ -137,10 +141,21 @@ main = hakyll $ do
         listContextWith (titleField "tagName") "tagNames" "tags" <>
         defaultContext
 
-      -- :dog2:
-      pandocCompilerWithEmoji :: Compiler (Item String)
-      pandocCompilerWithEmoji =
+      -- A `pandocCompiler` for modern styles
+      modernPandocCompiler :: Compiler (Item String)
+      modernPandocCompiler =
         let readerExtensions' = readerExtensions defaultHakyllReaderOptions
         in pandocCompilerWith
           defaultHakyllReaderOptions { readerExtensions = Set.insert Ext_emoji readerExtensions' }
           defaultHakyllWriterOptions
+          <&> fmap (withTags processTags)
+
+      processTags :: Tag String -> Tag String
+      processTags tag@(isTagOpenName "table" -> True) = appendAttr tag ("class", "table table-bordered")
+      processTags tag = tag
+
+      appendAttr :: Tag String -> Attribute String -> Tag String
+      appendAttr (TagOpen tagName attrs) newAttr@(attrName, attrValue) = TagOpen tagName $
+        case lookup attrName attrs of
+          Nothing     -> newAttr : attrs
+          Just oldVal -> (attrName, oldVal ++ ' ' : attrValue) : delete (attrName, oldVal) attrs
