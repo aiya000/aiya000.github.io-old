@@ -15,3 +15,24 @@ tags: Haskell
 | (^?) :: s -> Getting (First a) s a -> Maybe a | preview :: MonadReader s m => Getting (First a) s a -> m (Maybe a) |
 | (.~) :: ASetter s t a b -> b -> s -> t | set :: ASetter s t a b -> b -> s -> t |
 | (?~) :: ASetter s t a (Maybe b) -> b -> s -> t | 対応なし |
+
+　余談だけど、演算子でなく関数を使った方が綺麗に書けるパターンとして、以下のように
+`Functor`の内側にアクセッサを適用したいというものがある。
+
+```haskell
+{-# LANGUAGE TemplateHaskell #-}
+
+import Control.Lens
+
+makeLensesFor [("runIdentity", "_Identity")] ''Identity
+
+x :: Identity (Identity Int)
+x = Identity $ Identity 10
+
+-- ここ
+z :: Identity Int
+z = x <&> view _Identity
+
+main :: IO ()
+main = print z
+```
