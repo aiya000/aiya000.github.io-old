@@ -83,14 +83,11 @@ Changing discoverable on succeeded
 [CHG] Controller YY:YY:YY:YY:YY:YY Discoverable: yes
 [bluetooth]# pairable on
 Changing pairable on succeeded
-[bluetooth]# connect XX:XX:XX:XX:XX:XX
-Attempting to connect to XX:XX:XX:XX:XX:XX
-[CHG] Device XX:XX:XX:XX:XX:XX Connected: yes
-Connection successful
 [CHG] Device XX:XX:XX:XX:XX:XX ServicesResolved: yes
 [Doogee X5 Max Pro]# trust XX:XX:XX:XX:XX:XX
 Changing XX:XX:XX:XX:XX:XX trust succeeded
 [CHG] Controller YY:YY:YY:YY:YY:YY Discoverable: no</code></pre>
+<p>　もし他の機器から接続した時に、<code>Connected: yes</code>が表示された後にすぐ<code>Connected: no</code>になってしまうようであれば、 （pulseaudioデーモンが起動されていない可能性があるので）<code>$ pulseaudio -vD</code>などするといいかもしれない。</p>
 <p>　結局こっちに準拠してみた時点で、Androidからraspi3へのスピーカーとしての接続ができて、音声出力が確認できた！ - <a href="https://raspberrypi.stackexchange.com/questions/47708/setup-raspberry-pi-3-as-bluetooth-speaker">audio - Setup Raspberry Pi 3 as bluetooth speaker - Raspberry Pi Stack Exchange</a></p>
 <p>　一番悩んだのは、上記の<code>ragusa87 script</code>の<code>AUDIOSINK</code>に何を指定するのか、これであってるのか？ ということだったけど、確かに以下であっていた。</p>
 <pre class="console"><code>&gt;&gt;&gt; pactl list sources short
