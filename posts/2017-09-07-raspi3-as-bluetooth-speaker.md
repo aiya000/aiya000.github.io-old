@@ -35,15 +35,14 @@ Changing discoverable on succeeded
 [CHG] Controller YY:YY:YY:YY:YY:YY Discoverable: yes
 [bluetooth]# pairable on
 Changing pairable on succeeded
-[bluetooth]# connect XX:XX:XX:XX:XX:XX
-Attempting to connect to XX:XX:XX:XX:XX:XX
-[CHG] Device XX:XX:XX:XX:XX:XX Connected: yes
-Connection successful
 [CHG] Device XX:XX:XX:XX:XX:XX ServicesResolved: yes
 [Doogee X5 Max Pro]# trust XX:XX:XX:XX:XX:XX
 Changing XX:XX:XX:XX:XX:XX trust succeeded
 [CHG] Controller YY:YY:YY:YY:YY:YY Discoverable: no
 ```
+
+　もし他の機器から接続した時に、`Connected: yes`が表示された後にすぐ`Connected: no`になってしまうようであれば、
+（pulseaudioデーモンが起動されていない可能性があるので）`$ pulseaudio -vD`などするといいかもしれない。
 
 　結局こっちに準拠してみた時点で、Androidからraspi3へのスピーカーとしての接続ができて、音声出力が確認できた！
 - [audio - Setup Raspberry Pi 3 as bluetooth speaker - Raspberry Pi Stack Exchange](https://raspberrypi.stackexchange.com/questions/47708/setup-raspberry-pi-3-as-bluetooth-speaker)
