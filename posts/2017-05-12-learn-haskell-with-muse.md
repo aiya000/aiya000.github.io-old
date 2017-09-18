@@ -495,12 +495,7 @@ public class Program {
 - [Aquors - Wikipedia](https://ja.wikipedia.org/wiki/Aqours)
 - [F代数 - Weblio辞書](http://www.weblio.jp/content/F%E4%BB%A3%E6%95%B0)
 
-
-# 💎 お願い 💎
-
-　この続きはTwitterへの共有ツイート、はてなブックマークへのブックマーク登録、Facebookへのいいね及びシェア、Pocketへの登録  
-あと僕の~~気分~~げふんげふん……モチベーションによって書かれます。  
-僕を讃えて。 広めて。 褒めて！
+- - -
 
 　疑問点があれば、Twitterでリプライくれれば（そのリプライを見逃してなければ）返すよ！  
 [\@public_ai000ya - Twitter](https://twitter.com/public_ai000ya)
