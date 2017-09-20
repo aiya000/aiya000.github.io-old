@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>あいや☆ぱぶりっしゅぶろぐ！ - Haskellを教えてきた</title>
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - Haskellを教えて、対価としてモンハンを買って貰ってきた</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
@@ -24,7 +24,7 @@
         </nav>
 
         <div id="content">
-            <h4>Haskellを教えてきた</h4>
+            <h4>Haskellを教えて、対価としてモンハンを買って貰ってきた</h4>
             <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <div class="info">
@@ -43,7 +43,7 @@
         </li>
 
         <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-09-20-noenoe-haskell-mon-hun.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Haskellを教えてきた - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-09-20-noenoe-haskell-mon-hun.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Haskellを教えて、対価としてモンハンを買って貰ってきた - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
             <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
@@ -60,6 +60,7 @@
 
 <hr />
 
+<h1 id="発端">発端</h1>
 <blockquote class="twitter-tweet" data-lang="ja">
 <p lang="ja" dir="ltr">
 switchのモンハン欲しい……switchのモンハン欲しいよお……
@@ -82,7 +83,7 @@ switchのモンハン欲しい……switchのモンハン欲しいよお……
 </blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <p>ンゴ！？！？</p>
-<hr />
+<h1 id="アバウト">アバウト</h1>
 <p>　今年のこの季節、やはり常々思うことは「SwitchのモンハンXX欲しい！」ということなので、 「Haskellを教えるので、Switchのモンハンください！」とつぶやいたら、 おキツネ美少女であるところのノエノエが「いいよ」と言ってくださったので、 某所にて密会してきました。</p>
 <ul>
 <li>やった範囲
@@ -99,18 +100,25 @@ switchのモンハン欲しい……switchのモンハン欲しいよお……
 </ul></li>
 <li>リストMonad（リストFunctor, リストApplicative）
 <ul>
-<li>なんとはなしに「そういえばノエノエは、教えて欲しいところとかあったりする？」など聞いてみると</li>
-<li>ノエノエがとても勢い良く「Monad！！」と言ってくれたので</li>
+<li>なんとはなしに「そういえばノエノエは、教えて欲しいところとかあったりする？」など聞いてみると
+<ul>
+<li>ノエノエがとても勢い良く「Monad！！」と言ってくれたので
+<ul>
 <li>リストMonadも内容に入れた</li>
 </ul></li>
 </ul></li>
+</ul></li>
+</ul></li>
 </ul>
+<h1 id="自己評価">自己評価</h1>
 <p>　特に<code>Monad</code>については教えるのが難しかった。</p>
 <p>　まずは<code>Monad</code>が（<code>Applicative</code>に加えて）<code>join</code>を実現するような抽象だということに焦点を当てて、 <code>&gt;&gt;=</code>（モナドバインド）が<code>map</code>（<code>fmap</code>）と<code>join</code>の合成で構成できることを皮切りに、 リストの<code>map</code>を一般化したものが<code>fmap</code>（<code>Functor</code>）だということを説明した。</p>
 <p>　その次に<code>Applicative</code>を教えたのだけど、<code>pure</code>はともかく <code>&lt;*&gt;</code>（<code>ap</code>）がどのようなものか伝えるのが難しかった。</p>
 <p>　また「なぜ<code>Monad</code>はこのような形になっているのか？」という疑問を残してしまったみたいだけど、 こればっかりはこの時間では説明仕切る自身がなく、 断念した。</p>
 <p>　Haskellの基盤……パターンマッチ含む、代数的データ型については ノエノエから疑問が出なかったので、 うまく教えられたかと思う。</p>
-<hr />
+<h1 id="その後">その後</h1>
+<p>　キツネ美少女であるところのノエノエにニンテンドープリペードカード6000円分を買ってもらい、 サイゼリヤでミラノ風ドリアなどを一緒に食べた。</p>
+<h1 id="最後に">最後に</h1>
 <p>　このようなマジの機会を設けてのHaskell教えは初めてだったので テンポよくとは行きませんでしたが、 僕は今日もずっとモンハンXXをやっています。</p>
 
 <hr />
@@ -118,7 +126,7 @@ switchのモンハン欲しい……switchのモンハン欲しいよお……
 
 <p class="about-pr">
 この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-09-20-noenoe-haskell-mon-hun.md">Haskellを教えてきた - github</a> <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-09-20-noenoe-haskell-mon-hun.md">Haskellを教えて、対価としてモンハンを買って貰ってきた - github</a> <br />
 ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
 </p>
 
