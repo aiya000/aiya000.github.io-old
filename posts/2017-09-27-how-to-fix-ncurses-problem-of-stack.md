@@ -1,5 +1,5 @@
 ---
-title: haskell-stackで-collect2: エラー: ldはステータス1で終了しました-が出た場合の対処
+title: haskell-stackで-collect2： エラー： ldはステータス1で終了しました-が出た場合の対処
 tags: Haskell
 ---
 　先日`yaourt -Syuu`すると、haskell-stackのプロジェクトがビルドできなくなった。
