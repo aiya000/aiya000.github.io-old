@@ -67,6 +67,12 @@ p.about-pr {
     padding: 4px;
 }
 
+p.don {
+    font-size: 22px;
+    font-weight: bold;
+    font-style: italic;
+}
+
 p.dodon {
     font-size: 40px;
     font-weight: bold;
