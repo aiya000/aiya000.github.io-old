@@ -1,0 +1,193 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - 僕ののHaskell開発環境を紹介する</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>僕ののHaskell開発環境を紹介する</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/10/01 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-10-01-summary-haskell-env.html" class="hatena-bookmark-button" data-hatena-bookmark-title="僕ののHaskell開発環境を紹介する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-10-01-summary-haskell-env.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="趣旨">趣旨</h1>
+<p>　僕は僕のHaskell開発環境を使っているのだけど（それはそう）、常々これはなかなか便利だと思っている。</p>
+<p>加え、Haskellの開発環境の導入方法がよくわからないという声をとても多く聞く。</p>
+<p>　幸い、前提となるHaskell開発ツールキットの導入については、こちらにわかりやすい記事がある。</p>
+<ul>
+<li><a href="https://employment.en-japan.com/engineerhub/entry/2017/08/25/110000">Haskellらしさって？「型」と「関数」の基本を解説！【第二言語としてのHaskell】 - エンジニアHub｜若手Webエンジニアのキャリアを考える！</a> 　ここでは、これらのツールキットをどのようにうまく使うか ……例えば、TDDに適したテキストエディタは？ 今表示しているこの関数の型ってどうやったらわかる？ というのを、<strong>「僕はこうしているよ」という様に</strong>まとめておく。</li>
+</ul>
+<p>　また、「こっちの方がいいんじゃ？」というのがあれば、教えてもらいたい。 あと、皆も自分のやつを晒すといいと思う。</p>
+<p>　そういえばこういうのも開催されているらしい。</p>
+<ul>
+<li><a href="https://hacktoberfest.digitalocean.com/">hacktoberfest.digitalocean.com</a>
+<ul>
+<li>10月中にGitHubでPull-Requestを4つ送るとTシャツが貰えるやつ。</li>
+</ul></li>
+</ul>
+<h1 id="本的な構成">本的な構成</h1>
+<ul>
+<li>CLI
+<ul>
+<li>シェル（bashでもzshでもなんでも）
+<ul>
+<li>and commands</li>
+</ul></li>
+<li>Vim or NeoVim
+<ul>
+<li>and plugins</li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="テキストエディタ">テキストエディタ</h1>
+<p>　まず開発者が一番気になるのがテキストエディタだと思う。 また、IDEを使うかどうか、という話にもなる。</p>
+<p>　僕はVimを常用していて、全ての言語をVimで書いているので （Javaも、Kotlinも、そしてC#も）、 やはりVimを使う。</p>
+<p>　この前までNeoVimを使っていたので、NeoVimでも行けると思う。</p>
+<h1 id="hasktags-haskdogsを使う">hasktags + haskdogsを使う</h1>
+<ul>
+<li><a href="https://hackage.haskell.org/package/hasktags">hasktags: Produces ctags “tags” and etags “TAGS” files for Haskell programs</a>
+<ul>
+<li>かのTsuru Capitalがコントリビューターの一片になっている</li>
+</ul></li>
+<li><a href="https://hackage.haskell.org/package/haskdogs">haskdogs: Generate tags file for Haskell project and its nearest deps</a></li>
+</ul>
+<h2 id="vimでの設定">Vimでの設定</h2>
+<p>　Vimにはctagsという、 関数や型の情報を集収したファイルを参照し、 関数や型が記述されている実際のファイル位置に飛ぶことができる 機能がある。</p>
+<p>　tagファイルは通常<code>ctags</code>コマンドで生成できる。</p>
+<p>　僕はそれを読み込むために、<code>.vimrc</code>で<code>'tags'</code>を以下のように設定している。</p>
+<pre class="vim"><code>let &amp;tags = join([
+\    'tags',
+\    '.git/tags',
+\    '../.git/tags',
+\    '../../.git/tags',
+\    '../../../.git/tags',
+\    '../../../../.git/tags'
+\], ',')</code></pre>
+<p>　これは<code>./tags</code>か、もしくは<code>.git/tags</code>, <code>../.git/tags</code>, …にあるそのtagsを読み込む。</p>
+<h2 id="hasktags">hasktags</h2>
+<p>　Haskellに特化した<code>ctags</code>コマンド亜種として、 <code>hasktags</code>コマンドがある。</p>
+<p>　これは、今我々が作っているプロジェクトにある各.hsファイルに記述された 全ての関数を扱うことができる。</p>
+<div class="figure">
+<img src="../images/posts/2017-10-01-summary-haskell-env/hasktags-image.png" alt="hasktags-image" />
+<p class="caption">hasktags-image</p>
+</div>
+<p>　以下のシェルコマンドでインストールできる。</p>
+<pre class="console"><code>$ stack install hasktags</code></pre>
+<p>　僕はこんなaliasをシェルに定義して使っている。</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="bu">alias</span> hasktags-casual=<span class="st">'hasktags . --ignore-close-implementation --tags-absolute --ctags -f'</span></code></pre></div>
+<pre class="console"><code>$ haskdogs .git/tags
+（.git/tagsに、各.hsファイルの関数の羅列が出力される）</code></pre>
+<h2 id="haskdogs">haskdogs</h2>
+<p>　上で<code>hasktags</code>の使い方を紹介したものの、まあ普通はこれだけ使っていればいい。</p>
+<p>　<code>haskdogs</code>は……<code>hasktags</code>を使って、 自プロジェクトの依存しているパッケージのtagsも出力してしまおう、というもの。</p>
+<p>　例えば、自プロジェクトが<code>easy-file</code>パッケージの<code>doesFileExist</code>関数を使っている時に <code>haskdogs</code>を実行すると、<code>haskdogs</code>はghc-pkgコマンドを使って <code>easy-file</code>のソースを<code>$HOME/.haskdogs</code>以下に落としてきて、 そこを参照するtagsを生成する。</p>
+<p>　また、生成されたtagsには自プロジェクトの各関数も含まれるので、 プロジェクトに関係する、 ほぼ全ての関数と型をエディタに表示できる！</p>
+<div class="figure">
+<img src="../images/posts/2017-10-01-summary-haskell-env/haskdogs-image.png" alt="haskdogs-image" />
+<p class="caption">haskdogs-image</p>
+</div>
+<p>　以下のシェルコマンドでインストールできる。</p>
+<pre class="console"><code>$ stack install haskdogs</code></pre>
+<h2 id="unite-tag">unite-tag</h2>
+<ul>
+<li><a href="https://github.com/tsukkee/unite-tag">GitHub - tsukkee/unite-tag: tags soruce for unite.vim</a></li>
+</ul>
+<p>　tagsファイルをUniteで開くのに使用する。 関数名、型名でtagsファイル内を検索することができる。</p>
+<p>　例えば、現在開いているバッファに引きたい関数名がなくとも、 これで検索することができる。 （普段は名前の上にカーソルを載せて、<code>&lt;C-]&gt;</code>キーでtagsの先にジャンプできる）</p>
+<h2 id="aref-web.vimで関数名や型を調べる">aref-web.vimで関数名や型を調べる</h2>
+<p>　<code>haskdogs</code>とVimのtagジャンプ機能そしてunite-tagで、 自プロジェクトに関係するほぼ全ての関数と型を引くことができた。</p>
+<p>　これの唯一できないことは、自プロジェクトに関係ないものを引くことだ。 これはVimで、Web上のStackage検索を使うことで実現する。</p>
+<p>　Web辞書（例えばWeblio）をVimで引くためのプラグインとして、aref-web.vimがある。</p>
+<ul>
+<li><a href="https://github.com/aiya000/aref-web.vim">GitHub - aiya000/aref-web.vim: Web dictionaries on the vim with async.</a></li>
+</ul>
+<p>　これは僕が作ったものなのだけど、 これのデバッグはずっとStackageを用いて行っていたこともあり、 Stackageについては十分に実用できるレベルになっていると思う。</p>
+<div class="figure">
+<img src="../images/posts/2017-10-01-summary-haskell-env/aref-image.png" alt="aref-image" />
+<p class="caption">aref-image</p>
+</div>
+<p>（まあ…… 誰も注目してくれていないみたいだし、 僕もStackage検索を行うために作ったものなので、 他のサイトについてはまだβという感じ）</p>
+<p>StackageのWebサイトは、 Haskellの関数とライブラリの検索に対応しており</p>
+<ul>
+<li><a href="https://www.stackage.org/">Stackage</a></li>
+</ul>
+<p>例えば</p>
+<ul>
+<li><code>a -&gt; a</code>の型を持つあの関数の名前ってなんだっけ？</li>
+<li><code>id</code>関数の型ってなんだっけ？</li>
+<li><code>doesFileExist</code>関数ってどのライブラリが提供してるんだっけ？</li>
+<li><code>m a -&gt; a</code>みたいな型を持つ関数ってないかな？</li>
+</ul>
+<p>というシチュエーションに対して対応することができる。</p>
+<p>　余談だけど、僕はこれで英和辞書を使ってたりもするので便利（ステマ）。</p>
+<h1 id="snowtify">snowtify</h1>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-10-01-summary-haskell-env.md">僕ののHaskell開発環境を紹介する - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>
