@@ -9,13 +9,14 @@ tags: ラブライブ！で学ぶ, にこ、希と一緒に学ぶHaskell, Haskel
 
 :tada: ﾊﾟﾊﾟｰﾝ!!
 
-にこ「わっ！　あ……ありがとう……！」  
+にこ「わ……」  
 
 - - -
 
 - [本編その1（ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」）](./2017-05-06-learn-haskell-with-muse.html)
-- [更新履歴 - μ'sと一緒に学ぶHaskell](https://github.com/aiya000/aiya000.github.io/search?utf8=%E2%9C%93&q=%22Haskell%2FMuse%3A%22&type=Commits)
 - [前回 - にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」](./2017-05-27-learn-haskell-with-muse-extra.html)
+- [更新履歴 - μ'sと一緒に学ぶHaskell](https://github.com/aiya000/aiya000.github.io/search?utf8=%E2%9C%93&q=%22Haskell%2FMuse%3A%22&type=Commits)
+- [記事一覧 - にこ、希と一緒に学ぶHaskell（番外）](/tags/にこ、希と一緒に学ぶHaskell.html)
 
 - - -
 
