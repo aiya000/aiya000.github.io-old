@@ -71,3 +71,9 @@ main = print $ 10 ^. simple
 -- {output}
 -- 10
 ```
+
+
+# 参考
+
+- [Control.Lens.Equality (simple)](https://www.stackage.org/haddock/lts-9.10/lens-4.15.4/Control-Lens-Equality.html#v:simple)
+- [Control.Lens.Setter (ASetter)](https://www.stackage.org/haddock/lts-9.10/lens-4.15.4/Control-Lens-Setter.html#t:ASetter)
