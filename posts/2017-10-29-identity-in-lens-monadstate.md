@@ -1,5 +1,5 @@
 ---
-title: lens（のMonadState演算子など）で自己に言及したい時はsimpleを使う
+title: lens（のMonadState演算子など）で自己に言及したい時はidを使う
 tags: Haskell
 ---
 # まとめ
@@ -17,8 +17,8 @@ main = runStateT context [0] >>= print
 -- dequeue behavior
 context :: StateT [Int] IO ()
 context = do
-  simple %= (10 <|)
-  simple %= (|> 20)
+  id %= (10 <|)
+  id %= (|> 20)
 -- {output}
 -- ((),[10,0,20])
 ```
@@ -36,44 +36,30 @@ infix 4 %=
 (10 <|) :: Seq a -> Seq a
 (|> 20) :: Seq a -> Seq a
 
-simple :: Equality' a a
+type ASetter' s a = ASetter s s a a
+type ASetter s t a b = (a -> Identity b) -> s -> Identity t
 
-type Equality' s a = Equality s s a a
-type ASetter'  s a = ASetter s s a a
-
-type ASetter  s t a b = (a -> Identity b) -> s -> Identity t
-type Equality s t a b = forall k3 p f. p a (f b) -> p s (f t)
-
--- 簡約
-forall k3 p f. p a (f b) -> p s (f t)
-    k3は幽霊            ==> forall f. p a (f b) -> p s (f t)
-    p = (->)            ==> forall f. (a -> f b) -> s -> (f t)
-    Identity = Identity ==> (a -> Identity b) -> s -> (Identity t)
-                            = ASetter s t a b
-
-simple :: ASetter' s a
-simple :: ASetter' [Int] [Int]
+id :: p s (f a) -> p s (f a)
+id :: (s -> f a) -> s -> f a
+id :: (s -> Identity a) -> s -> Identity a
+id :: ASetter' s a
+id :: ASetter' [Int] [Int]
 
 -- なので
 
-(simple %=) :: ([Int] -> [Int]) -> StateT [Int] IO ()
+(id %=) :: ([Int] -> [Int]) -> StateT [Int] IO ()
 ```
 
 
-# 余談
-　`simple`が`id`のようなもの、っていうのはこれを見るとわかる。
-
-```haskell
-import Control.Lens ((^.), simple)
-
-main :: IO ()
-main = print $ 10 ^. simple
--- {output}
--- 10
-```
+　ちなみに`Control.Lens.Equality`の`simple :: Equality' a a`の実定義は`id`。
 
 
 # 参考
 
 - [Control.Lens.Equality (simple)](https://www.stackage.org/haddock/lts-9.10/lens-4.15.4/Control-Lens-Equality.html#v:simple)
 - [Control.Lens.Setter (ASetter)](https://www.stackage.org/haddock/lts-9.10/lens-4.15.4/Control-Lens-Setter.html#t:ASetter)
+
+
+# Thanks
+
+- [みょんさん](https://myuon.github.io/)
