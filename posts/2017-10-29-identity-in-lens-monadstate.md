@@ -5,7 +5,7 @@ tags: Haskell
 # まとめ
 　lensにて。
 例えば`Int`や`[Int]`のような単一の状態を持つ`MonadState`の文脈で、
-（`id`のように）状態自身（自己）に言及したい場合は、このようにすることで実現できる。
+状態自身（自己）に言及したい場合は、このようにすることで実現できる。
 
 ```haskell
 import Control.Lens
