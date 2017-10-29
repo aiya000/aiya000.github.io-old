@@ -61,7 +61,7 @@
 <hr />
 
 <h1 id="まとめ">まとめ</h1>
-<p>　lensにて。 例えば<code>Int</code>や<code>[Int]</code>のような単一の状態を持つ<code>MonadState</code>の文脈で、 （<code>id</code>のように）状態自身（自己）に言及したい場合は、このようにすることで実現できる。</p>
+<p>　lensにて。 例えば<code>Int</code>や<code>[Int]</code>のような単一の状態を持つ<code>MonadState</code>の文脈で、 状態自身（自己）に言及したい場合は、このようにすることで実現できる。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Control.Lens</span>
 <span class="kw">import </span><span class="dt">Control.Monad.State.Lazy</span> (<span class="dt">StateT</span>, runStateT)
 
