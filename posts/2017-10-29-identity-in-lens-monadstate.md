@@ -54,7 +54,7 @@ forall k3 p f. p a (f b) -> p s (f t)
 simple :: ASetter' s a
 simple :: ASetter' [Int] [Int]
 
-なので
+-- なので
 
 (simple %=) :: ([Int] -> [Int]) -> StateT [Int] IO ()
 ```
