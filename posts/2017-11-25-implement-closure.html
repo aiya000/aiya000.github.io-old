@@ -1,0 +1,243 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - 不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/11/25 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Lisp.html">Lisp</a>]
+    
+        [<a href="../tags/AdventCalendar2017.html">AdventCalendar2017</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-11-25-implement-closure.html" class="hatena-bookmark-button" data-hatena-bookmark-title="不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-11-25-implement-closure.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>　この記事は<a href="https://qiita.com/advent-calendar/2017/lang_dev">言語実装 Advent Calendar 2017</a>の、 12月1日の記事です。</p>
+<p>ファーストバッターやっていき 💪</p>
+<h1 id="始まり">始まり</h1>
+<p>　皆さんは常々クロージャを作っていると思うのですが、 どのように作ってらっしゃるのでしょうか。</p>
+<p>環境全てをキャプチャ？</p>
+<p>包含される変数のみをキャプチャ？</p>
+<p>ユーザ（プログラマ）の選択した変数のみをキャプチャ？</p>
+<p>　今回僕がLisp処理系を作るに当たって、 不変性を仮定した場合に（多分）マクロでない（副作用のない）変数を 任意のタイミングで簡約できるということを利用した、 クロージャ生成アルゴリズムを採用しました。</p>
+<h1 id="備考">備考</h1>
+<p>　このLisp処理系の評価戦略は値呼びで、 スコープはレキシカルスコープです。</p>
+<h1 id="どんなアルゴリズム">どんなアルゴリズム？</h1>
+<p>　以下のようなとても基本的なクロージャを考えます。</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
+(def f (fn (a) x))
+(f <span class="dv">0</span>)
+<span class="co">; 10</span></code></pre></div>
+<p><code>def</code>マクロは、渡された式を評価し、その結果を<strong>グローバル</strong>変数に束縛します。<br />
+<code>fn</code>マクロは一時関数を作成します（いわゆるラムダ式）。</p>
+<p>　このとき<code>(def f (fn (a) x))</code>によって<code>(fn (a) x)</code>が評価されたタイミングで、 その中の変数<code>x</code>をその実値である<code>(fn (a) 10)</code>として<strong>展開</strong>し、 最後にそれを<code>f</code>に束縛します。</p>
+<p>（以下、<code>===</code>は展開を表します）</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def f (fn (a) x))
+===
+<span class="co">; xを削除（置き換え）</span>
+(def f (fn (a) <span class="dv">10</span>))</code></pre></div>
+<h2 id="展開">展開？</h2>
+<p>　「展開」は、外部環境の変数をその変数の値で（再帰的に）置き換えます。</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
+(def f (fn (a) x))
+===
+<span class="co">; xを削除</span>
+(def f (fn (a) <span class="dv">10</span>))</code></pre></div>
+<p>「展開」は仮引数の変数を展開しません。</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
+(def f (fn (a) (<span class="kw">do</span>
+    x
+    a)))
+===
+<span class="co">; aを削除しない</span>
+(def f (fn (a) (<span class="kw">do</span>
+    <span class="dv">10</span>
+    a)))</code></pre></div>
+<p>「展開」は<code>+ - * /</code>などの基本的なシンボルとマクロのシンボルを展開しません。<br />
+（ここで「基本的な」とは、 実体がS式でない、これ以上は他のS式に展開できないことを表しますこと（実装がネイティブ実装である） ことを表します。）</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def *x* <span class="dv">10</span>)
+(def plus (fn (x y) (<span class="op">+</span> x y *x*)))
+(def f (fn () (<span class="kw">do</span>
+    (<span class="kw">print</span> (plus <span class="dv">1</span> <span class="dv">2</span>))
+    (plus <span class="dv">1</span> <span class="dv">2</span>))))
+===
+(def *x* <span class="dv">10</span>)
+<span class="co">; plusを削除（plusは(fn (x y) (+ x y *x*))に展開できる）</span>
+(def f (fn () (<span class="kw">do</span>
+    (<span class="kw">print</span> ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))
+    ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))))
+===
+<span class="co">; *x*を削除</span>
+(def f (fn () (<span class="kw">do</span>
+    (<span class="kw">print</span> ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))
+    ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))))
+<span class="co">; +, print, fnは展開されない</span></code></pre></div>
+<p>「展開」は再帰的に行われます。</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
+(def y x)
+(def f (fn (a) y))
+===
+(def f (fn (a) x))
+===
+(def f (fn (a) <span class="dv">10</span>))</code></pre></div>
+<p>「展開」は（いわゆる）評価を行いません。</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
+(def f (fn (a) (<span class="kw">do</span>
+    (<span class="kw">print</span> x)
+    (<span class="op">+</span> x <span class="dv">1</span>))))
+===
+(def f (fn (a) (<span class="kw">do</span>
+    (<span class="kw">print</span> <span class="dv">10</span>)  <span class="co">; 10は出力されない</span>
+    (<span class="op">+</span> <span class="dv">10</span> <span class="dv">1</span>)))) <span class="co">; (+ 10 1)は11に評価されない</span>
+<span class="co">; ここで展開は止まる</span></code></pre></div>
+<p>　つまるところ展開は、 できるところまで変数をその値に置き換え、 そしてそれは（いわゆる）評価ではない。 って感じです。</p>
+<h3 id="余談">余談</h3>
+<p>　さっきから</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
+(def y x)
+(def f (fn () y))
+===
+(def x <span class="dv">10</span>)
+(def f (fn () x))
+===
+(def f (fn () <span class="dv">10</span>))</code></pre></div>
+<p>だったり</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
+(def y x)
+(def f (fn () y))
+===
+(def y <span class="dv">10</span>)
+(def f (fn () y))
+===
+(def f (fn () <span class="dv">10</span>))</code></pre></div>
+<p>だったりしてますが、「展開」は ラムダ計算でいう（展開を適用とした）完全ベータ簡約だと思います。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/評価戦略#.E5.AE.8C.E5.85.A8.CE.B2-.E7.B0.A1.E7.B4.84">評価戦略（完全β-簡約） - Wikipedia</a></li>
+</ul>
+<h1 id="何が便利なの">何が便利なの？</h1>
+<p>　クロージャを定義したときに、グローバル変数あたりにその場の環境をコピーするという、 もしかしたら一般的かもしれないアルゴリズムを考えたときに… 本記事のアルゴリズムはそれと比べ、簡素に済みます。</p>
+<ul>
+<li>グローバルへのコピーを引き起こさない
+<ul>
+<li>= そのクロージャに関数適用がなされるタイミングで、グローバルへの参照が走らない</li>
+<li>グローバルへコピー/参照するアルゴリズムを実装する必要がない
+<ul>
+<li>コピー/参照するアルゴリズムは例えば…… コピー時にクロージャごとにユニークなIDを振っておいて、<br />
+参照時にそれを鍵にしてグローバルから環境を引き出す。<br />
+……というものが考えられる</li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="それによって起こる注意点および問題">それによって起こる注意点および問題</h1>
+<h2 id="不変性を仮定する必要がある">不変性を仮定する必要がある</h2>
+<p>　処理系で<code>setq</code>や<code>def</code>などによる、変数の再代入を許したときに、 作られたクロージャはそれに追随できません。</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
+(def f (fn () x))
+(f) <span class="co">; 10</span>
+(<span class="kw">setq</span> x <span class="dv">20</span>) <span class="co">; xを20に変更</span>
+(f) <span class="co">; 10</span>
+<span class="co">; ↑ 20ではない</span></code></pre></div>
+<p>なので不変性を仮定する必要があります。</p>
+<p>具体的には、<code>setq</code>を定義しない。 <code>def</code>による変数の再定義を禁止するか、名前の上書きと見做すということが必要になります。</p>
+<p>上書きの見做し</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>) <span class="co">; A</span>
+(def x <span class="dv">20</span>) <span class="co">; B</span>
+<span class="co">; 以下、&quot;x&quot;というシンボルを用いたときは常にBが参照され、Aは参照できない。</span></code></pre></div>
+<h2 id="再帰関数をdefとfnの組み合わせで定義できない">再帰関数をdefとfnの組み合わせで定義できない</h2>
+<p>　関数定義を行う<code>defn</code>マクロを考えます。 これは（僕のように）短絡的に考えると、<code>def</code>と<code>fn</code>の組み合わせで実現できそうです。</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(defn f (x) (<span class="op">+</span> x <span class="dv">10</span>))
+===
+(def f (fn (x) (<span class="op">+</span> x <span class="dv">10</span>)))</code></pre></div>
+<p>しかし同じように再帰関数を定義しようとすると、展開が必ず無限再帰します。</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(defn f (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>)))))
+===
+<span class="co">; defとfnに分解</span>
+(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))))
+===
+<span class="co">; 浅いfを削除</span>
+(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))
+===
+(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))
+===
+(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))
+===
+<span class="co">; 襲い来る無限再帰</span></code></pre></div>
+<p>どうしようかね？</p>
+<h1 id="参考ページ">参考ページ</h1>
+<ul>
+<li><a href="https://github.com/aiya000/hs-zuramaru/blob/0b71e01c12e10b39276560f7ad622f1f3ca12af8/src/Maru/Eval.hs#L345">これの実装</a>
+<ul>
+<li><a href="https://github.com/aiya000/hs-zuramaru">aiya000/hs-zuramaru: An experience of Make-A-Lisp ずら〜 - GitHub</a></li>
+</ul></li>
+<li><a href="https://github.com/kanaka/mal/blob/master/process/guide.md">kanaka/mal - Make a Lisp - GitHub</a></li>
+</ul>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-11-25-implement-closure.md">不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題 - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>
