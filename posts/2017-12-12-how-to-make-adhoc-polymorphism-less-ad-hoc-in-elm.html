@@ -1,0 +1,310 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - How to make type classes without implicit caller in Elm</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>How to make type classes without implicit caller in Elm</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/12/12 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Elm.html">Elm</a>]
+    
+        [<a href="../tags/AdventCalendar2017.html">AdventCalendar2017</a>]
+    
+        [<a href="../tags/AdventCalendar.html">AdventCalendar</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-12-12-how-to-make-adhoc-polymorphism-less-ad-hoc-in-elm.html" class="hatena-bookmark-button" data-hatena-bookmark-title="How to make type classes without implicit caller in Elm - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-12-12-how-to-make-adhoc-polymorphism-less-ad-hoc-in-elm.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="諸注意">諸注意</h1>
+<p>　実案件で本アプローチを使用しないでください、特がありません！</p>
+<hr />
+<p class="dodon">
+How to make and use type classes without implicit caller in Elm
+</p>
+<p class="dodon" style="text-align: center">
+- 侵略者 -
+</p>
+<hr />
+<h1 id="本記事は">本記事は</h1>
+<p>　Elm Advent Calendar 2017の12日目の記事です！</p>
+<ul>
+<li><a href="https://qiita.com/advent-calendar/2017/elm">Elm Advent Calendar 2017 - Qiita</a></li>
+</ul>
+<h1 id="elmへの型クラスの導入">Elmへの型クラスの導入</h1>
+<p>　この記事では、Philip Wadlerの論文「How to make ad-hoc polymorphism less ad hoc」 にて示される型クラスの導入を元にした、Elmに型クラスの導入を行うためのアプローチを示します。</p>
+<ul>
+<li><a href="https://www.google.co.jp/search?q=philip+wadler+how+to+make+ad-hoc+polymorphism&amp;ie=utf-8&amp;oe=utf-8&amp;client=firefox-b&amp;gfe_rd=cr&amp;dcr=0&amp;ei=YbIOWq34J5KL8QeCm6GQAw">How to make ad-hoc polymorphism less ad hoc</a></li>
+</ul>
+<p>　元文では</p>
+<p>　基本的に表現は元の論文に準拠しつつ、 かつ修正が見込める場合は現代的な表現を用います。</p>
+<h1 id="本題-単純な型クラスの導入">本題: 単純な型クラスの導入</h1>
+<h2 id="ステップ1-num型クラスの定義">ステップ1: Num型クラスの定義</h2>
+<p>　例として<code>Num</code>型クラスの定義を行います。</p>
+<pre class="elm"><code>type NumD a = NumDict
+  { add : a -&gt; a -&gt; a -- (+)の代わり
+  , mul : a -&gt; a -&gt; a -- (*)の代わり
+  , neg : a -&gt; a      -- negateの代わり
+  }
+
+add : NumD a -&gt; (a -&gt; a -&gt; a)
+add (NumDict {add}) = add
+
+mul : NumD a -&gt; (a -&gt; a -&gt; a)
+mul (NumDict {mul}) = mul
+
+neg : NumD a -&gt; (a -&gt; a)
+neg (NumDict {neg}) = neg</code></pre>
+<p>また、ここの各レコードは<code>Basics</code>ライブラリとの命名衝突を避けた命名がなされています。</p>
+<p>　以下はHaskellのNum型クラスです。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Num</span> a <span class="kw">where</span>
+<span class="ot">  add ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="co">-- 本来は(+)</span>
+<span class="ot">  mul ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="co">-- 本来は(*)</span>
+<span class="ot">  neg ::</span> a <span class="ot">-&gt;</span> a      <span class="co">-- 本来はnegate</span>
+
+<span class="co">-- add :: Num a =&gt; a -&gt; a -&gt; a</span>
+<span class="co">-- mul :: Num a =&gt; a -&gt; a -&gt; a</span>
+<span class="co">-- neg :: Num a =&gt; a -&gt; a -&gt; a</span></code></pre></div>
+<p>　ここで<code>NumD</code>型 = <code>Num</code>型クラスとみなします。</p>
+<p>　本記事では、型クラスとなる型名には<code>D</code>サフィックスを、 そのインスタンス定義（後述）に用いられる値構築子には<code>Dict</code>サフィックスを負荷します。</p>
+<h2 id="ステップ2-numインスタンスの定義">ステップ2: Numインスタンスの定義</h2>
+<pre class="elm"><code>{-| IntのNumインスタンスの定義 -}
+numDInt : NumD Int
+numDInt = NumDict
+  { add = (+)
+  , mul = (*)
+  , neg = negate
+  }
+
+{-| FloatのNumインスタンスの定義 -}
+numDFloat : NumD Float
+numDFloat = NumDict
+  { add = (+)
+  , mul = (*)
+  , neg = negate
+  }</code></pre>
+<p>　これでインスタンスの定義は完了です。</p>
+<p>　<code>Int</code>及び<code>Float</code>のインスタンスの、<code>add</code>, <code>mul</code>, <code>neg</code>関数を使用してみます。</p>
+<pre class="elm"><code>&gt; add numDInt 1 2
+3 : Int
+&gt; mul numDFloat 3.0 3.0
+9.0 : Float
+&gt; neg numDFloat 3.0
+3.0 : Float
+&gt; add numDInt 1 2.0
+（Int and Floatのタイプミスマッチエラー！）</code></pre>
+<p>Good!</p>
+<p class="kosokoso">
+…これ、実際はREPLで実行していなくて、コンパイルしてから似たような動作確認してます…。 elm-replはなぜ、ファイル読み込みを実装してくれないの？
+</p>
+<h3 id="ステップ2.5-num型クラス制約のある関数を実装する">ステップ2.5: Num型クラス制約のある関数を実装する</h3>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">square ::</span> <span class="dt">Num</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+square x <span class="fu">=</span> mul x x
+<span class="co">-- x * x</span></code></pre></div>
+<p>このHaskellコードと同じ内容を、本アプローチのElmで実装します。</p>
+<pre class="elm"><code>square : NumD a -&gt; a -&gt; a
+square numDa x = mul numDa x x</code></pre>
+<h2 id="ステップ3-深いインスタンスを定義する">ステップ3: 深いインスタンスを定義する</h2>
+<p>　ここでの「深い」とは、以下のようにインスタンスに型制約を持ち、 かつ抽象型（具体型でない型）のインスタンスであることを示します。</p>
+<p>（つまりHaskell的意味合いで、そのインスタンスがundecidable instanceであること）</p>
+<pre class="elm"><code>numDPair : (NumD a, NumD b) -&gt; NumD (a, b)
+numDPair numDab =
+  let
+    addPair : (NumD a, NumD b) -&gt; (a, b) -&gt; (a, b) -&gt; (a, b)
+    addPair (numDa, numDb) (x1, y1) (x2, y2) = (add numDa x1 x2, add numDb y1 y2)
+    mulPair : (NumD a, NumD b) -&gt; (a, b) -&gt; (a, b) -&gt; (a, b)
+    mulPair (numDa, numDb) (x1, y1) (x2, y2) = (mul numDa x1 x2, mul numDb y1 y2)
+    negPair : (NumD a, NumD b) -&gt; (a, b) -&gt; (a, b)
+    negPair (numDa, numDb) (x, y) = (neg numDa x, neg numDb y)
+  in NumDict
+      { add = addPair numDab
+      , mul = mulPair numDab
+      , neg = negPair numDab
+      }</code></pre>
+<p>これは以下のHaskellコードと同等です。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> (<span class="dt">Num</span> a, <span class="dt">Num</span> b) <span class="ot">=&gt;</span> <span class="dt">Num</span> (a, b) <span class="kw">where</span>
+  add <span class="fu">=</span> addPair
+    <span class="kw">where</span>
+<span class="ot">      addPair ::</span> (<span class="dt">Num</span> a, <span class="dt">Num</span> b) <span class="ot">=&gt;</span> (a, b) <span class="ot">-&gt;</span> (a, b) <span class="ot">-&gt;</span> (a, b)
+      addPair (x1, y1) (x2, y2) <span class="fu">=</span> (add x1 x2, add y1 y2)
+  mul <span class="fu">=</span> mulPair
+    <span class="kw">where</span>
+<span class="ot">      mulPair ::</span> (<span class="dt">Num</span> a, <span class="dt">Num</span> b) <span class="ot">=&gt;</span> (a, b) <span class="ot">-&gt;</span> (a, b) <span class="ot">-&gt;</span> (a, b)
+      mulPair (x1, y1) (x2, y2) <span class="fu">=</span> (mul x1 x2, mul y1 y2)
+  neg <span class="fu">=</span> negPair
+    <span class="kw">where</span>
+<span class="ot">      negPair ::</span> (<span class="dt">Num</span> a, <span class="dt">Num</span> b) <span class="ot">=&gt;</span> (a, b) <span class="ot">-&gt;</span> (a, b)
+      negPair (x, y) <span class="fu">=</span> (neg x, neg y)</code></pre></div>
+<p>…</p>
+<pre class="elm"><code>&gt; add (numDPair (numDInt, numDFloat)) (1, 2.0) (3, 4.0)
+(4,6.699999999999999)</code></pre>
+<p>💠 OK! 💠</p>
+<h2 id="ステップx-まとめ">ステップX: まとめ</h2>
+<p>　まとめとして、型安全な値の比較をする関数<code>eq</code>を持つ型クラス<code>Eq</code>を作成します。</p>
+<pre class="elm"><code>import List
+
+{-|
+class Eq a where
+  eq :: a -&gt; a -&gt; Bool
+-}
+type EqD a = EqDict
+  { eq : a -&gt; a -&gt; Bool
+  }
+
+{-|
+eq :: Eq a =&gt; a -&gt; a -&gt; Bool
+-}
+eq : EqD a -&gt; a -&gt; a -&gt; Bool
+eq (EqDict {eq}) = eq
+
+{-|
+instance Eq Int where
+  eq = (==)
+-}
+eqDInt : EqD Int
+eqDInt = EqDict
+  { eq = (==)
+  }
+
+{-|
+instance Eq a =&gt; Eq (List a) where
+  eq xs ys = zipWith eq xs ys &amp; List.all id
+-}
+eqDList : EqD a -&gt; EqD (List a)
+eqDList eqDa =
+  let
+    eqList : EqD a -&gt; List a -&gt; List a -&gt; Bool
+    eqList eqDa xs ys = List.map2 (eq eqDa) xs ys |&gt; List.all identity
+  in EqDict
+      { eq = eqList eqDa
+      }
+
+member : EqD a -&gt; List a -&gt; a -&gt; Bool
+member eqDa xs y = case xs of
+  []      -&gt; False
+  (x::xs) -&gt; eq eqDa x y || member eqDa xs y</code></pre>
+<pre class="elm"><code>&gt; eq eqDInt 1 1
+True
+&gt; eq (eqDList eqDInt) [1, 1] [1, 2]
+False
+&gt; eq (eqDList (eqDList eqDInt)) [[10], [1, 2]] [[10], [1, 2]]
+True
+&gt; member eqDInt [1, 2, 3] 2
+True</code></pre>
+<h1 id="複数の型制約を受け取る">複数の型制約を受け取る</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">memsq ::</span> (<span class="dt">Eq</span> a, <span class="dt">Num</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></code></pre></div>
+<p>　このような2つ以上の型制約（aに対する<code>(Eq a, Num a)</code>）を持つ場合は、単純に</p>
+<pre class="elm"><code>memsq : (EqD a, NumD a) -&gt; List a -&gt; a -&gt; Bool
+memsq (eqDa, numDa) xs y = member eqDa xs (square numDa y)</code></pre>
+<p>のようにしてあげるとよいです。</p>
+<pre class="elm"><code>&gt; memsq (eqDInt, numDInt) [1, 3, 5, 7, 9] 3
+True</code></pre>
+<hr />
+<p>（本章の以下は余談です）</p>
+<p>　もしかしたら、元論文を読んだ人が本章を読んだときに、違和感を感じたかもしれません。 というのも、ここでは元論文のこれについての内容を省略していることによるものです。</p>
+<p>　元論文では、例えば以下のような関数</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">memsq ::</span> (<span class="dt">Eq</span> a, <span class="dt">Num</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></code></pre></div>
+<p>の制約<code>(Eq a, Num a)</code>を今までのルールに載せるには 「<code>Eq a</code>もしくは<code>Num a</code>のクラス宣言で、どちらかをどちらかのサブクラスにするといい」 と。</p>
+<p>つまり<code>Eq</code>型クラスを</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Num</span> a <span class="ot">=&gt;</span> <span class="dt">Eq</span> a <span class="kw">where</span> <span class="fu">...</span>
+
+<span class="ot">memsq ::</span> <span class="dt">Eq</span> a <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></code></pre></div>
+<p>と改変するか （おそらくこの「改変」はプリプロセス時あたりを仮定している）</p>
+<p>もしくは</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Eq</span> a <span class="ot">=&gt;</span> <span class="dt">Num</span> a <span class="kw">where</span> <span class="fu">...</span>
+
+<span class="ot">memsq ::</span> <span class="dt">Num</span> a <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></code></pre></div>
+<p>とするとよい。</p>
+<p>と書いてある思うのですが、 本アプローチではそれも必要ないので、ばっさり省略しています。</p>
+<h1 id="終章-複数の引数を持つ型クラスmulti-param-type-class">終章: 複数の引数を持つ型クラス（multi param type class）</h1>
+<p>　複数の引数（実装の対象）を持つ型クラス（multi param type class） を実装できることを示し、これで締めとします。</p>
+<p>（「示す」だけに「締め」ということで）</p>
+<p>例として、<code>a</code>から<code>b</code>への変換ができることを表す型クラス<code>Coerce</code>を実装します。</p>
+<pre class="elm"><code>type CoerceD a b = CoerceDict
+  { coerce : a -&gt; b
+  }
+
+coerce : CoerceD a b -&gt; a -&gt; b
+coerce (CoerceDict {coerce}) = coerce
+
+coerceDIntFloat : CoerceD Int Float
+coerceDIntFloat = CoerceDict
+  { coerce = toFloat
+  }</code></pre>
+<h1 id="補足">補足</h1>
+<p>　本記事のタイトルに付けた ‘without implicit caller’ の意ですが、 本アプローチではご覧の通り、型クラスインスタンスを表す値を 関数呼び出し時に省略することができません。</p>
+<p>e.g. ここの<code>eqDInt</code></p>
+<pre class="elm"><code>--   vvvvvv
+&gt; eq eqDInt 1 1
+True</code></pre>
+<p>（例えばScalaはこれを<code>implicit</code>でうまいこと解決していると思う）</p>
+<h1 id="終わりに">終わりに</h1>
+<p>　この記事は、実際ネタ枠です。 現実的には、構造的部分型とかもっと単相的にやるとかの方がいいと思います。</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-12-12-how-to-make-adhoc-polymorphism-less-ad-hoc-in-elm.md">How to make type classes without implicit caller in Elm - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>
