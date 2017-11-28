@@ -114,7 +114,7 @@ neg (NumDict {neg}) = neg</code></pre>
 <span class="co">-- mul :: Num a =&gt; a -&gt; a -&gt; a</span>
 <span class="co">-- neg :: Num a =&gt; a -&gt; a -&gt; a</span></code></pre></div>
 <p>　ここで<code>NumD</code>型 = <code>Num</code>型クラスとみなします。</p>
-<p>　本記事では、型クラスとなる型名には<code>D</code>サフィックスを、 そのインスタンス定義（後述）に用いられる値構築子には<code>Dict</code>サフィックスを負荷します。</p>
+<p>　本記事では、型クラスとなる型名には<code>D</code>サフィックスを、 そのインスタンス定義（後述）に用いられる値構築子には<code>Dict</code>サフィックスを付加します。</p>
 <h2 id="ステップ2-numインスタンスの定義">ステップ2: Numインスタンスの定義</h2>
 <pre class="elm"><code>{-| IntのNumインスタンスの定義 -}
 numDInt : NumD Int
