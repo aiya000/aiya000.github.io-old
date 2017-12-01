@@ -57,13 +57,14 @@ tags: プログラミング, Lisp, AdventCalendar2017, AdventCalendar
 ## 展開？
 
 - - -
+
 ※追記
 
-これは一般的に「定数伝播」と呼ばれるらしいです。  
+　これは一般的に「定数伝播」と呼ばれるらしいです。  
 知らなかった。
 
 知らなかったので、ここでは「展開」と呼称するのを貫いていきます。  
-ほら、一貫性って大事だもん。
+ほら、一貫性って大事ですよね。
 
 - [定数伝播（定数畳み込み） - Wikipedia](https://ja.wikipedia.org/wiki/定数畳み込み#.E5.AE.9A.E6.95.B0.E4.BC.9D.E6.92.AD)
 
@@ -146,7 +147,32 @@ tags: プログラミング, Lisp, AdventCalendar2017, AdventCalendar
 って感じです。
 
 
-### 余談
+## 備考1: 展開が行われるタイミングについて
+　「展開」は、`(fn {func-name} {body})`の書式に沿ったS式が被評価される際に実行されます。
+
+例えば
+
+```lisp
+(def f (fn (x) x))
+```
+
+ここでの`def`マクロは加評価（評価する側）で、
+`(fn (x) x)`は被評価（評価される側）です。
+
+　そして例えば`(fn {func-name} {body})`が関数適用（加評価）のがわになる場合は、
+展開は特には要請されません。
+
+```haskell
+(def *x* 10)
+((fn (x) (fn () (+ *x* x))) 1)
+===
+; ここで*x*を展開してもしなくてもしなくても、特には変わらない
+(def *x* 10)
+(fn () (+ *x* 1))
+```
+
+
+## 備考2: 順序は問われない
 　さっきから
 ```lisp
 (def x 10)
@@ -192,7 +218,7 @@ tags: プログラミング, Lisp, AdventCalendar2017, AdventCalendar
           ……というものが考えられる
 
 
-# それによって起こる注意点および問題
+# それによって起こる注意点および未解決の問題
 ## 不変性を仮定する必要がある
 　処理系で`setq`や`def`などによる、変数の再代入を許したときに、
 作られたクロージャはそれに追随できません。
@@ -254,3 +280,8 @@ tags: プログラミング, Lisp, AdventCalendar2017, AdventCalendar
 - [これの実装](https://github.com/aiya000/hs-zuramaru/blob/0b71e01c12e10b39276560f7ad622f1f3ca12af8/src/Maru/Eval.hs#L345)
     - [aiya000/hs-zuramaru: An experience of Make-A-Lisp ずら〜 - GitHub](https://github.com/aiya000/hs-zuramaru)
 - [kanaka/mal - Make a Lisp - GitHub](https://github.com/kanaka/mal/blob/master/process/guide.md)
+
+
+# Thanks
+
+- [keenさん](https://twitter.com/blackenedgold)
