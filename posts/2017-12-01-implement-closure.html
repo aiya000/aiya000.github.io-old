@@ -91,6 +91,16 @@
 <span class="co">; xを削除（置き換え）</span>
 (def f (fn (a) <span class="dv">10</span>))</code></pre></div>
 <h2 id="展開">展開？</h2>
+<hr />
+<p>※追記</p>
+<p>　これは一般的に「定数伝播」と呼ばれるらしいです。<br />
+知らなかった。</p>
+<p>知らなかったので、ここでは「展開」と呼称するのを貫いていきます。<br />
+ほら、一貫性って大事ですよね。</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/定数畳み込み#.E5.AE.9A.E6.95.B0.E4.BC.9D.E6.92.AD">定数伝播（定数畳み込み） - Wikipedia</a></li>
+</ul>
+<hr />
 <p>　「展開」は、外部環境の変数をその変数の値で（再帰的に）置き換えます。</p>
 <div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
 (def f (fn (a) x))
@@ -145,7 +155,19 @@
     (<span class="op">+</span> <span class="dv">10</span> <span class="dv">1</span>)))) <span class="co">; (+ 10 1)は11に評価されない</span>
 <span class="co">; ここで展開は止まる</span></code></pre></div>
 <p>　つまるところ展開は、 できるところまで変数をその値に置き換え、 そしてそれは（いわゆる）評価ではない。 って感じです。</p>
-<h3 id="余談">余談</h3>
+<h2 id="備考1-展開が行われるタイミングについて">備考1: 展開が行われるタイミングについて</h2>
+<p>　「展開」は、<code>(fn {func-name} {body})</code>の書式に沿ったS式が被評価される際に実行されます。</p>
+<p>例えば</p>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def f (fn (x) x))</code></pre></div>
+<p>ここでの<code>def</code>マクロは加評価（評価する側）で、 <code>(fn (x) x)</code>は被評価（評価される側）です。</p>
+<p>　そして例えば<code>(fn {func-name} {body})</code>が関数適用（加評価）のがわになる場合は、 展開は特には要請されません。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(def <span class="fu">*</span>x<span class="fu">*</span> <span class="dv">10</span>)
+((fn (x) (fn () (<span class="fu">+</span> <span class="fu">*</span>x<span class="fu">*</span> x))) <span class="dv">1</span>)
+<span class="fu">===</span>
+; ここで<span class="fu">*</span>x<span class="fu">*</span>を展開してもしなくてもしなくても、特には変わらない
+(def <span class="fu">*</span>x<span class="fu">*</span> <span class="dv">10</span>)
+(fn () (<span class="fu">+</span> <span class="fu">*</span>x<span class="fu">*</span> <span class="dv">1</span>))</code></pre></div>
+<h2 id="備考2-順序は問われない">備考2: 順序は問われない</h2>
 <p>　さっきから</p>
 <div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
 (def y x)
@@ -182,7 +204,7 @@
 </ul></li>
 </ul></li>
 </ul>
-<h1 id="それによって起こる注意点および問題">それによって起こる注意点および問題</h1>
+<h1 id="それによって起こる注意点および未解決の問題">それによって起こる注意点および未解決の問題</h1>
 <h2 id="不変性を仮定する必要がある">不変性を仮定する必要がある</h2>
 <p>　処理系で<code>setq</code>や<code>def</code>などによる、変数の再代入を許したときに、 作られたクロージャはそれに追随できません。</p>
 <div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(def x <span class="dv">10</span>)
@@ -224,6 +246,10 @@
 <li><a href="https://github.com/aiya000/hs-zuramaru">aiya000/hs-zuramaru: An experience of Make-A-Lisp ずら〜 - GitHub</a></li>
 </ul></li>
 <li><a href="https://github.com/kanaka/mal/blob/master/process/guide.md">kanaka/mal - Make a Lisp - GitHub</a></li>
+</ul>
+<h1 id="thanks">Thanks</h1>
+<ul>
+<li><a href="https://twitter.com/blackenedgold">keenさん</a></li>
 </ul>
 
 <hr />
