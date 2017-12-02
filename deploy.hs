@@ -50,5 +50,7 @@ deploy = do
   run_ "git" ["add", "--all"]
   now <- strip <$> run "date" ["-R"]
   let message = "Build at [" <> now <> "]"
+                <> "\n\n"
+                <> "https://aiya000.github.io"
   run_ "git" ["commit", "-m", message]
   run_ "git" ["push", "-uf", "origin", "master"]
