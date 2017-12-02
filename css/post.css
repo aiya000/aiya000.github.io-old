@@ -48,7 +48,7 @@ li {
     font-size: 95%;
 }
 
-a:link {
+li a:link {
     color: chocolate;
     font-size: 120%;
 }
