@@ -1,6 +1,6 @@
 ---
 title: 転職しましたが合計46万以上のPC貰いました
-tags: 備考録
+tags: 備考録, AdventCalendar2017, AdventCalendar
 ---
 - ※ 貰ってはいません（貸し与えられている）
 - ※ 20万のWindowsマシンと26万のmacOSマシン
