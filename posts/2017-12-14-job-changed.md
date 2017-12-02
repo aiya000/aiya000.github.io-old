@@ -4,6 +4,7 @@ tags: 備考録, AdventCalendar2017, AdventCalendar
 ---
 - ※ 貰ってはいません（貸し与えられている）
 - ※ 20万のWindowsマシンと26万のmacOSマシン
+- ※この記事は[退職者その2 Advent Calendar 2017 - Adventar](https://adventar.org/calendars/2278)、14日目の記事です
 
 - - -
 
