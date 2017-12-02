@@ -1,3 +1,13 @@
+/* In the classes of here,
+ * 'kosokoso' means a size of little.
+ *   ^
+ * 'pon' means a size of a litle of big.
+ *   ^
+ * 'don' means a size of bigger.
+ *   ^
+ * 'dodon' means a size of biggest.
+ */
+
 h1 {
     font-size: 150%;
     margin-bottom: 32px;
@@ -40,10 +50,20 @@ li {
 
 a:link {
     color: chocolate;
+    font-size: 120%;
+}
+
+/* Don't break the consistency in the human readability of the terms size */
+li li a:link {
+    font-size: 100%;
 }
 
 a:visited {
     color: chocolate;
+}
+
+a.pon {
+    font-size: 160%;
 }
 
 .info {
@@ -89,4 +109,8 @@ p.dodon {
 
 p.kosokoso {
     font-size: 12px;
+}
+
+p.someone-says {
+    font-size: 140%;
 }
