@@ -1,5 +1,5 @@
 ---
-title: にこ、希と一緒に学ぶHaskell（番外）そのA「型クラスの定義と実装（Extra）」
+title: にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」
 tags: ラブライブ！で学ぶ, にこ、希と一緒に学ぶHaskell, Haskell
 ---
 
