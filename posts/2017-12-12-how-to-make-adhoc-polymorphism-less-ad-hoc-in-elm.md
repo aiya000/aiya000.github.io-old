@@ -1,5 +1,5 @@
 ---
-title: How to make type classes without implicit caller in Elm
+title: How to make type classes without implicit parameter in Elm
 tags: Elm, AdventCalendar2017, AdventCalendar
 ---
 # 諸注意
@@ -7,7 +7,7 @@ tags: Elm, AdventCalendar2017, AdventCalendar
 
 - - -
 
-<p class='dodon'>How to make and use type classes without implicit caller in Elm</p>
+<p class='dodon'>How to make and use type classes without implicit parameter in Elm</p>
 <p class='dodon' style='text-align: center'>\- 侵略者 -</p>
 
 - - -
@@ -322,7 +322,7 @@ coerceDIntFloat = CoerceDict
 
 
 # 補足
-　本記事のタイトルに付けた 'without implicit caller'
+　本記事のタイトルに付けた 'without implicit parameter'
 の意ですが、
 本アプローチではご覧の通り、型クラスインスタンスを表す値を
 関数呼び出し時に省略することができません。
@@ -336,6 +336,8 @@ True
 ```
 
 （例えばScalaはこれを`implicit`でうまいこと解決していると思う）
+（Haskell（GHC）は`ImplicitParams`拡張を使うことで、この`eqDInt`を省略させることができます。
+いや、Haskellは構文レベルで型クラスをサポートしてるけどね）
 
 
 # 終わりに
