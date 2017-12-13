@@ -132,8 +132,6 @@ square numDa x = mul numDa x x
 　ここでの「深い」とは、以下のようにインスタンスに型制約を持ち、
 かつ抽象型（具体型でない型）のインスタンスであることを示します。
 
-（つまりHaskell的意味合いで、そのインスタンスがundecidable instanceであること）
-
 ```elm
 numDPair : (NumD a, NumD b) -> NumD (a, b)
 numDPair numDab =
