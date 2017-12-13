@@ -154,7 +154,6 @@ square x <span class="fu">=</span> mul x x
 square numDa x = mul numDa x x</code></pre>
 <h2 id="ステップ3-深いインスタンスを定義する">ステップ3: 深いインスタンスを定義する</h2>
 <p>　ここでの「深い」とは、以下のようにインスタンスに型制約を持ち、 かつ抽象型（具体型でない型）のインスタンスであることを示します。</p>
-<p>（つまりHaskell的意味合いで、そのインスタンスがundecidable instanceであること）</p>
 <pre class="elm"><code>numDPair : (NumD a, NumD b) -&gt; NumD (a, b)
 numDPair numDab =
   let
