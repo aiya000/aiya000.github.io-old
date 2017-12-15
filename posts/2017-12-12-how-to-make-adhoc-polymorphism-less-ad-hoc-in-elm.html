@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>あいや☆ぱぶりっしゅぶろぐ！ - How to make type classes without implicit caller in Elm</title>
+        <title>あいや☆ぱぶりっしゅぶろぐ！ - How to make type classes without implicit parameter in Elm</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
@@ -24,7 +24,7 @@
         </nav>
 
         <div id="content">
-            <h4>How to make type classes without implicit caller in Elm</h4>
+            <h4>How to make type classes without implicit parameter in Elm</h4>
             <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <div class="info">
@@ -47,7 +47,7 @@
         </li>
 
         <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-12-12-how-to-make-adhoc-polymorphism-less-ad-hoc-in-elm.html" class="hatena-bookmark-button" data-hatena-bookmark-title="How to make type classes without implicit caller in Elm - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-12-12-how-to-make-adhoc-polymorphism-less-ad-hoc-in-elm.html" class="hatena-bookmark-button" data-hatena-bookmark-title="How to make type classes without implicit parameter in Elm - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
             <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
@@ -68,7 +68,7 @@
 <p>　実案件で本アプローチを使用しないでください、特がありません！</p>
 <hr />
 <p class="dodon">
-How to make and use type classes without implicit caller in Elm
+How to make and use type classes without implicit parameter in Elm
 </p>
 <p class="dodon" style="text-align: center">
 - 侵略者 -
@@ -279,12 +279,12 @@ coerceDIntFloat = CoerceDict
   { coerce = toFloat
   }</code></pre>
 <h1 id="補足">補足</h1>
-<p>　本記事のタイトルに付けた ‘without implicit caller’ の意ですが、 本アプローチではご覧の通り、型クラスインスタンスを表す値を 関数呼び出し時に省略することができません。</p>
+<p>　本記事のタイトルに付けた ‘without implicit parameter’ の意ですが、 本アプローチではご覧の通り、型クラスインスタンスを表す値を 関数呼び出し時に省略することができません。</p>
 <p>e.g. ここの<code>eqDInt</code></p>
 <pre class="elm"><code>--   vvvvvv
 &gt; eq eqDInt 1 1
 True</code></pre>
-<p>（例えばScalaはこれを<code>implicit</code>でうまいこと解決していると思う）</p>
+<p>（例えばScalaはこれを<code>implicit</code>でうまいこと解決していると思う） （Haskell（GHC）は<code>ImplicitParams</code>拡張を使うことで、この<code>eqDInt</code>を省略させることができます。 いや、Haskellは構文レベルで型クラスをサポートしてるけどね）</p>
 <h1 id="終わりに">終わりに</h1>
 <p>　この記事は、実際ネタ枠です。 現実的には、構造的部分型とかもっと単相的にやるとかの方がいいと思います。</p>
 
@@ -293,7 +293,7 @@ True</code></pre>
 
 <p class="about-pr">
 この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-12-12-how-to-make-adhoc-polymorphism-less-ad-hoc-in-elm.md">How to make type classes without implicit caller in Elm - github</a> <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-12-12-how-to-make-adhoc-polymorphism-less-ad-hoc-in-elm.md">How to make type classes without implicit parameter in Elm - github</a> <br />
 ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
 </p>
 
