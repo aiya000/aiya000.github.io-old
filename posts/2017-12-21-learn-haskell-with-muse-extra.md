@@ -2,7 +2,7 @@
 title: にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」
 tags: ラブライブ！で学ぶ, にこ、希と一緒に学ぶHaskell, Haskell, AdventCalendar2017, AdventCalendar
 ---
-　この記事は[Haskell (その3） Advent Calendar 2017](https://qiita.com/advent-calendar/2017/haskell3)の
+　この記事は[Haskell (その3) Advent Calendar 2017](https://qiita.com/advent-calendar/2017/haskell3)の
 21日目の記事です！
 
 　この記事にはSS表現、ラブライブが含まれます。
