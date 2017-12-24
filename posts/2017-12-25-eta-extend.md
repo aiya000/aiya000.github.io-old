@@ -2,12 +2,12 @@
 title: Etaで表現されるデータ型としてのJavaクラスとその継承関係
 tags: Eta, Haskell, AdventCalendar2017, AdventCalendar
 ---
+　どうも、 :sunflower: 日曜日お日様Haskeller :sunflower: のあいやです。
+
 　この記事は[Haskell Advent Calendar 2017](https://qiita.com/advent-calendar/2017/haskell)の
-クリスマス当日（25日目）の記事です！
+クリスマス当日（ :santa: 25日目 :santa: ）の記事です！
 
 皆さん、アドベントカレンダーお疲れ様でした！ :tada: :tada: :tada:
-
-:sunflower: 日曜日お日様Haskeller :sunflower:
 
 # Outline
 
