@@ -1,10 +1,11 @@
 ---
-title: haskell-stackで-collect2： エラー： ldはステータス1で終了しました-が出た場合の対処
+title: haskell-stackで 'collect2; エラー; ldはステータス1で終了しました' が出た場合の対処
 tags: Haskell
 ---
 　先日`yaourt -Syuu`すると、haskell-stackのプロジェクトがビルドできなくなった。
 
-```console
+```shell-session
+$ cd {a-stack-project} && stack build
 Configuring clock-0.7.2...
 Building clock-0.7.2...
 Preprocessing library clock-0.7.2...
@@ -21,7 +22,7 @@ collect2: エラー: ld はステータス 1 で終了しました
 　Haskellができないとか意味がわからないので、直す。
 これで直った。
 
-```console
+```shell-session
 $ yaourt -Rns libtinfo
 $ yaourt -S ncurses5-compat-libs
 $ rm -rf ~/.stack .stack-work
@@ -36,3 +37,17 @@ $ sudo ln -s libncursesw.so.6.0 libncurses.so
 　後半のコマンドについてはこれ。
 
 - [あいや☆ぱぶりっしゅぶろぐ！ - haskell-stackでcan't load .so/.DLL for 〜/libncurses.soが出た場合の対処](2017-04-12-how-to-fix-libncurses-problem-of-stack.html)
+
+# 上記がダメだったときに試すその他方法
+クラキ カコ ヲ ケシサル ノダ
+
+```shell-session
+$ rm -rf ~/.stack
+$ cd {your-stack-project} && rm -rf .stack-work
+```
+
+ナンジ スタティック ノ チカラ ヲ テニセヨ
+
+```shell-session
+$ yaourt -S stack-static
+```
