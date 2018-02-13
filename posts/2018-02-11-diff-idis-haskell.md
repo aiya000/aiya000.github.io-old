@@ -5,6 +5,10 @@ tags: Idris, Haskell
 　Idrisに入門中なので、せっかくだからHaskellではできなかったけどIdrisではできること、
 またその逆を定期的に挙げていきたいと思います :dog2:
 
+以下のとこには載ってないものを挙げてくつもりです！
+
+- [Idris for Haskellers - idris-lang/Idris-dev Wiki - GitHub](https://github.com/idris-lang/Idris-dev/wiki/Idris-for-Haskellers)
+
 　初回なので、少し前提知識の補填が入るのはご容赦を。
 ここでの主題はあくまで「依存型のパターンマッチが可能」というところです。
 
