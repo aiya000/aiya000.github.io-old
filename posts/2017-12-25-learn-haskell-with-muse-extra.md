@@ -222,7 +222,28 @@ main = return ()
 ```
 
 にこ「ええ。
-インスタンス側の型クラス関数が、そのときに使いたい型になっているか不安なときに使ったりするわ」  
+インスタンス側の型クラス関数が、そのときに使いたい型になっているか不安なときに使ったりするわ。
+`ScopedTypeVariables`と一緒に使うと、より厳格に型検査をしてもらえるのよね」  
+
+```haskell
+{-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+
+newtype List' a = List'
+  { unList' :: [a]
+  }
+
+-- ランダムなリストを生成するインスタンス
+instance (Bounded a, Random a) => Random (List' a) where
+  randomR :: forall g. RandomGen g => (List' a, List' a) -> g -> (List' a, g)
+  randomR (List' xs, List' ys) gen =
+    let randomR' :: a -> a -> (a, g)  -- 意図通りの関数を書けてるか、型検査
+        randomR' = curry $ flip randomR gen
+        zs' :: [(a, g)]  -- 意図通りの結果を受け取れてるか、型検査
+        zs' = zipWith randomR' xs ys
+    in ...
+```
+
 にこ「でも、一度コンパイルが通ったら消しちゃうことも少なくないわ……
 コンパイル速度が落ちそうな気がしちゃって」  
 
