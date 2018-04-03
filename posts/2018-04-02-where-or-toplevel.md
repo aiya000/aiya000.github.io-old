@@ -8,7 +8,7 @@ swordをトップレベルに定義するか、wher句に定義するかが選�
 
 ```haskell
 sugar :: Int -> Char
-sugar = chr . sugar
+sugar = chr . sword
 
 sword :: Bool -> Int
 sword True  = 1
@@ -19,7 +19,7 @@ or
 
 ```haskell
 sugar :: Int -> Char
-sugar = chr . sugar
+sugar = chr . sword
   where
     sword :: Bool -> Int
     sword True  = 1
