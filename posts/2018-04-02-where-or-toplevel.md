@@ -4,7 +4,7 @@ tags: Haskell
 ---
 # 概要
 　下記のようにsugar以外がswordを参照していない場合は、
-swordをトップレベルに定義するか、wher句に定義するかが選べるかと思います。
+swordをトップレベルに定義するか、where句に定義するかが選べるかと思います。
 
 ```haskell
 sugar :: Int -> Char
