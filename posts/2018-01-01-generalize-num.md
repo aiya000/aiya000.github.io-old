@@ -1,5 +1,5 @@
 ---
-title: どうした？数値リテラルを直接使いたいからnewtypeしないのか？
+title: 数値をnewtypeした型の値として数値リテラルを使う
 tags: Haskell
 ---
 　`Num`型クラスに対して`GeneralizedNewtypeDeriving`拡張を使うことができるので、
@@ -48,5 +48,3 @@ main = do
 -- Seconds {unSeconds = 11}
 -- Seconds {unSeconds = 10}
 ```
-
-　貴方とGHC、今すぐ入信。
