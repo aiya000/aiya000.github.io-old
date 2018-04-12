@@ -25,12 +25,25 @@ tags: Linux, NeoVim
 　幅2で表示されるべき文字だが、考慮されていない環境では幅1で表示されたりする。
 
 # 結論
-　urxvt * Vimを使うのがいいと思う。  
-（NeoVim宗教上の理由により、僕は無理だった）
+~~　urxvt * Vimを使うのがいいと思う。~~  
+~~（NeoVim宗教上の理由により、僕は無理だった）~~
 
-　または何かしらの統合デスクトップ環境を使えば、うまく対処できるのかもしれない。
-僕は統合デスクトップ環境を使っていない。  
-（xmonadを使っている）
+~~　または何かしらの統合デスクトップ環境を使えば、うまく対処できるのかもしれない。~~
+~~僕は統合デスクトップ環境を使っていない。~~  
+~~（xmonadを使っている）~~
+
+　[fumiyas/wcwidth-cjk](https://github.com/fumiyas/wcwidth-cjk)
+をインストールして、指示通り`.zshenv`あたりに
+```sh
+eval `/usr/local/bin/wcwidth-cjk --sh-init`
+```
+と書くと、urxvt上での問題は一切合切直った。
+すごい！！
+
+- [GitHub - fumiyas/wcwidth-cjk: Run command with CJK-friendly wcwidth(3) to fix ambiguous width chars](https://github.com/fumiyas/wcwidth-cjk)
+
+　以下の内容は僕にとってもはや無用になったが、残しておく。
+誰かのためになれば幸い。
 
 # Vim上での問題以前
 　前述の通りArch Linux * Termiteな環境ではEast…charはcatでもlessでもなんでもうまく表示されなかったが、
