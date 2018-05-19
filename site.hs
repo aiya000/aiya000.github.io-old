@@ -31,7 +31,6 @@ listContextWith ctx thisFieldName targetFieldName = listField thisFieldName ctx 
 main :: IO ()
 main = hakyll $ do
   tags <- buildTags "posts/*" $ fromCapture "tags/*.html"
-
   tagsRules tags $ \tag pat -> do
     route idRoute
     compile $ do
@@ -41,6 +40,7 @@ main = hakyll $ do
                 defaultContext
       makeItem ""
         >>= loadAndApplyTemplate "templates/tag.html" ctx
+        >>= loadAndApplyTemplate "templates/basic.html" ctx
         >>= loadAndApplyTemplate "templates/default.html" ctx
         >>= relativizeUrls
 
