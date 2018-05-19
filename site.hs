@@ -123,6 +123,7 @@ main = hakyll $ do
   match "products.html" $ do
     route idRoute
     compile $ getResourceBody
+      >>= loadAndApplyTemplate "templates/basic.html" defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
