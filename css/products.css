@@ -1,21 +1,8 @@
-li.no-dot {
-    list-style: none;
-}
-
-hr.short-bar {
+hr.products-short-bar {
     width: 50%;
-    margin: 30px 0 30px 0;
+    margin: 5% 0 5% 0;
 }
 
-div.sentence {
-    background-color: white;
-}
-
-div.sentence p.attribute {
-    background-color: silver;
-    margin: 0;
-}
-
-div.sentence p {
-    margin: 8px;
+h4.products-child {
+    margin: 3% 0 2% 0;
 }
