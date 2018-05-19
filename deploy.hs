@@ -5,16 +5,20 @@
 
 import Control.Monad (forM_, when)
 import Data.Monoid ((<>))
-import Data.Text (Text, strip)
+import Data.Text (Text)
+import qualified Data.Text as T
 import Shelly
 
 default (Text)
 
+type FilePath' = Text
 
 main :: IO ()
-main = shelly . verbosely $
-  (prepare >> deploy) `finally_sh` cleanUp
-
+main = shelly . verbosely $ do
+  currentBranch <- removeTrailLineBreak <$> run "git" ["branch"] -|- run "grep" ["^*"] -|- run "awk" ["{print $2}"]
+  (prepare >> deploy) `finally_sh` cleanUpTo currentBranch
+  where
+    removeTrailLineBreak = T.init
 
 prepare :: Sh ()
 prepare = do
@@ -23,12 +27,12 @@ prepare = do
   run_ "cp" ["-r", "_site", "/tmp/_site"]
   run_ "git" ["checkout", "master"]
 
-cleanUp :: Sh ()
-cleanUp = do
-  run_ "git" ["checkout", "src"]
+cleanUpTo :: FilePath' -> Sh ()
+cleanUpTo prevBranch = do
+  run_ "git" ["checkout", prevBranch]
+  run_ "rm" ["-rf", ".stack-work"]
   run_ "mv" ["/tmp/.stack-work", "."]
   run_ "rm" ["-rf", "/tmp/_site"]
-
 
 deploy :: Sh ()
 deploy = do
@@ -48,7 +52,7 @@ deploy = do
 
   -- Deploy to the repository
   run_ "git" ["add", "--all"]
-  now <- strip <$> run "date" ["-R"]
+  now <- T.strip <$> run "date" ["-R"]
   let message = "Build at [" <> now <> "]"
                 <> "\n\n"
                 <> "https://aiya000.github.io"
