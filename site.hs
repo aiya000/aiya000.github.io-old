@@ -127,10 +127,7 @@ main = hakyll $ do
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
-  -- These are the part of index.html
-  match "pickup-post.html" $ do
-    route idRoute
-    compile templateCompiler
+  -- A part of index.html
   match "affiliate.html" $ do
     route idRoute
     compile templateCompiler
