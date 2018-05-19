@@ -74,7 +74,6 @@ main = hakyll $ do
   match "profile.html" $ do
     route idRoute
     compile $ getResourceBody
-      >>= loadAndApplyTemplate "templates/profile.html" defaultContext
       >>= loadAndApplyTemplate "templates/basic.html" defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
