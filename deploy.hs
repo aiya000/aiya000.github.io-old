@@ -12,7 +12,7 @@ default (Text)
 
 
 main :: IO ()
-main = shelly . verbosely $ do
+main = shelly . verbosely $
   (prepare >> deploy) `finally_sh` cleanUp
 
 
@@ -34,14 +34,14 @@ deploy :: Sh ()
 deploy = do
   -- Delete the all file in the master branch
   existFiles <- ls "."
-  forM_ existFiles $ \file -> do
+  forM_ existFiles $ \file ->
     --TODO: Normalize path of `file`
     when (toTextIgnore file /= "./.git") $
       run_ "rm" ["-rf", toTextIgnore file]
 
   -- Move the backed up contents to here
   newFiles <- ls "/tmp/_site"
-  forM_ newFiles $ \file -> do
+  forM_ newFiles $ \file ->
     run_ "mv" [toTextIgnore file, "."]
   -- _cache is unneeded by the site
   run_ "rm" ["-rf", "_cache"]
