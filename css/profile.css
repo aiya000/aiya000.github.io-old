@@ -27,22 +27,6 @@ hr.short-bar {
     margin: 30px 0 30px 0;
 }
 
-h1 {
-    font-size: 150%;
-    margin-bottom: 32px;
-    background-image: -moz-linear-gradient(top, #efefef, #ccc);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc));
-    padding: 8px;
-}
-
-h2 {
-    font-size: 100%;
-    margin-top: 32px;
-    background-image: -moz-linear-gradient(top, #efefef, #ccc);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc));
-    padding: 4px;
-}
-
 b {
     font-size: 130%;
     color: midnightblue;
