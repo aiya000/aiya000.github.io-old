@@ -7,19 +7,13 @@ title: About
 　Haskellを中心とした技術記事、イベントの参加記事を書いていきます。  
 たまに日記や私的な備考録が投稿されます。
 
-また、一部の記事は[Qiita](http://qiita.com/aiya000)に投稿しています。
+　正確な内容の記事は[Qiita](http://qiita.com/aiya000)に、
+メモ帳程度の内容はこのブログに投稿しています。
+しかしながら記事中のコードについては、コンパイルで検証するように心がけています。
+また筆の乗りを重視するため、ですます調が記事ごとに変わります、ご了承ください。
 
-　筆の乗りを重視するため、ですます調が記事ごとに変わりますがご了承ください。
-
-　ここでの記事中のコードは、可能であればコンパイルを検証しています。
-
-(\*＾\_＾)
-
-　当サイトはHaskell製の静的ブログジェネレータ、[Hakyll](http://jaspervdj.be/hakyll)及び  
-CSSフレームワーク [Umi](http://nkmr6194.github.io/Umi/) を使用しています。
-
-***[Bootstrap Theme Umi](http://nkmr6194.github.io/Umi/)***  
-[![umi-image](/images/umi.png)](http://nkmr6194.github.io/Umi/)
+　当サイトはHaskell製の静的ブログジェネレータ、
+[Hakyll](http://jaspervdj.be/hakyll)を使用して生成されています。
 
 - - -
 

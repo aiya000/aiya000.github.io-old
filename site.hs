@@ -59,6 +59,7 @@ main = hakyll $ do
   match "about.md" $ do
     route $ setExtension "html"
     compile $ modernPandocCompiler
+      >>= loadAndApplyTemplate "templates/basic.html" defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
