@@ -2,6 +2,7 @@
 title: About
 ---
 
+# このブログについて
 ![aiya000-icon](/images/aiya000-profile_icon.png)
 
 　Haskellを中心とした技術記事、イベントの参加記事を書いていきます。  

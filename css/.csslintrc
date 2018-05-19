@@ -1,0 +1,11 @@
+{
+  "ignore": [
+    "box-model",
+    "box-sizing",
+    "order-alphabetical"
+  ],
+  "warnings": [
+  ],
+  "errors": [
+  ]
+}
