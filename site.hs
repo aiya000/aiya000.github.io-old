@@ -63,6 +63,13 @@ main = hakyll $ do
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
+  match "licenses.md" $ do
+    route $ setExtension "html"
+    compile $ modernPandocCompiler
+      >>= loadAndApplyTemplate "templates/basic.html" defaultContext
+      >>= loadAndApplyTemplate "templates/default.html" defaultContext
+      >>= relativizeUrls
+
   match "profile.html" $ do
     route idRoute
     compile $ getResourceBody
