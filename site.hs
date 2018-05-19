@@ -35,7 +35,8 @@ main = hakyll $ do
     route idRoute
     compile $ do
       posts <- loadAll pat >>= recentFirst
-      let ctx = constField "title" ("Posts tagged " ++ tag) <>
+      let ctx = constField "tag" tag <>
+                constField "title" ("Posts tagged " ++ tag) <>
                 listField "posts" postCtx (return posts) <>
                 defaultContext
       makeItem ""
