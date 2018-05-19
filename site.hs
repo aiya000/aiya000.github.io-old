@@ -12,6 +12,7 @@ import qualified Data.Set as Set
 
 
 -- See http://mattwetmore.me/posts/hakyll-list-metadata.html
+--
 -- |
 -- listContextWith looks up @targetFieldName@,
 -- splits the looking up result by ",",
@@ -31,10 +32,10 @@ main :: IO ()
 main = hakyll $ do
   tags <- buildTags "posts/*" $ fromCapture "tags/*.html"
 
-  tagsRules tags $ \tag pattern -> do
+  tagsRules tags $ \tag pat -> do
     route idRoute
     compile $ do
-      posts <- loadAll pattern >>= recentFirst
+      posts <- loadAll pat >>= recentFirst
       let ctx = constField "title" ("Posts tagged " ++ tag) <>
                 listField "posts" postCtx (return posts) <>
                 defaultContext
@@ -109,7 +110,7 @@ main = hakyll $ do
         >>= loadAndApplyTemplate "templates/default.html" indexCtx
         >>= relativizeUrls
 
-  match "templates/*" $ do
+  match "templates/*" $
     compile templateCompiler
 
   create ["css/highlight.css"] $ do
