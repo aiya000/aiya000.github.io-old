@@ -109,7 +109,6 @@ main = hakyll $ do
                      defaultContext
       getResourceBody
         >>= applyAsTemplate indexCtx
-        >>= loadAndApplyTemplate "templates/index.html" indexCtx
         >>= loadAndApplyTemplate "templates/basic.html" indexCtx
         >>= loadAndApplyTemplate "templates/default.html" indexCtx
         >>= relativizeUrls
