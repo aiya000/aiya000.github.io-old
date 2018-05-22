@@ -1,0 +1,366 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1-Haskeller-にこにー - 今年のGitHubでの開発まとめ</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>今年のGitHubでの開発まとめ</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2017/12/31 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/備考録.html">備考録</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-12-31-developments-on-this-year.html" class="hatena-bookmark-button" data-hatena-bookmark-title="今年のGitHubでの開発まとめ - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-12-31-developments-on-this-year.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<h1 id="今年に進捗したリポジトリ一覧の取り方">今年に進捗したリポジトリ一覧の取り方</h1>
+<p>　リポジトリ一覧はこれで取りました！</p>
+<pre class="shell-session"><code>$ for i in {1..7} ; do
+    curl &quot;https://github.com/search?l=&amp;p=${i}&amp;q=user%3Aaiya000+pushed%3A%3E2017-01-01+fork%3Atrue&amp;ref=advsearch&amp;type=Repositories&amp;utf8=%E2%9C%93&quot; | pup '.repo-list div div h3 a json{}' | jq -r '.[].text'
+  done</code></pre>
+<p>（<br />
+GitHub WebAPIの方だとなぜか31件しか取れなかった。 それはこう。</p>
+<pre class="shell-session"><code>$ curl 'https://api.github.com/users/aiya000/repos?sort=pushed' | jq -r '.[].html_url'</code></pre>
+<p>）</p>
+<p>NeoVim上でそれを実行すると、バッファにゴミと共にこんなリストが取れるので</p>
+<pre><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 70203    0 70203    0     0  70203      0 --:--:--  0:00:01 --:--:-- 47338
+aiya000/hs-kemono-friends
+aiya000/aref-web.vim
+aiya000/dotfiles
+aiya000/aiya000.github.io
+aiya000/hs-throwable-exceptions
+aiya000/nico-lang
+aiya000/hs-gorira
+aiya000/workspace
+aiya000/aho-bakaup.vim
+aiya000/hs-zuramaru
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 56156    0 56156    0     0  56156      0 --:--:--  0:00:01 --:--:-- 45766
+aiya000/hs-brainhack
+aiya000/hs-stack-type
+aiya000/hs-hucheduler
+aiya000/franz-kokoro-io
+aiya000/sh-hereis
+aiya000/xmonad-config
+aiya000/eta-doromochi
+aiya000/zsh-shell-kawaii
+aiya000/yi-config
+aiya000/learning-Haskell
+...
+...</code></pre>
+<p>全部ヤンクして、てきとーな新規バッファにプットして<code>qagg3dd10jq6@a</code>という感じにします。</p>
+<p>（ここの<code>6</code>は</p>
+<p><code>https://github.com/search?l=&amp;p=1&amp;q=user%3Aaiya000+pushed%3A%3E2017-01-01+fork%3Atrue&amp;ref=advsearch&amp;type=Repositories&amp;utf8=%E2%9C%93</code></p>
+<p>で取れるページ数 -1 の数。 <code>aiya000</code>を変更してください ❗ ）</p>
+<p>そしてあとはタブ内に、ブログ記事用のmarkdownバッファを左に、 ☝️ の一覧を右にして <code>&lt;C-b&gt;</code>キーのために僕のvimrcを導入して、</p>
+<p><code>qavil&quot;uy&lt;C-w&gt;hGo&lt;CR&gt;## &lt;C-r&gt;u&lt;CR&gt;CR&gt;- [](https://github.com/&lt;C-r&gt;u)vib&quot;+y_f[&lt;C-b&gt;&lt;Esc&gt;&lt;C-w&gt;lddq59@a</code></p>
+<p>ってやるとできます。 （<code>59</code>はリポジトリの総数 - 1）</p>
+<h1 id="進捗一覧">進捗一覧</h1>
+<p>　本年度に1つ以上のコミットをしたリポジトリは60個くらいあったため、 ほとんど何もしてないのと、何をしたか覚えてないのは省略しました。</p>
+<p>　最近スターの欲しさがすごいので、スターをください。</p>
+<h2 id="eta-doromochi">eta-doromochi</h2>
+<p>　現在最も開発中。 Etaを使ったHaskellでのJavaFXプログラミングの実験。 ちょっとEtaの問題点が発覚してきた。</p>
+<p>どうせ誰もPRしないだろうしWIPだし、どうせ誰も見てないので、masterに<code>git push -f</code>しまくってるげふんげふん</p>
+<ul>
+<li><a href="https://github.com/aiya000/eta-doromochi">GitHub - aiya000/eta-doromochi: An Eta experience</a></li>
+</ul>
+<p>　絵を<a href="https://twitter.com/HassakuTb">はっさくさん</a>に描いて貰えたのが本当に嬉しくて、 はっさくさんの絵はすごいすごい好みなので、 絶対に完成させるぞい！</p>
+<p>!(-_-)<a href="https://mascot-apps-contest.azurewebsites.net/2017/About">締め切りが2018-01-07</a></p>
+<h2 id="learning-haskell">learning-Haskell</h2>
+<p>　いつもHaskell</p>
+<ul>
+<li><a href="https://github.com/aiya000/learning-Haskell">GitHub - aiya000/learning-Haskell: My Learning for Haskell</a></li>
+</ul>
+<h2 id="workspace">workspace</h2>
+<p>　ほとんどlearning-Haskellのサブリポジトリみたいなもの。</p>
+<ul>
+<li><a href="https://github.com/aiya000/workspace">GitHub - aiya000/workspace: This is file space that is my learning any language.</a></li>
+</ul>
+<h2 id="hs-zuramaru">hs-zuramaru</h2>
+<p>　僕のLisp処理系！</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-zuramaru">GitHub - aiya000/hs-zuramaru: [WIP] An experience of Make-A-Lisp ずら〜</a></li>
+</ul>
+<h2 id="dotfiles">dotfiles</h2>
+<p>　コミット数がいっぱい</p>
+<ul>
+<li><a href="https://github.com/aiya000/dotfiles">GitHub - aiya000/dotfiles: my dotfiles for public.</a></li>
+</ul>
+<h2 id="aiya000.github.io">aiya000.github.io</h2>
+<p>　このブログ</p>
+<ul>
+<li><a href="https://github.com/aiya000/aiya000.github.io">GitHub - aiya000/aiya000.github.io: my blog</a></li>
+</ul>
+<h2 id="hs-brainhack">hs-brainhack</h2>
+<p>　Haskellでbrainf*ck処理系を作るためのライブラリ。 各トークンを定義するだけで処理系が作れる。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-brainhack">GitHub - aiya000/hs-brainhack: The brainf*ck language maker library</a></li>
+</ul>
+<h2 id="nico-lang">nico-lang</h2>
+<p>　hs-brainhackの例で、にこにーです。</p>
+<ul>
+<li><a href="https://github.com/aiya000/nico-lang">GitHub - aiya000/nico-lang: Nico-lang is the programing language of Nico Yazawa</a></li>
+</ul>
+<h2 id="hs-kemono-friends">hs-kemono-friends</h2>
+<p>　hs-brainhackの例で、すごーい！</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-kemono-friends">GitHub - aiya000/hs-kemono-friends: あなたはプログラミング言語フレンズなんだね！（Haskell）</a></li>
+</ul>
+<h2 id="hs-gorira">hs-gorira</h2>
+<p>　Haskell製Twitter bot。 動かす環境がないので、最近動かせてない。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-gorira">GitHub - aiya000/hs-gorira: He is Twitter bot that made by Haskell.</a></li>
+</ul>
+<h2 id="hs-sentence-jp">hs-sentence-jp</h2>
+<p>　hs-gorira用のライブラリなんだけど、hs-goriraと分割する必要がなかった。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-sentence-jp">GitHub - aiya000/hs-sentence-jp: Easily generating sentence from texts.</a></li>
+</ul>
+<h2 id="aho-bakaup.vim">aho-bakaup.vim</h2>
+<p>　Vimで、ファイル保存毎にそのファイルのバックアップを取るやつ。 最新以外のバックアップも保存されるので、標準の’backup’より強い。</p>
+<ul>
+<li><a href="https://github.com/aiya000/aho-bakaup.vim">GitHub - aiya000/aho-bakaup.vim: aho-bakaup.vim backs up any files when you write the file</a></li>
+</ul>
+<h2 id="aref-web.vim">aref-web.vim</h2>
+<p>　VimでWeb辞書を非同期で取ってくる。 Haskellのstackageとかweblio引ける。</p>
+<ul>
+<li><a href="https://github.com/aiya000/aref-web.vim">GitHub - aiya000/aref-web.vim: Web dictionaries on the vim with async.</a></li>
+</ul>
+<h2 id="hs-throwable-exceptions">hs-throwable-exceptions</h2>
+<p>　TemplateHaskellを使って、例外型を生成するやつ。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-throwable-exceptions">GitHub - aiya000/hs-throwable-exceptions: Give the exception’s value constructors for your haskell project</a></li>
+</ul>
+<h2 id="hs-stack-type">hs-stack-type</h2>
+<p>　stackageにパッケージを上げるための練習。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-stack-type">GitHub - aiya000/hs-stack-type: The very very simply representation of the stack data type</a></li>
+</ul>
+<h2 id="hs-hucheduler">hs-hucheduler</h2>
+<p>　僕の実力確認用に、短時間で作ってみたやつ。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-hucheduler">GitHub - aiya000/hs-hucheduler: simple schedule notifyer</a></li>
+</ul>
+<h2 id="franz-kokoro-io">franz-kokoro-io</h2>
+<p>　kokoro.io。</p>
+<ul>
+<li><a href="https://github.com/aiya000/franz-kokoro-io">GitHub - aiya000/franz-kokoro-io</a></li>
+</ul>
+<h2 id="sh-hereis">sh-hereis</h2>
+<p>　もう使ってない。</p>
+<ul>
+<li><a href="https://github.com/aiya000/sh-hereis">GitHub - aiya000/sh-hereis: Bookmark for your shell (sh, bash, zsh and others compatible)</a></li>
+</ul>
+<h2 id="xmonad-config">xmonad-config</h2>
+<p>　xmonad.hsだけど、巨大になりすぎたのでhaskell-stackプロジェクトとして管理してる。</p>
+<ul>
+<li><a href="https://github.com/aiya000/xmonad-config">GitHub - aiya000/xmonad-config: my xmonad preference</a></li>
+</ul>
+<h2 id="zsh-shell-kawaii">zsh-shell-kawaii</h2>
+<p>　zshで可愛いやつ。</p>
+<ul>
+<li><a href="https://github.com/aiya000/zsh-shell-kawaii">GitHub - aiya000/zsh-shell-kawaii: Your shell dresses up lovely (*<sup>-</sup>)</a></li>
+</ul>
+<h2 id="yi">yi</h2>
+<p>　Vim/EmacsライクなHaskell製エディタyi。 設計がStatelessで美しい。</p>
+<p>Vimでいう<code>:register</code>を実装してPRした。</p>
+<ul>
+<li><a href="https://github.com/aiya000/yi">GitHub - aiya000/yi: The Haskell-Scriptable Editor</a></li>
+</ul>
+<h2 id="yi-config">yi-config</h2>
+<p>　Vim/EmacsライクなHaskell製エディタyiの僕用設定。</p>
+<ul>
+<li><a href="https://github.com/aiya000/yi-config">GitHub - aiya000/yi-config: my yi config</a></li>
+</ul>
+<h2 id="hs-snowtify">hs-snowtify</h2>
+<p>　<code>$ stack build</code>や<code>$ stack test</code>をnotifyデーモンで表示するやつ。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-snowtify">GitHub - aiya000/hs-snowtify: snowtify send your result of <code>stack build</code> (<code>stack test</code>) to notify-daemon 🐕</a></li>
+</ul>
+<h2 id="franz-lgtm-in">franz-lgtm-in</h2>
+<p>　はい</p>
+<ul>
+<li><a href="https://github.com/aiya000/franz-lgtm-in">GitHub - aiya000/franz-lgtm-in: A franz plugin for LGTM.in</a></li>
+</ul>
+<h2 id="vim-quickrun">vim-quickrun</h2>
+<p>　<code>elm</code>とか<code>eta</code>とかの対応をPRしたりした。</p>
+<ul>
+<li><a href="https://github.com/aiya000/vim-quickrun">GitHub - aiya000/vim-quickrun: Run commands quickly.</a></li>
+</ul>
+<h2 id="mani">mani</h2>
+<p>　はい</p>
+<ul>
+<li><a href="https://github.com/aiya000/mani">GitHub - aiya000/mani: A window automation tool.</a></li>
+</ul>
+<h2 id="haan">haan</h2>
+<p>　hi</p>
+<ul>
+<li><a href="https://github.com/aiya000/haan">GitHub - aiya000/haan</a></li>
+</ul>
+<h2 id="thank-you-stars">thank-you-stars</h2>
+<p>　「プロジェクト名とカレントディレクトリが同じじゃないと失敗するから、<code>.cabal</code>ファイルを指定できるようにしたよ」 ってPRしたら、 しばらく放置されてから「別仕様で対応しました」って言われてCloseされたけど、これはいいやつです。</p>
+<ul>
+<li><a href="https://github.com/aiya000/thank-you-stars">GitHub - aiya000/thank-you-stars: Give your dependencies stars on GitHub!</a></li>
+</ul>
+<h2 id="extensible">extensible</h2>
+<p>　<code>liftMaybe</code>あたり？をPRした。</p>
+<ul>
+<li><a href="https://github.com/aiya000/extensible">GitHub - aiya000/extensible: Extensible records, variants, structs, effects, tangles</a></li>
+</ul>
+<h2 id="hs-rins">hs-rins</h2>
+<p>　LensがわからなすぎてLensを作ろうとしたんだけど、 Lensが理解できたのでLensを作らなかった。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-rins">GitHub - aiya000/hs-rins: 凛はLensになるんだにゃ</a></li>
+</ul>
+<h2 id="rsync_backupper">rsync_backupper</h2>
+<p>　僕が外付けHDDにOS (Linux)をバックアップするやつ。</p>
+<ul>
+<li><a href="https://github.com/aiya000/rsync_backupper">GitHub - aiya000/rsync_backupper: :D</a></li>
+</ul>
+<h2 id="adrone-hs.vim">adrone-hs.vim</h2>
+<p>　Vimで日記。 今でも使ってる。</p>
+<ul>
+<li><a href="https://github.com/aiya000/adrone-hs.vim">GitHub - aiya000/adrone-hs.vim: Diary plugin for vim.</a></li>
+</ul>
+<h2 id="programming">programming</h2>
+<p>　ハクトーバフェスタのやつ</p>
+<ul>
+<li><a href="https://github.com/aiya000/programming">GitHub - aiya000/programming: Code a program in a language of your choice.</a></li>
+</ul>
+<h2 id="ilinq.py">ilinq.py</h2>
+<p>　Linq to objectのpython3実装で、<code>span</code>関数をPRした。</p>
+<ul>
+<li><a href="https://github.com/aiya000/ilinq.py">GitHub - aiya000/ilinq.py</a></li>
+</ul>
+<h2 id="mvn-javafx-sample">mvn-javafx-sample</h2>
+<p>　mvn + JavaFXの環境を練習です。</p>
+<ul>
+<li><a href="https://github.com/aiya000/mvn-javafx-sample">GitHub - aiya000/mvn-javafx-sample: Example for javafx with maven</a></li>
+</ul>
+<h2 id="vital.vim">vital.vim</h2>
+<p>　Data.EitherをPRした。</p>
+<p>元々Data.Optionalもあったし、 Vim scriptは今後「モナドあるよ」って言える。</p>
+<p>Data.Listをfuncref対応させつつ、 Data.List.ClosureいうやつでVim7.4でも使えるクロージャの Data.List向け関数を提供しようとしてるんだけど、 Vim7.4のパーサの不具合？ で致命的なエラーが出ていて、致命的にめんどくさくなって放置してる。</p>
+<p>　それさえ直せばもうマージしてもらえるはずなので、なんとかしたいんだけど、 どうしてもやる気でない。</p>
+<p>頼む、誰かそこをなんとかしてくれないかな？ 😭</p>
+<ul>
+<li><a href="https://github.com/aiya000/vital.vim">GitHub - aiya000/vital.vim: A comprehensive Vim utility functions for Vim plugins</a></li>
+</ul>
+<h2 id="hs-yohamaru">hs-yohamaru</h2>
+<p>　アドベントカレンダー用に作った型レベルプログラミング（依存型）の例題だったんだけど、 SS形式で解説する意味を見出だせずボツになった。</p>
+<ul>
+<li><a href="https://github.com/aiya000/hs-yohamaru">GitHub - aiya000/hs-yohamaru: For Haskell Advent Calendar 2017</a></li>
+</ul>
+<h2 id="stackage">stackage</h2>
+<p>　Haskellerは皆持ってるリポジトリ。</p>
+<ul>
+<li><a href="https://github.com/aiya000/stackage">GitHub - aiya000/stackage: “Stable Hackage”: vetted consistent packages from Hackage</a></li>
+</ul>
+<h2 id="github-viewer.slack">github-viewer.slack</h2>
+<p>　slackでgithub通知を対話的にも実行できるようになるやつ。</p>
+<ul>
+<li><a href="https://github.com/aiya000/github-viewer.slack">GitHub - aiya000/github-viewer.slack: slack plugin to view github state</a></li>
+</ul>
+<h2 id="zsh-zapack">zsh-zapack</h2>
+<p>　なぜか僕の環境ではzplugがやば遅かったので、早いやつを作った。 プラグイン機構はgit-submoduleを利用していて、自前では実装してない。</p>
+<ul>
+<li><a href="https://github.com/aiya000/zsh-zapack">GitHub - aiya000/zsh-zapack: The basic minimum zsh plugin <strong>loader</strong> 👍</a></li>
+</ul>
+<h2 id="lens">lens</h2>
+<p>　皆大好きLensの本家。 本家やぞ。</p>
+<p>　何かがexport出来てなかった問題をPRした気がする。</p>
+<ul>
+<li><a href="https://github.com/aiya000/lens">GitHub - aiya000/lens: Lenses, Folds, and Traversals - Join us on freenode #haskell-lens</a></li>
+</ul>
+<h2 id="extensible-effects">extensible-effects</h2>
+<p>　Haskellでの拡張可能作用の実装。</p>
+<p>　何かがexport出来てなかった問題をPRした気がする。</p>
+<ul>
+<li><a href="https://github.com/aiya000/extensible-effects">GitHub - aiya000/extensible-effects: Extensible Effects: An Alternative to Monad Transformers</a></li>
+</ul>
+<h2 id="maid">Maid</h2>
+<p>　どこかで発表したスライドとかを公開したりしてる。</p>
+<p>VimConf2017でLTしたりした。</p>
+<ul>
+<li><a href="https://github.com/aiya000/Maid">GitHub - aiya000/Maid: My slide collections.</a></li>
+</ul>
+<h2 id="unite-outline">unite-outline</h2>
+<p>　elm対応を入れた。</p>
+<ul>
+<li><a href="https://github.com/aiya000/unite-outline">GitHub - aiya000/unite-outline: outline source for unite.vim</a></li>
+</ul>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a href="https://github.com/ericchiang/pup">GitHub - ericchiang/pup: Parsing HTML at the command line</a></li>
+<li><a href="https://github.com/stedolan/jq">GitHub - stedolan/jq: Command-line JSON processor</a></li>
+</ul>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-12-31-developments-on-this-year.md">今年のGitHubでの開発まとめ - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

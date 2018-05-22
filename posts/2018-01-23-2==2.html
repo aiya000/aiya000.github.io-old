@@ -1,0 +1,227 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1-Haskeller-にこにー - 1 == "x" が違法だなんて誰も言ってない！</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>1 == "x" が違法だなんて誰も言ってない！</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2018/01/23 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2018-01-23-2%3D%3D2.html" class="hatena-bookmark-button" data-hatena-bookmark-title="1 == " x" が違法だなんて誰も言ってない！ - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2018-01-23-2%3D%3D2.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>これはおもしろ記事です。</p>
+<h1 id="前提">前提</h1>
+<p>例えばJavaを例に上げると、全てのclassはObjectを継承しており、Objectがequalsメソッドを持つので 異なる型を比較（<code>equals</code>）できてしまいます。</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> Foo {}
+<span class="kw">class</span> Bar {}
+
+<span class="kw">public</span> <span class="kw">class</span> Test {
+    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {
+        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="kw">new</span> <span class="fu">Foo</span>().<span class="fu">equals</span>(<span class="kw">new</span> <span class="fu">Bar</span>()));
+    }
+}
+<span class="co">// {output}</span>
+<span class="co">// false</span></code></pre></div>
+<p>これはインスタンスをアップキャストしたい際などには便利ですが、 私個人としては「ある値x,yが異なる型を持てば同じものではない（<code>x != y</code>）」というものを認めた方が 誤りが発生しにくいと考えています 💩</p>
+<p>それをおおよそ認めたとも捉えれられる言語の１つとしてHaskellがあります ❇️</p>
+<p>Haskellは異なる型の比較（<code>==</code>）をコンパイルエラーで報告します。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- CharとBoolの比較</span>
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> print <span class="fu">$</span> <span class="ch">'a'</span> <span class="fu">==</span> <span class="dt">True</span>
+<span class="co">-- /tmp/nvimkIYPkj/4.hs:2:23: error:</span>
+<span class="co">--     • Couldn't match expected type ‘Char’ with actual type ‘Bool’</span>
+<span class="co">--     • In the second argument of ‘(==)’, namely ‘True’</span>
+<span class="co">--       In the second argument of ‘($)’, namely ‘'a' == True’</span>
+<span class="co">--       In the expression: print $ 'a' == True</span></code></pre></div>
+<p>繰り返しになりますが、これはある種の安全性を担保します。</p>
+<h1 id="xがtrueになることを合法にする"><code>1 == &quot;x&quot;</code>が<code>True</code>になることを合法にする</h1>
+<p>　上記のHaskellの例を見た時に、もしかしたら貴方は「柔軟性に乏しい」と考えたかもしれません。</p>
+<p>そんなことはないよ。</p>
+<p>そんなことないことについて、<code>1 == &quot;x&quot;</code>の比較が<strong>型付け</strong>によって<code>True</code>に成りうるという事実を以て示したいと思います。 （主にGHC拡張を振りかざすことによって）</p>
+<h2 id="isstring-num"><code>IsString</code> + <code>Num</code></h2>
+<blockquote class="twitter-tweet" data-lang="ja">
+<p lang="ja" dir="ltr">
+NumとEqとIsStringのインスタンスだけでできると思います。 <a href="https://t.co/DSMCmvAIVX">pic.twitter.com/DSMCmvAIVX</a>
+</p>
+— caffeine propulsion (<span class="citation">@iand675</span>) <a href="https://twitter.com/iand675/status/955758784487534593?ref_src=twsrc%5Etfw">2018年1月23日</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
+
+<span class="kw">import </span><span class="dt">Data.String</span> (<span class="dt">IsString</span>(..))
+
+<span class="kw">data</span> <span class="dt">Foo</span> <span class="fu">=</span> <span class="dt">Foo</span>
+
+<span class="kw">instance</span> <span class="dt">IsString</span> <span class="dt">Foo</span> <span class="kw">where</span>
+  fromString _ <span class="fu">=</span> <span class="dt">Foo</span>
+
+<span class="kw">instance</span> <span class="dt">Num</span> <span class="dt">Foo</span> <span class="kw">where</span>
+  fromInteger _ <span class="fu">=</span> <span class="dt">Foo</span>
+
+<span class="kw">instance</span> <span class="dt">Eq</span> <span class="dt">Foo</span> <span class="kw">where</span>
+  _ <span class="fu">==</span> _ <span class="fu">=</span> <span class="dt">True</span>
+
+default (<span class="dt">Foo</span>)
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span>
+<span class="co">-- {output}</span>
+<span class="co">-- True</span></code></pre></div>
+<p>　値<code>1</code>と<code>&quot;x&quot;</code>を、単一の値を持つ型<code>Foo</code>に型付けしてしまうアプローチです。</p>
+<p>　GHCには<code>OverloadedStrings</code>という独自言語拡張があり、 これは通常<code>&quot;x&quot;</code>が<code>&quot;x&quot; :: String</code>という暗黙的型付けを行うルールを、 <code>&quot;x&quot; :: IsString x =&gt; x</code>という暗黙的型付けに変更します。</p>
+<p>つまるところ<code>&quot;x&quot; :: Foo</code>という型付けが合法になります。</p>
+<p>　文字列リテラルに関する<code>OverloadedStrings</code>と似たような、数値リテラルに対する暗黙的型付けルールを Haskellはデフォルトで持ちます。</p>
+<p>このルールは値<code>1</code>を<code>1 :: Num a =&gt; a</code>というような型（<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>）に型付けます。 ですので<code>1 :: Foo</code>という暗黙的型付けが合法になります。</p>
+<p>　最後に<code>default (Foo)</code>は<code>1</code>のような明示的型付きを成されていない数値リテラルを デフォルトで<code>Foo</code>に型付けるようにします。</p>
+<p>　上記3つのルール</p>
+<ul>
+<li><code>OverloadedStrings</code>が<code>&quot;x&quot; :: IsString x =&gt; x</code>に型付ける</li>
+<li>Haskellのデフォルト挙動が<code>1 :: Num a =&gt; a</code>に型付ける</li>
+<li><code>default (Foo)</code>が<code>1 :: Foo</code>に型付ける</li>
+</ul>
+<p>によって<code>1 == &quot;x&quot;</code>が<code>(1 :: Foo) == (&quot;x&quot; :: IsString x =&gt; x)</code>として型付けられる。 かつ<code>==</code>は左辺と右辺に同じ型を持つので <code>(1 :: Foo) == (&quot;x&quot; :: Foo)</code>（<code>(==) :: Foo -&gt; Foo -&gt; Bool</code>） を導くことができました 💥</p>
+<h2 id="num">Num</h2>
+<p>　先程は<code>Foo</code>に集約しましたが、しかしながら<code>String</code>に集約することも可能です。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE FlexibleInstances #-}</span>
+<span class="ot">{-# LANGUAGE TypeSynonymInstances #-}</span>
+
+<span class="kw">instance</span> <span class="dt">Num</span> <span class="dt">String</span> <span class="kw">where</span>
+  fromInteger _ <span class="fu">=</span> <span class="st">&quot;x&quot;</span>
+
+default (<span class="dt">String</span>)
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span>
+<span class="co">-- {output}</span>
+<span class="co">-- True</span></code></pre></div>
+<p>　これは章「<code>IsString</code> + <code>Num</code>」と全く同じことをしていますが、 ただし<code>1</code>を<code>1 :: String</code>に型付けています。</p>
+<h2 id="rebindablesyntax">RebindableSyntax</h2>
+<p>　最後に1つ、ぶっ飛んだ例を紹介して終わります。 これについては、あまり型付けに関していなません。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE RebindableSyntax #-}</span>
+
+<span class="kw">import </span><span class="dt">Prelude</span> (<span class="dt">Integer</span>, <span class="dt">String</span>, <span class="dt">IO</span>, print, ($), (==))
+
+fromInteger<span class="ot"> ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
+fromInteger _ <span class="fu">=</span> <span class="st">&quot;x&quot;</span>
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span>
+<span class="co">-- {output}</span>
+<span class="co">-- True</span></code></pre></div>
+<p>　GHCの<code>RebindableSyntax</code>拡張は、Haskell標準が<code>1</code>という式を<code>Prelude.fromInteger (1 :: Integer)</code>という式に展開するという仕様について改変します。</p>
+<ul>
+<li><a href="https://downloads.haskell.org/~ghc/7.2.1/docs/html/users_guide/syntax-extns.html">7.3. Syntactic extensions</a>
+<ul>
+<li>7.3.11. Rebindable syntax and the implicit Prelude import</li>
+</ul></li>
+</ul>
+<p>Haskell標準は<code>1</code>を<code>Prelude.fromInteger (1 :: Integer)</code>に展開しますが、 <code>RebindableSyntax</code>が有効になっている場合は<code>1</code>を<code>fromInteger (1 :: Integer)</code>に展開します。</p>
+<p>つまり、とりあえず現在のスコープにある<code>fromInteger</code>と<code>Integer</code>を取ってきて使うというめっちゃ乱暴なものです 💥</p>
+<p>ですので<code>1 == &quot;x&quot;</code>がローカルの<code>fromInteger</code>の定義を用いて<code>&quot;x&quot; == &quot;x&quot;</code>という簡素な式を導きます 😇</p>
+<p><code>Integer</code>をローカルに定義して、そちらを使うようにしても面白いかもしれません。</p>
+<h1 id="参考ページ">参考ページ</h1>
+<ul>
+<li><a href="https://downloads.haskell.org/~ghc/7.2.1/docs/html/users_guide/syntax-extns.html">7.3. Syntactic extensions</a>
+<ul>
+<li>7.3.11. Rebindable syntax and the implicit Prelude import</li>
+</ul></li>
+</ul>
+<blockquote class="twitter-tweet" data-lang="ja">
+<p lang="ja" dir="ltr">
+プログラマの面接を行うことになった面接官がHaskellerに尋ねた。<br>「2+2は何になりますか?」<br>Haskellerはドアに鍵をかけ、型定義とそれに対するNumインスタンスを書きながら小声で尋ねた。<br>「2+2をいくつにしたいんです？」<a href="https://t.co/ePWU41mZDr">https://t.co/ePWU41mZDr</a> <a href="https://t.co/0uQR1HEVpl">pic.twitter.com/0uQR1HEVpl</a>
+</p>
+— Make 生活リズム 正常 again (<span class="citation">@mod_poppo</span>) <a href="https://twitter.com/mod_poppo/status/955685593471705088?ref_src=twsrc%5Etfw">2018年1月23日</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-lang="ja">
+<p lang="ja" dir="ltr">
+みなさん、 2+2 のようなクソ2番煎じネタじゃなくて、代数的実数の方を拡散してください <a href="https://t.co/eSMVWbRyTo">https://t.co/eSMVWbRyTo</a>
+</p>
+— Make 生活リズム 正常 again (<span class="citation">@mod_poppo</span>) <a href="https://twitter.com/mod_poppo/status/955716537683341312?ref_src=twsrc%5Etfw">2018年1月23日</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-lang="ja">
+<p lang="ja" dir="ltr">
+NumとEqとIsStringのインスタンスだけでできると思います。 <a href="https://t.co/DSMCmvAIVX">pic.twitter.com/DSMCmvAIVX</a>
+</p>
+— caffeine propulsion (<span class="citation">@iand675</span>) <a href="https://twitter.com/iand675/status/955758784487534593?ref_src=twsrc%5Etfw">2018年1月23日</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<hr />
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>実際は暗黙的型付けというよりは糖衣構文の展開だけど、「<code>1</code>が<code>Num</code>インスタンスのいずれかに型付けられる」ということを導くのは同じはず<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-01-23-2==2.md">1 == "x" が違法だなんて誰も言ってない！ - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

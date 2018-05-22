@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>あいや☆ぱぶりっしゅぶろぐ！ - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」</title>
+        <title>大銀河宇宙No.1-Haskeller-にこにー - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
@@ -12,7 +12,7 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="../">Home</a></li>
@@ -68,7 +68,7 @@
 
 <hr />
 
-<p>　この記事は<a href="https://qiita.com/advent-calendar/2017/haskell">Haskell Advent Calendar 2017</a>の クリスマス当日（25日目）の記事です！</p>
+<p>　この記事は<a href="https://qiita.com/advent-calendar/2017/haskell3">Haskell (その3） Advent Calendar 2017</a>の 21日目の記事です！</p>
 <p>　この記事にはSS表現、ラブライブが含まれます。 これらが苦手な方はブラウザバックを推奨します。</p>
 <hr />
 <ul>
@@ -238,8 +238,24 @@ y <span class="fu">Prelude.&gt;&gt;</span> z</code></pre></div>
 
 <span class="ot">main ::</span> <span class="dt">IO</span> ()
 main <span class="fu">=</span> return ()</code></pre></div>
-<p>にこ「ええ。 インスタンス側の型クラス関数が、そのときに使いたい型になっているか不安なときに使ったりするわ」<br />
-にこ「でも、一度コンパイルが通ったら消しちゃうことも少なくないわ…… コンパイル速度が落ちそうな気がしちゃって」</p>
+<p>にこ「ええ。 インスタンス側の型クラス関数が、そのときに使いたい型になっているか不安なときに使ったりするわ。 <code>ScopedTypeVariables</code>と一緒に使うと、より厳格に型検査をしてもらえるのよね」</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE InstanceSigs #-}</span>
+<span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span>
+
+<span class="kw">newtype</span> <span class="dt">List'</span> a <span class="fu">=</span> <span class="dt">List'</span>
+  {<span class="ot"> unList' ::</span> [a]
+  }
+
+<span class="co">-- ランダムなリストを生成するインスタンス</span>
+<span class="kw">instance</span> (<span class="dt">Bounded</span> a, <span class="dt">Random</span> a) <span class="ot">=&gt;</span> <span class="dt">Random</span> (<span class="dt">List'</span> a) <span class="kw">where</span>
+<span class="ot">  randomR ::</span> forall g<span class="fu">.</span> <span class="dt">RandomGen</span> g <span class="ot">=&gt;</span> (<span class="dt">List'</span> a, <span class="dt">List'</span> a) <span class="ot">-&gt;</span> g <span class="ot">-&gt;</span> (<span class="dt">List'</span> a, g)
+  randomR (<span class="dt">List'</span> xs, <span class="dt">List'</span> ys) gen <span class="fu">=</span>
+    <span class="kw">let</span><span class="ot"> randomR' ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> (a, g)  <span class="co">-- 意図通りの関数を書けてるか、型検査</span>
+        randomR' <span class="fu">=</span> curry <span class="fu">$</span> flip randomR gen
+<span class="ot">        zs' ::</span> [(a, g)]  <span class="co">-- 意図通りの結果を受け取れてるか、型検査</span>
+        zs' <span class="fu">=</span> zipWith randomR' xs ys
+    <span class="kw">in</span> <span class="fu">...</span></code></pre></div>
+<p>にこ「でも、一度コンパイルが通ったら消しちゃうことも少なくないわ…… コンパイル速度が落ちそうな気がしちゃって」</p>
 <p>希「どうなんやろな？」</p>
 <h1 id="impredicativetypes">ImpredicativeTypes</h1>
 <p>にこ「非可述的な……型々？」<br />
@@ -319,8 +335,7 @@ main <span class="fu">=</span> return ()</code></pre></div>
 <p>希「なるほどな〜。 デフォルトで値レベルの<code>(-&lt;|) :: a -&gt; b -&gt; a</code> を、 <code>type</code>を指定したときには型レベルの<code>(-&lt;|)</code>を扱うって感じやんな！」</p>
 <h1 id="夜更け">夜更け</h1>
 <p>希「はぁ〜ふぅ」あくび</p>
-<p>にこ（……もう24ね）<br />
-にこ「眠い？」<br />
+<p>にこ（……もう24時ね）   にこ「眠い？」<br />
 希「うーん、ちょっと眠くなってもうたわ」</p>
 <p>にこ「明日眠くなって調子でなかったら大変だし、今日はもう寝ましょうか」<br />
 希「せやね〜」</p>

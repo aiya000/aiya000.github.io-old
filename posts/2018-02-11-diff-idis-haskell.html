@@ -1,0 +1,200 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1-Haskeller-にこにー - IdrisとHaskellの差異「依存型のパターンマッチが可能」</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>IdrisとHaskellの差異「依存型のパターンマッチが可能」</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2018/02/11 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Idris.html">Idris</a>]
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2018-02-11-diff-idis-haskell.html" class="hatena-bookmark-button" data-hatena-bookmark-title="IdrisとHaskellの差異「依存型のパターンマッチが可能」 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2018-02-11-diff-idis-haskell.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>　Idrisに入門中なので、せっかくだからHaskellではできなかったけどIdrisではできること、 またその逆を定期的に挙げていきたいと思います 🐕</p>
+<p>以下のとこには載ってないものを挙げてくつもりです！</p>
+<ul>
+<li><a href="https://github.com/idris-lang/Idris-dev/wiki/Idris-for-Haskellers">Idris for Haskellers - idris-lang/Idris-dev Wiki - GitHub</a></li>
+</ul>
+<p>　初回なので、少し前提知識の補填が入るのはご容赦を。 ここでの主題はあくまで「依存型のパターンマッチが可能」というところです。</p>
+<h1 id="index">Index</h1>
+<ul>
+<li><a href="#idris%E3%81%A7%E3%81%AF%E4%BE%9D%E5%AD%98%E5%9E%8B%E3%81%AE%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B">Idrisでは依存型のパターンマッチができる</a>
+<ul>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89%E5%85%A8%E6%96%87">コード全文</a></li>
+<li><a href="#haskell%E3%81%A7%E6%9B%B8%E3%81%8F%E3%81%AA%E3%82%89">Haskellで書くなら</a></li>
+</ul></li>
+<li><a href="#%E4%BD%99%E8%AB%87-%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E8%AB%B8%E6%A9%9F%E8%83%BD%E3%81%AE%E8%AA%AC%E6%98%8E">余談: 使用した諸機能の説明</a>
+<ul>
+<li><a href="#printlnprint">printLn/print</a></li>
+<li><a href="#vect-n-a">Vect n a</a></li>
+<li><a href="#idris%E3%81%A7%E3%81%AE%E8%87%AA%E7%84%B6%E6%95%B0nat%E3%81%AF0%E3%82%82%E5%90%AB%E3%82%80">Idrisでの自然数（Nat）は0も含む</a></li>
+<li><a href="#dotdot-in-vect">リストリテラル中の..記法はVectでは使えないみたい</a></li>
+</ul></li>
+<li><a href="#idris%E3%81%A7%E3%81%AFghc%E3%81%AEgadts%E6%8B%A1%E5%BC%B5%E7%9B%B8%E5%BD%93%E3%81%8C%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B">IdrisではGHCのGADTs拡張相当がデフォルトで使える</a></li>
+</ul>
+<h1 id="idrisでは依存型のパターンマッチができる">Idrisでは依存型のパターンマッチができる</h1>
+<p>　コードを見てもらえれば、感覚がわかると思う。 <code>Vect</code>型については後述。</p>
+<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span>
+length' {n <span class="fu">=</span> val} <span class="fu">_</span> <span class="fu">=</span> val</code></pre></div>
+<p><code>{n = val}</code>というのが依存型<code>n</code>のパターンマッチである。 <code>n</code>には例えば<code>Vect 5 Int</code>のように自然数値が入る。</p>
+<p>その後の<code>_</code>は<code>Vect n a</code>値が束縛されるが、既に必要ないのでアンダースコアによって破棄される。</p>
+<p>この<code>val</code>はパターンなので、例えば以下のようなマッチングもかけることができる。</p>
+<p>（<code>Z : Type</code>と<code>S : Nat -&gt; Type</code>は<code>Nat</code>型の値。<code>Z</code>は<code>0</code>、<code>S Z</code>は<code>1</code>を表す）</p>
+<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span>
+length' {n <span class="fu">=</span> <span class="dt">Z</span>}   <span class="fu">_</span>  <span class="fu">=</span> <span class="dv">0</span>
+length' {n <span class="fu">=</span> <span class="dt">S</span> <span class="fu">_</span>} xs <span class="fu">=</span> <span class="dv">1</span> <span class="fu">+</span> length' (tail xs)</code></pre></div>
+<h2 id="コード全文">コード全文</h2>
+<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="kw">import</span> <span class="dt">Data</span><span class="fu">.</span><span class="dt">Vect</span>
+
+<span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span>
+xs <span class="fu">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]
+
+<span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span>
+length' {n <span class="fu">=</span> val} <span class="fu">_</span> <span class="fu">=</span> val
+
+<span class="co">--length' : Vect n a -&gt; Nat</span>
+<span class="co">--length' {n = Z}   _  = 0</span>
+<span class="co">--length' {n = S _} xs = 1 + length' (tail xs)</span>
+
+<span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> printLn <span class="fu">$</span> length' xs
+<span class="co">-- {output}</span>
+<span class="co">-- 5</span></code></pre></div>
+<h2 id="haskellで書くなら">Haskellで書くなら</h2>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE DataKinds #-}</span>
+<span class="ot">{-# LANGUAGE GADTs #-}</span>
+<span class="ot">{-# LANGUAGE KindSignatures #-}</span>
+<span class="ot">{-# LANGUAGE PolyKinds #-}</span>
+<span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span>
+<span class="ot">{-# LANGUAGE TypeOperators #-}</span>
+
+<span class="kw">import </span><span class="dt">Data.Proxy</span> (<span class="dt">Proxy</span>(..))
+<span class="kw">import </span><span class="dt">GHC.TypeLits</span>
+
+<span class="kw">data</span> <span class="dt">Vect</span> (<span class="ot">n ::</span> <span class="dt">Nat</span>)<span class="ot"> a ::</span> <span class="fu">*</span> <span class="kw">where</span>
+  <span class="dt">Nil</span><span class="ot"> ::</span> <span class="dt">Vect</span> <span class="dv">0</span> a
+<span class="ot">  (:::) ::</span> a <span class="ot">-&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Vect</span> (n <span class="fu">+</span> <span class="dv">1</span>) a
+
+<span class="kw">infixr</span> <span class="dv">7</span> <span class="ot">::</span><span class="fu">:</span>
+
+<span class="ot">xs ::</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span>
+xs <span class="fu">=</span> <span class="dv">1</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">2</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">3</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">4</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">5</span> <span class="ot">::</span><span class="fu">:</span> <span class="dt">Nil</span>
+
+<span class="co">-- HaskellではNatが値を持たないのでIntを使う</span>
+<span class="ot">length' ::</span> forall n a<span class="fu">.</span> <span class="dt">KnownNat</span> n <span class="ot">=&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Int</span>
+length' _ <span class="fu">=</span> fromInteger <span class="fu">$</span> natVal (<span class="dt">Proxy</span><span class="ot"> ::</span> <span class="dt">Proxy</span> n)
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> print <span class="fu">$</span> length' xs
+<span class="co">-- {output}</span>
+<span class="co">-- 5</span></code></pre></div>
+<h1 id="余談-使用した諸機能の説明">余談: 使用した諸機能の説明</h1>
+<p>　以上で使用した諸機能について補足をします。</p>
+<h2 id="printlnprint"><code>printLn</code>/<code>print</code></h2>
+<p>　Haskellでの<code>print</code>は<code>printLn</code>に該当する。 Idrisの<code>print</code>は改行を出力しない。</p>
+<h2 id="vect-n-a"><code>Vect n a</code></h2>
+<p>　<code>Vect</code>型はその長さを型パラメータ<code>n</code>に持つ<code>a</code>のリストである。 例えば以下は長さ5を持つ。</p>
+<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span>
+xs <span class="fu">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]</code></pre></div>
+<p>　<code>Vect</code>の簡略的定義はこんな感じ</p>
+<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="kw">data</span> <span class="dt">Vect</span> <span class="ot">:</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="kw">where</span>
+  <span class="dt">Nil</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">0</span> a
+  <span class="fu">(::)</span> <span class="ot">:</span> x <span class="ot">-&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Vect</span> (<span class="dt">S</span> n) a
+
+<span class="kw">infixl</span> <span class="dv">7</span> <span class="ot">::</span></code></pre></div>
+<ul>
+<li>実定義は<a href="https://www.idris-lang.org/docs/current/base_doc/docs/Data.Vect.html#Data.Vect.Vect">IdrisDoc: Data.Vect</a></li>
+</ul>
+<p>　また<code>Type</code>型はHaskellで言う<code>*</code>種である。</p>
+<p>Idrisでは値と型の区別がなく、つまり種（型の型）も値で表現できるので、 「ある自然数と要素の型を受け取り、その型を返す」 という表現は<code>Nat -&gt; a -&gt; Type</code>になる。</p>
+<h2 id="idrisでの自然数natは0も含む"><strong>Idrisでの自然数（<code>Nat</code>）は<code>0</code>も含む</strong></h2>
+<p>　やはりプログラミングでは<code>0</code>を含んだ方が、自然数がぐーーーんと使いやすい。</p>
+<h2 id="リストリテラル中の..記法はvectでは使えないみたい">リストリテラル中の<code>..</code>記法は<code>Vect</code>では使えないみたい <a name="dotdot-in-vect"></a></h2>
+<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span>
+xs <span class="fu">=</span> [<span class="dv">1</span><span class="fu">..</span><span class="dv">5</span>]</code></pre></div>
+<pre><code>| xs = [1..5]
+|      ~~~~~~
+When checking right hand side of xs with expected type
+        Vect 5 Int
+
+Type mismatch between
+        List a (Type of enumFromTo _ _)
+and
+        Vect 5 Int (Expected type)</code></pre>
+<p>（expected type <code>Vect 5 Int</code> but got <code>List a</code> と言っている）</p>
+<h2 id="idrisではghcのgadts拡張相当がデフォルトで使える">IdrisではGHCの<code>GADTs</code>拡張相当がデフォルトで使える</h2>
+<p>　上記、<code>Vect</code>の簡略定義の通り。</p>
+<p>もちろん普通の代数的データ型もこんな感じに書ける。</p>
+<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="kw">data</span> <span class="dt">Mine</span> <span class="fu">=</span> <span class="dt">My</span> <span class="dt">String</span></code></pre></div>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-02-11-diff-idis-haskell.md">IdrisとHaskellの差異「依存型のパターンマッチが可能」 - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

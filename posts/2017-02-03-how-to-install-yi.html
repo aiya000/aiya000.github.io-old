@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>あいや☆ぱぶりっしゅぶろぐ！ - yiテキストエディタのインストール方法</title>
+        <title>大銀河宇宙No.1-Haskeller-にこにー - yiテキストエディタのインストール方法</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
@@ -12,7 +12,7 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="../">Home</a></li>
@@ -60,14 +60,51 @@
 
 <hr />
 
-<p>　一応、メモっておく。</p>
-<p><code>haskell-stack</code>はインストールされているものとする。</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">git</span> clone https://github.com/yi-editor/yi yi
-$ <span class="bu">cd</span> yi
-$ <span class="va">LANG=</span>C <span class="va">STACK_YAML=</span>lts-6.yaml <span class="ex">stack</span> setup
-$ <span class="va">LANG=</span>C <span class="va">STACK_YAML=</span>lts-6.yaml <span class="ex">stack</span> build
-$ <span class="va">LANG=</span>C <span class="va">STACK_YAML=</span>lts-6.yaml <span class="ex">stack</span> install</code></pre></div>
-<p>$LANG, $STACK_YAMLを外すと、Gtk2Hs関連のエラーが出る。</p>
+<p>　<code>haskell-stack</code>はインストールされているものとする 🐕</p>
+<pre class="shell-session"><code>$ git clone https://github.com/yi-editor/yi yi
+$ cd yi/yi
+$ LANG=C stack setup
+$ LANG=C stack build
+$ LANG=C stack install</code></pre>
+<p><code>$LANG</code>を外すと、cairoパッケージあたり？ でGtk2Hs関連のエラーが出る。</p>
+<pre><code>--  While building custom Setup.hs for package cairo-0.13.3.1 using:
+      /tmp/stack16474/cairo-0.13.3.1/.stack-work/dist/x86_64-linux-tinfo6-nopie/Cabal-1.24.2.0/setup/setup-to-file&quot;
+    Process exited with code: ExitFailure 1
+    Logs have been written to: /home/aiya000/Repository/yi...
+
+    [1 of 2] Compiling Main             ( ...
+    [2 of 2] Compiling StackSetupShim   ( ...
+    Linking /tmp/stack16474/cairo-0.13.3.1/.stack-work/dist/x86_64-linux-tinfo6-nopie/Cabal-1.24.2.0/setup
+    Configuring cairo-0.13.3.1...
+    Building cairo-0.13.3.1...
+    Preprocessing library cairo-0.13.3.1...
+    setup: Error in C header file.
+
+    ./cairo-gtk2hs.h:1: (column 0) [FATAL]
+      &gt;&gt;&gt; Lexical error!
+      The character '#' does not fit here.
+
+
+--  While building custom Setup.hs for package glib-0.13.4.1 using:
+      /tmp/stack16474/glib-0.13.4.1/.stack-work/dist/x86_64-linux-tinfo6-nopie/Cabal-1.24.2.0/setup/setup-to-file&quot;
+    Process exited with code: ExitFailure 1
+    Logs have been written to: /home/aiya000/Repository/yi...
+
+    [1 of 2] Compiling Main             ( ...
+    [2 of 2] Compiling StackSetupShim   ( ...
+    Linking /tmp/stack16474/glib-0.13.4.1/.stack-work/dist/x86_64-linux-tinfo6-nopie/Cabal-1.24.2.0/setup/...
+    Configuring glib-0.13.4.1...
+    Building glib-0.13.4.1...
+    Preprocessing library glib-0.13.4.1...
+    setup: Error in C header file.
+
+    /usr/include/glib-2.0/glib-object.h:1: (column 0) [FATAL]
+      &gt;&gt;&gt; Lexical error!
+      The character '#' does not fit here.</code></pre>
+<p>（今回は<a href="https://github.com/yi-editor/yi">yi-editor/yi</a>を<code>yi-config/yi-origin</code>ディレクトリにクローンしてある）</p>
+<p>　手元の都合に応じて<code>STACK_YAML=lts-6.yaml</code>などを指定してあげると、対応したstackageのltsバージョンでビルドできる。 指定しなければ<code>yi/yi/stack.yaml</code>の内容でビルドされる。</p>
+<pre class="shell-session"><code>$ ls yi/yi/lts-*
+yi/yi/lts-6.yaml  yi/yi/lts-7.yaml</code></pre>
 
 <hr />
 <hr />

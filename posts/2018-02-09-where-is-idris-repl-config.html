@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>あいや☆ぱぶりっしゅぶろぐ！ - extensibleのEffectでIOを使う</title>
+        <title>大銀河宇宙No.1-Haskeller-にこにー - IdrisのREPLの設定ファイルは~/.idris/repl/init</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
@@ -12,7 +12,7 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="../">Home</a></li>
@@ -24,16 +24,16 @@
         </nav>
 
         <div id="content">
-            <h4>extensibleのEffectでIOを使う</h4>
+            <h4>IdrisのREPLの設定ファイルは~/.idris/repl/init</h4>
             <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <div class="info">
-    Posted on 2017/08/27 <br />
+    Posted on 2018/02/09 <br />
     
 
     Tags:
     
-        [<a href="../tags/Haskell.html">Haskell</a>]
+        [<a href="../tags/Idris.html">Idris</a>]
     
 
     <ul class="bookmarkers">
@@ -43,12 +43,12 @@
         </li>
 
         <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-08-27-io-in-extensible.html" class="hatena-bookmark-button" data-hatena-bookmark-title="extensibleのEffectでIOを使う - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2018-02-09-where-is-idris-repl-config.html" class="hatena-bookmark-button" data-hatena-bookmark-title="IdrisのREPLの設定ファイルは~/.idris/repl/init - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
             <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
         <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
-            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-08-27-io-in-extensible.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2018-02-09-where-is-idris-repl-config.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
         </li>
 
         <li> <!-- See https://getpocket.com/publisher/button -->
@@ -60,29 +60,17 @@
 
 <hr />
 
-<p>※ 本記事はextensible-effectsパッケージではなくextensibleパッケージの <code>Data.Extensible.Effect</code>モジュールについての記事です</p>
-<h1 id="解答">解答</h1>
-<p>　こんな感じにする。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE DataKinds #-}</span>
-<span class="ot">{-# LANGUAGE OverloadedLabels #-}</span>
-<span class="ot">{-# LANGUAGE TypeApplications #-}</span>
-<span class="ot">{-# LANGUAGE TypeOperators #-}</span>
-
-<span class="kw">import </span><span class="dt">Data.Extensible</span>
-
-<span class="ot">context ::</span> <span class="dt">Eff</span> <span class="ch">'[&quot;io&quot; &gt;: IO] ()</span>
-context <span class="fu">=</span> liftEff <span class="fu">#</span>io <span class="fu">$</span> putStrLn <span class="st">&quot;hi&quot;</span>
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> retractEff context
-<span class="co">-- hi</span></code></pre></div>
+<ul>
+<li><a href="http://docs.idris-lang.org/en/latest/reference/repl.html">The Idris REPL — Idris 1.2.0 documentation</a></li>
+</ul>
+<p>“The file repl/init” と書いてあったものの、一瞬わからなかったのでメモ 🐕</p>
 
 <hr />
 <hr />
 
 <p class="about-pr">
 この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-08-27-io-in-extensible.md">extensibleのEffectでIOを使う - github</a> <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-02-09-where-is-idris-repl-config.md">IdrisのREPLの設定ファイルは~/.idris/repl/init - github</a> <br />
 ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
 </p>
 

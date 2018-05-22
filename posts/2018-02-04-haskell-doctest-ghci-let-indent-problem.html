@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1-Haskeller-にこにー - Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2018/02/04 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Haskell.html">Haskell</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2018-02-04-haskell-doctest-ghci-let-indent-problem.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2018-02-04-haskell-doctest-ghci-let-indent-problem.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>こんな感じのdoctestを書いていると怒られた 😭</p>
+<pre><code>-- &gt;&gt;&gt; :{
+-- &gt;&gt;&gt; let result = &quot;good&quot;
+-- &gt;&gt;&gt; &quot;good&quot;
+-- &gt;&gt;&gt; :}
+-- &quot;good&quot;</code></pre>
+<pre><code>### Failure in Foo.hs:364: expression `:{
+ let result = &quot;good&quot;
+ &quot;good&quot;
+:}'
+expected: &quot;good&quot;
+ but got:
+          &lt;interactive&gt;:436:2: error:
+              parse error (possibly incorrect indentation or mismatched brackets)</code></pre>
+<p>let式を使うと（letにinを付けると）正しく実行された。</p>
+<pre><code>-- &gt;&gt;&gt; :{
+-- &gt;&gt;&gt; let result = &quot;good&quot; in
+-- &gt;&gt;&gt; &quot;good&quot;
+-- &gt;&gt;&gt; :}
+-- &quot;good&quot;</code></pre>
+<p>ちなみにこれもだめだった 😕</p>
+<pre><code>-- &gt;&gt;&gt; :{
+-- &gt;&gt;&gt; let result = &quot;good&quot;
+-- &gt;&gt;&gt; return &quot;good&quot;
+-- &gt;&gt;&gt; :}
+-- &quot;good&quot;</code></pre>
+<p>マジかよ ❗ ❗</p>
+<hr />
+<p>参考までに、以下は「こんな感じ」の実例。</p>
+<pre><code>-- &gt;&gt;&gt; :{
+-- &gt;&gt;&gt; let result = [z|
+-- &gt;&gt;&gt;               (do
+-- &gt;&gt;&gt;                 (def! x 10)
+-- &gt;&gt;&gt;                 (def! y (+ 10 x))
+-- &gt;&gt;&gt;                 (fn* (a) (+ x y)))
+-- &gt;&gt;&gt;              |] in
+-- &gt;&gt;&gt; case result of
+-- &gt;&gt;&gt;      [pp|(fn* (a) (+ 10 20))|] -&gt; &quot;good&quot;
+-- &gt;&gt;&gt;      _ -&gt; &quot;bad: &quot; &lt;&gt; readable result
+-- &gt;&gt;&gt; :}
+-- &quot;good&quot;</code></pre>
+<pre><code>### Failure in src/Maru/Eval.hs:364: expression `:{ilures: 0
+ let result = [z|
+               (do
+                 (def! x 10)
+                 (def! y (+ 10 x))
+                 (fn* (a) (+ x y)))
+              |]
+ case result of
+      [pp|(fn* (a) (+ 10 20))|] -&gt; &quot;good&quot;
+      _ -&gt; &quot;bad: &quot; &lt;&gt; readable result
+:}'
+expected: &quot;good&quot;
+ but got:
+          &lt;interactive&gt;:441:2: error:
+              parse error (possibly incorrect indentation or mismatched brackets)</code></pre>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-02-04-haskell-doctest-ghci-let-indent-problem.md">Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

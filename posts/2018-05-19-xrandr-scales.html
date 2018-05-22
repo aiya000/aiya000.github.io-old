@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1-Haskeller-にこにー - Xorg環境でディスプレイの解像度ではなく表示倍率を変える--scale</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>Xorg環境でディスプレイの解像度ではなく表示倍率を変える--scale</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2018/05/19 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Linux.html">Linux</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2018-05-19-xrandr-scales.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Xorg環境でディスプレイの解像度ではなく表示倍率を変える--scale - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2018-05-19-xrandr-scales.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>Before<br />
+<img src="../images/posts/2018-05-19-xrandr-scales/before.png" alt="before" /></p>
+<p>After<br />
+<img src="../images/posts/2018-05-19-xrandr-scales/after.png" alt="after" /></p>
+<h1 id="問題">問題</h1>
+<p>　上記 ‘Before’ のように、 解像度の低いディスプレイでvivaldiのサイドタブを使っていると、 ページの表示に使える領域が非常に狭くなる。</p>
+<p>もちろん解像度が低いので仕方ないのだけど、 同じディスプレイをWindows10またはmacOS HighSierraにつなぐと、 なんと見た目上は使える領域を広くしてくれる （表示倍率を自動調節してくれる）。</p>
+<p>Xorgはすごいので、Linuxディストロでもできるだろうと思って調べた。</p>
+<h1 id="解決">解決</h1>
+<pre class="shell-session"><code># --scaleを見て欲しい
+$ xrandr --output DP-1 --mode 1280x1024 --pos 2160x0 --scale 1.6x1.6</code></pre>
+<p>　これでWindowsやmacOSのように、 表示倍率を変えることができた。 （上記 ‘After’ と ‘Before’ を見てもらえれば思う）</p>
+<p>解像度が変わったわけではないので文字が若干荒く表示されるので ターミナルエミュレータを表示させておくのは厳しいが、 ブラウザや画像などを見る程度なら快適である。</p>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-05-19-xrandr-scales.md">Xorg環境でディスプレイの解像度ではなく表示倍率を変える--scale - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

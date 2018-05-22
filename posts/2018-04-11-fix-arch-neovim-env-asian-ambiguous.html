@@ -1,0 +1,175 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1-Haskeller-にこにー - Arch LinuxでEast Asian Ambiguous charが幅1で表示されることについて</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <!-- bootstrap requires jquery -->
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="../">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../products.html">Products</a></li>
+                <li><a href="../archive.html">Archive</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <h4>Arch LinuxでEast Asian Ambiguous charが幅1で表示されることについて</h4>
+            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="info">
+    Posted on 2018/04/11 <br />
+    
+
+    Tags:
+    
+        [<a href="../tags/Linux.html">Linux</a>]
+    
+        [<a href="../tags/NeoVim.html">NeoVim</a>]
+    
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Arch LinuxでEast Asian Ambiguous charが幅1で表示されることについて - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+</div>
+
+<hr />
+
+<p>　相当前から…僕のArch Linux上のTermite上のNeoVimで 「…」 という文字が幅1で表示されてしまう 問題に悩ませれている。 結局解決できなかったが……今後別の環境でまた同じシチュエーションになったときのために……まとめておく。</p>
+<p>……</p>
+<h1 id="この記事中の各々のバージョン">この記事中の各々のバージョン</h1>
+<table class="table table-bordered">
+<tbody>
+<tr class="odd">
+<td align="center">NeoVim</td>
+<td align="center">0.2.2</td>
+</tr>
+<tr class="even">
+<td align="center">Vim</td>
+<td align="center">8.0.1257</td>
+</tr>
+<tr class="odd">
+<td align="center">urxvt</td>
+<td align="center">9.22</td>
+</tr>
+<tr class="even">
+<td align="center">Termite</td>
+<td align="center">13</td>
+</tr>
+<tr class="odd">
+<td align="center">tmux</td>
+<td align="center">2.6</td>
+</tr>
+</tbody>
+</table>
+<h1 id="east-asian-ambiguous-charactersって">East Asian Ambiguous charactersって？</h1>
+<p>　これ 👇</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E6%9D%B1%E3%82%A2%E3%82%B8%E3%82%A2%E3%81%AE%E6%96%87%E5%AD%97%E5%B9%85">東アジアの文字幅 - Wikipedia</a></li>
+</ul>
+<p>　幅2で表示されるべき文字だが、考慮されていない環境では幅1で表示されたりする。</p>
+<h1 id="結論">結論</h1>
+<p><del>　urxvt * Vimを使うのがいいと思う。</del><br />
+<del>（NeoVim宗教上の理由により、僕は無理だった）</del></p>
+<p><del>　または何かしらの統合デスクトップ環境を使えば、うまく対処できるのかもしれない。</del> <del>僕は統合デスクトップ環境を使っていない。</del><br />
+<del>（xmonadを使っている）</del></p>
+<p>　<a href="https://github.com/fumiyas/wcwidth-cjk">fumiyas/wcwidth-cjk</a> をインストールして、指示通り<code>.zshenv</code>あたりに</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="bu">eval</span> <span class="kw">`</span><span class="ex">/usr/local/bin/wcwidth-cjk</span> --sh-init<span class="kw">`</span></code></pre></div>
+<p>と書くと、urxvt上での問題は一切合切直った。 すごい！！</p>
+<ul>
+<li><a href="https://github.com/fumiyas/wcwidth-cjk">GitHub - fumiyas/wcwidth-cjk: Run command with CJK-friendly wcwidth(3) to fix ambiguous width chars</a></li>
+</ul>
+<p>　以下の内容は僕にとってもはや無用になったが、残しておく。 誰かのためになれば幸い。</p>
+<h1 id="vim上での問題以前">Vim上での問題以前</h1>
+<p>　前述の通りArch Linux * Termiteな環境ではEast…charはcatでもlessでもなんでもうまく表示されなかったが、 Vimだけは例外だった。 Vimの中ではTermiteの上であろうとurxvtの上であろうと幅2で表示される。</p>
+<p>Vimではいずれの環境でもうまく表示された。 NeoVimではダメだった。</p>
+<p>　これについて<del>Dark Vim Master</del>報告者の方は 「terminalの問題っぽい。urxvtではうまく動いた」と報告しているが、 後述する僕のurxvt環境（Arch Linux * urxvt）では cat/lessでうまく動くものの NeoVimではうまく動かなかったので、 やはりNeoVimの問題ではないかと思う。</p>
+<p>（もう力尽きたので、これについての調査は行っておらず…ごめん）</p>
+<ul>
+<li><a href="https://github.com/neovim/neovim/issues/2684">Wrong ambiwidth VTE width when VTE_CJK_WIDTH - Issue #2684 - neovim/neovim - GitHub</a></li>
+</ul>
+<p>　なのでNeoVimからVimに乗り換えようと思ったものの、 僕はNeoVimに頼りっきりになっていて、無理だった…… NeoVimは最強、離れられない。</p>
+<h1 id="termiteの問題">Termiteの問題</h1>
+<div class="figure">
+<img src="../images/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous/in-termite.png" alt="on-termite" />
+<p class="caption">on-termite</p>
+</div>
+<p>　上の画像はTermite * NeoVimでの表示。</p>
+<p>しかしながらcat/lessでもTermite上ではうまく表示されず、 TermiteではEastふんふんcharは必ず幅1で表示されるものと思われる。</p>
+<p>　これについてはurxvtに以降することで対処した。</p>
+<p>urxvt上でのcat/lessではEastふんふんは幅2で表示される。 （ただし絵文字はうまく表示できず、ぐぬぬ）</p>
+<h1 id="neovimの問題">NeoVimの問題</h1>
+<div class="figure">
+<img src="../images/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous/in-urxvt.png" alt="on-urxvt" />
+<p class="caption">on-urxvt</p>
+</div>
+<p>　しかしながら未だurxvt * NeoVim環境ではふんふんが幅2で表示されている（こんな感じ ☝️）。</p>
+<p>　この記事で「…」を多用して下記心地を試してみたものの、 ちょっとtypoが発生してしまいそうで怖い。</p>
+<p>今はNeoVimのfやFなどを駆使してなんとかがんばっている……。</p>
+<h1 id="その他の環境でeast-asian-ambiguous-character-widthに問題がある場合">その他の環境でEast Asian Ambiguous character widthに問題がある場合</h1>
+<p>　その他の環境でEast Asian Ambiguous character widthに問題がある場合に役に立ちそうなもの 👇 。</p>
+<ul>
+<li>tmuxに問題がある場合
+<ul>
+<li><a href="https://gist.github.com/z80oolong/e65baf0d590f62fab8f4f7c358cbcc34">tmux 2.3 以降において East Asian Ambiguous Character を全角文字の幅で表示する - GitHub</a></li>
+</ul></li>
+<li>libc, urxvt, emacs, Vim, xterm, mlterm, screen, w3mのいずれかに問題がある場合
+<ul>
+<li><a href="https://github.com/hamano/locale-eaw">GitHub - hamano/locale-eaw: East Asian Ambiguous Width問題と絵文字の横幅問題の修正ロケール</a></li>
+</ul></li>
+<li>Qtを用いたアプリケーションに問題がある場合
+<ul>
+<li><a href="http://rago1975.blog.shinobi.jp/lxqt/0071">qtermwidget-cjk-git というパッケージを作成し、AURに登録した。｜rago1975の部屋</a></li>
+</ul></li>
+<li>汎用的で局所的な対処
+<ul>
+<li><a href="https://github.com/fumiyas/wcwidth-cjk">GitHub - fumiyas/wcwidth-cjk: Run command with CJK-friendly wcwidth(3) to fix ambiguous width chars</a></li>
+</ul></li>
+</ul>
+
+<hr />
+<hr />
+
+<p class="about-pr">
+この記事はこちらから修正リクエストを送ることができます。 <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous.md">Arch LinuxでEast Asian Ambiguous charが幅1で表示されることについて - github</a> <br />
+ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+</p>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+        </div>
+
+        <div id="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
+            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
+        </div>
+    </body>
+</html>

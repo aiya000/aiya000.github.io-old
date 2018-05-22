@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>あいや☆ぱぶりっしゅぶろぐ！ - haskell-stackで-collect2： エラー： ldはステータス1で終了しました-が出た場合の対処</title>
+        <title>大銀河宇宙No.1-Haskeller-にこにー - haskell-stackで 'collect2; エラー; ldはステータス1で終了しました' が出た場合の対処</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
@@ -12,7 +12,7 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../">あいや☆ぱぶりっしゅぶろぐ！</a>
+                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="../">Home</a></li>
@@ -24,7 +24,7 @@
         </nav>
 
         <div id="content">
-            <h4>haskell-stackで-collect2： エラー： ldはステータス1で終了しました-が出た場合の対処</h4>
+            <h4>haskell-stackで 'collect2; エラー; ldはステータス1で終了しました' が出た場合の対処</h4>
             <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <div class="info">
@@ -43,7 +43,7 @@
         </li>
 
         <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-09-27-how-to-fix-ncurses-problem-of-stack.html" class="hatena-bookmark-button" data-hatena-bookmark-title="haskell-stackで-collect2： エラー： ldはステータス1で終了しました-が出た場合の対処 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-09-27-how-to-fix-ncurses-problem-of-stack.html" class="hatena-bookmark-button" data-hatena-bookmark-title="haskell-stackで 'collect2; エラー; ldはステータス1で終了しました' が出た場合の対処 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
             <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
@@ -61,7 +61,8 @@
 <hr />
 
 <p>　先日<code>yaourt -Syuu</code>すると、haskell-stackのプロジェクトがビルドできなくなった。</p>
-<pre class="console"><code>Configuring clock-0.7.2...
+<pre class="shell-session"><code>$ cd {a-stack-project} &amp;&amp; stack build
+Configuring clock-0.7.2...
 Building clock-0.7.2...
 Preprocessing library clock-0.7.2...
 /tmp/stack19865/clock-0.7.2/Clock.hsc:44:0: 警告: &quot;hsc_alignment&quot; が再定義されました
@@ -73,7 +74,7 @@ Preprocessing library clock-0.7.2...
 /bin/ld: 最終リンクに失敗しました: 出力に対応するセクションがありません
 collect2: エラー: ld はステータス 1 で終了しました</code></pre>
 <p>　Haskellができないとか意味がわからないので、直す。 これで直った。</p>
-<pre class="console"><code>$ yaourt -Rns libtinfo
+<pre class="shell-session"><code>$ yaourt -Rns libtinfo
 $ yaourt -S ncurses5-compat-libs
 $ rm -rf ~/.stack .stack-work
 
@@ -85,13 +86,19 @@ $ sudo ln -s libncursesw.so.6.0 libncurses.so</code></pre>
 <ul>
 <li><a href="2017-04-12-how-to-fix-libncurses-problem-of-stack.html">あいや☆ぱぶりっしゅぶろぐ！ - haskell-stackでcan’t load .so/.DLL for 〜/libncurses.soが出た場合の対処</a></li>
 </ul>
+<h1 id="上記がダメだったときに試すその他方法">上記がダメだったときに試すその他方法</h1>
+<p>クラキ カコ ヲ ケシサル ノダ</p>
+<pre class="shell-session"><code>$ rm -rf ~/.stack
+$ cd {your-stack-project} &amp;&amp; rm -rf .stack-work</code></pre>
+<p>ナンジ スタティック ノ チカラ ヲ テニセヨ</p>
+<pre class="shell-session"><code>$ yaourt -S stack-static</code></pre>
 
 <hr />
 <hr />
 
 <p class="about-pr">
 この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-09-27-how-to-fix-ncurses-problem-of-stack.md">haskell-stackで-collect2： エラー： ldはステータス1で終了しました-が出た場合の対処 - github</a> <br />
+<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-09-27-how-to-fix-ncurses-problem-of-stack.md">haskell-stackで 'collect2; エラー; ldはステータス1で終了しました' が出た場合の対処 - github</a> <br />
 ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
 </p>
 
