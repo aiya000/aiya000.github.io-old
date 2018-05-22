@@ -1,15 +1,27 @@
 <link rel="stylesheet" type="text/css" href="/css/post.css"/>
 
-<div class="info">
-    Posted on $date$ <br/>
+<div class="post-info">
+    <div class="post-date">$date$</div>
     $if(author)$
-        by $author$ <br/>
+       <div class="post-author">$author$</div>
     $endif$
 
-    Tags:
-    $for(tagNames)$
-        [<a href="/tags/$tagName$.html">$tagName$</a>]
-    $endfor$
+    <div class="post-title">$title$</div>
+
+    <ul class="post-tags">
+        $for(tagNames)$
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="/tags/$tagName$.html">$tagName$</a>
+            </li>
+        $endfor$
+    </ul>
+</div>
+
+<div class="post-body">
+    $body$
+
+    <hr/>
 
     <ul class="bookmarkers">
         <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
@@ -31,19 +43,12 @@
             <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
         </li>
     </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br/>
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/$path$">$title$ - github</a> <br/>
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
 </div>
 
-<hr/>
-
-$body$
-
-<hr/>
-<hr/>
-
-<p class="about-pr">
-この記事はこちらから修正リクエストを送ることができます。 <br/>
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/$path$">$title$ - github</a> <br/>
-ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
-</p>
-
-<script src="/js/facebook-sdk-2.8.js"></script>
+<script src="/js/facebook-sdk-2.8.js"/>
