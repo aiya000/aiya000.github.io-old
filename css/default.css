@@ -35,7 +35,7 @@ hr {
 }
 
 h1 {
-      font-size: 150%;
+      font-size: 170%;
       padding-bottom: 2%;
       padding-left: 2%;
       margin-left: -2.5%;
@@ -47,6 +47,23 @@ h1:before {
         content: "";
         height: 60%;
         width: 0.7%;
+        left: 0;
+        position: absolute;
+}
+
+h2 {
+      font-size: 120%;
+      padding-bottom: 2%;
+      padding-left: 2.5%;
+      margin-left: -2.5%;
+      position: relative;
+}
+
+h2:before {
+        background: black;
+        content: "";
+        height: 60%;
+        width: 1.4%;
         left: 0;
         position: absolute;
 }
