@@ -69,6 +69,4 @@ Wakaru（Wakaru）
 Sorena！Seyana！Soyana！Arena！  
 Wakaru（Wakaru）  
 
-# 元
-
 - [何でも言うことを聞いてくれるアカネチャン - ニコニコ動画](http://www.nicovideo.jp/watch/sm32492001)
