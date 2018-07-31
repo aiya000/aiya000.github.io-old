@@ -1,70 +1,69 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1-Haskeller-にこにー - にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」</title>
+        <title>大銀河宇宙No.1_Haskeller - にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
-        <!-- bootstrap requires jquery -->
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                大銀河宇宙No.1_Haskeller
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="../">Home</a></li>
-                <li><a href="../about.html">About</a></li>
-                <li><a href="../profile.html">Profile</a></li>
-                <li><a href="../products.html">Products</a></li>
-                <li><a href="../archive.html">Archive</a></li>
-            </ul>
         </nav>
 
-        <div id="content">
-            <h4>にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」</h4>
-            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
-<div class="info">
-    Posted on 2017/05/27 <br />
+<div class="post-info">
+    <div class="post-date">2017/05/27</div>
     
 
-    Tags:
-    
-        [<a href="../tags/ラブライブ！で学ぶ.html">ラブライブ！で学ぶ</a>]
-    
-        [<a href="../tags/にこ、希と一緒に学ぶHaskell.html">にこ、希と一緒に学ぶHaskell</a>]
-    
-        [<a href="../tags/Haskell.html">Haskell</a>]
-    
+    <div class="post-title">にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」</div>
 
-    <ul class="bookmarkers">
-        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
-            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </li>
-
-        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-05-27-learn-haskell-with-muse-extra.html" class="hatena-bookmark-button" data-hatena-bookmark-title="にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </li>
-
-        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
-            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-05-27-learn-haskell-with-muse-extra.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
-        </li>
-
-        <li> <!-- See https://getpocket.com/publisher/button -->
-            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
-            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-        </li>
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/ラブライブ！で学ぶ.html">ラブライブ！で学ぶ</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/にこ、希と一緒に学ぶHaskell.html">にこ、希と一緒に学ぶHaskell</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Haskell.html">Haskell</a>
+            </li>
+        
     </ul>
 </div>
 
-<hr />
-
-<ul>
+<div class="post-body">
+    <ul>
 <li><a href="./2017-05-06-learn-haskell-with-muse.html">本編その1（ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」）</a></li>
 <li><a href="../tags/にこ、希と一緒に学ぶHaskell.html">記事一覧 - にこ、希と一緒に学ぶHaskell（番外）</a></li>
 <li><a href="https://github.com/aiya000/aiya000.github.io/search?utf8=%E2%9C%93&amp;q=%22Haskell%2FMuse%3A%22&amp;type=Commits">更新履歴 - μ’sと一緒に学ぶHaskell</a></li>
@@ -252,22 +251,47 @@ SingletonInt result = x.<span class="fu">mappend</span>(y).<span class="fu">mapp
 <li><a href="http://dic.pixiv.net/a/%E7%9F%A2%E6%BE%A4%E3%81%AB%E3%81%93">矢澤にこ - ピクシブ百科事典</a></li>
 </ul>
 
-<hr />
-<hr />
+    <hr />
 
-<p class="about-pr">
-この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-05-27-learn-haskell-with-muse-extra.md">にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」 - github</a> <br />
-ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
-</p>
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2017-05-27-learn-haskell-with-muse-extra.html" class="hatena-bookmark-button" data-hatena-bookmark-title="にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2017-05-27-learn-haskell-with-muse-extra.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-05-27-learn-haskell-with-muse-extra.md">にこ、希と一緒に学ぶHaskell（番外）「型クラスの定義と実装（Extra）」 - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
 
 <script src="../js/facebook-sdk-2.8.js"></script>
 
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
         </div>
 
-        <div id="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
-            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
-        </div>
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
     </body>
 </html>

@@ -1,0 +1,203 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1_Haskeller - ScopedTypeVariables下の1ランク多相で型が合わないとき</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                大銀河宇宙No.1_Haskeller
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="post-info">
+    <div class="post-date">2018/06/20</div>
+    
+
+    <div class="post-title">ScopedTypeVariables下の1ランク多相で型が合わないとき</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Haskell.html">Haskell</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <h1 id="まとめ">まとめ</h1>
+<p>　forallを指定してあげると、一連の<code>a</code>, <code>b</code>が固定されてくれます。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">f ::</span> forall a b<span class="fu">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></code></pre></div>
+<h1 id="解説">解説</h1>
+<p>　以下のようなコードを書くと</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span>
+
+<span class="ot">f ::</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+f g h x <span class="fu">=</span>
+  <span class="kw">let</span> y <span class="fu">=</span> g<span class="ot"> x ::</span> b
+      z <span class="fu">=</span> h<span class="ot"> x ::</span> b
+  <span class="kw">in</span> y <span class="fu">==</span> z
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> pure ()</code></pre></div>
+<p>以下のようなエラーがでます。 「<code>g x</code>によって推論されたその型<code>b'</code>と、指定されたその型<code>b</code>が同一ではない」の意です。</p>
+<p>意図として 「<code>g x :: b</code>の<code>b</code>は、<code>f</code>の型で指定された<code>b</code>そのものである」 ということを指定したつもりなのだけど…。</p>
+<pre><code>/tmp/nvimNLJJ6T/148.hs:5:11: error:
+    • Couldn't match expected type ‘b2’ with actual type ‘b’
+      ‘b’ is a rigid type variable bound by
+        the type signature for:
+          f :: forall b a. Eq b =&gt; (a -&gt; b) -&gt; (a -&gt; b) -&gt; a -&gt; Bool
+        at /tmp/nvimNLJJ6T/148.hs:3:6
+      ‘b2’ is a rigid type variable bound by
+        an expression type signature:
+          forall b2. b2
+        at /tmp/nvimNLJJ6T/148.hs:5:18
+    • In the expression: g x :: b
+      In an equation for ‘y’: y = g x :: b
+      In the expression:
+        let
+          y = g x :: b
+          z = h x :: b
+        in y == z
+    • Relevant bindings include
+        h :: a -&gt; b (bound at /tmp/nvimNLJJ6T/148.hs:4:5)
+        g :: a -&gt; b (bound at /tmp/nvimNLJJ6T/148.hs:4:3)
+        f :: (a -&gt; b) -&gt; (a -&gt; b) -&gt; a -&gt; Bool
+          (bound at /tmp/nvimNLJJ6T/148.hs:4:1)
+
+/tmp/nvimNLJJ6T/148.hs:6:11: error:
+    • Couldn't match expected type ‘b2’ with actual type ‘b’
+      ‘b’ is a rigid type variable bound by
+        the type signature for:
+          f :: forall b a. Eq b =&gt; (a -&gt; b) -&gt; (a -&gt; b) -&gt; a -&gt; Bool
+        at /tmp/nvimNLJJ6T/148.hs:3:6
+      ‘b2’ is a rigid type variable bound by
+        an expression type signature:
+          forall b2. b2
+        at /tmp/nvimNLJJ6T/148.hs:6:18
+    • In the expression: h x :: b
+      In an equation for ‘z’: z = h x :: b
+      In the expression:
+        let
+          y = g x :: b
+          z = h x :: b
+        in y == z
+    • Relevant bindings include
+        h :: a -&gt; b (bound at /tmp/nvimNLJJ6T/148.hs:4:5)
+        g :: a -&gt; b (bound at /tmp/nvimNLJJ6T/148.hs:4:3)
+        f :: (a -&gt; b) -&gt; (a -&gt; b) -&gt; a -&gt; Bool
+          (bound at /tmp/nvimNLJJ6T/148.hs:4:1)
+
+/tmp/nvimNLJJ6T/148.hs:7:6: error:
+    • Could not deduce (Eq a0) arising from a use of ‘==’
+      from the context: Eq b
+        bound by the type signature for:
+                   f :: Eq b =&gt; (a -&gt; b) -&gt; (a -&gt; b) -&gt; a -&gt; Bool
+        at /tmp/nvimNLJJ6T/148.hs:3:1-46
+      The type variable ‘a0’ is ambiguous
+      These potential instances exist:
+        instance Eq Ordering -- Defined in ‘GHC.Classes’
+        instance Eq Integer
+          -- Defined in ‘integer-gmp-1.0.0.1:GHC.Integer.Type’
+        instance Eq a =&gt; Eq (Maybe a) -- Defined in ‘GHC.Base’
+        ...plus 22 others
+        ...plus 7 instances involving out-of-scope types
+        (use -fprint-potential-instances to see them all)
+    • In the expression: y == z
+      In the expression:
+        let
+          y = g x :: b
+          z = h x :: b
+        in y == z
+      In an equation for ‘f’:
+          f g h x
+            = let
+                y = ...
+                z = ...
+              in y == z</code></pre>
+<p>ということで、確かに 「<code>g x :: b</code>の<code>b</code>は、<code>f</code>の型で指定された<code>b</code>そのものである」 ということを型検査に伝えてあげます。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span>
+
+<span class="ot">f ::</span> forall a b<span class="fu">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+f g h x <span class="fu">=</span>
+  <span class="kw">let</span> y <span class="fu">=</span> g<span class="ot"> x ::</span> b
+      z <span class="fu">=</span> h<span class="ot"> x ::</span> b
+  <span class="kw">in</span> y <span class="fu">==</span> z
+
+<span class="ot">main ::</span> <span class="dt">IO</span> ()
+main <span class="fu">=</span> pure ()</code></pre></div>
+<p>OK 🐕</p>
+<p>　そりゃそうなんですけど、いつも忘れて「！？」ってなりますよね。</p>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2018-06-20-why-scoped-type-variable-type-mismatches-types.html" class="hatena-bookmark-button" data-hatena-bookmark-title="ScopedTypeVariables下の1ランク多相で型が合わないとき - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2018-06-20-why-scoped-type-variable-type-mismatches-types.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-06-20-why-scoped-type-variable-type-mismatches-types.md">ScopedTypeVariables下の1ランク多相で型が合わないとき - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
+        </div>
+
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    </body>
+</html>

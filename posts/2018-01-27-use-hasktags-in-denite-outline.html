@@ -1,42 +1,79 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1-Haskeller-にこにー - How to use 'hasktags' in ':Denite outline'</title>
+        <title>大銀河宇宙No.1_Haskeller - How to use 'hasktags' in ':Denite outline'</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
-        <!-- bootstrap requires jquery -->
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                大銀河宇宙No.1_Haskeller
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="../">Home</a></li>
-                <li><a href="../about.html">About</a></li>
-                <li><a href="../profile.html">Profile</a></li>
-                <li><a href="../products.html">Products</a></li>
-                <li><a href="../archive.html">Archive</a></li>
-            </ul>
         </nav>
 
-        <div id="content">
-            <h4>How to use 'hasktags' in ':Denite outline'</h4>
-            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
-<div class="info">
-    Posted on 2018/01/27 <br />
+<div class="post-info">
+    <div class="post-date">2018/01/27</div>
     
 
-    Tags:
-    
-        [<a href="../tags/Vim.html">Vim</a>]
-    
-        [<a href="../tags/NeoVim.html">NeoVim</a>]
-    
+    <div class="post-title">How to use 'hasktags' in ':Denite outline'</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Vim.html">Vim</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/NeoVim.html">NeoVim</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <p>Below lines sets to use <code>hasktags</code> in <code>:Denite outline</code> 😃</p>
+<pre class="vim"><code>call denite#custom#var('outline', 'command', ['hasktags'])
+call denite#custom#var('outline', 'options', ['--ignore-close-implementation', '--ctags', '-x'])</code></pre>
+<p>But it overwrites the default values, all command will be using <code>hasktags</code> 😭</p>
+<p>You should add the like below lines to your <code>.vimrc</code></p>
+<pre class="vim"><code>augroup VimrcDeniteOutline
+    autocmd!
+    autocmd BufEnter,BufWinEnter *
+        \   call denite#custom#var('outline', 'command', ['ctags'])
+        \|  call denite#custom#var('outline', 'options', [])
+    autocmd BufEnter,BufWinEnter *.hs
+        \   call denite#custom#var('outline', 'command', ['hasktags'])
+        \|  call denite#custom#var('outline', 'options', ['--ignore-close-implementation', '--ctags', '-x'])
+augroup END</code></pre>
+
+    <hr />
 
     <ul class="bookmarkers">
         <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
@@ -58,41 +95,25 @@
             <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
         </li>
     </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-01-27-use-hasktags-in-denite-outline.md">How to use 'hasktags' in ':Denite outline' - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
 </div>
-
-<hr />
-
-<p>Below lines sets to use <code>hasktags</code> in <code>:Denite outline</code> 😃</p>
-<pre class="vim"><code>call denite#custom#var('outline', 'command', ['hasktags'])
-call denite#custom#var('outline', 'options', ['--ignore-close-implementation', '--ctags', '-x'])</code></pre>
-<p>But it overwrites the default values, all command will be using <code>hasktags</code> 😭</p>
-<p>You should add the like below lines to your <code>.vimrc</code></p>
-<pre class="vim"><code>augroup VimrcDeniteOutline
-    autocmd!
-    autocmd BufEnter,BufWinEnter *
-        \   call denite#custom#var('outline', 'command', ['ctags'])
-        \|  call denite#custom#var('outline', 'options', [])
-    autocmd BufEnter,BufWinEnter *.hs
-        \   call denite#custom#var('outline', 'command', ['hasktags'])
-        \|  call denite#custom#var('outline', 'options', ['--ignore-close-implementation', '--ctags', '-x'])
-augroup END</code></pre>
-
-<hr />
-<hr />
-
-<p class="about-pr">
-この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-01-27-use-hasktags-in-denite-outline.md">How to use 'hasktags' in ':Denite outline' - github</a> <br />
-ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
-</p>
 
 <script src="../js/facebook-sdk-2.8.js"></script>
 
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
         </div>
 
-        <div id="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
-            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
-        </div>
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
     </body>
 </html>

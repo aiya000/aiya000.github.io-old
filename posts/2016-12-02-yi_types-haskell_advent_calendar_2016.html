@@ -1,68 +1,64 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1-Haskeller-にこにー - Yiが定義する型の紹介 - Haskell Advent Calendar 2016 - 4日目</title>
+        <title>大銀河宇宙No.1_Haskeller - Yiが定義する型の紹介 - Haskell Advent Calendar 2016 - 4日目</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
-        <!-- bootstrap requires jquery -->
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                大銀河宇宙No.1_Haskeller
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="../">Home</a></li>
-                <li><a href="../about.html">About</a></li>
-                <li><a href="../profile.html">Profile</a></li>
-                <li><a href="../products.html">Products</a></li>
-                <li><a href="../archive.html">Archive</a></li>
-            </ul>
         </nav>
 
-        <div id="content">
-            <h4>Yiが定義する型の紹介 - Haskell Advent Calendar 2016 - 4日目</h4>
-            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
-<div class="info">
-    Posted on 2016/12/02 <br />
+<div class="post-info">
+    <div class="post-date">2016/12/02</div>
     
 
-    Tags:
-    
-        [<a href="../tags/AdventCalendar.html">AdventCalendar</a>]
-    
-        [<a href="../tags/Haskell.html">Haskell</a>]
-    
+    <div class="post-title">Yiが定義する型の紹介 - Haskell Advent Calendar 2016 - 4日目</div>
 
-    <ul class="bookmarkers">
-        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
-            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </li>
-
-        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2016-12-02-yi_types-haskell_advent_calendar_2016.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Yiが定義する型の紹介 - Haskell Advent Calendar 2016 - 4日目 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </li>
-
-        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
-            <div class="fb-like" data-href="https://aiya000.github.io/posts/2016-12-02-yi_types-haskell_advent_calendar_2016.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
-        </li>
-
-        <li> <!-- See https://getpocket.com/publisher/button -->
-            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
-            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-        </li>
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/AdventCalendar.html">AdventCalendar</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Haskell.html">Haskell</a>
+            </li>
+        
     </ul>
 </div>
 
-<hr />
-
-<p>　ドーモ、fix関数の簡約が「いい感じにやる」といった理解しかできないあいやです。<br />
+<div class="post-body">
+    <p>　ドーモ、fix関数の簡約が「いい感じにやる」といった理解しかできないあいやです。<br />
 この記事は<a href="http://qiita.com/advent-calendar/2016/haskell">Haskell Advent Calendar 2016</a> 4日目の記事です。</p>
 <h1 id="私何もあげられるものないからyiの型書くよ">私何もあげられるものないから、yiの型書くよ！</h1>
 <ul>
@@ -206,22 +202,47 @@ UIに実際に表示されているタブやバッファ、検索中の単語(�
 <h1 id="こんな感じで">こんな感じで</h1>
 <p>　yiが出来る。 （雑）</p>
 
-<hr />
-<hr />
+    <hr />
 
-<p class="about-pr">
-この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2016-12-02-yi_types-haskell_advent_calendar_2016.md">Yiが定義する型の紹介 - Haskell Advent Calendar 2016 - 4日目 - github</a> <br />
-ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
-</p>
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2016-12-02-yi_types-haskell_advent_calendar_2016.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Yiが定義する型の紹介 - Haskell Advent Calendar 2016 - 4日目 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2016-12-02-yi_types-haskell_advent_calendar_2016.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2016-12-02-yi_types-haskell_advent_calendar_2016.md">Yiが定義する型の紹介 - Haskell Advent Calendar 2016 - 4日目 - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
 
 <script src="../js/facebook-sdk-2.8.js"></script>
 
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
         </div>
 
-        <div id="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
-            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
-        </div>
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
     </body>
 </html>

@@ -1,68 +1,98 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1-Haskeller-にこにー - Home</title>
+        <title>大銀河宇宙No.1_Haskeller - Home</title>
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="./css/default.css" />
         <link rel="stylesheet" type="text/css" href="./css/highlight.css" />
-        <!-- bootstrap requires jquery -->
-        <script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="./">大銀河宇宙No.1-Haskeller-にこにー</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="./">
+                大銀河宇宙No.1_Haskeller
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./archive.html">Archive</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="./">Home</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="./profile.html">Profile</a></li>
-                <li><a href="./products.html">Products</a></li>
-                <li><a href="./archive.html">Archive</a></li>
-            </ul>
         </nav>
 
-        <div id="content">
-            <h4>Home</h4>
-            <link rel="stylesheet" type="text/css" href="./css/index.css" />
+        <!-- This is a general template for a page that has a single content -->
 
-<div class="blog-title">
-    <div class="blog-title-internal">
-        <h1>
-            <img class="icon-of-me" src="./images/me.png" alt="icon-of-me" /> ＜{Haskellやるぞ！}
-        </h1>
+<link rel="stylesheet" type="text/css" href="./css/basic.css" />
+
+<div class="basic-content">
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+
+<div class="index-title">
+    <div class="index-title-internal">
+        <img class="index-icon-of-me" src="./images/me.png" alt="icon-of-me" /> ＜{Haskellやるぞ！}
     </div>
 </div>
 
-<div class="home-content">
-    <div class="screen-left">
+<div class="index-content">
+    <div class="index-left">
         <img class="wani-san" src="./images/wani-san.png" alt="wani-san-image" />
-        <div class="tagcloud">
-            <a style="font-size: 80%" href="./tags/AWS.html">AWS</a> <a style="font-size: 98%" href="./tags/AdventCalendar.html">AdventCalendar</a> <a style="font-size: 89%" href="./tags/AdventCalendar2017.html">AdventCalendar2017</a> <a style="font-size: 80%" href="./tags/Android.html">Android</a> <a style="font-size: 197%" href="./tags/Haskell.html">Haskell</a> <a style="font-size: 86%" href="./tags/Idris.html">Idris</a> <a style="font-size: 80%" href="./tags/JavaScript.html">JavaScript</a> <a style="font-size: 123%" href="./tags/Linux.html">Linux</a> <a style="font-size: 80%" href="./tags/Linux%20%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0.html">Linux プログラミング</a> <a style="font-size: 80%" href="./tags/Lisp.html">Lisp</a> <a style="font-size: 84%" href="./tags/NeoVim.html">NeoVim</a> <a style="font-size: 84%" href="./tags/Node.js.html">Node.js</a> <a style="font-size: 82%" href="./tags/RasberryPi.html">RasberryPi</a> <a style="font-size: 82%" href="./tags/Shell.html">Shell</a> <a style="font-size: 82%" href="./tags/TypeScript.html">TypeScript</a> <a style="font-size: 93%" href="./tags/Vim.html">Vim</a> <a style="font-size: 80%" href="./tags/elm.html">elm</a> <a style="font-size: 82%" href="./tags/git.html">git</a> <a style="font-size: 80%" href="./tags/shell.html">shell</a> <a style="font-size: 91%" href="./tags/%E3%81%93%E3%81%A8%E3%82%8A%E3%80%81%E7%A9%82%E4%B9%83%E6%9E%9C%E3%81%A8%E4%B8%80%E7%B7%92%E3%81%AB%E5%AD%A6%E3%81%B6Haskell.html">ことり、穂乃果と一緒に学ぶHaskell</a> <a style="font-size: 86%" href="./tags/%E3%81%AB%E3%81%93%E3%80%81%E5%B8%8C%E3%81%A8%E4%B8%80%E7%B7%92%E3%81%AB%E5%AD%A6%E3%81%B6Haskell.html">にこ、希と一緒に学ぶHaskell</a> <a style="font-size: 100%" href="./tags/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88.html">イベント</a> <a style="font-size: 82%" href="./tags/%E3%82%B2%E3%83%BC%E3%83%A0.html">ゲーム</a> <a style="font-size: 95%" href="./tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0.html">プログラミング</a> <a style="font-size: 80%" href="./tags/%E3%83%9D%E3%82%A8%E3%83%A0.html">ポエム</a> <a style="font-size: 100%" href="./tags/%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%EF%BC%81%E3%81%A7%E5%AD%A6%E3%81%B6.html">ラブライブ！で学ぶ</a> <a style="font-size: 80%" href="./tags/%E5%81%A5%E5%BA%B7.html">健康</a> <a style="font-size: 95%" href="./tags/%E5%82%99%E8%80%83%E9%8C%B2.html">備考録</a> <a style="font-size: 129%" href="./tags/%E6%97%A5%E8%A8%98.html">日記</a> <a style="font-size: 102%" href="./tags/%E7%92%B0%E5%A2%83.html">環境</a>
+        <div class="index-tagcloud">
+            <a style="font-size: 80%" href="./tags/AWS.html">AWS</a> <a style="font-size: 97%" href="./tags/AdventCalendar.html">AdventCalendar</a> <a style="font-size: 88%" href="./tags/AdventCalendar2017.html">AdventCalendar2017</a> <a style="font-size: 80%" href="./tags/Android.html">Android</a> <a style="font-size: 197%" href="./tags/Haskell.html">Haskell</a> <a style="font-size: 86%" href="./tags/Idris.html">Idris</a> <a style="font-size: 80%" href="./tags/JavaScript.html">JavaScript</a> <a style="font-size: 118%" href="./tags/Linux.html">Linux</a> <a style="font-size: 80%" href="./tags/Linux%20%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0.html">Linux プログラミング</a> <a style="font-size: 80%" href="./tags/Lisp.html">Lisp</a> <a style="font-size: 86%" href="./tags/NeoVim.html">NeoVim</a> <a style="font-size: 84%" href="./tags/Node.js.html">Node.js</a> <a style="font-size: 82%" href="./tags/RasberryPi.html">RasberryPi</a> <a style="font-size: 82%" href="./tags/Shell.html">Shell</a> <a style="font-size: 82%" href="./tags/TypeScript.html">TypeScript</a> <a style="font-size: 95%" href="./tags/Vim.html">Vim</a> <a style="font-size: 80%" href="./tags/elm.html">elm</a> <a style="font-size: 84%" href="./tags/git.html">git</a> <a style="font-size: 80%" href="./tags/shell.html">shell</a> <a style="font-size: 90%" href="./tags/%E3%81%93%E3%81%A8%E3%82%8A%E3%80%81%E7%A9%82%E4%B9%83%E6%9E%9C%E3%81%A8%E4%B8%80%E7%B7%92%E3%81%AB%E5%AD%A6%E3%81%B6Haskell.html">ことり、穂乃果と一緒に学ぶHaskell</a> <a style="font-size: 86%" href="./tags/%E3%81%AB%E3%81%93%E3%80%81%E5%B8%8C%E3%81%A8%E4%B8%80%E7%B7%92%E3%81%AB%E5%AD%A6%E3%81%B6Haskell.html">にこ、希と一緒に学ぶHaskell</a> <a style="font-size: 99%" href="./tags/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88.html">イベント</a> <a style="font-size: 80%" href="./tags/%E3%82%B2%E3%83%BC%E3%83%A0.html">ゲーム</a> <a style="font-size: 92%" href="./tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0.html">プログラミング</a> <a style="font-size: 80%" href="./tags/%E3%83%9D%E3%82%A8%E3%83%A0.html">ポエム</a> <a style="font-size: 99%" href="./tags/%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%EF%BC%81%E3%81%A7%E5%AD%A6%E3%81%B6.html">ラブライブ！で学ぶ</a> <a style="font-size: 80%" href="./tags/%E5%81%A5%E5%BA%B7.html">健康</a> <a style="font-size: 97%" href="./tags/%E5%82%99%E8%80%83%E9%8C%B2.html">備考録</a> <a style="font-size: 120%" href="./tags/%E6%97%A5%E8%A8%98.html">日記</a> <a style="font-size: 99%" href="./tags/%E7%92%B0%E5%A2%83.html">環境</a>
         </div>
-        <div class="twitter-widget">
+        <div class="index-twitter-widget">
             <a class="twitter-timeline" data-width="300" data-height="381" data-link-color="#E95F28" href="https://twitter.com/public_ai000ya">Tweets by public_ai000ya</a>
             <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-        <div class="i-want-to-this">
-            <a href="https://www.amazon.co.jp/registry/wishlist/FNT8GFU9HYEK">あいやの欲しい物リスト</a>
+        <div class="index-amazon-wish-list">
+            <a href="https://www.amazon.co.jp/registry/wishlist/FNT8GFU9HYEK">欲しい物リスト</a>
         </div>
     </div>
 
-    <div class="screen-right">
-        <link rel="stylesheet" type="text/css" href="./css/pickup-post.css" />
-
-<div class="pickup-post">
-    <span class="label label-info">Pick up</span>
-
-    <a href="./posts/2017-07-22-learn-haskell-with-muse-extra-for-nico-birthday.html">
-        にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里
-    </a>
-</div>
-
+    <div class="index-right">
         <h2>記事</h2>
         <ul>
+    
+        <li>
+            2018/07/31 - <a href="./posts/2018-07-31-set-git-editor-for-rebase-permission-deny.html">gitの「Could not execute editor」が出たときは$GIT_EDITORを設定する</a>
+        </li>
+    
+        <li>
+            2018/07/25 - <a href="./posts/2018-07-25-happy-order-of-tokens.html">Happyの%tokenではより一般的な形式を下にしなきゃだめ</a>
+        </li>
+    
+        <li>
+            2018/07/20 - <a href="./posts/2018-07-20-theorem-prove-seyana.html">何でも証明をしてくれるアカネチャン</a>
+        </li>
+    
+        <li>
+            2018/06/30 - <a href="./posts/2018-06-30-vim-quickfix-elm-make.html">VimのQuickFixでelm-makeの結果を表示する設定を書いた</a>
+        </li>
+    
+        <li>
+            2018/06/30 - <a href="./posts/2018-06-30-use-mtl-exceptt-no-eithert.html">mtlのExceptTを使うべき。EitherTでもtransformersのExceptTでもなく。</a>
+        </li>
+    
+        <li>
+            2018/06/20 - <a href="./posts/2018-06-20-why-scoped-type-variable-type-mismatches-types.html">ScopedTypeVariables下の1ランク多相で型が合わないとき</a>
+        </li>
+    
+        <li>
+            2018/05/26 - <a href="./posts/2018-05-26-sale-a-post-booth.html">HaskellerだけどBoothにマッハ新書出してみた（矢澤にこ先輩と一緒にモナドモナド！）</a>
+        </li>
     
         <li>
             2018/05/22 - <a href="./posts/2018-05-22-vim-errorformat-gradle-build.html">gradle buildの出力をVimのQuickFixに表示してエラー箇所にジャンプする</a>
@@ -156,42 +186,14 @@
             2017/11/03 - <a href="./posts/2017-11-03-unknown-stack-lib-problem.html">haskell-stackにlibHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soがないとか言われた</a>
         </li>
     
-        <li>
-            2017/11/03 - <a href="./posts/2017-11-03-elm-install-problem-with-npm.html">elmのインストールがnpmで失敗したからyarnでやったらできた</a>
-        </li>
-    
-        <li>
-            2017/10/30 - <a href="./posts/2017-10-30-how-to-show-inputted-key-on-screen-with-linux.html">Linuxで画面上に入力したキーを表示する（Like-macOS-keycastr）</a>
-        </li>
-    
-        <li>
-            2017/10/29 - <a href="./posts/2017-10-29-identity-in-lens-monadstate.html">lens（のMonadState演算子など）で自己に言及したい時はidを使う</a>
-        </li>
-    
-        <li>
-            2017/10/12 - <a href="./posts/2017-10-12-nonempty-islist-instance-wastes-type-safety.html">NonEmptyのIsListインスタンスの損なわせる型健全性</a>
-        </li>
-    
-        <li>
-            2017/10/10 - <a href="./posts/2017-10-10-aws-api-gateway-deplying-resource-to-stage.html">AWS API Gatewayのリソースを作成したらステージへのデプロイが必要</a>
-        </li>
-    
-        <li>
-            2017/10/01 - <a href="./posts/2017-10-01-summary-haskell-env.html">僕ののHaskell開発環境を紹介する</a>
-        </li>
-    
-        <li>
-            2017/09/27 - <a href="./posts/2017-09-27-how-to-fix-ncurses-problem-of-stack.html">haskell-stackで 'collect2; エラー; ldはステータス1で終了しました' が出た場合の対処</a>
-        </li>
-    
 </ul>
 
         <a href="./archive.html">これ以前の記事</a>
     </div>
 </div>
 
-<br class="clear-styles" />
-<hr class="short-bar" />
+<br class="index-clear-styles" />
+<hr />
 
 <link rel="stylesheet" type="text/css" href="./css/affiliate.css" />
 
@@ -263,12 +265,17 @@
 <br class="clear-styles" />
 
 
+</div>
 
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="./licenses.html">about licenses</a>).
         </div>
 
-        <div id="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
-            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
-        </div>
+        <script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="./js/popper.min.js"></script>
+        <script type="text/javascript" src="./js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="./js/fontawesome-all.min.js"></script>
     </body>
 </html>

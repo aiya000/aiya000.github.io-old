@@ -1,0 +1,120 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1_Haskeller - VimのQuickFixでelm-makeの結果を表示する設定を書いた</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                大銀河宇宙No.1_Haskeller
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="post-info">
+    <div class="post-date">2018/06/30</div>
+    
+
+    <div class="post-title">VimのQuickFixでelm-makeの結果を表示する設定を書いた</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Vim.html">Vim</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/NeoVim.html">NeoVim</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <p>　ソースはこちらに上げました 👇</p>
+<ul>
+<li><a href="https://github.com/aiya000/dotfiles/blob/4d64e1a45ff2f34b03f8094bcee40fc7dddf9470/.vim/after/ftplugin/elm.vim">dotfiles/elm.vim at 4d64e1a45ff2f34b03f8094bcee40fc7dddf9470 - aiya000/dotfiles - GitHub</a></li>
+</ul>
+<p>　☝️</p>
+<p>　elm-makeはエラー情報をjson形式で出力するという最高の機能があるので、逆に<code>'errroformat'</code>の行単位でエラーを解析するVimのQuickFixではうまく解析できません。<br />
+（elm-makeはjson形式だけでなく、human readableな形式でもエラーを出力することができますが、こちらも行単位の報告ではないのです 🐕）</p>
+<p>そのような場合はvital.vimのWeb.JSONモジュールを使うと最高です。 vital.vimはvim-jpの提供するVim script向け準標準ライブラリです。</p>
+<ul>
+<li><a href="https://github.com/vim-jp/vital.vim">GitHub - vim-jp/vital.vim: A comprehensive Vim utility functions for Vim plugins</a></li>
+</ul>
+<p>VimとNeoVimのどちらでも非同期に処理を行うために、vital-Whisky（vital.vimの追加ライブラリ）のSystem.Jobも使っています。</p>
+<ul>
+<li><a href="https://github.com/lambdalisue/vital-Whisky">GitHub - lambdalisue/vital-Whisky: vital.vim external module collection</a></li>
+</ul>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2018-06-30-vim-quickfix-elm-make.html" class="hatena-bookmark-button" data-hatena-bookmark-title="VimのQuickFixでelm-makeの結果を表示する設定を書いた - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2018-06-30-vim-quickfix-elm-make.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2018-06-30-vim-quickfix-elm-make.md">VimのQuickFixでelm-makeの結果を表示する設定を書いた - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
+        </div>
+
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    </body>
+</html>

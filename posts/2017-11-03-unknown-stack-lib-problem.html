@@ -1,40 +1,79 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1-Haskeller-にこにー - haskell-stackにlibHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soがないとか言われた</title>
+        <title>大銀河宇宙No.1_Haskeller - haskell-stackにlibHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soがないとか言われた</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
-        <!-- bootstrap requires jquery -->
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../">大銀河宇宙No.1-Haskeller-にこにー</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                大銀河宇宙No.1_Haskeller
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="../">Home</a></li>
-                <li><a href="../about.html">About</a></li>
-                <li><a href="../profile.html">Profile</a></li>
-                <li><a href="../products.html">Products</a></li>
-                <li><a href="../archive.html">Archive</a></li>
-            </ul>
         </nav>
 
-        <div id="content">
-            <h4>haskell-stackにlibHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soがないとか言われた</h4>
-            <link rel="stylesheet" type="text/css" href="../css/post.css" />
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
-<div class="info">
-    Posted on 2017/11/03 <br />
+<div class="post-info">
+    <div class="post-date">2017/11/03</div>
     
 
-    Tags:
-    
-        [<a href="../tags/Haskell.html">Haskell</a>]
-    
+    <div class="post-title">haskell-stackにlibHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soがないとか言われた</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Haskell.html">Haskell</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <h1 id="起こった問題">起こった問題</h1>
+<pre class="console"><code>$ stack
+stack: error while loading shared libraries: libHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.so: cannot open shared object file: No such file or directory</code></pre>
+<h1 id="結論">結論</h1>
+<p>　以下のコマンドで解決できる。</p>
+<pre class="console"><code>$ yaourt -U /var/cache/pacman/pkg/stack-1.4.0-37-x86_64.pkg.tar.xz
+$ yaourt -S haskell-stack-git
+# PKGBUILDの編集で、依存関係からtlibinfoとstackを消す</code></pre>
+<h1 id="事の流れ">事の流れ</h1>
+<p>　あることのために、ArchLinuxに<code>static-stack</code>という<code>haskell-stack-git</code>と競合するパッケージを入れる必要があった。 事を終えた後に<code>yaourt -S stack</code>をした後に<code>$ stack</code>を実行してみると、以下のエラーを吐いた。</p>
+<pre class="console"><code>$ stack
+stack: error while loading shared libraries: libHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.so: cannot open shared object file: No such file or directory</code></pre>
+<p>　つまるところ、stackコマンドほぼ全体が使えない。</p>
+<p>　libHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soはおそらくstack setupで入ったその場のghc8.2.1と結びついたライブラリだと思われる。 なので<code>$ stack setup</code>し直せばいけるか？　とも思ったが、しかしstackコマンドが使えないので、それもできない。</p>
+<p>　幸いこのArchLinuxには<code>/var/cache/pacman/pkg/stack-1.4.0-37-x86_64.pkg.tar.xz</code>が存在したので<code>yaourt -U</code>でそれを入れると、 正常に動いた。</p>
+<p>　その後<code>$ stack setup</code>してみるも「既にghcは入っている」的なことを言われたが<code>$ rm -rf ~/.stack</code>を試すのも馬鹿らしいので、 また<code>haskell-stack-git</code>を入れることにした。</p>
+<pre class="console"><code>$ yaourt -S haskell-stack-git
+# PKGBUILDの編集で、依存関係からtlibinfoとstackを消す</code></pre>
+<p>　これで解決した。</p>
+
+    <hr />
 
     <ul class="bookmarkers">
         <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
@@ -56,46 +95,25 @@
             <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
         </li>
     </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-11-03-unknown-stack-lib-problem.md">haskell-stackにlibHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soがないとか言われた - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
 </div>
-
-<hr />
-
-<h1 id="起こった問題">起こった問題</h1>
-<pre class="console"><code>$ stack
-stack: error while loading shared libraries: libHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.so: cannot open shared object file: No such file or directory</code></pre>
-<h1 id="結論">結論</h1>
-<p>　以下のコマンドで解決できる。</p>
-<pre class="console"><code>$ yaourt -U /var/cache/pacman/pkg/stack-1.4.0-37-x86_64.pkg.tar.xz
-$ yaourt -S haskell-stack-git
-# PKGBUILDの編集で、依存関係からtlibinfoとstackを消す</code></pre>
-<h1 id="事の流れ">事の流れ</h1>
-<p>　あることのために、ArchLinuxに<code>static-stack</code>という<code>haskell-stack-git</code>と競合するパッケージを入れる必要があった。 事を終えた後に<code>yaourt -S stack</code>をした後に<code>$ stack</code>を実行してみると、以下のエラーを吐いた。</p>
-<pre class="console"><code>$ stack
-stack: error while loading shared libraries: libHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.so: cannot open shared object file: No such file or directory</code></pre>
-<p>　つまるところ、stackコマンドほぼ全体が使えない。</p>
-<p>　libHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soはおそらくstack setupで入ったその場のghc8.2.1と結びついたライブラリだと思われる。 なので<code>$ stack setup</code>し直せばいけるか？　とも思ったが、しかしstackコマンドが使えないので、それもできない。</p>
-<p>　幸いこのArchLinuxには<code>/var/cache/pacman/pkg/stack-1.4.0-37-x86_64.pkg.tar.xz</code>が存在したので<code>yaourt -U</code>でそれを入れると、 正常に動いた。</p>
-<p>　その後<code>$ stack setup</code>してみるも「既にghcは入っている」的なことを言われたが<code>$ rm -rf ~/.stack</code>を試すのも馬鹿らしいので、 また<code>haskell-stack-git</code>を入れることにした。</p>
-<pre class="console"><code>$ yaourt -S haskell-stack-git
-# PKGBUILDの編集で、依存関係からtlibinfoとstackを消す</code></pre>
-<p>　これで解決した。</p>
-
-<hr />
-<hr />
-
-<p class="about-pr">
-この記事はこちらから修正リクエストを送ることができます。 <br />
-<a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2017-11-03-unknown-stack-lib-problem.md">haskell-stackにlibHSyaml-0.8.24-2wdOOQKc6Dt63OCZo8Nf1H-ghc8.2.1.soがないとか言われた - github</a> <br />
-ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
-</p>
 
 <script src="../js/facebook-sdk-2.8.js"></script>
 
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
         </div>
 
-        <div id="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a> <br />
-            and Uses <a href="http://nkmr6194.github.io/Umi/">Umi</a>
-        </div>
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
     </body>
 </html>
