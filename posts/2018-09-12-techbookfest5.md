@@ -2,6 +2,10 @@
 title: 技術書典5に参加します！（か74）
 tags: イベント
 ---
+# サンプル（お試し本）
+
+- [お試し本（半群の章まで）](/images/posts/2018-09-12-techbookfest5/sample-algebra-with-nico.pdf)
+
 # サークルページ
 
 - [サークルページ](https://techbookfest.org/event/tbf05/circle/43260001)
