@@ -15,3 +15,6 @@ post:
 	echo 'title: ' >> "./posts/$(POST_NAME).md"
 	echo 'tags: '  >> "./posts/$(POST_NAME).md"
 	echo ---       >> "./posts/$(POST_NAME).md"
+
+deploy:
+	./deploy.hs
