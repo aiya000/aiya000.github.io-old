@@ -4,7 +4,9 @@ ul.profile-intro {
     padding-left: 0;
 }
 
-img.smart-icon {
+img.icon {
+    width: 128px;
+    height: 128px;
     border-radius: 20px;
 }
 
