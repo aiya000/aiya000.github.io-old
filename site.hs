@@ -26,9 +26,8 @@ listContextWith ctx thisFieldName targetFieldName = listField thisFieldName ctx 
     twice :: (a -> a -> b) -> a -> b
     twice f x = f x x
 
-
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith conf $ do
   tags <- buildTags "posts/*" $ fromCapture "tags/*.html"
   tagsRules tags $ \tag pat -> do
     route idRoute
@@ -141,14 +140,14 @@ main = hakyll $ do
         listContextWith (titleField "tagName") "tagNames" "tags" <>
         defaultContext
 
-      -- A `pandocCompiler` for modern styles
-      modernPandocCompiler :: Compiler (Item String)
-      modernPandocCompiler =
-        let readerExtensions' = readerExtensions defaultHakyllReaderOptions <>
-                                extensionsFromList [Ext_emoji]
-            readerOptions = defaultHakyllReaderOptions { readerExtensions = readerExtensions' }
-        in fmap (withTags processTags) <$> pandocCompilerWith readerOptions defaultHakyllWriterOptions
-
+-- | A `pandocCompiler` with emojis
+modernPandocCompiler :: Compiler (Item String)
+modernPandocCompiler =
+  let readerExtensions' = readerExtensions defaultHakyllReaderOptions <>
+                          extensionsFromList [Ext_emoji]
+      readerOptions = defaultHakyllReaderOptions { readerExtensions = readerExtensions' }
+  in fmap (withTags processTags) <$> pandocCompilerWith readerOptions defaultHakyllWriterOptions
+  where
       processTags :: Tag String -> Tag String
       processTags tag@(isTagOpenName "table" -> True) = appendAttr tag ("class", "table table-bordered")
       processTags tag = tag
@@ -158,3 +157,6 @@ main = hakyll $ do
         case lookup attrName attrs of
           Nothing     -> newAttr : attrs
           Just oldVal -> (attrName, oldVal ++ ' ' : attrValue) : delete (attrName, oldVal) attrs
+
+conf :: Configuration
+conf = defaultConfiguration { previewPort = 25252 }
