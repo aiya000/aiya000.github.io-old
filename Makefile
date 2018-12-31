@@ -17,4 +17,4 @@ post:
 	echo ---       >> "./posts/$(POST_NAME).md"
 
 deploy:
-	./deploy.hs
+	./scripts/deploy.hs

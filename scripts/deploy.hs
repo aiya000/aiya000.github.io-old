@@ -1,5 +1,6 @@
 #!/usr/bin/env stack
 -- stack --resolver lts-8.11 --install-ghc runghc --package shelly --package text
+
 {-# LANGUAGE ExtendedDefaultRules #-}
 {-# LANGUAGE OverloadedStrings #-}
 
@@ -57,4 +58,4 @@ deploy = do
                 <> "\n\n"
                 <> "https://aiya000.github.io"
   run_ "git" ["commit", "-m", message]
-  run_ "git" ["push", "-uf", "origin", "master"]
+  run_ "git" ["push", "-f", "origin", "master"]
