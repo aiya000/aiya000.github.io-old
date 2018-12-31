@@ -7,8 +7,7 @@ import Data.Monoid ((<>))
 import Hakyll
 import Text.HTML.TagSoup (Tag(..), isTagOpenName, Attribute)
 import Text.Highlighting.Kate (styleToCss, pygments)
-import Text.Pandoc.Options (ReaderOptions(readerExtensions), Extension(Ext_emoji))
-import qualified Data.Set as Set
+import Text.Pandoc.Options (ReaderOptions(readerExtensions), Extension(Ext_emoji), extensionsFromList)
 
 
 -- See http://mattwetmore.me/posts/hakyll-list-metadata.html
@@ -145,11 +144,10 @@ main = hakyll $ do
       -- A `pandocCompiler` for modern styles
       modernPandocCompiler :: Compiler (Item String)
       modernPandocCompiler =
-        let readerExtensions' = readerExtensions defaultHakyllReaderOptions
-        in pandocCompilerWith
-          defaultHakyllReaderOptions { readerExtensions = Set.insert Ext_emoji readerExtensions' }
-          defaultHakyllWriterOptions
-          <&> fmap (withTags processTags)
+        let readerExtensions' = readerExtensions defaultHakyllReaderOptions <>
+                                extensionsFromList [Ext_emoji]
+            readerOptions = defaultHakyllReaderOptions { readerExtensions = readerExtensions' }
+        in fmap (withTags processTags) <$> pandocCompilerWith readerOptions defaultHakyllWriterOptions
 
       processTags :: Tag String -> Tag String
       processTags tag@(isTagOpenName "table" -> True) = appendAttr tag ("class", "table table-bordered")

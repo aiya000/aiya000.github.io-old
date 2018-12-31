@@ -1,4 +1,4 @@
 extra-package-dbs: []
 packages:
 - '.'
-resolver: lts-8.11
+resolver: lts-12.12
