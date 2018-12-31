@@ -1,14 +1,17 @@
 #!/usr/bin/env stack
--- stack --resolver lts-8.11 --install-ghc runghc --package shelly --package text
+-- stack --resolver lts-8.11 --install-ghc runghc --package shelly --package text --package here --package safe-exceptions
 
 {-# LANGUAGE ExtendedDefaultRules #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
 
+import Control.Exception.Safe (finally)
 import Control.Monad (forM_, when)
 import Data.Monoid ((<>))
+import Data.String.Here (i)
 import Data.Text (Text)
-import qualified Data.Text as T
-import Shelly
+import Shelly (Sh, shelly, verbosely, run, run_, (-|-), ls, toTextIgnore)
+import qualified Data.Text as Text
 
 default (Text)
 
@@ -17,9 +20,7 @@ type FilePath' = Text
 main :: IO ()
 main = shelly . verbosely $ do
   currentBranch <- removeTrailLineBreak <$> run "git" ["branch"] -|- run "grep" ["^*"] -|- run "awk" ["{print $2}"]
-  (prepare >> deploy) `finally_sh` cleanUpTo currentBranch
-  where
-    removeTrailLineBreak = T.init
+  (prepare >> deploy) `finally` cleanUpTo currentBranch
 
 prepare :: Sh ()
 prepare = do
@@ -37,25 +38,33 @@ cleanUpTo prevBranch = do
 
 deploy :: Sh ()
 deploy = do
-  -- Delete the all file in the master branch
-  existFiles <- ls "."
-  forM_ existFiles $ \file ->
-    --TODO: Normalize path of `file`
-    when (toTextIgnore file /= "./.git") $
-      run_ "rm" ["-rf", toTextIgnore file]
+  deleteOldFiles
+  restoreContents
+  deployToGit
+  where
+    deleteOldFiles = do
+      backupDir <- ("/tmp/aiya000.github.io_" <>) . removeTrailLineBreak <$> run "date" ["+%Y-%m-%d_%H-%M-%S"]
+      run_ "mkdir" [backupDir]
+      files <- map toTextIgnore <$> ls "."
+      forM_ files $ \file ->
+        -- TODO: Normalize path of `file`
+        when (file /= "./.git") $
+          run_ "mv" ["-f", file, [i|${backupDir}/${file}|]]
 
-  -- Move the backed up contents to here
-  newFiles <- ls "/tmp/_site"
-  forM_ newFiles $ \file ->
-    run_ "mv" [toTextIgnore file, "."]
-  -- _cache is unneeded by the site
-  run_ "rm" ["-rf", "_cache"]
+    restoreContents = do
+      contents <- map toTextIgnore <$> ls "/tmp/_site"
+      forM_ contents $ \content ->
+        run_ "mv" [content, "."]
+      run_ "rm" ["-rf", "_cache"]
 
-  -- Deploy to the repository
-  run_ "git" ["add", "--all"]
-  now <- T.strip <$> run "date" ["-R"]
-  let message = "Build at [" <> now <> "]"
-                <> "\n\n"
-                <> "https://aiya000.github.io"
-  run_ "git" ["commit", "-m", message]
-  run_ "git" ["push", "-f", "origin", "master"]
+    deployToGit = do
+      run_ "git" ["add", "--all"]
+      now <- Text.strip <$> run "date" ["-R"]
+      let message = "Build at [" <> now <> "]" <>
+                    "\n\n" <>
+                    "https://aiya000.github.io"
+      run_ "git" ["commit", "-m", message]
+      run_ "git" ["push", "-f", "origin", "master"]
+
+removeTrailLineBreak :: Text -> Text
+removeTrailLineBreak = Text.init
