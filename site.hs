@@ -118,10 +118,10 @@ main = hakyllWith conf $ do
     route idRoute
     compile $ makeItem (compressCss $ styleToCss pygments)
 
-  match "products.html" $ do
-    route idRoute
-    compile $ getResourceBody
-      >>= loadAndApplyTemplate "templates/basic.html" defaultContext
+  match "products.md" $ do
+    route $ setExtension "html"
+    compile $ modernPandocCompiler
+      >>= loadAndApplyTemplate "templates/products.html" defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
 
@@ -129,16 +129,15 @@ main = hakyllWith conf $ do
   match "affiliate.html" $ do
     route idRoute
     compile templateCompiler
-
-    where
-      -- See /posts/*.md and templates/post.html
-      postCtx :: Context String
-      postCtx =
-        dateField "date" "%Y/%m/%d" <>
-        constField "host" "aiya000.github.io" <>
-        --NOTE: Why "name" can be got if I use titleField ?
-        listContextWith (titleField "tagName") "tagNames" "tags" <>
-        defaultContext
+  where
+    -- See /posts/*.md and templates/post.html
+    postCtx :: Context String
+    postCtx =
+      dateField "date" "%Y/%m/%d" <>
+      constField "host" "aiya000.github.io" <>
+      --NOTE: Why "name" can be got if I use titleField ?
+      listContextWith (titleField "tagName") "tagNames" "tags" <>
+      defaultContext
 
 -- | A `pandocCompiler` with emojis
 modernPandocCompiler :: Compiler (Item String)
