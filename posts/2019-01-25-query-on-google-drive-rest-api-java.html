@@ -1,0 +1,116 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>大銀河宇宙No.1_Haskeller - Google Drive REST API Javaで検索条件を指定する</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                大銀河宇宙No.1_Haskeller
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<div class="post-info">
+    <div class="post-date">2019/01/25</div>
+    
+
+    <div class="post-title">Google Drive REST API Javaで検索条件を指定する</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Java.html">Java</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Kotlin.html">Kotlin</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <p><a href="https://developers.google.com/drive/api/v3/quickstart/java">Java Quickstart - Drive REST API - Google Developers</a>と <a href="https://developers.google.com/resources/api-libraries/documentation/drive/v3/java/latest/overview-summary.html">Overview (Drive API v3 (Rev. 136) 1.25.0)</a>に、 <a href="https://developers.google.com/drive/api/v3/reference/files/list">/drive/v3/files</a>での検索条件指定の方法が書かれていない気がするので、 迷ってしまいましたので、メモをしておきます。</p>
+<p>結論ですが、<code>Drive.Files.List#setQ(String)</code>を使います :green_salad:</p>
+<ul>
+<li><a href="https://developers.google.com/resources/api-libraries/documentation/drive/v3/java/latest/com/google/api/services/drive/Drive.Files.List.html#setQ-java.lang.String-">Drive.Files.List (Drive API v3 (Rev. 136) 1.25.0)</a></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">val</span> <span class="va">service</span>: Drive = ... <span class="co">// この取得方法はJava Quickstartのコード例を参照してください</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">val</span> <span class="va">filesUnderFoo</span>: List&lt;File&gt; = service.files().list()</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    .setQ(<span class="st">&quot;'${foo.id}' in parents&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    .execute().files</a></code></pre></div>
+<p>やったー！</p>
+<p>/drive/v3/filesの<code>q</code>パラメーターの構文については<a href="https://developers.google.com/drive/api/v3/search-parameters">Search for Files and Team Drives - Drive REST API - Google Developers</a>を参照してください 🐕</p>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2019-01-25-query-on-google-drive-rest-api-java.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Google Drive REST API Javaで検索条件を指定する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2019-01-25-query-on-google-drive-rest-api-java.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2019-01-25-query-on-google-drive-rest-api-java.md">Google Drive REST API Javaで検索条件を指定する - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
+        </div>
+
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    </body>
+</html>
