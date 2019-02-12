@@ -64,84 +64,84 @@
 </ul>
 <h1 id="ランク2多相をランク1多相として使おうとしたときの問題">ランク2多相をランク1多相として使おうとしたときの問題？</h1>
 <p>　これはできるのですが</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE ExistentialQuantification #-}</span>
-<span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
-<span class="ot">{-# LANGUAGE Rank2Types #-}</span>
-
-<span class="kw">import </span><span class="dt">Control.Monad</span> (void)
-<span class="kw">import </span><span class="dt">Control.Monad.IO.Class</span> (<span class="dt">MonadIO</span>, liftIO)
-<span class="kw">import </span><span class="dt">Data.String</span> (<span class="dt">IsString</span>, fromString)
-<span class="kw">import </span><span class="dt">System.Environment</span> (getEnv)
-
-
-<span class="kw">type</span> <span class="dt">FilePath'</span> <span class="fu">=</span> forall s<span class="fu">.</span> <span class="dt">IsString</span> s <span class="ot">=&gt;</span> s
-
-
-<span class="ot">inHomeDir ::</span> <span class="dt">MonadIO</span> m <span class="ot">=&gt;</span> (<span class="dt">FilePath'</span> <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> m a
-inHomeDir f <span class="fu">=</span> <span class="kw">do</span>
-  homeDir <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> getEnv <span class="st">&quot;HOME&quot;</span>
-  f <span class="fu">$</span> fromString homeDir
-
-
-<span class="ot">printFooAppDir ::</span> <span class="dt">IO</span> ()
-printFooAppDir <span class="fu">=</span> inHomeDir body
-  <span class="kw">where</span>  <span class="co">-- 型を明示するために関数分割してます</span>
-<span class="ot">    body ::</span> FilePath <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-    body homeDir <span class="fu">=</span> putStrLn <span class="fu">$</span> homeDir <span class="fu">++</span> <span class="st">&quot;/.config/foo&quot;</span>
-
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> printFooAppDir</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">{-# LANGUAGE ExistentialQuantification #-}</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="ot">{-# LANGUAGE Rank2Types #-}</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Control.Monad</span> (void)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">import</span> <span class="dt">Control.Monad.IO.Class</span> (<span class="dt">MonadIO</span>, liftIO)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>, fromString)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw">import</span> <span class="dt">System.Environment</span> (getEnv)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">type</span> <span class="dt">FilePath'</span> <span class="fu">=</span> forall s<span class="fu">.</span> <span class="dt">IsString</span> s <span class="ot">=&gt;</span> s</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="ot">inHomeDir ::</span> <span class="dt">MonadIO</span> m <span class="ot">=&gt;</span> (<span class="dt">FilePath'</span> <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> m a</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">inHomeDir f <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">  homeDir <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> getEnv <span class="st">&quot;HOME&quot;</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">  f <span class="fu">$</span> fromString homeDir</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="ot">printFooAppDir ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">printFooAppDir <span class="fu">=</span> inHomeDir body</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">  <span class="kw">where</span>  <span class="co">-- 型を明示するために関数分割してます</span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="ot">    body ::</span> FilePath <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">    body homeDir <span class="fu">=</span> putStrLn <span class="fu">$</span> homeDir <span class="fu">++</span> <span class="st">&quot;/.config/foo&quot;</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">main <span class="fu">=</span> printFooAppDir</a></code></pre></div>
 <p>これは</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE DeriveDataTypeable #-}</span>
-<span class="ot">{-# LANGUAGE ExistentialQuantification #-}</span>
-<span class="ot">{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span>
-<span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
-<span class="ot">{-# LANGUAGE Rank2Types #-}</span>
-
-<span class="kw">import </span><span class="dt">Control.Monad</span> (void)
-<span class="kw">import </span><span class="dt">Control.Monad.IO.Class</span> (<span class="dt">MonadIO</span>, liftIO)
-<span class="kw">import </span><span class="dt">Data.Monoid</span> ((&lt;&gt;))
-<span class="kw">import </span><span class="dt">Data.String</span> (<span class="dt">IsString</span>, fromString)
-<span class="kw">import </span><span class="dt">Data.Text</span> (<span class="dt">Text</span>)
-<span class="kw">import </span><span class="dt">Data.Typeable</span> (<span class="dt">Typeable</span>)
-<span class="kw">import </span><span class="dt">Data.Typeable</span> (cast)
-<span class="kw">import </span><span class="dt">System.Environment</span> (getEnv)
-<span class="kw">import qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span>
-
-
-<span class="kw">type</span> <span class="dt">FilePath'</span> <span class="fu">=</span> forall s<span class="fu">.</span> <span class="dt">IsString</span> s <span class="ot">=&gt;</span> s
-
-<span class="kw">newtype</span> <span class="dt">BakaFilePath</span> <span class="fu">=</span> <span class="dt">BakaFilePath</span> {<span class="ot"> unBakaFilePath ::</span> <span class="dt">Text</span> }
-  <span class="kw">deriving</span> (<span class="dt">IsString</span>, <span class="dt">Monoid</span>, <span class="dt">Typeable</span>)
-
-<span class="ot">putBakaLn ::</span> <span class="dt">BakaFilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-putBakaLn <span class="fu">=</span> TIO.putStrLn <span class="fu">.</span> unBakaFilePath
-
-
-<span class="ot">inHomeDir ::</span> <span class="dt">MonadIO</span> m <span class="ot">=&gt;</span> (<span class="dt">FilePath'</span> <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> m a
-inHomeDir f <span class="fu">=</span> <span class="kw">do</span>
-  homeDir <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> getEnv <span class="st">&quot;HOME&quot;</span>
-  f <span class="fu">$</span> fromString homeDir
-
-
-<span class="ot">printFooAppDir ::</span> <span class="dt">IO</span> ()
-printFooAppDir <span class="fu">=</span> id' <span class="fu">.</span> inHomeDir <span class="fu">$</span> body <span class="fu">.</span> cast'
-  <span class="kw">where</span>
-    <span class="co">-- MonadIO mからMonadIO nへの単相的な変換。 IO ()を期待する</span>
-<span class="ot">    id' ::</span> <span class="dt">IO</span> () <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-    id' <span class="fu">=</span> id
-
-<span class="ot">    cast' ::</span> FilePath <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">BakaFilePath</span>
-    cast' <span class="fu">=</span> cast
-
-<span class="ot">    body ::</span> <span class="dt">Maybe</span> <span class="dt">BakaFilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-    body <span class="dt">Nothing</span> <span class="fu">=</span> error <span class="st">&quot;baka&quot;</span>
-    body (<span class="dt">Just</span> bakaHomeDir) <span class="fu">=</span> putBakaLn <span class="fu">$</span> bakaHomeDir <span class="fu">&lt;&gt;</span> <span class="st">&quot;/.config/foo&quot;</span>
-
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> printFooAppDir</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE DeriveDataTypeable #-}</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ot">{-# LANGUAGE ExistentialQuantification #-}</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ot">{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="ot">{-# LANGUAGE Rank2Types #-}</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">import</span> <span class="dt">Control.Monad</span> (void)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">import</span> <span class="dt">Control.Monad.IO.Class</span> (<span class="dt">MonadIO</span>, liftIO)</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">import</span> <span class="dt">Data.Monoid</span> ((&lt;&gt;))</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>, fromString)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw">import</span> <span class="dt">Data.Typeable</span> (<span class="dt">Typeable</span>)</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="kw">import</span> <span class="dt">Data.Typeable</span> (cast)</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">import</span> <span class="dt">System.Environment</span> (getEnv)</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="kw">type</span> <span class="dt">FilePath'</span> <span class="fu">=</span> forall s<span class="fu">.</span> <span class="dt">IsString</span> s <span class="ot">=&gt;</span> s</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="kw">newtype</span> <span class="dt">BakaFilePath</span> <span class="fu">=</span> <span class="dt">BakaFilePath</span> {<span class="ot"> unBakaFilePath ::</span> <span class="dt">Text</span> }</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">  <span class="kw">deriving</span> (<span class="dt">IsString</span>, <span class="dt">Monoid</span>, <span class="dt">Typeable</span>)</a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="ot">putBakaLn ::</span> <span class="dt">BakaFilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">putBakaLn <span class="fu">=</span> TIO.putStrLn <span class="fu">.</span> unBakaFilePath</a>
+<a class="sourceLine" id="cb2-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="ot">inHomeDir ::</span> <span class="dt">MonadIO</span> m <span class="ot">=&gt;</span> (<span class="dt">FilePath'</span> <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> m a</a>
+<a class="sourceLine" id="cb2-28" data-line-number="28">inHomeDir f <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29">  homeDir <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> getEnv <span class="st">&quot;HOME&quot;</span></a>
+<a class="sourceLine" id="cb2-30" data-line-number="30">  f <span class="fu">$</span> fromString homeDir</a>
+<a class="sourceLine" id="cb2-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb2-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="ot">printFooAppDir ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-34" data-line-number="34">printFooAppDir <span class="fu">=</span> id' <span class="fu">.</span> inHomeDir <span class="fu">$</span> body <span class="fu">.</span> cast'</a>
+<a class="sourceLine" id="cb2-35" data-line-number="35">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-36" data-line-number="36">    <span class="co">-- MonadIO mからMonadIO nへの単相的な変換。 IO ()を期待する</span></a>
+<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="ot">    id' ::</span> <span class="dt">IO</span> () <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-38" data-line-number="38">    id' <span class="fu">=</span> id</a>
+<a class="sourceLine" id="cb2-39" data-line-number="39"></a>
+<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="ot">    cast' ::</span> FilePath <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">BakaFilePath</span></a>
+<a class="sourceLine" id="cb2-41" data-line-number="41">    cast' <span class="fu">=</span> cast</a>
+<a class="sourceLine" id="cb2-42" data-line-number="42"></a>
+<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="ot">    body ::</span> <span class="dt">Maybe</span> <span class="dt">BakaFilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-44" data-line-number="44">    body <span class="dt">Nothing</span> <span class="fu">=</span> error <span class="st">&quot;baka&quot;</span></a>
+<a class="sourceLine" id="cb2-45" data-line-number="45">    body (<span class="dt">Just</span> bakaHomeDir) <span class="fu">=</span> putBakaLn <span class="fu">$</span> bakaHomeDir <span class="fu">&lt;&gt;</span> <span class="st">&quot;/.config/foo&quot;</span></a>
+<a class="sourceLine" id="cb2-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb2-47" data-line-number="47"></a>
+<a class="sourceLine" id="cb2-48" data-line-number="48"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-49" data-line-number="49">main <span class="fu">=</span> printFooAppDir</a></code></pre></div>
 <p>こうなり</p>
 <pre><code>Test.hs|34 col 24| error:
      • Couldn't match type ‘FilePath’ with ‘FilePath'’
@@ -154,54 +154,54 @@ main <span class="fu">=</span> printFooAppDir</code></pre></div>
 <code>(bakaHomeDir :: BakaFilePath) &lt;&gt; (&quot;/.config/foo&quot; :: BakaFilePath)</code>としてもだめ。</p>
 <h1 id="回答">回答</h1>
 <p>　inHomeDirを単相化すればいいみたい。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE DeriveDataTypeable #-}</span>
-<span class="ot">{-# LANGUAGE ExistentialQuantification #-}</span>
-<span class="ot">{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span>
-<span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
-<span class="ot">{-# LANGUAGE Rank2Types #-}</span>
-
-<span class="kw">import </span><span class="dt">Control.Monad</span> (void)
-<span class="kw">import </span><span class="dt">Control.Monad.IO.Class</span> (<span class="dt">MonadIO</span>, liftIO)
-<span class="kw">import </span><span class="dt">Data.Monoid</span> ((&lt;&gt;))
-<span class="kw">import </span><span class="dt">Data.String</span> (<span class="dt">IsString</span>, fromString)
-<span class="kw">import </span><span class="dt">Data.Text</span> (<span class="dt">Text</span>)
-<span class="kw">import </span><span class="dt">Data.Typeable</span> (<span class="dt">Typeable</span>)
-<span class="kw">import </span><span class="dt">Data.Typeable</span> (cast)
-<span class="kw">import </span><span class="dt">System.Environment</span> (getEnv)
-<span class="kw">import qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span>
-
-
-<span class="kw">type</span> <span class="dt">FilePath'</span> <span class="fu">=</span> forall s<span class="fu">.</span> <span class="dt">IsString</span> s <span class="ot">=&gt;</span> s
-
-<span class="kw">newtype</span> <span class="dt">BakaFilePath</span> <span class="fu">=</span> <span class="dt">BakaFilePath</span> {<span class="ot"> unBakaFilePath ::</span> <span class="dt">Text</span> }
-  <span class="kw">deriving</span> (<span class="dt">IsString</span>, <span class="dt">Monoid</span>, <span class="dt">Typeable</span>)
-
-<span class="ot">putBakaLn ::</span> <span class="dt">BakaFilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-putBakaLn <span class="fu">=</span> TIO.putStrLn <span class="fu">.</span> unBakaFilePath
-
-
-<span class="ot">inHomeDir ::</span> <span class="dt">MonadIO</span> m <span class="ot">=&gt;</span> (<span class="dt">FilePath'</span> <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> m a
-inHomeDir f <span class="fu">=</span> <span class="kw">do</span>
-  homeDir <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> getEnv <span class="st">&quot;HOME&quot;</span>
-  f <span class="fu">$</span> fromString homeDir
-
-
-<span class="ot">printFooAppDir ::</span> <span class="dt">IO</span> ()
-printFooAppDir <span class="fu">=</span> id' <span class="fu">.</span> (<span class="ot">inHomeDir ::</span> (FilePath <span class="ot">-&gt;</span> <span class="dt">IO</span> ()) <span class="ot">-&gt;</span> <span class="dt">IO</span> ()) <span class="fu">$</span> body <span class="fu">.</span> cast'
-  <span class="kw">where</span>
-<span class="ot">    id' ::</span> <span class="dt">IO</span> () <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-    id' <span class="fu">=</span> id
-
-<span class="ot">    cast' ::</span> FilePath <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">BakaFilePath</span>
-    cast' <span class="fu">=</span> cast
-
-<span class="ot">    body ::</span> <span class="dt">Maybe</span> <span class="dt">BakaFilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-    body <span class="dt">Nothing</span> <span class="fu">=</span> error <span class="st">&quot;baka&quot;</span>
-    body (<span class="dt">Just</span> bakaHomeDir) <span class="fu">=</span> putBakaLn <span class="fu">$</span> bakaHomeDir <span class="fu">&lt;&gt;</span> <span class="st">&quot;/.config/foo&quot;</span>
-
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> printFooAppDir</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">{-# LANGUAGE DeriveDataTypeable #-}</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ot">{-# LANGUAGE ExistentialQuantification #-}</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ot">{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="ot">{-# LANGUAGE Rank2Types #-}</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw">import</span> <span class="dt">Control.Monad</span> (void)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">import</span> <span class="dt">Control.Monad.IO.Class</span> (<span class="dt">MonadIO</span>, liftIO)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="kw">import</span> <span class="dt">Data.Monoid</span> ((&lt;&gt;))</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>, fromString)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="kw">import</span> <span class="dt">Data.Typeable</span> (<span class="dt">Typeable</span>)</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="kw">import</span> <span class="dt">Data.Typeable</span> (cast)</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="kw">import</span> <span class="dt">System.Environment</span> (getEnv)</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="kw">type</span> <span class="dt">FilePath'</span> <span class="fu">=</span> forall s<span class="fu">.</span> <span class="dt">IsString</span> s <span class="ot">=&gt;</span> s</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="kw">newtype</span> <span class="dt">BakaFilePath</span> <span class="fu">=</span> <span class="dt">BakaFilePath</span> {<span class="ot"> unBakaFilePath ::</span> <span class="dt">Text</span> }</a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">  <span class="kw">deriving</span> (<span class="dt">IsString</span>, <span class="dt">Monoid</span>, <span class="dt">Typeable</span>)</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="ot">putBakaLn ::</span> <span class="dt">BakaFilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">putBakaLn <span class="fu">=</span> TIO.putStrLn <span class="fu">.</span> unBakaFilePath</a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="ot">inHomeDir ::</span> <span class="dt">MonadIO</span> m <span class="ot">=&gt;</span> (<span class="dt">FilePath'</span> <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> m a</a>
+<a class="sourceLine" id="cb4-28" data-line-number="28">inHomeDir f <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">  homeDir <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> getEnv <span class="st">&quot;HOME&quot;</span></a>
+<a class="sourceLine" id="cb4-30" data-line-number="30">  f <span class="fu">$</span> fromString homeDir</a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="ot">printFooAppDir ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-34" data-line-number="34">printFooAppDir <span class="fu">=</span> id' <span class="fu">.</span> (<span class="ot">inHomeDir ::</span> (FilePath <span class="ot">-&gt;</span> <span class="dt">IO</span> ()) <span class="ot">-&gt;</span> <span class="dt">IO</span> ()) <span class="fu">$</span> body <span class="fu">.</span> cast'</a>
+<a class="sourceLine" id="cb4-35" data-line-number="35">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="ot">    id' ::</span> <span class="dt">IO</span> () <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-37" data-line-number="37">    id' <span class="fu">=</span> id</a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="ot">    cast' ::</span> FilePath <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">BakaFilePath</span></a>
+<a class="sourceLine" id="cb4-40" data-line-number="40">    cast' <span class="fu">=</span> cast</a>
+<a class="sourceLine" id="cb4-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="ot">    body ::</span> <span class="dt">Maybe</span> <span class="dt">BakaFilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-43" data-line-number="43">    body <span class="dt">Nothing</span> <span class="fu">=</span> error <span class="st">&quot;baka&quot;</span></a>
+<a class="sourceLine" id="cb4-44" data-line-number="44">    body (<span class="dt">Just</span> bakaHomeDir) <span class="fu">=</span> putBakaLn <span class="fu">$</span> bakaHomeDir <span class="fu">&lt;&gt;</span> <span class="st">&quot;/.config/foo&quot;</span></a>
+<a class="sourceLine" id="cb4-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb4-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb4-47" data-line-number="47"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-48" data-line-number="48">main <span class="fu">=</span> printFooAppDir</a></code></pre></div>
 <hr />
 <p>これcastに失敗してNothingしてerror呼ぶけど、問題ないね！<br />
 コンパイル通れば、あとはどうとでもできる。</p>

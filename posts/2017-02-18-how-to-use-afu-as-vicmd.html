@@ -58,54 +58,54 @@
 <code>afu</code>は補完機能付き<code>viins</code>、<code>afu-vicmd</code>は<code>afu</code>と<code>vicmd</code>（の代わり）を行き来するためのものです。</p>
 <h1 id="auto-fu.zshの導入前後のzsh設定の具体的な変更内容">auto-fu.zshの導入前後の、zsh設定の具体的な変更内容</h1>
 <p>Before</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># Use viins</span>
-<span class="ex">bindkey</span> -v
-
-<span class="co"># Vim nize</span>
-<span class="ex">bindkey</span> -M vicmd <span class="st">'_'</span>  vi-first-non-blank
-<span class="ex">bindkey</span> -M vicmd <span class="st">'g_'</span> vi-end-of-line
-
-<span class="co"># Emacs nize</span>
-<span class="ex">bindkey</span> -M viins <span class="st">'^n'</span> down-history
-<span class="ex">bindkey</span> -M viins <span class="st">'^p'</span> up-history
-<span class="ex">bindkey</span> -M viins <span class="st">'^a'</span> beginning-of-line
-<span class="ex">bindkey</span> -M viins <span class="st">'^e'</span> end-of-line
-<span class="ex">bindkey</span> -M viins <span class="st">'^b'</span> backward-char
-<span class="ex">bindkey</span> -M viins <span class="st">'^f'</span> forward-char
-<span class="ex">bindkey</span> -M viins <span class="st">'^k'</span> kill-line
-<span class="ex">bindkey</span> -M viins <span class="st">'^u'</span> backward-kill-line
-<span class="ex">bindkey</span> -M viins <span class="st">'^d'</span> delete-char</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Use viins</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ex">bindkey</span> -v</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Vim nize</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="ex">bindkey</span> -M vicmd <span class="st">'_'</span>  vi-first-non-blank</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="ex">bindkey</span> -M vicmd <span class="st">'g_'</span> vi-end-of-line</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># Emacs nize</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="ex">bindkey</span> -M viins <span class="st">'^n'</span> down-history</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="ex">bindkey</span> -M viins <span class="st">'^p'</span> up-history</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="ex">bindkey</span> -M viins <span class="st">'^a'</span> beginning-of-line</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="ex">bindkey</span> -M viins <span class="st">'^e'</span> end-of-line</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="ex">bindkey</span> -M viins <span class="st">'^b'</span> backward-char</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="ex">bindkey</span> -M viins <span class="st">'^f'</span> forward-char</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="ex">bindkey</span> -M viins <span class="st">'^k'</span> kill-line</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="ex">bindkey</span> -M viins <span class="st">'^u'</span> backward-kill-line</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="ex">bindkey</span> -M viins <span class="st">'^d'</span> delete-char</a></code></pre></div>
 <p>After</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="bu">source</span> /path/to/auto-fu.zsh
-
-<span class="co"># Use afu-vicmd</span>
-<span class="ex">zle</span> -N zle-keymap-select auto-fu-zle-keymap-select
-
-<span class="co"># Vim nize</span>
-<span class="ex">bindkey</span> -M afu-vicmd <span class="st">'_'</span>  vi-first-non-blank
-<span class="ex">bindkey</span> -M afu-vicmd <span class="st">'g_'</span> vi-end-of-line
-<span class="ex">bindkey</span> -M afu <span class="st">'^['</span>   afu+vi-cmd-mode
-<span class="ex">bindkey</span> -M afu <span class="st">'^X^V'</span> afu+vi-cmd-mode  # Escでafu-vicmdに行く
-
-<span class="co"># Emacs nize insert mode</span>
-<span class="ex">bindkey</span> -M afu <span class="st">'^n'</span> down-history
-<span class="ex">bindkey</span> -M afu <span class="st">'^p'</span> up-history
-<span class="ex">bindkey</span> -M afu <span class="st">'^a'</span> beginning-of-line
-<span class="ex">bindkey</span> -M afu <span class="st">'^e'</span> end-of-line
-<span class="ex">bindkey</span> -M afu <span class="st">'^b'</span> backward-char
-<span class="ex">bindkey</span> -M afu <span class="st">'^f'</span> forward-char
-<span class="ex">bindkey</span> -M afu <span class="st">'^k'</span> kill-line
-<span class="ex">bindkey</span> -M afu <span class="st">'^u'</span> backward-kill-line
-<span class="ex">bindkey</span> -M afu <span class="st">'^d'</span> delete-char</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="bu">source</span> /path/to/auto-fu.zsh</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># Use afu-vicmd</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ex">zle</span> -N zle-keymap-select auto-fu-zle-keymap-select</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># Vim nize</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="ex">bindkey</span> -M afu-vicmd <span class="st">'_'</span>  vi-first-non-blank</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="ex">bindkey</span> -M afu-vicmd <span class="st">'g_'</span> vi-end-of-line</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="ex">bindkey</span> -M afu <span class="st">'^['</span>   afu+vi-cmd-mode</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="ex">bindkey</span> -M afu <span class="st">'^X^V'</span> afu+vi-cmd-mode  # Escでafu-vicmdに行く</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co"># Emacs nize insert mode</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="ex">bindkey</span> -M afu <span class="st">'^n'</span> down-history</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="ex">bindkey</span> -M afu <span class="st">'^p'</span> up-history</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="ex">bindkey</span> -M afu <span class="st">'^a'</span> beginning-of-line</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="ex">bindkey</span> -M afu <span class="st">'^e'</span> end-of-line</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="ex">bindkey</span> -M afu <span class="st">'^b'</span> backward-char</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="ex">bindkey</span> -M afu <span class="st">'^f'</span> forward-char</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="ex">bindkey</span> -M afu <span class="st">'^k'</span> kill-line</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="ex">bindkey</span> -M afu <span class="st">'^u'</span> backward-kill-line</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="ex">bindkey</span> -M afu <span class="st">'^d'</span> delete-char</a></code></pre></div>
 <p>実際に<code>viins</code>と<code>afu</code>、<code>vicmd</code>と<code>afu-vicmd</code>が割り当たってるのがわかるかと思います。</p>
 <h1 id="最後に注意">最後に注意</h1>
 <p>　<code>zle -N zle-keymap-select auto-fu-zle-keymap-select</code>は既存の<code>zle-keymap-select</code>を上書きするので、他の設定がある場合は以下のようにしましょう。</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">function</span><span class="fu"> zle-keymap-select</span> <span class="kw">{</span>
-	<span class="ex">auto-fu-zle-keymap-select</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span>
-	<span class="ex">shell_kawaii_build_prompt</span>
-	<span class="ex">zle</span> reset-prompt
-<span class="kw">}</span>
-<span class="ex">zle</span> -N zle-keymap-select</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">function</span><span class="fu"> zle-keymap-select</span> <span class="kw">{</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">	<span class="ex">auto-fu-zle-keymap-select</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">	<span class="ex">shell_kawaii_build_prompt</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">	<span class="ex">zle</span> reset-prompt</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="ex">zle</span> -N zle-keymap-select</a></code></pre></div>
 <p>（この例はauto-fu.zshと<a href="https://github.com/aiya000/zsh-shell-kawaii">zsh-shell-kawaii</a>の複合設定）</p>
 
     <hr />

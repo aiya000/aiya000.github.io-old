@@ -77,8 +77,8 @@ gnome-keyring 全てはこちらに書いてある。</p>
 </ul>
 <p>いくつかのディスプレイマネージャを使用していれば、自動でgnome-keyring-deamonを起動してくれるらしい。</p>
 <p>そうでないstartxを使う環境など（.xinitrcを介する環境）は.xinitrcにこれを書く。</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="bu">eval</span> <span class="va">$(</span><span class="ex">/usr/bin/gnome-keyring-daemon</span> --start --components=pkcs11,secrets,ssh<span class="va">)</span>
-<span class="bu">export</span> <span class="va">SSH_AUTH_SOCK</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="bu">eval</span> <span class="va">$(</span><span class="ex">/usr/bin/gnome-keyring-daemon</span> --start --components=pkcs11,secrets,ssh<span class="va">)</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="bu">export</span> <span class="va">SSH_AUTH_SOCK</span></a></code></pre></div>
 <p>皆さん多分/usr/lib/seahorseは<code>$PATH</code>に追加していないと思うので、フルパスでseahorse-ssh-askpassコマンド打つ</p>
 <pre class="console"><code>$ /usr/lib/seahorse/seahorse-ssh-askpass path/to/ssh_key</code></pre>
 <p>あとは再起動して、いける。</p>

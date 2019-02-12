@@ -88,8 +88,8 @@
 </ul>
 <hr />
 <p><a name="yi-editorm"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">EditorM</span> a <span class="fu">=</span> <span class="dt">EditorM</span> {<span class="ot"> fromEditorM ::</span> <span class="dt">ReaderT</span> <span class="dt">Config</span> (<span class="dt">State</span> <span class="dt">Editor</span>) a }
-    <span class="kw">deriving</span> (<span class="dt">Monad</span>, <span class="dt">Applicative</span>, <span class="dt">MonadState</span> <span class="dt">Editor</span>, <span class="dt">MonadReader</span> <span class="dt">Config</span>, <span class="dt">Functor</span>, <span class="dt">Typeable</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">EditorM</span> a <span class="fu">=</span> <span class="dt">EditorM</span> {<span class="ot"> fromEditorM ::</span> <span class="dt">ReaderT</span> <span class="dt">Config</span> (<span class="dt">State</span> <span class="dt">Editor</span>) a }</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="kw">deriving</span> (<span class="dt">Monad</span>, <span class="dt">Applicative</span>, <span class="dt">MonadState</span> <span class="dt">Editor</span>, <span class="dt">MonadReader</span> <span class="dt">Config</span>, <span class="dt">Functor</span>, <span class="dt">Typeable</span>)</a></code></pre></div>
 <p>　yiの状態と動作を持ちますが、IOは持ちません。<br />
 ReaderTとStateにより、<a href="#yi-config">Config</a>の読み込みと<a href="#yi-editor">Editor</a>への変更を行います。<br />
 例えば、現在保持しているバッファの一覧、バッファの追加などを取得したりできます。<br />
@@ -97,8 +97,8 @@ ReaderTとStateにより、<a href="#yi-config">Config</a>の読み込みと<a h
 <p><code>withEditor :: MonadEditor m =&gt; EditorM a -&gt; m a</code>関数でYiMに変換できたりします。</p>
 <hr />
 <p><a name="yi-yim"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">YiM</span> a <span class="fu">=</span>  <span class="dt">YiM</span> {<span class="ot"> runYiM ::</span> <span class="dt">ReaderT</span> <span class="dt">Yi</span> <span class="dt">IO</span> a } 
-    <span class="kw">deriving</span> (<span class="dt">Monad</span>, <span class="dt">Applicative</span>, <span class="dt">MonadReader</span> <span class="dt">Yi</span>, <span class="dt">MonadBase</span> <span class="dt">IO</span>, <span class="dt">Typeable</span>, <span class="dt">Functor</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">YiM</span> a <span class="fu">=</span>  <span class="dt">YiM</span> {<span class="ot"> runYiM ::</span> <span class="dt">ReaderT</span> <span class="dt">Yi</span> <span class="dt">IO</span> a } </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="kw">deriving</span> (<span class="dt">Monad</span>, <span class="dt">Applicative</span>, <span class="dt">MonadReader</span> <span class="dt">Yi</span>, <span class="dt">MonadBase</span> <span class="dt">IO</span>, <span class="dt">Typeable</span>, <span class="dt">Functor</span>)</a></code></pre></div>
 <p>　yiの状態と動作を持ちますが、IOを含むので何でもできます。 liftBaseすればそのままIOモナドになるので。<br />
 <code>MonadState Editor</code>になっていることと<a href="#yi-yi">Yi</a>が<a href="#yi-config">Config</a>を持っていることで、 やはりこちらもEditorMと同じことを行えます。<br />
 でもできるだけEditorMを使った方がいい :(</p>
@@ -110,51 +110,51 @@ ReaderTとStateにより、<a href="#yi-config">Config</a>の読み込みと<a h
 </ul>
 <hr />
 <p><a name="yi-config"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Config</span> <span class="fu">=</span> <span class="dt">Config</span>
-  {<span class="ot"> startFrontEnd ::</span> <span class="dt">UIBoot</span>
-  ,<span class="ot"> configUI ::</span> <span class="dt">UIConfig</span>
-  ,<span class="ot"> startActions ::</span> [<span class="dt">Action</span>]
-  ,<span class="ot"> initialActions ::</span> [<span class="dt">Action</span>]
-  ,<span class="ot"> defaultKm ::</span> <span class="dt">KeymapSet</span>
-  ,<span class="ot"> configInputPreprocess ::</span> <span class="dt">P</span> <span class="dt">Event</span> <span class="dt">Event</span>
-  ,<span class="ot"> modeTable ::</span> [<span class="dt">AnyMode</span>]
-  ,<span class="ot"> debugMode ::</span> <span class="dt">Bool</span>
-  ,<span class="ot"> configRegionStyle ::</span> <span class="dt">RegionStyle</span>
-  ,<span class="ot"> configKillringAccumulate ::</span> <span class="dt">Bool</span>
-  ,<span class="ot"> configCheckExternalChangesObsessively ::</span> <span class="dt">Bool</span>
-  ,<span class="ot"> bufferUpdateHandler ::</span> [[<span class="dt">Update</span>] <span class="ot">-&gt;</span> <span class="dt">BufferM</span> ()]
-  ,<span class="ot"> layoutManagers ::</span> [<span class="dt">AnyLayoutManager</span>]
-  ,<span class="ot"> configVars ::</span> <span class="dt">ConfigState.DynamicState</span>
-  }</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Config</span> <span class="fu">=</span> <span class="dt">Config</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  {<span class="ot"> startFrontEnd ::</span> <span class="dt">UIBoot</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  ,<span class="ot"> configUI ::</span> <span class="dt">UIConfig</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  ,<span class="ot"> startActions ::</span> [<span class="dt">Action</span>]</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  ,<span class="ot"> initialActions ::</span> [<span class="dt">Action</span>]</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  ,<span class="ot"> defaultKm ::</span> <span class="dt">KeymapSet</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  ,<span class="ot"> configInputPreprocess ::</span> <span class="dt">P</span> <span class="dt">Event</span> <span class="dt">Event</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  ,<span class="ot"> modeTable ::</span> [<span class="dt">AnyMode</span>]</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  ,<span class="ot"> debugMode ::</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">  ,<span class="ot"> configRegionStyle ::</span> <span class="dt">RegionStyle</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  ,<span class="ot"> configKillringAccumulate ::</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  ,<span class="ot"> configCheckExternalChangesObsessively ::</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">  ,<span class="ot"> bufferUpdateHandler ::</span> [[<span class="dt">Update</span>] <span class="ot">-&gt;</span> <span class="dt">BufferM</span> ()]</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">  ,<span class="ot"> layoutManagers ::</span> [<span class="dt">AnyLayoutManager</span>]</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">  ,<span class="ot"> configVars ::</span> <span class="dt">ConfigState.DynamicState</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">  }</a></code></pre></div>
 <p>　yi上のキーマッピング情報などの、yi起動以前に設定した情報を表します。<br />
 例えば、initialActionsでctagsなどのタグ情報を読み込む方法を設定しておいたりします。</p>
 <hr />
 <p><a name="yi-editor"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Editor</span> <span class="fu">=</span> <span class="dt">Editor</span>
-  {<span class="ot"> bufferStack     ::</span> <span class="fu">!</span>(<span class="dt">NonEmpty</span> <span class="dt">BufferRef</span>)
-  ,<span class="ot"> buffers         ::</span> <span class="fu">!</span>(<span class="dt">Map</span> <span class="dt">BufferRef</span> <span class="dt">FBuffer</span>)
-  ,<span class="ot"> refSupply       ::</span> <span class="fu">!</span><span class="dt">Int</span>
-  ,<span class="ot"> tabs_           ::</span> <span class="fu">!</span>(<span class="dt">PointedList</span> <span class="dt">Tab</span>)
-  ,<span class="ot"> dynamic         ::</span> <span class="fu">!</span><span class="dt">DynamicState.DynamicState</span>
-  ,<span class="ot"> statusLines     ::</span> <span class="fu">!</span><span class="dt">Statuses</span>
-  ,<span class="ot"> maxStatusHeight ::</span> <span class="fu">!</span><span class="dt">Int</span>
-  ,<span class="ot"> killring        ::</span> <span class="fu">!</span><span class="dt">Killring</span>
-  ,<span class="ot"> currentRegex    ::</span> <span class="fu">!</span>(<span class="dt">Maybe</span> <span class="dt">SearchExp</span>)
-  ,<span class="ot"> searchDirection ::</span> <span class="fu">!</span><span class="dt">Direction</span>
-  ,<span class="ot"> pendingEvents   ::</span> <span class="fu">!</span>[<span class="dt">Event</span>]
-  ,<span class="ot"> onCloseActions  ::</span> <span class="fu">!</span>(<span class="dt">Map</span> <span class="dt">BufferRef</span> (<span class="dt">EditorM</span> ()))
-  } <span class="kw">deriving</span> <span class="dt">Typeable</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Editor</span> <span class="fu">=</span> <span class="dt">Editor</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  {<span class="ot"> bufferStack     ::</span> <span class="fu">!</span>(<span class="dt">NonEmpty</span> <span class="dt">BufferRef</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  ,<span class="ot"> buffers         ::</span> <span class="fu">!</span>(<span class="dt">Map</span> <span class="dt">BufferRef</span> <span class="dt">FBuffer</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  ,<span class="ot"> refSupply       ::</span> <span class="fu">!</span><span class="dt">Int</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  ,<span class="ot"> tabs_           ::</span> <span class="fu">!</span>(<span class="dt">PointedList</span> <span class="dt">Tab</span>)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  ,<span class="ot"> dynamic         ::</span> <span class="fu">!</span><span class="dt">DynamicState.DynamicState</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  ,<span class="ot"> statusLines     ::</span> <span class="fu">!</span><span class="dt">Statuses</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  ,<span class="ot"> maxStatusHeight ::</span> <span class="fu">!</span><span class="dt">Int</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  ,<span class="ot"> killring        ::</span> <span class="fu">!</span><span class="dt">Killring</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">  ,<span class="ot"> currentRegex    ::</span> <span class="fu">!</span>(<span class="dt">Maybe</span> <span class="dt">SearchExp</span>)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">  ,<span class="ot"> searchDirection ::</span> <span class="fu">!</span><span class="dt">Direction</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">  ,<span class="ot"> pendingEvents   ::</span> <span class="fu">!</span>[<span class="dt">Event</span>]</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">  ,<span class="ot"> onCloseActions  ::</span> <span class="fu">!</span>(<span class="dt">Map</span> <span class="dt">BufferRef</span> (<span class="dt">EditorM</span> ()))</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">  } <span class="kw">deriving</span> <span class="dt">Typeable</span></a></code></pre></div>
 <p>　動的な状態を保持します。<br />
 UIに実際に表示されているタブやバッファ、検索中の単語(もとい表現)と検索状態などを保持します。</p>
 <hr />
 <p><a name="yi-yi"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Yi</span> <span class="fu">=</span> <span class="dt">Yi</span>
-  {<span class="ot"> yiUi          ::</span> <span class="dt">UI</span> <span class="dt">Editor</span>
-  ,<span class="ot"> yiInput       ::</span> [<span class="dt">Event</span>] <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-  ,<span class="ot"> yiOutput      ::</span> <span class="dt">IsRefreshNeeded</span> <span class="ot">-&gt;</span> [<span class="dt">Action</span>] <span class="ot">-&gt;</span> <span class="dt">IO</span> ()
-  ,<span class="ot"> yiConfig      ::</span> <span class="dt">Config</span>
-  ,<span class="ot"> yiVar         ::</span> <span class="dt">MVar</span> <span class="dt">YiVar</span>
-  } <span class="kw">deriving</span> <span class="dt">Typeable</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Yi</span> <span class="fu">=</span> <span class="dt">Yi</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  {<span class="ot"> yiUi          ::</span> <span class="dt">UI</span> <span class="dt">Editor</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  ,<span class="ot"> yiInput       ::</span> [<span class="dt">Event</span>] <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  ,<span class="ot"> yiOutput      ::</span> <span class="dt">IsRefreshNeeded</span> <span class="ot">-&gt;</span> [<span class="dt">Action</span>] <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  ,<span class="ot"> yiConfig      ::</span> <span class="dt">Config</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  ,<span class="ot"> yiVar         ::</span> <span class="dt">MVar</span> <span class="dt">YiVar</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  } <span class="kw">deriving</span> <span class="dt">Typeable</span></a></code></pre></div>
 <p>　動的な状態を保持します。 他の状態用の型とは違って、外界へのアクセスを許されているっぽい。</p>
 <h2 id="バッファ">バッファ</h2>
 <ul>
@@ -165,38 +165,38 @@ UIに実際に表示されているタブやバッファ、検索中の単語(�
 </ul>
 <hr />
 <p><a name="yi-bufferid"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">BufferId</span> <span class="fu">=</span> <span class="dt">MemBuffer</span> <span class="dt">Text</span>
-              <span class="fu">|</span> <span class="dt">FileBuffer</span> FilePath
-              <span class="kw">deriving</span> (<span class="dt">Show</span>, <span class="dt">Eq</span>, <span class="dt">Ord</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">data</span> <span class="dt">BufferId</span> <span class="fu">=</span> <span class="dt">MemBuffer</span> <span class="dt">Text</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">              <span class="fu">|</span> <span class="dt">FileBuffer</span> FilePath</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">              <span class="kw">deriving</span> (<span class="dt">Show</span>, <span class="dt">Eq</span>, <span class="dt">Ord</span>)</a></code></pre></div>
 <p>あるバッファの種別です。<br />
 <a href="#yi-attributes">Attributes</a>という形で<a href="#yi-fbuffer">FBuffer</a>から保持されます。</p>
 <hr />
 <p><a name="yi-fbuffer"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">FBuffer</span> <span class="fu">=</span> forall syntax<span class="fu">.</span> <span class="dt">FBuffer</span>
-  {<span class="ot"> bmode  ::</span> <span class="fu">!</span>(<span class="dt">Mode</span> syntax)
-  ,<span class="ot"> rawbuf ::</span> <span class="fu">!</span>(<span class="dt">BufferImpl</span> syntax)
-  ,<span class="ot"> attributes ::</span> <span class="fu">!</span><span class="dt">Attributes</span>
-  } <span class="kw">deriving</span> <span class="dt">Typeable</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">data</span> <span class="dt">FBuffer</span> <span class="fu">=</span> forall syntax<span class="fu">.</span> <span class="dt">FBuffer</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  {<span class="ot"> bmode  ::</span> <span class="fu">!</span>(<span class="dt">Mode</span> syntax)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  ,<span class="ot"> rawbuf ::</span> <span class="fu">!</span>(<span class="dt">BufferImpl</span> syntax)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  ,<span class="ot"> attributes ::</span> <span class="fu">!</span><span class="dt">Attributes</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  } <span class="kw">deriving</span> <span class="dt">Typeable</span></a></code></pre></div>
 <p>　具体的なバッファの値を指します。<br />
 <a href="#yi-bufferimpl">BufferImpl</a>とAttributesを統合して保持します。<br />
 <a href="#yi-bufferref">BufferRef</a>から参照されます。</p>
 <p>　これは<code>Editor</code>の<code>buffers</code>から取得できます。</p>
 <hr />
 <p><a name="yi-bufferimpl"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">BufferImpl</span> syntax <span class="fu">=</span> <span class="dt">FBufferData</span>
-  {<span class="ot"> mem         ::</span> <span class="fu">!</span><span class="dt">YiString</span>
-  ,<span class="ot"> marks       ::</span> <span class="fu">!</span><span class="dt">Marks</span>
-  ,<span class="ot"> markNames   ::</span> <span class="fu">!</span>(<span class="dt">Map</span> <span class="dt">String</span> <span class="dt">Mark</span>)
-  ,<span class="ot"> hlCache     ::</span> <span class="fu">!</span>(<span class="dt">HLState</span> syntax)
-  ,<span class="ot"> overlays    ::</span> <span class="fu">!</span>(<span class="dt">Set</span> <span class="dt">Overlay</span>)
-  ,<span class="ot"> dirtyOffset ::</span> <span class="fu">!</span><span class="dt">Point</span>
-  } <span class="kw">deriving</span> <span class="dt">Typeable</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">data</span> <span class="dt">BufferImpl</span> syntax <span class="fu">=</span> <span class="dt">FBufferData</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  {<span class="ot"> mem         ::</span> <span class="fu">!</span><span class="dt">YiString</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  ,<span class="ot"> marks       ::</span> <span class="fu">!</span><span class="dt">Marks</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  ,<span class="ot"> markNames   ::</span> <span class="fu">!</span>(<span class="dt">Map</span> <span class="dt">String</span> <span class="dt">Mark</span>)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">  ,<span class="ot"> hlCache     ::</span> <span class="fu">!</span>(<span class="dt">HLState</span> syntax)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">  ,<span class="ot"> overlays    ::</span> <span class="fu">!</span>(<span class="dt">Set</span> <span class="dt">Overlay</span>)</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">  ,<span class="ot"> dirtyOffset ::</span> <span class="fu">!</span><span class="dt">Point</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">  } <span class="kw">deriving</span> <span class="dt">Typeable</span></a></code></pre></div>
 <p>　バッファ内のテキストやハイライトを値でを保持します。</p>
 <hr />
 <p><a name="yi-bufferref"></a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">BufferRef</span> <span class="fu">=</span> <span class="dt">BufferRef</span> <span class="dt">Int</span>
-    <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>, <span class="dt">Typeable</span>, <span class="dt">Binary</span>, <span class="dt">Num</span>)
-<span class="kw">instance</span> <span class="dt">Show</span> <span class="dt">BufferRef</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">BufferRef</span> <span class="fu">=</span> <span class="dt">BufferRef</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>, <span class="dt">Typeable</span>, <span class="dt">Binary</span>, <span class="dt">Num</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">instance</span> <span class="dt">Show</span> <span class="dt">BufferRef</span></a></code></pre></div>
 <p>　バッファの参照を持ちます。<br />
 バッファの具体的な内容は持ちません。</p>
 <h1 id="こんな感じで">こんな感じで</h1>

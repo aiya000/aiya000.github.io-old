@@ -55,14 +55,14 @@
 <div class="post-body">
     <h1 id="作用とは">作用とは</h1>
 <p>　この記事では<code>Eff</code>型の第一型引数を指します。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- Fooは作用</span>
-<span class="dt">Eff</span> <span class="dt">Foo</span> a</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">-- Fooは作用</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="dt">Eff</span> <span class="dt">Foo</span> a</a></code></pre></div>
 <h1 id="拡大とは">拡大とは</h1>
 <p>　この記事において、作用<code>A</code>が作用<code>B</code>より大きいとは</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">A</span> <span class="fu">=</span> <span class="dt">X</span> <span class="fu">:&gt;</span> <span class="dt">Y</span> <span class="fu">:&gt;</span> <span class="dt">Z</span>
-<span class="kw">type</span> <span class="dt">B</span> <span class="fu">=</span> <span class="dt">Y</span> <span class="fu">:&gt;</span> <span class="dt">Z</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">type</span> <span class="dt">A</span> <span class="fu">=</span> <span class="dt">X</span> <span class="fu">:&gt;</span> <span class="dt">Y</span> <span class="fu">:&gt;</span> <span class="dt">Z</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">type</span> <span class="dt">B</span> <span class="fu">=</span> <span class="dt">Y</span> <span class="fu">:&gt;</span> <span class="dt">Z</span></a></code></pre></div>
 <p>このような<code>A ⊂ B</code>を指し、 「拡大」は、</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Eff</span> <span class="dt">B</span> a <span class="ot">-&gt;</span> <span class="dt">Eff</span> <span class="dt">A</span> a</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">Eff</span> <span class="dt">B</span> a <span class="ot">-&gt;</span> <span class="dt">Eff</span> <span class="dt">A</span> a</a></code></pre></div>
 <p>のような（<code>(X :&gt;)</code>を補填するような）操作を指します。 （一般的になんと言うのかは知らない）</p>
 <h1 id="問題">問題</h1>
 <p>　この問題についてのおおよその背景はみょんさんの記事を見た方がとてもわかりやすいと思いますが</p>
@@ -70,42 +70,42 @@
 <li><a href="http://myuon-myon.hatenablog.com/entry/2017/07/15/200203">Notions of Computations and Effects - Just $ A sandbox</a></li>
 </ul>
 <p>今回の焦点は、extensbile-effectsパッケージにおいてこのような2つの型があった時に</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">PureComputation</span>   <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)
-<span class="kw">type</span> <span class="dt">ImpureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">type</span> <span class="dt">PureComputation</span>   <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">type</span> <span class="dt">ImpureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>)</a></code></pre></div>
 <p>作用が小さいものを大きいものに拡大する一般的な関数が提供されていないということです。</p>
 <p>　直感的には、純粋な計算（<code>PureComputation</code>）というのは不純な計算（<code>ImpureComputation</code>）を含んでも問題がない気がします。 （でも、それを実現する、より一般的な方法がexntensible-effectsでは用意されていない）</p>
 <h1 id="解決自分で作る">解決（自分で作る）</h1>
 <p>　なのでこんな関数を定義します。 （Thanks <a href="https://github.com/as-capabl">@as-capbabl</a>！）</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">upgrade ::</span> (<span class="dt">Functor</span> t, <span class="dt">Typeable</span> t) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (t <span class="fu">:&gt;</span> r) a
-upgrade <span class="fu">=</span> fromView <span class="fu">.</span> go <span class="fu">.</span> toView
-  <span class="kw">where</span>
-    go (<span class="dt">Impure</span> uni) <span class="fu">=</span> <span class="dt">Impure</span> <span class="fu">$</span> weaken (upgrade <span class="fu">&lt;$&gt;</span> uni)
-    go (<span class="dt">Pure</span> x) <span class="fu">=</span> <span class="dt">Pure</span> x</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">upgrade ::</span> (<span class="dt">Functor</span> t, <span class="dt">Typeable</span> t) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (t <span class="fu">:&gt;</span> r) a</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">upgrade <span class="fu">=</span> fromView <span class="fu">.</span> go <span class="fu">.</span> toView</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    go (<span class="dt">Impure</span> uni) <span class="fu">=</span> <span class="dt">Impure</span> <span class="fu">$</span> weaken (upgrade <span class="fu">&lt;$&gt;</span> uni)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">    go (<span class="dt">Pure</span> x) <span class="fu">=</span> <span class="dt">Pure</span> x</a></code></pre></div>
 <p>　こんな感じで使います。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE TypeOperators #-}</span>
-
-<span class="kw">import </span><span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, (:&gt;), run)
-<span class="kw">import </span><span class="dt">Control.Eff.Exception</span> (<span class="dt">Exc</span>, runExc, liftEither)
-<span class="kw">import </span><span class="dt">Control.Eff.Lift</span> (<span class="dt">Lift</span>)
-<span class="kw">import </span><span class="dt">Control.Monad.Free.Reflection</span> (<span class="dt">FreeView</span>(..), fromView, toView)
-<span class="kw">import </span><span class="dt">Data.OpenUnion</span> (weaken)
-<span class="kw">import </span><span class="dt">Data.Typeable</span> (<span class="dt">Typeable</span>)
-<span class="kw">import </span><span class="dt">Data.Void</span> (<span class="dt">Void</span>)
-
-<span class="kw">type</span> <span class="dt">PureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)
-<span class="kw">type</span> <span class="dt">ImpureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)
-
-<span class="co">-- 何らかの純粋な計算</span>
-<span class="ot">pureCompute ::</span> <span class="dt">PureComputation</span> ()
-pureCompute <span class="fu">=</span> return ()
-
-<span class="co">-- 何らかの不純な計算</span>
-<span class="ot">impureCompute ::</span> <span class="dt">ImpureComputation</span> ()
-impureCompute <span class="fu">=</span> return ()
-
-<span class="co">-- 不純なものに拡大された純粋な計算</span>
-<span class="ot">impureCompute' ::</span> <span class="dt">ImpureComputation</span> ()
-impureCompute' <span class="fu">=</span> upgrade pureCompute</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, (:&gt;), run)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Control.Eff.Exception</span> (<span class="dt">Exc</span>, runExc, liftEither)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Control.Eff.Lift</span> (<span class="dt">Lift</span>)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw">import</span> <span class="dt">Control.Monad.Free.Reflection</span> (<span class="dt">FreeView</span>(..), fromView, toView)</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">import</span> <span class="dt">Data.OpenUnion</span> (weaken)</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="kw">import</span> <span class="dt">Data.Typeable</span> (<span class="dt">Typeable</span>)</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="kw">import</span> <span class="dt">Data.Void</span> (<span class="dt">Void</span>)</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="kw">type</span> <span class="dt">PureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="kw">type</span> <span class="dt">ImpureComputation</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Lift</span> <span class="dt">IO</span> <span class="fu">:&gt;</span> <span class="dt">Exc</span> () <span class="fu">:&gt;</span> <span class="dt">Void</span>)</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">-- 何らかの純粋な計算</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="ot">pureCompute ::</span> <span class="dt">PureComputation</span> ()</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">pureCompute <span class="fu">=</span> return ()</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">-- 何らかの不純な計算</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="ot">impureCompute ::</span> <span class="dt">ImpureComputation</span> ()</a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">impureCompute <span class="fu">=</span> return ()</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">-- 不純なものに拡大された純粋な計算</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="ot">impureCompute' ::</span> <span class="dt">ImpureComputation</span> ()</a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">impureCompute' <span class="fu">=</span> upgrade pureCompute</a></code></pre></div>
 <h1 id="余談">余談</h1>
 <p>　<a href="https://hackage.haskell.org/package/extensible-0.4.4/docs/Data-Extensible-Effect.html#v:castEff">extensibleのEffectモジュール</a> には<code>castEff :: IncludeAssoc ys xs =&gt; Eff xs a -&gt; Eff ys a</code>という関数が予め用意されています。</p>
 

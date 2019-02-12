@@ -54,43 +54,43 @@
 
 <div class="post-body">
     <p>　まずはこのコードを見て欲しい。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Numeric.Extra</span> (intToDouble)
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-  n <span class="ot">&lt;-</span> (readLn<span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">Int</span>)
-  xs <span class="ot">&lt;-</span> sequence <span class="fu">$</span> replicate n (readLn<span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">Int</span>)
-  <span class="kw">if</span> n <span class="fu">==</span> <span class="dv">3</span>
-     <span class="kw">then</span> <span class="kw">case</span> divTotal xs <span class="kw">of</span>
-               <span class="dt">Just</span> result <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result
-               <span class="dt">Nothing</span>     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span>
-     <span class="kw">else</span> putStrLn <span class="st">&quot;x(&quot;</span>
-
-<span class="ot">divTotal ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Int</span>
-divTotal [] <span class="fu">=</span> <span class="dt">Nothing</span>
-divTotal xs <span class="fu">=</span>
-  <span class="kw">let</span> (x'<span class="fu">:</span>xs') <span class="fu">=</span> map intToDouble xs
-  <span class="kw">in</span> truncate <span class="fu">&lt;$&gt;</span> foldr (flip (<span class="fu">/?</span>)) (<span class="dt">Just</span> x') xs'
-  <span class="kw">where</span>
-    <span class="co">-- Safe (/)</span>
-<span class="ot">    (/?) ::</span> <span class="dt">Maybe</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Double</span>
-    <span class="dt">Nothing</span> <span class="fu">/?</span> _  <span class="fu">=</span> <span class="dt">Nothing</span>
-    <span class="dt">Just</span> <span class="dv">0</span>  <span class="fu">/?</span> _  <span class="fu">=</span> <span class="dt">Nothing</span>
-    <span class="dt">Just</span> x  <span class="fu">/?</span> y  <span class="fu">=</span> <span class="dt">Just</span> <span class="fu">$</span> x <span class="fu">/</span> y</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Numeric.Extra</span> (intToDouble)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  n <span class="ot">&lt;-</span> (readLn<span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">Int</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  xs <span class="ot">&lt;-</span> sequence <span class="fu">$</span> replicate n (readLn<span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">Int</span>)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="kw">if</span> n <span class="fu">==</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">     <span class="kw">then</span> <span class="kw">case</span> divTotal xs <span class="kw">of</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">               <span class="dt">Just</span> result <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">               <span class="dt">Nothing</span>     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">     <span class="kw">else</span> putStrLn <span class="st">&quot;x(&quot;</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="ot">divTotal ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">divTotal [] <span class="fu">=</span> <span class="dt">Nothing</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">divTotal xs <span class="fu">=</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">  <span class="kw">let</span> (x'<span class="fu">:</span>xs') <span class="fu">=</span> map intToDouble xs</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">  <span class="kw">in</span> truncate <span class="fu">&lt;$&gt;</span> foldr (flip (<span class="fu">/?</span>)) (<span class="dt">Just</span> x') xs'</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">    <span class="co">-- Safe (/)</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="ot">    (/?) ::</span> <span class="dt">Maybe</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Double</span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">    <span class="dt">Nothing</span> <span class="fu">/?</span> _  <span class="fu">=</span> <span class="dt">Nothing</span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">    <span class="dt">Just</span> <span class="dv">0</span>  <span class="fu">/?</span> _  <span class="fu">=</span> <span class="dt">Nothing</span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">    <span class="dt">Just</span> x  <span class="fu">/?</span> y  <span class="fu">=</span> <span class="dt">Just</span> <span class="fu">$</span> x <span class="fu">/</span> y</a></code></pre></div>
 <p>これは最初にユーザから整数値nの入力を受け取ってから、n個の整数値の入力を受け取った後に、 nが3であれば3つの整数値を左から右に割り算するプログラムだ。</p>
 <p>nが3でなければエラーメッセージAを、 割り算で0除算が起こったらエラーメッセージBを、 全て正しく成功したら結果を表示する。</p>
 <p>　しかし見て欲しい。 ifとcaseが醜くネストしている。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> n <span class="fu">==</span> <span class="dv">3</span>
-  <span class="kw">then</span> <span class="kw">case</span> divTotal xs <span class="kw">of</span>
-            <span class="dt">Just</span> result <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result
-            <span class="dt">Nothing</span>     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span>
-  <span class="kw">else</span> putStrLn <span class="st">&quot;x(&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">if</span> n <span class="fu">==</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">then</span> <span class="kw">case</span> divTotal xs <span class="kw">of</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">            <span class="dt">Just</span> result <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">            <span class="dt">Nothing</span>     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw">else</span> putStrLn <span class="st">&quot;x(&quot;</span></a></code></pre></div>
 <p>　皆もこんなネストは見たくないよね？ まあこのレベルならともかく、もっとネストしていたら冗談でなく見たくなくなる。</p>
 <p>　このようなパターンなら、タプルを使ってネストを減らすことができる。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">case</span> (n <span class="fu">==</span> <span class="dv">3</span>, divTotal xs) <span class="kw">of</span>
-  (<span class="dt">False</span>, _) <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;x(&quot;</span>
-  (<span class="dt">True</span>, <span class="dt">Nothing</span>)     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span>
-  (<span class="dt">True</span>, <span class="dt">Just</span> result) <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">case</span> (n <span class="fu">==</span> <span class="dv">3</span>, divTotal xs) <span class="kw">of</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  (<span class="dt">False</span>, _) <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;x(&quot;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  (<span class="dt">True</span>, <span class="dt">Nothing</span>)     <span class="ot">-&gt;</span> putStrLn <span class="st">&quot;The caluculation is failed&quot;</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  (<span class="dt">True</span>, <span class="dt">Just</span> result) <span class="ot">-&gt;</span> putStrLn <span class="fu">$</span> <span class="st">&quot;succeed: &quot;</span> <span class="fu">++</span> show result</a></code></pre></div>
 <p>　もしdivTotal xsでerrorが返される場合でも、Haskellの評価戦略ならこの例をうまくやってくれるはずだ。</p>
 
     <hr />

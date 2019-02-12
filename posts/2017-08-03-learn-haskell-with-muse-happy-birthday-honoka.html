@@ -107,7 +107,7 @@
 穂乃果「ななつ……どうゆうことなの！？」</p>
 <p>ことり「うーん、かつてのHaskellが<code>String</code>で日本語とかを扱うことが苦手だったっていう歴史的経緯が含まれたりもするんだけど……」<br />
 ことり「実は<code>String</code>って、単なる<code>[Char]</code>の別名でね。　これは<code>String</code>をリストとしての側面を与える代わりに、処理効率はよくないとされてるんだ。　一般的には。」</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">String</span> <span class="fu">=</span> [<span class="dt">Char</span>]</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">type</span> <span class="dt">String</span> <span class="fu">=</span> [<span class="dt">Char</span>]</a></code></pre></div>
 <p>ことり「それを改善するために作られたのがこの2つ」</p>
 <ul>
 <li><a href="https://hackage.haskell.org/package/text-1.2.2.2">text: An efficient packed Unicode text type.</a></li>
@@ -159,46 +159,46 @@
 <p>ことり「<code>IsString</code>……はね。　ここで出てきた<code>ByteString</code>と<code>Text</code>が<code>IsString</code>インスタンスなんだ」<br />
 穂乃果「ほむ……<code>IsString</code>ってどんな型クラスなの？」</p>
 <p>ことり「Javaで文字列型っていうと、普通はString型だけでしょ？　こうやって簡単に代入できる」</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="bu">String</span> powerful = <span class="st">&quot;wao-wao&quot;</span>;</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="bu">String</span> powerful = <span class="st">&quot;wao-wao&quot;</span>;</a></code></pre></div>
 <p>ことり「でもHaskellでは<code>Text</code>や<code>ByteString</code>みたいに文字列型を自由に定義できることを許されているんだ」<br />
 ことり「そこで問題になるのが、<code>&quot;wao-wao&quot;</code>みたいなリテラルが<code>String</code>型である。 　ってところなんだ」</p>
 <p>ことり「<code>String</code>型の名前（変数）を定義するには、こうするよね」</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">powerful ::</span> <span class="dt">String</span>
-powerful <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">powerful ::</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">powerful <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span></a></code></pre></div>
 <p>ことり「でも同じことを<code>Text</code>や<code>ByteString</code>に対してやると、普通はこんな感じになっちゃうの」</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>) <span class="co">-- ByteStringを使いたいならChar8（or Lazy.Char8）がおすすめだよ！</span>
-<span class="kw">import </span><span class="dt">Data.Text</span> (<span class="dt">Text</span>)
-<span class="kw">import qualified</span> <span class="dt">Data.ByteString.Char8</span> <span class="kw">as</span> <span class="dt">B</span>
-<span class="kw">import qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span>
-
-<span class="co">-- B.pack :: String -&gt; ByteString</span>
-<span class="ot">powerfulB ::</span> <span class="dt">ByteString</span>
-powerfulB <span class="fu">=</span> B.pack <span class="st">&quot;wao-wao&quot;</span>
-
-<span class="co">-- T.pack :: String -&gt; Text</span>
-<span class="ot">powerfulT ::</span> <span class="dt">Text</span>
-powerfulT <span class="fu">=</span> T.pack <span class="st">&quot;wao-wao&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>) <span class="co">-- ByteStringを使いたいならChar8（or Lazy.Char8）がおすすめだよ！</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.ByteString.Char8</span> <span class="kw">as</span> <span class="dt">B</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">-- B.pack :: String -&gt; ByteString</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="ot">powerfulB ::</span> <span class="dt">ByteString</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">powerfulB <span class="fu">=</span> B.pack <span class="st">&quot;wao-wao&quot;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">-- T.pack :: String -&gt; Text</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="ot">powerfulT ::</span> <span class="dt">Text</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">powerfulT <span class="fu">=</span> T.pack <span class="st">&quot;wao-wao&quot;</span></a></code></pre></div>
 <h3 id="overloadedstrings-1">OverloadedStrings</h3>
 <p>穂乃果「<code>pack</code>っていう関数が、<code>String</code>からそれぞれへの変換をしてるんだよね、これ」<br />
 ことり「その通り。 　<code>String</code>が<code>pack</code>無しで扱えるのに対して、<code>ByteString</code>と<code>Text</code>は<code>pack</code>が必要になっちゃう」</p>
 <p>ことり「せっかくHaskellが文字列型を自由に定義することを許してるのに、これは面倒だよね」</p>
 <p>ことり「そこでファイルの<strong>先頭</strong>に、LANGUAGEプラグマって呼ばれるものを書いてあげると、なんと<code>pack</code>が必要なくなるの☆」</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
-
-<span class="kw">import </span><span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>)
-<span class="kw">import </span><span class="dt">Data.Text</span> (<span class="dt">Text</span>)
-<span class="kw">import qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span>
-
-<span class="ot">powerfulB ::</span> <span class="dt">ByteString</span>
-powerfulB <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span>
-
-<span class="ot">powerfulT ::</span> <span class="dt">Text</span>
-powerfulT <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span>
-
-<span class="co">-- TIO.putStrLnはTextを画面に出力する</span>
-<span class="co">-- TIO.putStrLn :: Text -&gt; IO ()</span>
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> TIO.putStrLn (<span class="st">&quot;powerful day !&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="ot">powerfulB ::</span> <span class="dt">ByteString</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">powerfulB <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="ot">powerfulT ::</span> <span class="dt">Text</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">powerfulT <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">-- TIO.putStrLnはTextを画面に出力する</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">-- TIO.putStrLn :: Text -&gt; IO ()</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">main <span class="fu">=</span> TIO.putStrLn (<span class="st">&quot;powerful day !&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)</a></code></pre></div>
 <h3 id="isstring">IsString</h3>
 <p>穂乃果「えっ、<code>&quot;wao-wao&quot;</code>がそれぞれ違う型の値になるってこと？？？」<br />
 穂乃果「それってすごいね！　……でもなんだろう、なんだかわからないんだけど、ちょっともやもやする……」</p>
@@ -214,16 +214,16 @@ main <span class="fu">=</span> TIO.putStrLn (<span class="st">&quot;powerful day
 <p>ことり「ふふふ。 　大丈夫だよ、そういう不健全さはHaskellには（ほとんど）ないの！」</p>
 <p>ことり「<code>OverloadedStrings</code>を使った後は、文字列リテラルは<code>IsString a =&gt; a</code>として扱われます」<br />
 ことり「具体的には、以下を可能にするよ」</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
-
-<span class="kw">import </span><span class="dt">Data.String</span> (<span class="dt">IsString</span>)
-<span class="kw">import qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span>
-
-<span class="ot">powerful' ::</span> <span class="dt">IsString</span> a <span class="ot">=&gt;</span> a
-powerful' <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span>
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> TIO.putStrLn powerful'</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="ot">powerful' ::</span> <span class="dt">IsString</span> a <span class="ot">=&gt;</span> a</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">powerful' <span class="fu">=</span> <span class="st">&quot;wao-wao&quot;</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">main <span class="fu">=</span> TIO.putStrLn powerful'</a></code></pre></div>
 <p>ことり「そして<code>TIO.putStrLn powerful'</code>時点で<code>powerful'</code>が<code>Text</code>として推論されます！ 　<code>TIO.putStrLn</code>が<code>Text -&gt; IO ()</code>だからね♪」</p>
 <p>穂乃果「なるほど……リテラルが多相的な型として扱われるんだ。 　なんか少し変な感じだけど、さっきの変な感じはなくなったなあ」</p>
 <p>穂乃果「すごいねー。　ありがと、ことりちゃん！」<br />

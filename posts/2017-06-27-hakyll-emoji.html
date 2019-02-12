@@ -56,39 +56,39 @@
     <p>💠 🐕 💠 （<code>:diamond_shape_with_a_dot_inside:</code> <code>:dog2:</code> <code>:diamond_shape_with_a_dot_inside:</code>）</p>
 <h1 id="section">🐶</h1>
 <p>　僕のこのブログのposts/*.mdは、以下のようにhtmlへ、site.hsによってコンパイルされます 👍</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> hakyll <span class="fu">$</span> <span class="kw">do</span>
-    <span class="co">-- 前略</span>
-    match <span class="st">&quot;posts/*&quot;</span> <span class="fu">$</span> <span class="kw">do</span>
-    route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span>
-    compile <span class="fu">$</span> pandocCompiler
-        <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span> postCtx
-        <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postCtx
-        <span class="fu">&gt;&gt;=</span> relativizeUrls
-    <span class="co">-- 後略</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">main <span class="fu">=</span> hakyll <span class="fu">$</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="co">-- 前略</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    match <span class="st">&quot;posts/*&quot;</span> <span class="fu">$</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    compile <span class="fu">$</span> pandocCompiler</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">        <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span> postCtx</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">        <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postCtx</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">        <span class="fu">&gt;&gt;=</span> relativizeUrls</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="co">-- 後略</span></a></code></pre></div>
 <p><code>pandocCompiler</code>はhakyllによって以下のように定義されてます 😄</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- Hakyll.Web.Pandoc</span>
-<span class="ot">pandocCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)
-pandocCompiler <span class="fu">=</span> pandocCompilerWith defaultHakyllReaderOptions defaultHakyllWriterOptions
-<span class="co">--pandocCompilerWith :: ReaderOptions -&gt; WriterOptions -&gt; Compiler (Item String)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">-- Hakyll.Web.Pandoc</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ot">pandocCompiler ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">pandocCompiler <span class="fu">=</span> pandocCompilerWith defaultHakyllReaderOptions defaultHakyllWriterOptions</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">--pandocCompilerWith :: ReaderOptions -&gt; WriterOptions -&gt; Compiler (Item String)</span></a></code></pre></div>
 <p><code>:smile:</code>のような絵文字をHakyllで使うには、<code>pandocCompilerWith</code>の<code>defaultHakyllReaderOptions</code>の<code>readerExtensions</code>に <code>Text.Pandoc.Options.Extension</code>の<code>Ext_emoji</code>を追加してあげます。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pandocCompilerWithEmoji ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)
-pandocCompilerWithEmoji <span class="fu">=</span>
-  <span class="kw">let</span> readerExtensions' <span class="fu">=</span> readerExtensions defaultHakyllReaderOptions
-  <span class="kw">in</span> pandocCompilerWith
-    defaultHakyllReaderOptions { readerExtensions <span class="fu">=</span> Set.insert <span class="dt">Ext_emoji</span> readerExtensions' }
-    defaultHakyllWriterOptions
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> hakyll <span class="fu">$</span> <span class="kw">do</span>
-    <span class="co">-- 前略</span>
-    match <span class="st">&quot;posts/*&quot;</span> <span class="fu">$</span> <span class="kw">do</span>
-    route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span>
-    compile <span class="fu">$</span> pandocCompilerWithEmoji <span class="co">-- !!</span>
-        <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span> postCtx
-        <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postCtx
-        <span class="fu">&gt;&gt;=</span> relativizeUrls
-    <span class="co">-- 後略</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">pandocCompilerWithEmoji ::</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">pandocCompilerWithEmoji <span class="fu">=</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw">let</span> readerExtensions' <span class="fu">=</span> readerExtensions defaultHakyllReaderOptions</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw">in</span> pandocCompilerWith</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">    defaultHakyllReaderOptions { readerExtensions <span class="fu">=</span> Set.insert <span class="dt">Ext_emoji</span> readerExtensions' }</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    defaultHakyllWriterOptions</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">main <span class="fu">=</span> hakyll <span class="fu">$</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="co">-- 前略</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    match <span class="st">&quot;posts/*&quot;</span> <span class="fu">$</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">    route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">    compile <span class="fu">$</span> pandocCompilerWithEmoji <span class="co">-- !!</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">        <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span> postCtx</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">        <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postCtx</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">        <span class="fu">&gt;&gt;=</span> relativizeUrls</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    <span class="co">-- 後略</span></a></code></pre></div>
 <p>👍 😃</p>
 
     <hr />

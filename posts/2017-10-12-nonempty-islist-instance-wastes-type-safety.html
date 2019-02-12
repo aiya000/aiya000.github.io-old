@@ -73,17 +73,17 @@
 </ul>
 <p>　<code>OverloadedLists</code>拡張は<code>OverloadedStrings</code>拡張と似た構造をしていて、 型<code>Set</code>, <code>Map</code>, そして<code>NonEmpty</code></p>
 <p>　例えば以下のコードはコンパイルを通り、実行時エラーになる。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedLists #-}</span>
-
-<span class="kw">import </span><span class="dt">Data.List.NonEmpty</span> (<span class="dt">NonEmpty</span>(..))
-
-<span class="ot">f ::</span> <span class="dt">NonEmpty</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
-f (x<span class="fu">:|</span>_) <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span>
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print <span class="fu">$</span> f []
-<span class="co">-- {output}</span>
-<span class="co">-- xxx.hs: NonEmpty.fromList: empty list</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE OverloadedLists #-}</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Data.List.NonEmpty</span> (<span class="dt">NonEmpty</span>(..))</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="ot">f ::</span> <span class="dt">NonEmpty</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">f (x<span class="fu">:|</span>_) <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">main <span class="fu">=</span> print <span class="fu">$</span> f []</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">-- xxx.hs: NonEmpty.fromList: empty list</span></a></code></pre></div>
 <p>　igrepさんが言っている通り、<code>NonEmpty</code>の<code>fromList</code>が悪い（部分関数になっている）。</p>
 <ul>
 <li><a href="https://www.stackage.org/haddock/lts-9.2/base-4.9.1.0/src/Data-List-NonEmpty.html#fromList">Data/List/NonEmpty.hs</a></li>

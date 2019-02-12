@@ -55,54 +55,54 @@
 <div class="post-body">
     <p>最近Haskellコードのcaseを多用するようになってたので、インデントレベルが3以上になってしまいそうで悩んでた X(</p>
 <p>こんなん</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-    x <span class="ot">&lt;-</span> getFooMaybe  <span class="co">-- indent 1</span>
-    <span class="kw">case</span> x <span class="kw">of</span>
-        <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">...</span>
-        <span class="dt">Just</span> x' <span class="ot">-&gt;</span> <span class="kw">do</span>  <span class="co">-- indent 2</span>
-            <span class="fu">...</span>  <span class="co">-- indent 3</span>
-            <span class="fu">...</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    x <span class="ot">&lt;-</span> getFooMaybe  <span class="co">-- indent 1</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="kw">case</span> x <span class="kw">of</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">        <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">        <span class="dt">Just</span> x' <span class="ot">-&gt;</span> <span class="kw">do</span>  <span class="co">-- indent 2</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">            <span class="fu">...</span>  <span class="co">-- indent 3</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">            <span class="fu">...</span></a></code></pre></div>
 <p>インデントレベル3はギリギリとして、4以上になるとコードの醜さが顕著に…ね？</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-    x <span class="ot">&lt;-</span> getFooMaybe
-    <span class="kw">case</span> x <span class="kw">of</span>
-        <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">...</span>
-        <span class="dt">Just</span> x' <span class="ot">-&gt;</span> <span class="kw">do</span>
-            y <span class="ot">&lt;-</span> getBarEither
-            <span class="kw">case</span> y <span class="kw">of</span>
-                <span class="dt">Left</span>  e <span class="ot">-&gt;</span> fail e
-                <span class="dt">Right</span> a <span class="ot">-&gt;</span> <span class="kw">do</span>
-                    putStrLn <span class="st">&quot;succeed&quot;</span>
-                    print a</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    x <span class="ot">&lt;-</span> getFooMaybe</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    <span class="kw">case</span> x <span class="kw">of</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">        <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">        <span class="dt">Just</span> x' <span class="ot">-&gt;</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">            y <span class="ot">&lt;-</span> getBarEither</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">            <span class="kw">case</span> y <span class="kw">of</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">                <span class="dt">Left</span>  e <span class="ot">-&gt;</span> fail e</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">                <span class="dt">Right</span> a <span class="ot">-&gt;</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">                    putStrLn <span class="st">&quot;succeed&quot;</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">                    print a</a></code></pre></div>
 <h1 id="ifm">ifM</h1>
 <p>強い。</p>
 <p>before</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Control.Monad.Extra</span> (ifM)
-
-<span class="co">-- Read Twitter OAuth from serialized data file</span>
-<span class="ot">readOAuth ::</span> (<span class="dt">MonadThrow</span> m, <span class="dt">MonadIO</span> m) <span class="ot">=&gt;</span> m <span class="dt">OAuth</span>
-readOAuth <span class="fu">=</span> <span class="kw">do</span>
-maybeOAuth <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> fmap read <span class="fu">&lt;$&gt;</span> getEnv <span class="st">&quot;GORIRA_OAUTH&quot;</span>
-<span class="kw">case</span> maybeOAuth <span class="kw">of</span>
-    <span class="dt">Just</span> oauth <span class="ot">-&gt;</span> return oauth
-    <span class="dt">Nothing</span>    <span class="ot">-&gt;</span> <span class="kw">do</span>
-        x <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> doesFileExist <span class="st">&quot;resource/twitter_oauth&quot;</span>
-        <span class="kw">if</span> x <span class="kw">then</span> liftIO <span class="fu">$</span> read <span class="fu">&lt;$&gt;</span> readFile <span class="st">&quot;resource/twitter_oauth&quot;</span>
-             <span class="kw">else</span> throwM <span class="fu">$</span> <span class="dt">IOException'</span> <span class="st">&quot;'resource/twitter_oauth' is not exists&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control.Monad.Extra</span> (ifM)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">-- Read Twitter OAuth from serialized data file</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="ot">readOAuth ::</span> (<span class="dt">MonadThrow</span> m, <span class="dt">MonadIO</span> m) <span class="ot">=&gt;</span> m <span class="dt">OAuth</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">readOAuth <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">maybeOAuth <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> fmap read <span class="fu">&lt;$&gt;</span> getEnv <span class="st">&quot;GORIRA_OAUTH&quot;</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">case</span> maybeOAuth <span class="kw">of</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="dt">Just</span> oauth <span class="ot">-&gt;</span> return oauth</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="dt">Nothing</span>    <span class="ot">-&gt;</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">        x <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> doesFileExist <span class="st">&quot;resource/twitter_oauth&quot;</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">        <span class="kw">if</span> x <span class="kw">then</span> liftIO <span class="fu">$</span> read <span class="fu">&lt;$&gt;</span> readFile <span class="st">&quot;resource/twitter_oauth&quot;</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">             <span class="kw">else</span> throwM <span class="fu">$</span> <span class="dt">IOException'</span> <span class="st">&quot;'resource/twitter_oauth' is not exists&quot;</span></a></code></pre></div>
 <p>after</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Control.Monad.Extra</span> (ifM)
-
-<span class="co">-- Read Twitter OAuth from serialized data file</span>
-<span class="ot">readOAuth ::</span> (<span class="dt">MonadThrow</span> m, <span class="dt">MonadIO</span> m) <span class="ot">=&gt;</span> m <span class="dt">OAuth</span>
-readOAuth <span class="fu">=</span> <span class="kw">do</span>
-maybeOAuth <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> fmap read <span class="fu">&lt;$&gt;</span> getEnv <span class="st">&quot;GORIRA_OAUTH&quot;</span>
-<span class="kw">case</span> maybeOAuth <span class="kw">of</span>
-    <span class="dt">Just</span> oauth <span class="ot">-&gt;</span> return oauth
-    <span class="dt">Nothing</span>    <span class="ot">-&gt;</span> ifM (liftIO <span class="fu">$</span> doesFileExist <span class="st">&quot;resource/twitter_oauth&quot;</span>)
-                    (liftIO <span class="fu">$</span> read <span class="fu">&lt;$&gt;</span> readFile <span class="st">&quot;resource/twitter_oauth&quot;</span>)
-                    (throwM <span class="fu">$</span> <span class="dt">IOException'</span> <span class="st">&quot;'resource/twitter_oauth' is not exists&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control.Monad.Extra</span> (ifM)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">-- Read Twitter OAuth from serialized data file</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="ot">readOAuth ::</span> (<span class="dt">MonadThrow</span> m, <span class="dt">MonadIO</span> m) <span class="ot">=&gt;</span> m <span class="dt">OAuth</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">readOAuth <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">maybeOAuth <span class="ot">&lt;-</span> liftIO <span class="fu">$</span> fmap read <span class="fu">&lt;$&gt;</span> getEnv <span class="st">&quot;GORIRA_OAUTH&quot;</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw">case</span> maybeOAuth <span class="kw">of</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="dt">Just</span> oauth <span class="ot">-&gt;</span> return oauth</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    <span class="dt">Nothing</span>    <span class="ot">-&gt;</span> ifM (liftIO <span class="fu">$</span> doesFileExist <span class="st">&quot;resource/twitter_oauth&quot;</span>)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">                    (liftIO <span class="fu">$</span> read <span class="fu">&lt;$&gt;</span> readFile <span class="st">&quot;resource/twitter_oauth&quot;</span>)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">                    (throwM <span class="fu">$</span> <span class="dt">IOException'</span> <span class="st">&quot;'resource/twitter_oauth' is not exists&quot;</span>)</a></code></pre></div>
 
     <hr />
 

@@ -68,7 +68,7 @@
 <p>とはいえCLIでの作業に萌えは欠かせないので、可愛い音声で実行終了の通知をしてもらうことにした。</p>
 <h2 id="喋らせる">喋らせる</h2>
 <p>　Linux環境で、合成音声で日本語を話してもらう方法を考えた。</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>open-jtalk
 <ul>
 <li>全然インストールできないし、インストールできてもエラー吐くし、もうめんどい</li>
@@ -90,7 +90,7 @@
 <h2 id="please-talk">Please talk !</h2>
 <p>　そういえばそもそも日本語にこだわる必要ってない。<br />
 僕は可愛い声で話して欲しいだけなんだ！！ おねがぁい☆</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>festival
 <ul>
 <li>設定ファイルをschemeで記述する面白そうなやつ</li>
@@ -133,19 +133,19 @@ breath 0 2 3 3 3 3 3 2
 echo 140 10
 roughness 20</code></pre>
 <h2 id="顧客が本当に必要だった幼女"><a href="http://matome.naver.jp/odai/2133468389280396901">顧客が本当に必要だった幼女</a></h2>
-<div class="sourceCode"><pre class="sourceCode zsh"><code class="sourceCode zsh"><span class="co"># Notify end of cli task</span>
-<span class="co"># example$ somecommand ; enotify</span>
-<span class="kw">function</span><span class="fu"> _espeak ()</span> <span class="kw">{</span>
-	espeak <span class="st">&quot;</span><span class="ot">$1</span><span class="st">&quot;</span> -s 150 -v +fex <span class="kw">2&gt;</span> /dev/null <span class="kw">||</span> <span class="kw">\</span>
-	espeak <span class="st">&quot;</span><span class="ot">$1</span><span class="st">&quot;</span> -s 150 <span class="kw">2&gt;</span> /dev/null
-<span class="kw">}</span>
-<span class="kw">function</span><span class="fu"> enotify ()</span> <span class="kw">{</span>
-	<span class="kw">if [</span> <span class="ot">$?</span> <span class="ot">-eq</span> 0<span class="kw"> ]</span> ; <span class="kw">then</span>
-		_espeak <span class="st">'Succeed!'</span>
-	<span class="kw">else</span>
-		_espeak <span class="st">'Exit with the error'</span>
-	<span class="kw">fi</span>
-<span class="kw">}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode zsh"><code class="sourceCode zsh"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Notify end of cli task</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># example$ somecommand ; enotify</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">function</span><span class="fu"> _espeak ()</span> <span class="kw">{</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">	espeak <span class="st">&quot;</span><span class="ot">$1</span><span class="st">&quot;</span> -s 150 -v +fex <span class="kw">2&gt;</span> /dev/null <span class="kw">||</span> <span class="kw">\</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">	espeak <span class="st">&quot;</span><span class="ot">$1</span><span class="st">&quot;</span> -s 150 <span class="kw">2&gt;</span> /dev/null</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">function</span><span class="fu"> enotify ()</span> <span class="kw">{</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">	<span class="kw">if [</span> <span class="ot">$?</span> <span class="ot">-eq</span> 0<span class="kw"> ]</span> ; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">		_espeak <span class="st">'Succeed!'</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">	<span class="kw">else</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">		_espeak <span class="st">'Exit with the error'</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">	<span class="kw">fi</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="kw">}</span></a></code></pre></div>
 <p>可愛さが足りない。</p>
 
     <hr />

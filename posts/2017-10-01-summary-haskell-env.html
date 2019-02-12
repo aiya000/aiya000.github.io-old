@@ -110,14 +110,13 @@
 <h2 id="hasktags">hasktags</h2>
 <p>　Haskellに特化した<code>ctags</code>コマンド亜種として、 <code>hasktags</code>コマンドがある。</p>
 <p>　これは、今我々が作っているプロジェクトにある各.hsファイルに記述された 全ての関数を扱うことができる。</p>
-<div class="figure">
-<img src="../images/posts/2017-10-01-summary-haskell-env/hasktags-image.png" alt="hasktags-image" />
-<p class="caption">hasktags-image</p>
-</div>
+<figure>
+<img src="../images/posts/2017-10-01-summary-haskell-env/hasktags-image.png" alt="hasktags-image" /><figcaption>hasktags-image</figcaption>
+</figure>
 <p>　以下のシェルコマンドでインストールできる。</p>
 <pre class="console"><code>$ stack install hasktags</code></pre>
 <p>　僕はこんなaliasをシェルに定義して使っている。</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="bu">alias</span> hasktags-casual=<span class="st">'hasktags . --ignore-close-implementation --tags-absolute --ctags -f'</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="bu">alias</span> hasktags-casual=<span class="st">'hasktags . --ignore-close-implementation --tags-absolute --ctags -f'</span></a></code></pre></div>
 <pre class="console"><code>$ haskdogs .git/tags
 （.git/tagsに、各.hsファイルの関数の羅列が出力される）</code></pre>
 <h2 id="haskdogs">haskdogs</h2>
@@ -125,10 +124,9 @@
 <p>　<code>haskdogs</code>は……<code>hasktags</code>を使って、 自プロジェクトの依存しているパッケージのtagsも出力してしまおう、というもの。</p>
 <p>　例えば、自プロジェクトが<code>easy-file</code>パッケージの<code>doesFileExist</code>関数を使っている時に <code>haskdogs</code>を実行すると、<code>haskdogs</code>はghc-pkgコマンドを使って <code>easy-file</code>のソースを<code>$HOME/.haskdogs</code>以下に落としてきて、 そこを参照するtagsを生成する。</p>
 <p>　また、生成されたtagsには自プロジェクトの各関数も含まれるので、 プロジェクトに関係する、 ほぼ全ての関数と型をエディタに表示できる！</p>
-<div class="figure">
-<img src="../images/posts/2017-10-01-summary-haskell-env/haskdogs-image.png" alt="haskdogs-image" />
-<p class="caption">haskdogs-image</p>
-</div>
+<figure>
+<img src="../images/posts/2017-10-01-summary-haskell-env/haskdogs-image.png" alt="haskdogs-image" /><figcaption>haskdogs-image</figcaption>
+</figure>
 <p>　以下のシェルコマンドでインストールできる。</p>
 <pre class="console"><code>$ stack install haskdogs</code></pre>
 <h2 id="unite-tag">unite-tag</h2>
@@ -145,10 +143,9 @@
 <li><a href="https://github.com/aiya000/aref-web.vim">GitHub - aiya000/aref-web.vim: Web dictionaries on the vim with async.</a></li>
 </ul>
 <p>　これは僕が作ったものなのだけど、 これのデバッグはずっとStackageを用いて行っていたこともあり、 Stackageについては十分に実用できるレベルになっていると思う。</p>
-<div class="figure">
-<img src="../images/posts/2017-10-01-summary-haskell-env/aref-image.png" alt="aref-image" />
-<p class="caption">aref-image</p>
-</div>
+<figure>
+<img src="../images/posts/2017-10-01-summary-haskell-env/aref-image.png" alt="aref-image" /><figcaption>aref-image</figcaption>
+</figure>
 <p>（まあ…… 誰も注目してくれていないみたいだし、 僕もStackage検索を行うために作ったものなので、 他のサイトについてはまだβという感じ）</p>
 <p>StackageのWebサイトは、 Haskellの関数とライブラリの検索に対応しており</p>
 <ul>

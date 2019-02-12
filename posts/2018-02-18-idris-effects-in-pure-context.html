@@ -55,28 +55,28 @@
 <div class="post-body">
     <p>In a situation, I have a program (<code>Eff</code>) with a <code>STATE</code> effect, and the program is pure.</p>
 <p>It can be run in a pure context like below 😂</p>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="kw">import</span> <span class="dt">Control</span><span class="fu">.</span><span class="dt">Monad</span><span class="fu">.</span><span class="dt">Identity</span>
-<span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">State</span>
-<span class="kw">import</span> <span class="dt">Effects</span>
-
-<span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-  <span class="kw">let</span> <span class="dt">Id</span> (<span class="fu">_</span> <span class="fu">**</span> [s]) <span class="fu">=</span> runEnv {m<span class="fu">=</span><span class="dt">Identity</span>} [<span class="kw">default</span>] <span class="fu">$</span> update (<span class="fu">+</span><span class="dv">1</span>)
-  printLn s
-<span class="co">-- {output}</span>
-<span class="co">-- 1</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control</span><span class="fu">.</span><span class="dt">Monad</span><span class="fu">.</span><span class="dt">Identity</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">State</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Effects</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="kw">let</span> <span class="dt">Id</span> (<span class="fu">_</span> <span class="fu">**</span> [s]) <span class="fu">=</span> runEnv {m<span class="fu">=</span><span class="dt">Identity</span>} [<span class="kw">default</span>] <span class="fu">$</span> update (<span class="fu">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  printLn s</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">-- 1</span></a></code></pre></div>
 <h1 id="ps">PS</h1>
 <p>I took a <a href="https://github.com/idris-lang/Idris-dev/pull/4338">Pull Request</a>, Above code can be written as below (no <code>Identity</code> is needed), if the PR is approved 🐕</p>
-<div class="sourceCode"><pre class="sourceCode idr"><code class="sourceCode idris"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">State</span>
-<span class="kw">import</span> <span class="dt">Effects</span>
-
-<span class="co">-- runPureEnv : (env : Env Basics.id xs) -&gt; (prog : EffM Basics.id a xs xs') -&gt; (x : a ** Env Basics.id (xs' x))</span>
-<span class="co">-- runPureEnv env prog = eff env prog (\r, env =&gt; (r ** env))</span>
-
-<span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-  <span class="kw">let</span> (<span class="fu">_</span> <span class="fu">**</span> [s]) <span class="fu">=</span> runPureEnv [<span class="kw">default</span>] <span class="fu">$</span> update (<span class="fu">+</span><span class="dv">1</span>)
-  printLn s</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode idr"><code class="sourceCode idris"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">State</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Effects</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">-- runPureEnv : (env : Env Basics.id xs) -&gt; (prog : EffM Basics.id a xs xs') -&gt; (x : a ** Env Basics.id (xs' x))</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">-- runPureEnv env prog = eff env prog (\r, env =&gt; (r ** env))</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="kw">let</span> (<span class="fu">_</span> <span class="fu">**</span> [s]) <span class="fu">=</span> runPureEnv [<span class="kw">default</span>] <span class="fu">$</span> update (<span class="fu">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">  printLn s</a></code></pre></div>
 
     <hr />
 

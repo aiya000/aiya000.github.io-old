@@ -55,47 +55,47 @@
 <div class="post-body">
     <h1 id="起">起</h1>
 <p>　ときどきTextにpack,unpackを介してString -&gt; Stringしたくなるシチュエーションに出会う。 でも普通に関数合成すると、なんだか格好悪いんだよね。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
-
-<span class="kw">import </span><span class="dt">Data.Char</span> (toUpper)
-<span class="kw">import </span><span class="dt">Data.Text</span> (<span class="dt">Text</span>)
-<span class="kw">import qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span>
-<span class="kw">import qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span>
-
-<span class="co">-- Data.TextのtoUpperを使えとか言っちゃだめ！ そしたら別の適切な例を教えて！</span>
-<span class="ot">upper ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
-upper <span class="fu">=</span> map toUpper
-
-<span class="ot">x ::</span> <span class="dt">Text</span>
-x <span class="fu">=</span> <span class="st">&quot;nico&quot;</span>
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-  <span class="kw">let</span> niconico <span class="fu">=</span> T.pack <span class="fu">.</span> upper <span class="fu">$</span> T.unpack x <span class="co">-- 格好悪い</span>
-  TIO.putStrLn niconico</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Data.Char</span> (toUpper)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">-- Data.TextのtoUpperを使えとか言っちゃだめ！ そしたら別の適切な例を教えて！</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="ot">upper ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">upper <span class="fu">=</span> map toUpper</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="ot">x ::</span> <span class="dt">Text</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">x <span class="fu">=</span> <span class="st">&quot;nico&quot;</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">  <span class="kw">let</span> niconico <span class="fu">=</span> T.pack <span class="fu">.</span> upper <span class="fu">$</span> T.unpack x <span class="co">-- 格好悪い</span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">  TIO.putStrLn niconico</a></code></pre></div>
 <h1 id="結">結</h1>
 <p>　<code>Profunctor</code>の<code>dimap</code>を使う。 <code>(-&gt;)</code>Profunctorを使えばdomainとcodomainの変更を一気にできるので、 <code>Text -&gt; String</code>と<code>String -&gt; String</code>と<code>String -&gt; Text</code>を格好良くできる！（まあ中身は👆と全くおんなじなんだけどでも見栄えいい）</p>
 <p>　これはその型と同型の型への操作に一般化できますので、<code>newtype</code>にも応用できます。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
-
-<span class="kw">import </span><span class="dt">Data.Char</span> (toUpper)
-<span class="kw">import </span><span class="dt">Data.Profunctor</span> (dimap)
-<span class="kw">import </span><span class="dt">Data.Text</span> (<span class="dt">Text</span>)
-<span class="kw">import qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span>
-<span class="kw">import qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span>
-
-<span class="ot">upper ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
-upper <span class="fu">=</span> map toUpper
-
-<span class="ot">x ::</span> <span class="dt">Text</span>
-x <span class="fu">=</span> <span class="st">&quot;nico&quot;</span>
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-  <span class="kw">let</span> niconico <span class="fu">=</span> dimap T.unpack T.pack upper x <span class="co">-- 平坦な構文に見えるので、見やすい</span>
-  TIO.putStrLn niconico</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- newtype Identity a = Identity { runIdentity :: a }</span>
-dimap runIdentity <span class="dt">Identity</span> f x</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Data.Char</span> (toUpper)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Data.Profunctor</span> (dimap)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="ot">upper ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">upper <span class="fu">=</span> map toUpper</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="ot">x ::</span> <span class="dt">Text</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">x <span class="fu">=</span> <span class="st">&quot;nico&quot;</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">  <span class="kw">let</span> niconico <span class="fu">=</span> dimap T.unpack T.pack upper x <span class="co">-- 平坦な構文に見えるので、見やすい</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">  TIO.putStrLn niconico</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">-- newtype Identity a = Identity { runIdentity :: a }</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">dimap runIdentity <span class="dt">Identity</span> f x</a></code></pre></div>
 <h1 id="その他">その他</h1>
 <ul>
 <li><a href="http://hackage.haskell.org/package/foundation-0.0.10/docs/Foundation-Collection.html#t:InnerFunctor">Foundation.Collection InnerFunctor - Hackage</a>

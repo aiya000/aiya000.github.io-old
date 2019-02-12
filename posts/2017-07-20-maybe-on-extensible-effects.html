@@ -57,22 +57,22 @@
 <ul>
 <li><a href="https://www.stackage.org/haddock/lts-8.11/extensible-effects-1.11.0.4/Control-Eff-Exception.html">Control.Eff.Exception</a></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Exc</span> e v <span class="fu">=</span> <span class="dt">Exc</span> e
-<span class="kw">type</span> <span class="dt">Fail</span> <span class="fu">=</span> <span class="dt">Exc</span> ()</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE FlexibleContexts #-}</span>
-
-<span class="kw">import </span><span class="dt">Control.Eff</span> (<span class="dt">Member</span>, <span class="dt">Eff</span>, run)
-<span class="kw">import </span><span class="dt">Control.Eff.Exception</span>(<span class="dt">Fail</span>, runFail, liftMaybe)
-
-<span class="ot">safeHeadEff ::</span> <span class="dt">Member</span> <span class="dt">Fail</span> r <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Eff</span> r a
-safeHeadEff [] <span class="fu">=</span> liftMaybe <span class="dt">Nothing</span>
-safeHeadEff (x<span class="fu">:</span>_) <span class="fu">=</span> return x
-
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-  <span class="kw">let</span> x <span class="fu">=</span> run <span class="fu">.</span> runFail <span class="fu">$</span> safeHeadEff [<span class="dv">1</span><span class="fu">..</span><span class="dv">10</span>]
-  print x</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">Exc</span> e v <span class="fu">=</span> <span class="dt">Exc</span> e</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">type</span> <span class="dt">Fail</span> <span class="fu">=</span> <span class="dt">Exc</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE FlexibleContexts #-}</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Control.Eff</span> (<span class="dt">Member</span>, <span class="dt">Eff</span>, run)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Control.Eff.Exception</span>(<span class="dt">Fail</span>, runFail, liftMaybe)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="ot">safeHeadEff ::</span> <span class="dt">Member</span> <span class="dt">Fail</span> r <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Eff</span> r a</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">safeHeadEff [] <span class="fu">=</span> liftMaybe <span class="dt">Nothing</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">safeHeadEff (x<span class="fu">:</span>_) <span class="fu">=</span> return x</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">  <span class="kw">let</span> x <span class="fu">=</span> run <span class="fu">.</span> runFail <span class="fu">$</span> safeHeadEff [<span class="dv">1</span><span class="fu">..</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">  print x</a></code></pre></div>
 <p>ちなみに<code>liftMaybeM</code>という関数をextensible-effectsにPRしました（マージされた）</p>
 <ul>
 <li><a href="https://github.com/suhailshergill/extensible-effects/pull/68">Add liftMaybeM to Control.Eff.Exception by aiya000 - Pull Request #68 - suhailshergill/extensible-effects - GitHub</a></li>

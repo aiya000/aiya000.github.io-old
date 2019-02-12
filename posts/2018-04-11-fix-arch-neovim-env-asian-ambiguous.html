@@ -64,24 +64,24 @@
 <table class="table table-bordered">
 <tbody>
 <tr class="odd">
-<td align="center">NeoVim</td>
-<td align="center">0.2.2</td>
+<td style="text-align: center;">NeoVim</td>
+<td style="text-align: center;">0.2.2</td>
 </tr>
 <tr class="even">
-<td align="center">Vim</td>
-<td align="center">8.0.1257</td>
+<td style="text-align: center;">Vim</td>
+<td style="text-align: center;">8.0.1257</td>
 </tr>
 <tr class="odd">
-<td align="center">urxvt</td>
-<td align="center">9.22</td>
+<td style="text-align: center;">urxvt</td>
+<td style="text-align: center;">9.22</td>
 </tr>
 <tr class="even">
-<td align="center">Termite</td>
-<td align="center">13</td>
+<td style="text-align: center;">Termite</td>
+<td style="text-align: center;">13</td>
 </tr>
 <tr class="odd">
-<td align="center">tmux</td>
-<td align="center">2.6</td>
+<td style="text-align: center;">tmux</td>
+<td style="text-align: center;">2.6</td>
 </tr>
 </tbody>
 </table>
@@ -97,7 +97,7 @@
 <p><del>　または何かしらの統合デスクトップ環境を使えば、うまく対処できるのかもしれない。</del> <del>僕は統合デスクトップ環境を使っていない。</del><br />
 <del>（xmonadを使っている）</del></p>
 <p>　<a href="https://github.com/fumiyas/wcwidth-cjk">fumiyas/wcwidth-cjk</a> をインストールして、指示通り<code>.zshenv</code>あたりに</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="bu">eval</span> <span class="kw">`</span><span class="ex">/usr/local/bin/wcwidth-cjk</span> --sh-init<span class="kw">`</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">eval</span> <span class="kw">`</span><span class="ex">/usr/local/bin/wcwidth-cjk</span> --sh-init<span class="kw">`</span></a></code></pre></div>
 <p>と書くと、urxvt上での問題は一切合切直った。 すごい！！</p>
 <ul>
 <li><a href="https://github.com/fumiyas/wcwidth-cjk">GitHub - fumiyas/wcwidth-cjk: Run command with CJK-friendly wcwidth(3) to fix ambiguous width chars</a></li>
@@ -113,19 +113,17 @@
 </ul>
 <p>　なのでNeoVimからVimに乗り換えようと思ったものの、 僕はNeoVimに頼りっきりになっていて、無理だった…… NeoVimは最強、離れられない。</p>
 <h1 id="termiteの問題">Termiteの問題</h1>
-<div class="figure">
-<img src="../images/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous/in-termite.png" alt="on-termite" />
-<p class="caption">on-termite</p>
-</div>
+<figure>
+<img src="../images/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous/in-termite.png" alt="on-termite" /><figcaption>on-termite</figcaption>
+</figure>
 <p>　上の画像はTermite * NeoVimでの表示。</p>
 <p>しかしながらcat/lessでもTermite上ではうまく表示されず、 TermiteではEastふんふんcharは必ず幅1で表示されるものと思われる。</p>
 <p>　これについてはurxvtに以降することで対処した。</p>
 <p>urxvt上でのcat/lessではEastふんふんは幅2で表示される。 （ただし絵文字はうまく表示できず、ぐぬぬ）</p>
 <h1 id="neovimの問題">NeoVimの問題</h1>
-<div class="figure">
-<img src="../images/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous/in-urxvt.png" alt="on-urxvt" />
-<p class="caption">on-urxvt</p>
-</div>
+<figure>
+<img src="../images/posts/2018-04-11-fix-arch-neovim-env-asian-ambiguous/in-urxvt.png" alt="on-urxvt" /><figcaption>on-urxvt</figcaption>
+</figure>
 <p>　しかしながら未だurxvt * NeoVim環境ではふんふんが幅2で表示されている（こんな感じ ☝️）。</p>
 <p>　この記事で「…」を多用して下記心地を試してみたものの、 ちょっとtypoが発生してしまいそうで怖い。</p>
 <p>今はNeoVimのfやFなどを駆使してなんとかがんばっている……。</p>

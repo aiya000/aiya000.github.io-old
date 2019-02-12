@@ -76,27 +76,27 @@
 <p>　ある一時期から、FC2ブログに投稿する前のmarkdownファイルはローカルに保存していたので、その分はそのまま<a href="https://jaspervdj.be/hakyll/">Hakyll</a>のpostsディレクトリに載せればそのまま動きました。 動く予定です。 ( この記事は作業しながら書いているので、予定 )</p>
 <p>　ここでちょっとしたTipsですが、*NIXターミナルで複雑なコマンドを打つ場合は、bash使いならキーマッピングをviにしておくと便利です。<br />
 具体的には以下の設定を.bashrcに書きます。 ( vi-insertの設定とvi-commandの設定を別個に書けないので、.inputrcには書かない )</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Set vi style keymapping mode</span>
-<span class="kw">set</span> <span class="ex">-o</span> vi
-
-<span class="co"># Vim nize</span>
-<span class="bu">bind</span> -m vi-command <span class="st">'&quot;_&quot;: beginning-of-line'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-\\\C-n&quot;: &quot;\e&quot;'</span>
-
-<span class="co"># Emacs nize</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-n&quot;: next-history'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-p&quot;: previous-history'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-a&quot;: beginning-of-line'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-e&quot;: end-of-line'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-b&quot;: backward-char'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-f&quot;: forward-char'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-k&quot;: kill-line'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-d&quot;: delete-char'</span>
-
-<span class="co"># My taste</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-l&quot;: &quot;\e&quot;'</span>
-<span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-]&quot;: clear-screen'</span>
-<span class="bu">bind</span> -m vi-command -x <span class="st">'&quot;\C-k\C-r&quot;: . ~/.bashrc &amp;&amp; echo &quot;&gt;&gt; bash source reloaded&quot;'</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Set vi style keymapping mode</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">set</span> <span class="ex">-o</span> vi</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Vim nize</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="bu">bind</span> -m vi-command <span class="st">'&quot;_&quot;: beginning-of-line'</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-\\\C-n&quot;: &quot;\e&quot;'</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># Emacs nize</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-n&quot;: next-history'</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-p&quot;: previous-history'</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-a&quot;: beginning-of-line'</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-e&quot;: end-of-line'</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-b&quot;: backward-char'</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-f&quot;: forward-char'</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-k&quot;: kill-line'</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-d&quot;: delete-char'</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co"># My taste</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-l&quot;: &quot;\e&quot;'</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="bu">bind</span> -m vi-insert  <span class="st">'&quot;\C-]&quot;: clear-screen'</span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="bu">bind</span> -m vi-command -x <span class="st">'&quot;\C-k\C-r&quot;: . ~/.bashrc &amp;&amp; echo &quot;&gt;&gt; bash source reloaded&quot;'</span></a></code></pre></div>
 <p>( 多分、「bash vi」で検索すれば情報はうんさか出てきそう )</p>
 <p>するとbashのviのnormalモードでvを押すと…コマンドラインが$EDITORで編集できます。<br />
 あとはお好きに、<code>r!find</code>したりして、別のディレクトリに集めたファイル群をHakyllのpostsやimagesの構造に合わせてmvやcpすると強い。</p>

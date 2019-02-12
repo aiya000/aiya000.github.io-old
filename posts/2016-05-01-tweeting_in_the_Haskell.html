@@ -105,10 +105,10 @@
 ちゅーんさんが「Haskellで読み込みたい設定値がReadインスタンスの型の値なら、read(とreadFile)だけで読み込める」(要☆約)<br />
 って言ってたから「確かに！！」ってなったというのがありました。 すごいです。 しゅごいい。</p>
 <p>こんなん。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">readFooSetting ::</span> <span class="dt">IO</span> <span class="dt">SomeType</span>
-readFooSetting <span class="fu">=</span> <span class="kw">do</span>
-  foo <span class="ot">&lt;-</span> read <span class="fu">&lt;$&gt;</span> readFile <span class="st">&quot;path/to/config_file&quot;</span>
-  return foo</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">readFooSetting ::</span> <span class="dt">IO</span> <span class="dt">SomeType</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">readFooSetting <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  foo <span class="ot">&lt;-</span> read <span class="fu">&lt;$&gt;</span> readFile <span class="st">&quot;path/to/config_file&quot;</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  return foo</a></code></pre></div>
 <p>　設定値を1つのファイルにまとめなくていいケースであれば、yamlやjsonすらいらないね！！ すごい！！</p>
 <h2 id="ほげ">ほげ</h2>
 <p>　そういえばyunomu氏のブログ記事にsignOAuth関数の型にMonad__Unsafe__IOというのがあったけれど、 今のバージョンだとちゃんとUnsafeじゃなくなってたのでよかった。(大丈夫)</p>

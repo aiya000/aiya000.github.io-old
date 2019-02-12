@@ -55,20 +55,20 @@
 <div class="post-body">
     <p>　isAlphaNumも同様。<br />
 まじ注意。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Prelude</span><span class="fu">&gt;</span> <span class="kw">import </span><span class="dt">Data.Char</span>
-<span class="dt">Prelude</span> <span class="dt">Data.Char</span><span class="fu">&gt;</span> isAlpha <span class="ch">'あ'</span>
-<span class="dt">True</span>
-<span class="dt">Prelude</span> <span class="dt">Data.Char</span><span class="fu">&gt;</span> isAlphaNum <span class="ch">'あ'</span>
-<span class="dt">True</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dt">Prelude</span><span class="fu">&gt;</span> <span class="kw">import</span> <span class="dt">Data.Char</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="dt">Prelude</span> <span class="dt">Data.Char</span><span class="fu">&gt;</span> isAlpha <span class="ch">'あ'</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="dt">True</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="dt">Prelude</span> <span class="dt">Data.Char</span><span class="fu">&gt;</span> isAlphaNum <span class="ch">'あ'</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="dt">True</span></a></code></pre></div>
 <p>これを定義しておけばいいんだけど、他にどっかData.Text以下あたりでexportしてないかなー。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">isAlpha' ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-isAlpha' c <span class="fu">=</span> c <span class="ot">`elem`</span> [<span class="ch">'A'</span><span class="fu">..</span><span class="ch">'Z'</span>]
-          <span class="fu">||</span> c <span class="ot">`elem`</span> [<span class="ch">'a'</span><span class="fu">..</span><span class="ch">'z'</span>]
-
-<span class="ot">isAlphaNum' ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-isAlphaNum' c <span class="fu">=</span> c <span class="ot">`elem`</span> [<span class="ch">'A'</span><span class="fu">..</span><span class="ch">'Z'</span>]
-             <span class="fu">||</span> c <span class="ot">`elem`</span> [<span class="ch">'a'</span><span class="fu">..</span><span class="ch">'z'</span>]
-             <span class="fu">||</span> c <span class="ot">`elem`</span> [<span class="ch">'0'</span><span class="fu">..</span><span class="ch">'9'</span>]</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">isAlpha' ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">isAlpha' c <span class="fu">=</span> c <span class="ot">`elem`</span> [<span class="ch">'A'</span><span class="fu">..</span><span class="ch">'Z'</span>]</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">          <span class="fu">||</span> c <span class="ot">`elem`</span> [<span class="ch">'a'</span><span class="fu">..</span><span class="ch">'z'</span>]</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="ot">isAlphaNum' ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">isAlphaNum' c <span class="fu">=</span> c <span class="ot">`elem`</span> [<span class="ch">'A'</span><span class="fu">..</span><span class="ch">'Z'</span>]</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">             <span class="fu">||</span> c <span class="ot">`elem`</span> [<span class="ch">'a'</span><span class="fu">..</span><span class="ch">'z'</span>]</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">             <span class="fu">||</span> c <span class="ot">`elem`</span> [<span class="ch">'0'</span><span class="fu">..</span><span class="ch">'9'</span>]</a></code></pre></div>
 
     <hr />
 

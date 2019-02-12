@@ -61,30 +61,30 @@
 </ul>
 <h1 id="typeした型の中身を表示するkind">typeした型の中身を表示する:kind!</h1>
 <p>　Hamberger.hsではこんな感じで、型レベル関数の結果を左辺に格納している。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">BasicHamburgerC</span> <span class="fu">=</span> <span class="dt">HamburgerC</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span>
-
-<span class="kw">type</span> <span class="dt">HamburgerC1</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">BasicHamburgerC</span> <span class="dt">Cheese</span>
-<span class="kw">type</span> <span class="dt">HamburgerC2</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC1</span> <span class="dt">Tomato</span>
-<span class="kw">type</span> <span class="dt">HamburgerC3</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC2</span> <span class="dt">Meet</span>
-<span class="kw">type</span> <span class="dt">HamburgerC4</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC3</span> <span class="dt">Ushi</span>
-<span class="kw">type</span> <span class="dt">HamburgerC5</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC4</span> <span class="dt">Ushi</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">type</span> <span class="dt">BasicHamburgerC</span> <span class="fu">=</span> <span class="dt">HamburgerC</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">type</span> <span class="dt">HamburgerC1</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">BasicHamburgerC</span> <span class="dt">Cheese</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">type</span> <span class="dt">HamburgerC2</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC1</span> <span class="dt">Tomato</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">type</span> <span class="dt">HamburgerC3</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC2</span> <span class="dt">Meet</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">type</span> <span class="dt">HamburgerC4</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC3</span> <span class="dt">Ushi</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">type</span> <span class="dt">HamburgerC5</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC4</span> <span class="dt">Ushi</span></a></code></pre></div>
 <p>例えば<code>HamburgerC4</code>と<code>HamburgerC5</code>の結果が見たいとき、 もしこれらが（<code>Show</code>である）値であれば<code>print</code>してあげればいいものの、これらは型である。</p>
 <p>　<code>type</code>された型を展開して表示するには、GHCiで<code>:kind!</code>を使う。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>kind<span class="fu">!</span> <span class="dt">HamburgerC4</span>
-<span class="dt">HamburgerC4</span><span class="ot"> ::</span> <span class="dt">HamburgerT</span>
-<span class="fu">=</span> <span class="ch">'HamburgerC '</span><span class="dt">Cheese</span> <span class="ch">'Tomato '</span><span class="dt">Meet</span> <span class="ch">'Ushi</span>
-
-<span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>kind<span class="fu">!</span> <span class="dt">HamburgerC5</span>
-<span class="dt">HamburgerC5</span><span class="ot"> ::</span> <span class="dt">HamburgerT</span>
-<span class="fu">=</span> <span class="ch">'Fail</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>kind<span class="fu">!</span> <span class="dt">HamburgerC4</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="dt">HamburgerC4</span><span class="ot"> ::</span> <span class="dt">HamburgerT</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="fu">=</span> '<span class="dt">HamburgerC</span> '<span class="dt">Cheese</span> '<span class="dt">Tomato</span> '<span class="dt">Meet</span> '<span class="dt">Ushi</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>kind<span class="fu">!</span> <span class="dt">HamburgerC5</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="dt">HamburgerC5</span><span class="ot"> ::</span> <span class="dt">HamburgerT</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="fu">=</span> '<span class="dt">Fail</span></a></code></pre></div>
 <p>　ちなみに<code>:info</code>すれば、それらどうやって（値レベルでいう）束縛を行われたのか と 行われた箇所が見れる。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>info <span class="dt">HamburgerC4</span>
-<span class="kw">type</span> <span class="dt">HamburgerC4</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC3</span> <span class="ch">'Ushi :: HamburgerT</span>
-        <span class="co">-- Defined at Hamburger.hs:59:1</span>
-
-<span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>info <span class="dt">HamburgerC5</span>
-<span class="kw">type</span> <span class="dt">HamburgerC5</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC4</span> <span class="ch">'Ushi :: HamburgerT</span>
-        <span class="co">-- Defined at Hamburger.hs:60:1</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>info <span class="dt">HamburgerC4</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">type</span> <span class="dt">HamburgerC4</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC3</span> '<span class="dt">Ushi</span><span class="ot"> ::</span> <span class="dt">HamburgerT</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">        <span class="co">-- Defined at Hamburger.hs:59:1</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="dt">GHCi</span><span class="fu">&gt;</span> <span class="fu">:</span>info <span class="dt">HamburgerC5</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw">type</span> <span class="dt">HamburgerC5</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC4</span> '<span class="dt">Ushi</span><span class="ot"> ::</span> <span class="dt">HamburgerT</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">        <span class="co">-- Defined at Hamburger.hs:60:1</span></a></code></pre></div>
 <h1 id="一言">一言</h1>
 <p>　ここの一連の<code>type</code>、よく関数ローカルでいくつかの名前を<code>let</code>していくのと似てるよねー。</p>
 

@@ -53,20 +53,20 @@
 </div>
 
 <div class="post-body">
-    <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">clOptions ::</span> <span class="dt">CommandLineOptions</span>
-clOptions <span class="fu">=</span> <span class="dt">CommandLineOptions</span>
-  { frontend    <span class="fu">=</span> <span class="st">&quot;vty&quot;</span>   <span class="fu">&amp;=</span> help <span class="st">&quot;The frontend to use&quot;</span>
-  , startOnLine <span class="fu">=</span> <span class="dt">Nothing</span> <span class="fu">&amp;=</span> help <span class="st">&quot;Open the (last) file on line NUM&quot;</span>
-  , files       <span class="fu">=</span> []      <span class="fu">&amp;=</span> help <span class="st">&quot;FILES...&quot;</span> <span class="fu">&amp;=</span> args  <span class="co">-- ここ</span>
-  }</code></pre></div>
+    <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">clOptions ::</span> <span class="dt">CommandLineOptions</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">clOptions <span class="fu">=</span> <span class="dt">CommandLineOptions</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  { frontend    <span class="fu">=</span> <span class="st">&quot;vty&quot;</span>   <span class="fu">&amp;=</span> help <span class="st">&quot;The frontend to use&quot;</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  , startOnLine <span class="fu">=</span> <span class="dt">Nothing</span> <span class="fu">&amp;=</span> help <span class="st">&quot;Open the (last) file on line NUM&quot;</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  , files       <span class="fu">=</span> []      <span class="fu">&amp;=</span> help <span class="st">&quot;FILES...&quot;</span> <span class="fu">&amp;=</span> args  <span class="co">-- ここ</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  }</a></code></pre></div>
 <p>デフォルトの引数をfilesで受けとりたくば、helpを消せ。<br />
 さもなくば我々をcmdargsがコロす。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">clOptions ::</span> <span class="dt">CommandLineOptions</span>
-clOptions <span class="fu">=</span> <span class="dt">CommandLineOptions</span>
-  { frontend    <span class="fu">=</span> <span class="st">&quot;vty&quot;</span>   <span class="fu">&amp;=</span> help <span class="st">&quot;The frontend to use&quot;</span>
-  , startOnLine <span class="fu">=</span> <span class="dt">Nothing</span> <span class="fu">&amp;=</span> help <span class="st">&quot;Open the (last) file on line NUM&quot;</span>
-  , files       <span class="fu">=</span> []      <span class="fu">&amp;=</span> args  <span class="co">-- ここ</span>
-  }</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">clOptions ::</span> <span class="dt">CommandLineOptions</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">clOptions <span class="fu">=</span> <span class="dt">CommandLineOptions</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  { frontend    <span class="fu">=</span> <span class="st">&quot;vty&quot;</span>   <span class="fu">&amp;=</span> help <span class="st">&quot;The frontend to use&quot;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  , startOnLine <span class="fu">=</span> <span class="dt">Nothing</span> <span class="fu">&amp;=</span> help <span class="st">&quot;Open the (last) file on line NUM&quot;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  , files       <span class="fu">=</span> []      <span class="fu">&amp;=</span> args  <span class="co">-- ここ</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  }</a></code></pre></div>
 <p>忘れるなよ。</p>
 
     <hr />

@@ -55,19 +55,19 @@
 <div class="post-body">
     <h1 id="まとめ">まとめ</h1>
 <p>　forallを指定してあげると、一連の<code>a</code>, <code>b</code>が固定されてくれます。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">f ::</span> forall a b<span class="fu">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">f ::</span> forall a b<span class="fu">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a></code></pre></div>
 <h1 id="解説">解説</h1>
 <p>　以下のようなコードを書くと</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span>
-
-<span class="ot">f ::</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-f g h x <span class="fu">=</span>
-  <span class="kw">let</span> y <span class="fu">=</span> g<span class="ot"> x ::</span> b
-      z <span class="fu">=</span> h<span class="ot"> x ::</span> b
-  <span class="kw">in</span> y <span class="fu">==</span> z
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> pure ()</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ot">f ::</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">f g h x <span class="fu">=</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw">let</span> y <span class="fu">=</span> g<span class="ot"> x ::</span> b</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">      z <span class="fu">=</span> h<span class="ot"> x ::</span> b</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="kw">in</span> y <span class="fu">==</span> z</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">main <span class="fu">=</span> pure ()</a></code></pre></div>
 <p>以下のようなエラーがでます。 「<code>g x</code>によって推論されたその型<code>b'</code>と、指定されたその型<code>b</code>が同一ではない」の意です。</p>
 <p>意図として 「<code>g x :: b</code>の<code>b</code>は、<code>f</code>の型で指定された<code>b</code>そのものである」 ということを指定したつもりなのだけど…。</p>
 <pre><code>/tmp/nvimNLJJ6T/148.hs:5:11: error:
@@ -144,16 +144,16 @@ main <span class="fu">=</span> pure ()</code></pre></div>
                 z = ...
               in y == z</code></pre>
 <p>ということで、確かに 「<code>g x :: b</code>の<code>b</code>は、<code>f</code>の型で指定された<code>b</code>そのものである」 ということを型検査に伝えてあげます。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span>
-
-<span class="ot">f ::</span> forall a b<span class="fu">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-f g h x <span class="fu">=</span>
-  <span class="kw">let</span> y <span class="fu">=</span> g<span class="ot"> x ::</span> b
-      z <span class="fu">=</span> h<span class="ot"> x ::</span> b
-  <span class="kw">in</span> y <span class="fu">==</span> z
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> pure ()</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ot">f ::</span> forall a b<span class="fu">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">f g h x <span class="fu">=</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="kw">let</span> y <span class="fu">=</span> g<span class="ot"> x ::</span> b</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">      z <span class="fu">=</span> h<span class="ot"> x ::</span> b</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="kw">in</span> y <span class="fu">==</span> z</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">main <span class="fu">=</span> pure ()</a></code></pre></div>
 <p>OK 🐕</p>
 <p>　そりゃそうなんですけど、いつも忘れて「！？」ってなりますよね。</p>
 

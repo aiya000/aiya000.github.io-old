@@ -64,20 +64,20 @@
 <p>　完全にいいのですが、裏技があって、(unit|prop|scprop|spec|test)_<strong>function_name</strong>となるfunction_nameをsneak_caseにしておくと、テスト実行時に項目名にしてくれます。</p>
 <h1 id="例">例</h1>
 <p>Step1Test.hs</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">test_parser_and_printer_converts_left_to_right ::</span> [<span class="dt">TestTree</span>]
-test_parser_and_printer_converts_left_to_right <span class="fu">=</span>
-  [ testCase <span class="st">&quot;'123' -&gt; '123'&quot;</span> <span class="fu">$</span> <span class="st">&quot;123&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;123&quot;</span>
-  , testCase <span class="st">&quot;'abc' -&gt; 'abc'&quot;</span> <span class="fu">$</span> <span class="st">&quot;abc&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;abc&quot;</span>
-  , testCase <span class="st">&quot;'(123 456)' -&gt; '(123 456)'&quot;</span> <span class="fu">$</span> <span class="st">&quot;(123 456)&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456)&quot;</span>
-  , testCase <span class="st">&quot;'( 123 456 789 )' -&gt; '(123 456 789)'&quot;</span> <span class="fu">$</span> <span class="st">&quot;( 123 456 789 )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456 789)&quot;</span>
-  , testCase <span class="st">&quot;'( + 2 (* 3 4) )' -&gt; '(+ 2 (* 3 4))'&quot;</span> <span class="fu">$</span> <span class="st">&quot;( + 2 (* 3 4) )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(+ 2 (* 3 4))&quot;</span>
-  ]
-  <span class="kw">where</span>
-<span class="ot">    isConvertedTo ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Assertion</span>
-    isConvertedTo code expected <span class="fu">=</span>
-      <span class="kw">case</span> Parser.parse code <span class="kw">of</span>
-        <span class="dt">Left</span>  e     <span class="ot">-&gt;</span> assertFailure <span class="fu">$</span> <span class="st">&quot;The parse is failed: &quot;</span> <span class="fu">++</span> Parser.parseErrorPretty e
-        <span class="dt">Right</span> sexpr <span class="ot">-&gt;</span> MT.toSyntax sexpr <span class="fu">@?=</span> expected</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">test_parser_and_printer_converts_left_to_right ::</span> [<span class="dt">TestTree</span>]</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">test_parser_and_printer_converts_left_to_right <span class="fu">=</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  [ testCase <span class="st">&quot;'123' -&gt; '123'&quot;</span> <span class="fu">$</span> <span class="st">&quot;123&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;123&quot;</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  , testCase <span class="st">&quot;'abc' -&gt; 'abc'&quot;</span> <span class="fu">$</span> <span class="st">&quot;abc&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;abc&quot;</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  , testCase <span class="st">&quot;'(123 456)' -&gt; '(123 456)'&quot;</span> <span class="fu">$</span> <span class="st">&quot;(123 456)&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456)&quot;</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  , testCase <span class="st">&quot;'( 123 456 789 )' -&gt; '(123 456 789)'&quot;</span> <span class="fu">$</span> <span class="st">&quot;( 123 456 789 )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456 789)&quot;</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  , testCase <span class="st">&quot;'( + 2 (* 3 4) )' -&gt; '(+ 2 (* 3 4))'&quot;</span> <span class="fu">$</span> <span class="st">&quot;( + 2 (* 3 4) )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(+ 2 (* 3 4))&quot;</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  ]</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="ot">    isConvertedTo ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Assertion</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    isConvertedTo code expected <span class="fu">=</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">      <span class="kw">case</span> Parser.parse code <span class="kw">of</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">        <span class="dt">Left</span>  e     <span class="ot">-&gt;</span> assertFailure <span class="fu">$</span> <span class="st">&quot;The parse is failed: &quot;</span> <span class="fu">++</span> Parser.parseErrorPretty e</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">        <span class="dt">Right</span> sexpr <span class="ot">-&gt;</span> MT.toSyntax sexpr <span class="fu">@?=</span> expected</a></code></pre></div>
 <p>出力</p>
 <pre class="console"><code>Progress: 1/2tasty-discover
   parser and printer converts left to right

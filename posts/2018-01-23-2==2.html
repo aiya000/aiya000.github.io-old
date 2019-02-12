@@ -56,27 +56,27 @@
     <p>これはおもしろ記事です。</p>
 <h1 id="前提">前提</h1>
 <p>例えばJavaを例に上げると、全てのclassはObjectを継承しており、Objectがequalsメソッドを持つので 異なる型を比較（<code>equals</code>）できてしまいます。</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> Foo {}
-<span class="kw">class</span> Bar {}
-
-<span class="kw">public</span> <span class="kw">class</span> Test {
-    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {
-        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="kw">new</span> <span class="fu">Foo</span>().<span class="fu">equals</span>(<span class="kw">new</span> <span class="fu">Bar</span>()));
-    }
-}
-<span class="co">// {output}</span>
-<span class="co">// false</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">class</span> Foo {}</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">class</span> Bar {}</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">public</span> <span class="kw">class</span> Test {</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="kw">new</span> <span class="fu">Foo</span>().<span class="fu">equals</span>(<span class="kw">new</span> <span class="fu">Bar</span>()));</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    }</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">// {output}</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">// false</span></a></code></pre></div>
 <p>これはインスタンスをアップキャストしたい際などには便利ですが、 私個人としては「ある値x,yが異なる型を持てば同じものではない（<code>x != y</code>）」というものを認めた方が 誤りが発生しにくいと考えています 💩</p>
 <p>それをおおよそ認めたとも捉えれられる言語の１つとしてHaskellがあります ❇️</p>
 <p>Haskellは異なる型の比較（<code>==</code>）をコンパイルエラーで報告します。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- CharとBoolの比較</span>
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print <span class="fu">$</span> <span class="ch">'a'</span> <span class="fu">==</span> <span class="dt">True</span>
-<span class="co">-- /tmp/nvimkIYPkj/4.hs:2:23: error:</span>
-<span class="co">--     • Couldn't match expected type ‘Char’ with actual type ‘Bool’</span>
-<span class="co">--     • In the second argument of ‘(==)’, namely ‘True’</span>
-<span class="co">--       In the second argument of ‘($)’, namely ‘'a' == True’</span>
-<span class="co">--       In the expression: print $ 'a' == True</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">-- CharとBoolの比較</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">main <span class="fu">=</span> print <span class="fu">$</span> <span class="ch">'a'</span> <span class="fu">==</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">-- /tmp/nvimkIYPkj/4.hs:2:23: error:</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">--     • Couldn't match expected type ‘Char’ with actual type ‘Bool’</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">--     • In the second argument of ‘(==)’, namely ‘True’</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">--       In the second argument of ‘($)’, namely ‘'a' == True’</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">--       In the expression: print $ 'a' == True</span></a></code></pre></div>
 <p>繰り返しになりますが、これはある種の安全性を担保します。</p>
 <h1 id="xがtrueになることを合法にする"><code>1 == &quot;x&quot;</code>が<code>True</code>になることを合法にする</h1>
 <p>　上記のHaskellの例を見た時に、もしかしたら貴方は「柔軟性に乏しい」と考えたかもしれません。</p>
@@ -87,35 +87,35 @@ main <span class="fu">=</span> print <span class="fu">$</span> <span class="ch">
 <p lang="ja" dir="ltr">
 NumとEqとIsStringのインスタンスだけでできると思います。 <a href="https://t.co/DSMCmvAIVX">pic.twitter.com/DSMCmvAIVX</a>
 </p>
-— caffeine propulsion (<span class="citation">@iand675</span>) <a href="https://twitter.com/iand675/status/955758784487534593?ref_src=twsrc%5Etfw">2018年1月23日</a>
+— caffeine propulsion (<span class="citation" data-cites="iand675">@iand675</span>) <a href="https://twitter.com/iand675/status/955758784487534593?ref_src=twsrc%5Etfw">2018年1月23日</a>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span>
-
-<span class="kw">import </span><span class="dt">Data.String</span> (<span class="dt">IsString</span>(..))
-
-<span class="kw">data</span> <span class="dt">Foo</span> <span class="fu">=</span> <span class="dt">Foo</span>
-
-<span class="kw">instance</span> <span class="dt">IsString</span> <span class="dt">Foo</span> <span class="kw">where</span>
-  fromString _ <span class="fu">=</span> <span class="dt">Foo</span>
-
-<span class="kw">instance</span> <span class="dt">Num</span> <span class="dt">Foo</span> <span class="kw">where</span>
-  fromInteger _ <span class="fu">=</span> <span class="dt">Foo</span>
-
-<span class="kw">instance</span> <span class="dt">Eq</span> <span class="dt">Foo</span> <span class="kw">where</span>
-  _ <span class="fu">==</span> _ <span class="fu">=</span> <span class="dt">True</span>
-
-default (<span class="dt">Foo</span>)
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span>
-<span class="co">-- {output}</span>
-<span class="co">-- True</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>(..))</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">data</span> <span class="dt">Foo</span> <span class="fu">=</span> <span class="dt">Foo</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">instance</span> <span class="dt">IsString</span> <span class="dt">Foo</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  fromString _ <span class="fu">=</span> <span class="dt">Foo</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw">instance</span> <span class="dt">Num</span> <span class="dt">Foo</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  fromInteger _ <span class="fu">=</span> <span class="dt">Foo</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="kw">instance</span> <span class="dt">Eq</span> <span class="dt">Foo</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">  _ <span class="fu">==</span> _ <span class="fu">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">default (<span class="dt">Foo</span>)</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">-- True</span></a></code></pre></div>
 <p>　値<code>1</code>と<code>&quot;x&quot;</code>を、単一の値を持つ型<code>Foo</code>に型付けしてしまうアプローチです。</p>
 <p>　GHCには<code>OverloadedStrings</code>という独自言語拡張があり、 これは通常<code>&quot;x&quot;</code>が<code>&quot;x&quot; :: String</code>という暗黙的型付けを行うルールを、 <code>&quot;x&quot; :: IsString x =&gt; x</code>という暗黙的型付けに変更します。</p>
 <p>つまるところ<code>&quot;x&quot; :: Foo</code>という型付けが合法になります。</p>
 <p>　文字列リテラルに関する<code>OverloadedStrings</code>と似たような、数値リテラルに対する暗黙的型付けルールを Haskellはデフォルトで持ちます。</p>
-<p>このルールは値<code>1</code>を<code>1 :: Num a =&gt; a</code>というような型（<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>）に型付けます。 ですので<code>1 :: Foo</code>という暗黙的型付けが合法になります。</p>
+<p>このルールは値<code>1</code>を<code>1 :: Num a =&gt; a</code>というような型（<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>）に型付けます。 ですので<code>1 :: Foo</code>という暗黙的型付けが合法になります。</p>
 <p>　最後に<code>default (Foo)</code>は<code>1</code>のような明示的型付きを成されていない数値リテラルを デフォルトで<code>Foo</code>に型付けるようにします。</p>
 <p>　上記3つのルール</p>
 <ul>
@@ -126,32 +126,32 @@ main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">
 <p>によって<code>1 == &quot;x&quot;</code>が<code>(1 :: Foo) == (&quot;x&quot; :: IsString x =&gt; x)</code>として型付けられる。 かつ<code>==</code>は左辺と右辺に同じ型を持つので <code>(1 :: Foo) == (&quot;x&quot; :: Foo)</code>（<code>(==) :: Foo -&gt; Foo -&gt; Bool</code>） を導くことができました 💥</p>
 <h2 id="num">Num</h2>
 <p>　先程は<code>Foo</code>に集約しましたが、しかしながら<code>String</code>に集約することも可能です。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE FlexibleInstances #-}</span>
-<span class="ot">{-# LANGUAGE TypeSynonymInstances #-}</span>
-
-<span class="kw">instance</span> <span class="dt">Num</span> <span class="dt">String</span> <span class="kw">where</span>
-  fromInteger _ <span class="fu">=</span> <span class="st">&quot;x&quot;</span>
-
-default (<span class="dt">String</span>)
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span>
-<span class="co">-- {output}</span>
-<span class="co">-- True</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">{-# LANGUAGE FlexibleInstances #-}</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ot">{-# LANGUAGE TypeSynonymInstances #-}</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw">instance</span> <span class="dt">Num</span> <span class="dt">String</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  fromInteger _ <span class="fu">=</span> <span class="st">&quot;x&quot;</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">default (<span class="dt">String</span>)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">-- True</span></a></code></pre></div>
 <p>　これは章「<code>IsString</code> + <code>Num</code>」と全く同じことをしていますが、 ただし<code>1</code>を<code>1 :: String</code>に型付けています。</p>
 <h2 id="rebindablesyntax">RebindableSyntax</h2>
 <p>　最後に1つ、ぶっ飛んだ例を紹介して終わります。 これについては、あまり型付けに関していなません。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE RebindableSyntax #-}</span>
-
-<span class="kw">import </span><span class="dt">Prelude</span> (<span class="dt">Integer</span>, <span class="dt">String</span>, <span class="dt">IO</span>, print, ($), (==))
-
-fromInteger<span class="ot"> ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
-fromInteger _ <span class="fu">=</span> <span class="st">&quot;x&quot;</span>
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span>
-<span class="co">-- {output}</span>
-<span class="co">-- True</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">{-# LANGUAGE RebindableSyntax #-}</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Prelude</span> (<span class="dt">Integer</span>, <span class="dt">String</span>, <span class="dt">IO</span>, print, ($), (==))</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">fromInteger<span class="ot"> ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">fromInteger _ <span class="fu">=</span> <span class="st">&quot;x&quot;</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">1</span> <span class="fu">==</span> <span class="st">&quot;x&quot;</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">-- True</span></a></code></pre></div>
 <p>　GHCの<code>RebindableSyntax</code>拡張は、Haskell標準が<code>1</code>という式を<code>Prelude.fromInteger (1 :: Integer)</code>という式に展開するという仕様について改変します。</p>
 <ul>
 <li><a href="https://downloads.haskell.org/~ghc/7.2.1/docs/html/users_guide/syntax-extns.html">7.3. Syntactic extensions</a>
@@ -174,30 +174,30 @@ main <span class="fu">=</span> print <span class="fu">$</span> <span class="dv">
 <p lang="ja" dir="ltr">
 プログラマの面接を行うことになった面接官がHaskellerに尋ねた。<br>「2+2は何になりますか?」<br>Haskellerはドアに鍵をかけ、型定義とそれに対するNumインスタンスを書きながら小声で尋ねた。<br>「2+2をいくつにしたいんです？」<a href="https://t.co/ePWU41mZDr">https://t.co/ePWU41mZDr</a> <a href="https://t.co/0uQR1HEVpl">pic.twitter.com/0uQR1HEVpl</a>
 </p>
-— Make 生活リズム 正常 again (<span class="citation">@mod_poppo</span>) <a href="https://twitter.com/mod_poppo/status/955685593471705088?ref_src=twsrc%5Etfw">2018年1月23日</a>
+— Make 生活リズム 正常 again (<span class="citation" data-cites="mod_poppo">@mod_poppo</span>) <a href="https://twitter.com/mod_poppo/status/955685593471705088?ref_src=twsrc%5Etfw">2018年1月23日</a>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <blockquote class="twitter-tweet" data-lang="ja">
 <p lang="ja" dir="ltr">
 みなさん、 2+2 のようなクソ2番煎じネタじゃなくて、代数的実数の方を拡散してください <a href="https://t.co/eSMVWbRyTo">https://t.co/eSMVWbRyTo</a>
 </p>
-— Make 生活リズム 正常 again (<span class="citation">@mod_poppo</span>) <a href="https://twitter.com/mod_poppo/status/955716537683341312?ref_src=twsrc%5Etfw">2018年1月23日</a>
+— Make 生活リズム 正常 again (<span class="citation" data-cites="mod_poppo">@mod_poppo</span>) <a href="https://twitter.com/mod_poppo/status/955716537683341312?ref_src=twsrc%5Etfw">2018年1月23日</a>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <blockquote class="twitter-tweet" data-lang="ja">
 <p lang="ja" dir="ltr">
 NumとEqとIsStringのインスタンスだけでできると思います。 <a href="https://t.co/DSMCmvAIVX">pic.twitter.com/DSMCmvAIVX</a>
 </p>
-— caffeine propulsion (<span class="citation">@iand675</span>) <a href="https://twitter.com/iand675/status/955758784487534593?ref_src=twsrc%5Etfw">2018年1月23日</a>
+— caffeine propulsion (<span class="citation" data-cites="iand675">@iand675</span>) <a href="https://twitter.com/iand675/status/955758784487534593?ref_src=twsrc%5Etfw">2018年1月23日</a>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <hr />
-<div class="footnotes">
+<section class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>実際は暗黙的型付けというよりは糖衣構文の展開だけど、「<code>1</code>が<code>Num</code>インスタンスのいずれかに型付けられる」ということを導くのは同じはず<a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>実際は暗黙的型付けというよりは糖衣構文の展開だけど、「<code>1</code>が<code>Num</code>インスタンスのいずれかに型付けられる」ということを導くのは同じはず<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
-</div>
+</section>
 
     <hr />
 

@@ -82,74 +82,74 @@
 </ul>
 <h1 id="idrisでは依存型のパターンマッチができる">Idrisでは依存型のパターンマッチができる</h1>
 <p>　コードを見てもらえれば、感覚がわかると思う。 <code>Vect</code>型については後述。</p>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span>
-length' {n <span class="fu">=</span> val} <span class="fu">_</span> <span class="fu">=</span> val</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">length' {n <span class="fu">=</span> val} <span class="fu">_</span> <span class="fu">=</span> val</a></code></pre></div>
 <p><code>{n = val}</code>というのが依存型<code>n</code>のパターンマッチである。 <code>n</code>には例えば<code>Vect 5 Int</code>のように自然数値が入る。</p>
 <p>その後の<code>_</code>は<code>Vect n a</code>値が束縛されるが、既に必要ないのでアンダースコアによって破棄される。</p>
 <p>この<code>val</code>はパターンなので、例えば以下のようなマッチングもかけることができる。</p>
 <p>（<code>Z : Type</code>と<code>S : Nat -&gt; Type</code>は<code>Nat</code>型の値。<code>Z</code>は<code>0</code>、<code>S Z</code>は<code>1</code>を表す）</p>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span>
-length' {n <span class="fu">=</span> <span class="dt">Z</span>}   <span class="fu">_</span>  <span class="fu">=</span> <span class="dv">0</span>
-length' {n <span class="fu">=</span> <span class="dt">S</span> <span class="fu">_</span>} xs <span class="fu">=</span> <span class="dv">1</span> <span class="fu">+</span> length' (tail xs)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">length' {n <span class="fu">=</span> <span class="dt">Z</span>}   <span class="fu">_</span>  <span class="fu">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">length' {n <span class="fu">=</span> <span class="dt">S</span> <span class="fu">_</span>} xs <span class="fu">=</span> <span class="dv">1</span> <span class="fu">+</span> length' (tail xs)</a></code></pre></div>
 <h2 id="コード全文">コード全文</h2>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="kw">import</span> <span class="dt">Data</span><span class="fu">.</span><span class="dt">Vect</span>
-
-<span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span>
-xs <span class="fu">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]
-
-<span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span>
-length' {n <span class="fu">=</span> val} <span class="fu">_</span> <span class="fu">=</span> val
-
-<span class="co">--length' : Vect n a -&gt; Nat</span>
-<span class="co">--length' {n = Z}   _  = 0</span>
-<span class="co">--length' {n = S _} xs = 1 + length' (tail xs)</span>
-
-<span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> printLn <span class="fu">$</span> length' xs
-<span class="co">-- {output}</span>
-<span class="co">-- 5</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Data</span><span class="fu">.</span><span class="dt">Vect</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">xs <span class="fu">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="fu">length'</span> <span class="ot">:</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Nat</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">length' {n <span class="fu">=</span> val} <span class="fu">_</span> <span class="fu">=</span> val</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">--length' : Vect n a -&gt; Nat</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">--length' {n = Z}   _  = 0</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">--length' {n = S _} xs = 1 + length' (tail xs)</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">main <span class="fu">=</span> printLn <span class="fu">$</span> length' xs</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">-- 5</span></a></code></pre></div>
 <h2 id="haskellで書くなら">Haskellで書くなら</h2>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE DataKinds #-}</span>
-<span class="ot">{-# LANGUAGE GADTs #-}</span>
-<span class="ot">{-# LANGUAGE KindSignatures #-}</span>
-<span class="ot">{-# LANGUAGE PolyKinds #-}</span>
-<span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span>
-<span class="ot">{-# LANGUAGE TypeOperators #-}</span>
-
-<span class="kw">import </span><span class="dt">Data.Proxy</span> (<span class="dt">Proxy</span>(..))
-<span class="kw">import </span><span class="dt">GHC.TypeLits</span>
-
-<span class="kw">data</span> <span class="dt">Vect</span> (<span class="ot">n ::</span> <span class="dt">Nat</span>)<span class="ot"> a ::</span> <span class="fu">*</span> <span class="kw">where</span>
-  <span class="dt">Nil</span><span class="ot"> ::</span> <span class="dt">Vect</span> <span class="dv">0</span> a
-<span class="ot">  (:::) ::</span> a <span class="ot">-&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Vect</span> (n <span class="fu">+</span> <span class="dv">1</span>) a
-
-<span class="kw">infixr</span> <span class="dv">7</span> <span class="ot">::</span><span class="fu">:</span>
-
-<span class="ot">xs ::</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span>
-xs <span class="fu">=</span> <span class="dv">1</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">2</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">3</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">4</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">5</span> <span class="ot">::</span><span class="fu">:</span> <span class="dt">Nil</span>
-
-<span class="co">-- HaskellではNatが値を持たないのでIntを使う</span>
-<span class="ot">length' ::</span> forall n a<span class="fu">.</span> <span class="dt">KnownNat</span> n <span class="ot">=&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Int</span>
-length' _ <span class="fu">=</span> fromInteger <span class="fu">$</span> natVal (<span class="dt">Proxy</span><span class="ot"> ::</span> <span class="dt">Proxy</span> n)
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print <span class="fu">$</span> length' xs
-<span class="co">-- {output}</span>
-<span class="co">-- 5</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">{-# LANGUAGE DataKinds #-}</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ot">{-# LANGUAGE KindSignatures #-}</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="ot">{-# LANGUAGE PolyKinds #-}</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">import</span> <span class="dt">Data.Proxy</span> (<span class="dt">Proxy</span>(..))</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="kw">import</span> <span class="dt">GHC.TypeLits</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw">data</span> <span class="dt">Vect</span> (<span class="ot">n ::</span> <span class="dt">Nat</span>)<span class="ot"> a ::</span> <span class="fu">*</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">  <span class="dt">Nil</span><span class="ot"> ::</span> <span class="dt">Vect</span> <span class="dv">0</span> a</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="ot">  (:::) ::</span> a <span class="ot">-&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Vect</span> (n <span class="fu">+</span> <span class="dv">1</span>) a</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="kw">infixr</span> <span class="dv">7</span> <span class="ot">::</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="ot">xs ::</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">xs <span class="fu">=</span> <span class="dv">1</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">2</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">3</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">4</span> <span class="ot">::</span><span class="fu">:</span> <span class="dv">5</span> <span class="ot">::</span><span class="fu">:</span> <span class="dt">Nil</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">-- HaskellではNatが値を持たないのでIntを使う</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="ot">length' ::</span> forall n a<span class="fu">.</span> <span class="dt">KnownNat</span> n <span class="ot">=&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">length' _ <span class="fu">=</span> fromInteger <span class="fu">$</span> natVal (<span class="dt">Proxy</span><span class="ot"> ::</span> <span class="dt">Proxy</span> n)</a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-25" data-line-number="25">main <span class="fu">=</span> print <span class="fu">$</span> length' xs</a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">-- 5</span></a></code></pre></div>
 <h1 id="余談-使用した諸機能の説明">余談: 使用した諸機能の説明</h1>
 <p>　以上で使用した諸機能について補足をします。</p>
 <h2 id="printlnprint"><code>printLn</code>/<code>print</code></h2>
 <p>　Haskellでの<code>print</code>は<code>printLn</code>に該当する。 Idrisの<code>print</code>は改行を出力しない。</p>
 <h2 id="vect-n-a"><code>Vect n a</code></h2>
 <p>　<code>Vect</code>型はその長さを型パラメータ<code>n</code>に持つ<code>a</code>のリストである。 例えば以下は長さ5を持つ。</p>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span>
-xs <span class="fu">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">xs <span class="fu">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]</a></code></pre></div>
 <p>　<code>Vect</code>の簡略的定義はこんな感じ</p>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="kw">data</span> <span class="dt">Vect</span> <span class="ot">:</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="kw">where</span>
-  <span class="dt">Nil</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">0</span> a
-  <span class="fu">(::)</span> <span class="ot">:</span> x <span class="ot">-&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Vect</span> (<span class="dt">S</span> n) a
-
-<span class="kw">infixl</span> <span class="dv">7</span> <span class="ot">::</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Vect</span> <span class="ot">:</span> <span class="dt">Nat</span> <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="dt">Nil</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">0</span> a</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="fu">(::)</span> <span class="ot">:</span> x <span class="ot">-&gt;</span> <span class="dt">Vect</span> n a <span class="ot">-&gt;</span> <span class="dt">Vect</span> (<span class="dt">S</span> n) a</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">infixl</span> <span class="dv">7</span> <span class="ot">::</span></a></code></pre></div>
 <ul>
 <li>実定義は<a href="https://www.idris-lang.org/docs/current/base_doc/docs/Data.Vect.html#Data.Vect.Vect">IdrisDoc: Data.Vect</a></li>
 </ul>
@@ -158,8 +158,8 @@ xs <span class="fu">=</span> [<span class="dv">1</span>,<span class="dv">2</span
 <h2 id="idrisでの自然数natは0も含む"><strong>Idrisでの自然数（<code>Nat</code>）は<code>0</code>も含む</strong></h2>
 <p>　やはりプログラミングでは<code>0</code>を含んだ方が、自然数がぐーーーんと使いやすい。</p>
 <h2 id="リストリテラル中の..記法はvectでは使えないみたい">リストリテラル中の<code>..</code>記法は<code>Vect</code>では使えないみたい <a name="dotdot-in-vect"></a></h2>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span>
-xs <span class="fu">=</span> [<span class="dv">1</span><span class="fu">..</span><span class="dv">5</span>]</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">xs</span> <span class="ot">:</span> <span class="dt">Vect</span> <span class="dv">5</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">xs <span class="fu">=</span> [<span class="dv">1</span><span class="fu">..</span><span class="dv">5</span>]</a></code></pre></div>
 <pre><code>| xs = [1..5]
 |      ~~~~~~
 When checking right hand side of xs with expected type
@@ -173,7 +173,7 @@ and
 <h2 id="idrisではghcのgadts拡張相当がデフォルトで使える">IdrisではGHCの<code>GADTs</code>拡張相当がデフォルトで使える</h2>
 <p>　上記、<code>Vect</code>の簡略定義の通り。</p>
 <p>もちろん普通の代数的データ型もこんな感じに書ける。</p>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="kw">data</span> <span class="dt">Mine</span> <span class="fu">=</span> <span class="dt">My</span> <span class="dt">String</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Mine</span> <span class="fu">=</span> <span class="dt">My</span> <span class="dt">String</span></a></code></pre></div>
 
     <hr />
 

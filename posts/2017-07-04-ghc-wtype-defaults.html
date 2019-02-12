@@ -54,8 +54,8 @@
 
 <div class="post-body">
     <p>Test.hs</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print <span class="dv">10</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">main <span class="fu">=</span> print <span class="dv">10</span></a></code></pre></div>
 <p>このコードを<code>-Wtype-defaults</code>付きでコンパイルすると、以下の警告が出る。 （<code>-Wtype-defaults</code>はGHC-8.0.2ではデフォルトで無効）</p>
 <pre class="console"><code>$ stack runghc -- -Wtype-defaults Test.hs
 
@@ -69,8 +69,8 @@ Test.hs:2:8: warning: [-Wtype-defaults]
 <p>10が型推論で<code>(Num a, Show a) =&gt; a</code>に推論されているからだ。 GHCは10を最終的に単相型で型付けする必要がある……はずなので、デフォルトの<code>Integer</code>として型付けされていて、 このままだとパフォーマンスに影響が出る。（<code>Integer</code>より<code>Int</code>のが速い）</p>
 <p>型を付けて解決する。</p>
 <p>Test.hs</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print (<span class="dv">10</span><span class="ot"> ::</span> <span class="dt">Int</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">main <span class="fu">=</span> print (<span class="dv">10</span><span class="ot"> ::</span> <span class="dt">Int</span>)</a></code></pre></div>
 <p>他にいい解決方法ないの？</p>
 <h1 id="参考ページ">参考ページ</h1>
 <ul>

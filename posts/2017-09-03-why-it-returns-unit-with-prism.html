@@ -59,62 +59,62 @@
 </ul>
 <p>に書いた通り、 <code>(^?)</code>はある<code>Prism</code>を引数に取る。</p>
 <p>　でもPrismは必ず<code>(^?)</code>と一緒に使わなきゃいけないわけじゃなくって、 <code>Monoid r =&gt; Getting r s a</code>の形になった<code>Prism</code>は Lensの<code>(^.)</code>にも指定できる。 （例えば<code>_Right</code>）</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Control.Lens</span>
-<span class="kw">import </span><span class="dt">Data.Monoid</span> (<span class="dt">Sum</span>)
-
-<span class="ot">x ::</span> <span class="dt">Either</span> <span class="dt">Char</span> (<span class="dt">Sum</span> <span class="dt">Int</span>)
-x <span class="fu">=</span> <span class="dt">Left</span> <span class="ch">'a'</span>
-
-<span class="co">-- xはRight値ではないので、Sumの単位元であるSum 0が返る</span>
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> print <span class="fu">$</span> x <span class="fu">^.</span> _Right
-
-<span class="co">-- {output}</span>
-<span class="co">-- Sum {getSum = 0}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control.Lens</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Data.Monoid</span> (<span class="dt">Sum</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="ot">x ::</span> <span class="dt">Either</span> <span class="dt">Char</span> (<span class="dt">Sum</span> <span class="dt">Int</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">x <span class="fu">=</span> <span class="dt">Left</span> <span class="ch">'a'</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">-- xはRight値ではないので、Sumの単位元であるSum 0が返る</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">main <span class="fu">=</span> print <span class="fu">$</span> x <span class="fu">^.</span> _Right</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">-- Sum {getSum = 0}</span></a></code></pre></div>
 <p>　実用上、<code>Prism</code>の<code>(^.)</code>が（上記のように）失敗した場合は 単位元が返されるのが便利なのはわかったけど、 なんで<code>(^.)</code>に<code>Monoid</code>の<code>Prism</code>を指定できるのか？</p>
 <p>　型を簡約して、<code>_Right</code>が<code>(^.)</code>の型に合致することを確認してみる。</p>
 <h2 id="なぜ.にprismを適用できるのか">なぜ(^.)にPrismを適用できるのか</h2>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- _RightはPrism</span>
-<span class="ot">_Right ::</span> <span class="dt">Prism</span> (<span class="dt">Either</span> c a) (<span class="dt">Either</span> c b) a b
-
-<span class="co">-- Prismの定義により</span>
-<span class="co">-- type Prism s t a b = forall p f. (Choice p, Applicative f) =&gt; p a (f b) -&gt; p s (f t)</span>
-<span class="ot">_Right ::</span> (<span class="dt">Applicative</span> f, <span class="dt">Choice</span> p) <span class="ot">=&gt;</span> p a (f b) <span class="ot">-&gt;</span> p (<span class="dt">Either</span> c a) (f (<span class="dt">Either</span> c b))
-
-<span class="co">-- ここからf,pに具体型を代入して、簡約していく</span>
-
-<span class="co">-- (-&gt;)はChoiceなので</span>
-<span class="ot">_Right ::</span> <span class="dt">Applicative</span> f <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> (f b)) <span class="ot">-&gt;</span> <span class="dt">Either</span> c a <span class="ot">-&gt;</span> f (<span class="dt">Either</span> c b)
-
-<span class="co">-- `Monoid r =&gt; Const r`はApplicativeなので</span>
-<span class="ot">_Right ::</span> <span class="dt">Monoid</span> r <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Const</span> r b) <span class="ot">-&gt;</span> <span class="dt">Either</span> c a <span class="ot">-&gt;</span> <span class="dt">Const</span> r (<span class="dt">Either</span> c b)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">-- _RightはPrism</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ot">_Right ::</span> <span class="dt">Prism</span> (<span class="dt">Either</span> c a) (<span class="dt">Either</span> c b) a b</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">-- Prismの定義により</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">-- type Prism s t a b = forall p f. (Choice p, Applicative f) =&gt; p a (f b) -&gt; p s (f t)</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="ot">_Right ::</span> (<span class="dt">Applicative</span> f, <span class="dt">Choice</span> p) <span class="ot">=&gt;</span> p a (f b) <span class="ot">-&gt;</span> p (<span class="dt">Either</span> c a) (f (<span class="dt">Either</span> c b))</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">-- ここからf,pに具体型を代入して、簡約していく</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">-- (-&gt;)はChoiceなので</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="ot">_Right ::</span> <span class="dt">Applicative</span> f <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> (f b)) <span class="ot">-&gt;</span> <span class="dt">Either</span> c a <span class="ot">-&gt;</span> f (<span class="dt">Either</span> c b)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">-- `Monoid r =&gt; Const r`はApplicativeなので</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="ot">_Right ::</span> <span class="dt">Monoid</span> r <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Const</span> r b) <span class="ot">-&gt;</span> <span class="dt">Either</span> c a <span class="ot">-&gt;</span> <span class="dt">Const</span> r (<span class="dt">Either</span> c b)</a></code></pre></div>
 <p>　ここから<code>Getting</code>に特殊化すると</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- b = aにする（bにaを代入する）</span>
-<span class="ot">_Right ::</span> <span class="dt">Monoid</span> r <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Const</span> r a) <span class="ot">-&gt;</span> <span class="dt">Either</span> c a <span class="ot">-&gt;</span> <span class="dt">Const</span> r (<span class="dt">Either</span> c a)
-
-<span class="co">-- Getting r s aは`(a -&gt; Const r a) -&gt; s -&gt; Const r s`のtypeシノニムなので</span>
-<span class="ot">_Right ::</span> <span class="dt">Monoid</span> r <span class="ot">=&gt;</span> <span class="dt">Getting</span> r (<span class="dt">Either</span> c a) a</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">-- b = aにする（bにaを代入する）</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="ot">_Right ::</span> <span class="dt">Monoid</span> r <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Const</span> r a) <span class="ot">-&gt;</span> <span class="dt">Either</span> c a <span class="ot">-&gt;</span> <span class="dt">Const</span> r (<span class="dt">Either</span> c a)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">-- Getting r s aは`(a -&gt; Const r a) -&gt; s -&gt; Const r s`のtypeシノニムなので</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="ot">_Right ::</span> <span class="dt">Monoid</span> r <span class="ot">=&gt;</span> <span class="dt">Getting</span> r (<span class="dt">Either</span> c a) a</a></code></pre></div>
 <p>　<code>(^.)</code>に、この特殊化された<code>_Right</code>の型を当てはめると</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">(^.) ::</span> <span class="dt">Monoid</span> r <span class="ot">=&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Getting</span> r (<span class="dt">Either</span> c a) a <span class="ot">-&gt;</span> a</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">(^.) ::</span> <span class="dt">Monoid</span> r <span class="ot">=&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Getting</span> r (<span class="dt">Either</span> c a) a <span class="ot">-&gt;</span> a</a></code></pre></div>
 <p>になるので、<code>(^.)</code>には<code>_Right</code>を当てはめることができる。</p>
 <h2 id="なぜこの.は単位元を取ってくるのか">なぜ、この(^.)は単位元を取ってくるのか</h2>
 <p>　上記の型を見ると、確かに…… 直和型の値の取得に失敗した際は、単位元を取ってくるんだろうなということが読み取れる。</p>
 <p>　確認はここまででも十分だとは思うけど、せっかくなので<code>(^.)</code>の実装を確認して、 真に納得してみる。</p>
 <p>　ひたすら簡約。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Left</span> <span class="ch">'a'</span> <span class="fu">^.</span> _Right
-<span class="fu">=</span> <span class="dt">Left</span> <span class="ch">'a'</span> <span class="fu">^.</span> (prism <span class="dt">Right</span> <span class="fu">$</span> either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>)
-<span class="fu">=</span> <span class="dt">Left</span> <span class="ch">'a'</span> <span class="fu">^.</span> dimap (either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>) (either pure (fmap <span class="dt">Right</span>)) <span class="fu">.</span> right'
-<span class="fu">=</span> getConst <span class="fu">$</span> ((dimap (either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>) (either pure (fmap <span class="dt">Right</span>))) (right' <span class="dt">Const</span>)) (<span class="dt">Left</span> <span class="ch">'a'</span>)
-<span class="fu">=</span> getConst <span class="fu">$</span> ((dimap (either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>) (either pure (fmap <span class="dt">Right</span>))) (fmap <span class="dt">Const</span>)) (<span class="dt">Left</span> <span class="ch">'a'</span>)
-<span class="fu">=</span> getConst <span class="fu">$</span> (dimap (either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>) (either pure (fmap <span class="dt">Right</span>)) (fmap <span class="dt">Const</span>)) (<span class="dt">Left</span> <span class="ch">'a'</span>)
-<span class="fu">=</span> getConst <span class="fu">$</span> either pure (fmap <span class="dt">Right</span>) <span class="fu">.</span> fmap <span class="dt">Const</span> <span class="fu">.</span> either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span> <span class="fu">$</span> (<span class="dt">Left</span> <span class="ch">'a'</span>)
-<span class="fu">=</span> getConst <span class="fu">$</span> either pure (fmap <span class="dt">Right</span>) <span class="fu">.</span> fmap <span class="dt">Const</span> <span class="fu">$</span> (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="ch">'a'</span>
-<span class="fu">=</span> getConst <span class="fu">$</span> either pure (fmap <span class="dt">Right</span>) <span class="fu">$</span> (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="ch">'a'</span>
-<span class="fu">=</span> getConst <span class="fu">$</span> pure <span class="fu">$</span> <span class="dt">Left</span> <span class="ch">'a'</span>
-<span class="fu">=</span> getConst <span class="fu">$</span> pure (<span class="dt">Left</span> <span class="ch">'a'</span>)
-<span class="fu">=</span> getConst <span class="fu">$</span> <span class="dt">Const</span> mempty
-<span class="fu">=</span> mempty
-<span class="fu">=</span> <span class="dt">Sum</span> <span class="dv">0</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="dt">Left</span> <span class="ch">'a'</span> <span class="fu">^.</span> _Right</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="fu">=</span> <span class="dt">Left</span> <span class="ch">'a'</span> <span class="fu">^.</span> (prism <span class="dt">Right</span> <span class="fu">$</span> either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="fu">=</span> <span class="dt">Left</span> <span class="ch">'a'</span> <span class="fu">^.</span> dimap (either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>) (either pure (fmap <span class="dt">Right</span>)) <span class="fu">.</span> right'</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="fu">=</span> getConst <span class="fu">$</span> ((dimap (either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>) (either pure (fmap <span class="dt">Right</span>))) (right' <span class="dt">Const</span>)) (<span class="dt">Left</span> <span class="ch">'a'</span>)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="fu">=</span> getConst <span class="fu">$</span> ((dimap (either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>) (either pure (fmap <span class="dt">Right</span>))) (fmap <span class="dt">Const</span>)) (<span class="dt">Left</span> <span class="ch">'a'</span>)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="fu">=</span> getConst <span class="fu">$</span> (dimap (either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span>) (either pure (fmap <span class="dt">Right</span>)) (fmap <span class="dt">Const</span>)) (<span class="dt">Left</span> <span class="ch">'a'</span>)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="fu">=</span> getConst <span class="fu">$</span> either pure (fmap <span class="dt">Right</span>) <span class="fu">.</span> fmap <span class="dt">Const</span> <span class="fu">.</span> either (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="dt">Right</span> <span class="fu">$</span> (<span class="dt">Left</span> <span class="ch">'a'</span>)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="fu">=</span> getConst <span class="fu">$</span> either pure (fmap <span class="dt">Right</span>) <span class="fu">.</span> fmap <span class="dt">Const</span> <span class="fu">$</span> (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="ch">'a'</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="fu">=</span> getConst <span class="fu">$</span> either pure (fmap <span class="dt">Right</span>) <span class="fu">$</span> (<span class="dt">Left</span> <span class="fu">.</span> <span class="dt">Left</span>) <span class="ch">'a'</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="fu">=</span> getConst <span class="fu">$</span> pure <span class="fu">$</span> <span class="dt">Left</span> <span class="ch">'a'</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="fu">=</span> getConst <span class="fu">$</span> pure (<span class="dt">Left</span> <span class="ch">'a'</span>)</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="fu">=</span> getConst <span class="fu">$</span> <span class="dt">Const</span> mempty</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="fu">=</span> mempty</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="fu">=</span> <span class="dt">Sum</span> <span class="dv">0</span></a></code></pre></div>
 <p>　確かに単位元を取ってくることができた。</p>
 <h1 id="余談">余談</h1>
 <p>　<code>Monoid a =&gt; Applicative (Const a)</code>の<code>pure</code>に引っかかってしまって、 この簡約にちょうど丸々1時間かかった。</p>

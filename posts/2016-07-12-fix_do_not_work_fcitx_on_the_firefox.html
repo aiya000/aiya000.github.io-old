@@ -64,17 +64,17 @@
 </ul></li>
 </ul>
 <p>解決方法としては、<code>~/.xinitrc</code>に以下を記述します。 それだけ。</p>
-<div class="sourceCode"><pre class="sourceCode zsh"><code class="sourceCode zsh"><span class="kw">export</span> <span class="ot">GTK_IM_MODULE=</span>fcitx
-<span class="kw">export</span> <span class="ot">QT_IM_MODULE=</span>fcitx
-<span class="kw">export</span> <span class="ot">XMODIFIERS=</span>@<span class="ot">im=</span>fcitx
-<span class="kw">export</span> <span class="ot">DefaultIMModule=</span>fcitx</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode zsh"><code class="sourceCode zsh"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">export</span> <span class="ot">GTK_IM_MODULE=</span>fcitx</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">export</span> <span class="ot">QT_IM_MODULE=</span>fcitx</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">export</span> <span class="ot">XMODIFIERS=</span>@<span class="ot">im=</span>fcitx</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">export</span> <span class="ot">DefaultIMModule=</span>fcitx</a></code></pre></div>
 <p>僕の<code>.xinitrc</code>はこんな感じ。 exec startxfce4の後にexportを書いててちょっとハマった。</p>
-<div class="sourceCode"><pre class="sourceCode zsh"><code class="sourceCode zsh"><span class="co">#!/bin/sh</span>
-<span class="kw">export</span> <span class="ot">GTK_IM_MODULE=</span>fcitx
-<span class="kw">export</span> <span class="ot">QT_IM_MODULE=</span>fcitx
-<span class="kw">export</span> <span class="ot">XMODIFIERS=</span>@<span class="ot">im=</span>fcitx
-<span class="kw">export</span> <span class="ot">DefaultIMModule=</span>fcitx
-<span class="kw">exec</span> startxfce4</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode zsh"><code class="sourceCode zsh"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">#!/bin/sh</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">export</span> <span class="ot">GTK_IM_MODULE=</span>fcitx</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">export</span> <span class="ot">QT_IM_MODULE=</span>fcitx</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">export</span> <span class="ot">XMODIFIERS=</span>@<span class="ot">im=</span>fcitx</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">export</span> <span class="ot">DefaultIMModule=</span>fcitx</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">exec</span> startxfce4</a></code></pre></div>
 <p><a href="https://wiki.archlinuxjp.org/index.php/fcitx">参考</a></p>
 <hr />
 <p>最近いきなりArchが暴れ始めている。<br />

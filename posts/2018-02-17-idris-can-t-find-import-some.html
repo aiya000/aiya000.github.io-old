@@ -55,15 +55,15 @@
 <div class="post-body">
     <h1 id="問題">問題</h1>
 <p>Main.idr</p>
-<div class="sourceCode"><pre class="sourceCode idris"><code class="sourceCode idris"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">Default</span>
-
-<span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-  printLn <span class="fu">$</span> the <span class="dt">Int</span> <span class="kw">default</span>
-  printLn <span class="fu">$</span> the <span class="dt">Char</span> <span class="kw">default</span>
-  printLn <span class="fu">$</span> the <span class="dt">Bool</span> <span class="kw">default</span>
-  printLn <span class="fu">$</span> the <span class="dt">String</span> <span class="kw">default</span>
-  printLn <span class="fu">$</span> the (<span class="dt">List</span> <span class="dt">String</span>) <span class="kw">default</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">Default</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  printLn <span class="fu">$</span> the <span class="dt">Int</span> <span class="kw">default</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  printLn <span class="fu">$</span> the <span class="dt">Char</span> <span class="kw">default</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  printLn <span class="fu">$</span> the <span class="dt">Bool</span> <span class="kw">default</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  printLn <span class="fu">$</span> the <span class="dt">String</span> <span class="kw">default</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  printLn <span class="fu">$</span> the (<span class="dt">List</span> <span class="dt">String</span>) <span class="kw">default</span></a></code></pre></div>
 <pre class="shell-session"><code>$ idris -o Main Main.idr
 Can't find import Effect/Default</code></pre>
 <h1 id="解決">解決</h1>

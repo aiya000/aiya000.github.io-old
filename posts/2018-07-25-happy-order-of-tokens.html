@@ -55,19 +55,19 @@
 <div class="post-body">
     <h1 id="正誤">正誤</h1>
 <p>正しい</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">%</span>token
-  <span class="fu">...</span>
-  <span class="fu">...</span>
-  natType  { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Nat&quot;</span>, _)   }
-  boolType { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Bool&quot;</span>, _)  }
-  ident    { (<span class="dt">TokenAnIdent</span> <span class="fu">$$</span>, _)      }</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">%</span>token</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="fu">...</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="fu">...</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  natType  { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Nat&quot;</span>, _)   }</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  boolType { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Bool&quot;</span>, _)  }</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  ident    { (<span class="dt">TokenAnIdent</span> <span class="fu">$$</span>, _)      }</a></code></pre></div>
 <p>誤り</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">%</span>token
-  <span class="fu">...</span>
-  ident    { (<span class="dt">TokenAnIdent</span> <span class="fu">$$</span>, _)      }
-  <span class="fu">...</span>
-  natType  { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Nat&quot;</span>, _)   }
-  boolType { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Bool&quot;</span>, _)  }</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">%</span>token</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="fu">...</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  ident    { (<span class="dt">TokenAnIdent</span> <span class="fu">$$</span>, _)      }</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="fu">...</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  natType  { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Nat&quot;</span>, _)   }</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  boolType { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Bool&quot;</span>, _)  }</a></code></pre></div>
 <p>これはhappy製の単純型付きラムダ計算パーサーの、トークン宣言部です。</p>
 <p>「正しい」のようにしないと、このような実行時エラーが起きます。</p>
 <pre><code>&gt;&gt;&gt; parse &quot;\\x:Nat.10&quot;

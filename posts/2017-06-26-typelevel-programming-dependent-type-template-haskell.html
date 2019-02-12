@@ -89,158 +89,158 @@ SHamburger (Cheese Tomato Meet Ushi)</code></pre>
 <ul>
 <li><a href="https://github.com/aiya000/learning-Haskell/blob/d4d29ad26673e828bc0b0358d1cde42c295eb50b/Language/Haskell/Extension/Room/Hamburger.hs">Hamburger.hs</a></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE DataKinds #-}</span>
-<span class="ot">{-# LANGUAGE FlexibleInstances #-}</span>
-<span class="ot">{-# LANGUAGE GADTs #-}</span>
-<span class="ot">{-# LANGUAGE TemplateHaskell #-}</span>
-<span class="ot">{-# LANGUAGE TypeFamilies #-}</span>
-
-<span class="kw">module</span> <span class="dt">Hamberger</span> <span class="kw">where</span>
-
-<span class="kw">import </span><span class="dt">Hamburger.TH</span> (defineInstances)
-
-<span class="co">-- | A kind of the topping, and types.</span>
-<span class="kw">data</span> <span class="dt">Topping</span> <span class="fu">=</span> <span class="dt">Space</span> <span class="co">-- ^ Mean a space, it can be inserted some @Topping@</span>
-             <span class="fu">|</span> <span class="dt">Cheese</span> <span class="fu">|</span> <span class="dt">Tomato</span> <span class="fu">|</span> <span class="dt">Meet</span> <span class="fu">|</span> <span class="dt">Ushi</span>
-
-<span class="co">-- |</span>
-<span class="co">-- A type level function</span>
-<span class="co">-- that maps @HamburgerT@ and @Topping@ to @HamburgerT@.</span>
-<span class="co">--</span>
-<span class="co">-- If @HamburgerC a b c d@ :: @HamburgerT@ of the domain has no space, or @Fail@ is specified to the domain,</span>
-<span class="co">-- return @Fail@ type.</span>
-<span class="kw">type</span> family <span class="dt">AddTopping</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) (<span class="ot">t ::</span> <span class="dt">Topping</span>)<span class="ot"> ::</span> <span class="dt">HamburgerT</span> <span class="kw">where</span>
-  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> <span class="dt">Space</span> b c d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> t b c d
-  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a <span class="dt">Space</span> c d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a t c d
-  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a b <span class="dt">Space</span> d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a b t d
-  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a b c <span class="dt">Space</span>) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a b c t
-  <span class="dt">AddTopping</span> _ _ <span class="fu">=</span> <span class="dt">Fail</span>
-
-<span class="co">-- | A kind of the abstract hamburger</span>
-<span class="kw">data</span> <span class="dt">HamburgerT</span> <span class="fu">=</span> <span class="dt">HamburgerC</span> <span class="dt">Topping</span> <span class="dt">Topping</span> <span class="dt">Topping</span> <span class="dt">Topping</span> <span class="co">-- ^ A type constructor of the abstract hamburger</span>
-                <span class="fu">|</span> <span class="dt">Fail</span> <span class="co">-- ^ Mean a fail of a mapping of @AddTopping@</span>
-
-
-<span class="co">{- The dependent type -}</span>
-
-<span class="co">-- |</span>
-<span class="co">-- A concrete of the hamburger</span>
-<span class="co">-- (A type constructor for a type of @HamburgerT@ kind).</span>
-<span class="kw">data</span> <span class="dt">SHamburger</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) <span class="kw">where</span>
-  <span class="dt">Concrete</span><span class="ot"> ::</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">SHamburger</span> (<span class="dt">HamburgerC</span> a b c<span class="ot"> d ::</span> <span class="dt">HamburgerT</span>)
-
-<span class="co">-- | A singleton type for @Topping@ kind.</span>
-<span class="kw">data</span> <span class="dt">STopping</span> <span class="fu">=</span> <span class="dt">SSpace</span> <span class="fu">|</span> <span class="dt">SCheese</span> <span class="fu">|</span> <span class="dt">STomato</span> <span class="fu">|</span> <span class="dt">SMeet</span> <span class="fu">|</span> <span class="dt">SUshi</span>
-  <span class="kw">deriving</span> (<span class="dt">Show</span>)
-
-<span class="co">-- | Represent the simply dependent type</span>
-<span class="kw">class</span> <span class="dt">Singleton</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) <span class="kw">where</span>
-<span class="ot">  sing ::</span> <span class="dt">SHamburger</span> h
-
-
-<span class="co">-- Define any instances for 126 patterns !</span>
-defineInstances
-
-
-<span class="kw">type</span> <span class="dt">BasicHamburgerC</span> <span class="fu">=</span> <span class="dt">HamburgerC</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span>
-
-<span class="kw">type</span> <span class="dt">HamburgerC1</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">BasicHamburgerC</span> <span class="dt">Cheese</span> <span class="co">-- these kind is @HamburgerT@</span>
-<span class="kw">type</span> <span class="dt">HamburgerC2</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC1</span> <span class="dt">Tomato</span>
-<span class="kw">type</span> <span class="dt">HamburgerC3</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC2</span> <span class="dt">Meet</span>
-<span class="kw">type</span> <span class="dt">HamburgerC4</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC3</span> <span class="dt">Ushi</span>
-<span class="kw">type</span> <span class="dt">HamburgerC5</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC4</span> <span class="dt">Ushi</span> <span class="co">-- = Fail</span>
-
-x0 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">BasicHamburgerC</span>
-x1 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">HamburgerC1</span>
-x2 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">HamburgerC2</span>
-x3 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">HamburgerC3</span>
-x4 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">HamburgerC4</span>
-<span class="co">--x5 = sing :: SHamburger HamburgerC5 -- This is the compile error because Refl is not a Fail's value</span>
-
-
-<span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> <span class="kw">do</span>
-  print x0
-  print x1
-  print x2
-  print x3
-  print x4</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE DataKinds #-}</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ot">{-# LANGUAGE FlexibleInstances #-}</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ot">{-# LANGUAGE TemplateHaskell #-}</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">module</span> <span class="dt">Hamberger</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">import</span> <span class="dt">Hamburger.TH</span> (defineInstances)</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">-- | A kind of the topping, and types.</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw">data</span> <span class="dt">Topping</span> <span class="fu">=</span> <span class="dt">Space</span> <span class="co">-- ^ Mean a space, it can be inserted some @Topping@</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">             <span class="fu">|</span> <span class="dt">Cheese</span> <span class="fu">|</span> <span class="dt">Tomato</span> <span class="fu">|</span> <span class="dt">Meet</span> <span class="fu">|</span> <span class="dt">Ushi</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">-- |</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">-- A type level function</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">-- that maps @HamburgerT@ and @Topping@ to @HamburgerT@.</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">--</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">-- If @HamburgerC a b c d@ :: @HamburgerT@ of the domain has no space, or @Fail@ is specified to the domain,</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">-- return @Fail@ type.</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="kw">type</span> family <span class="dt">AddTopping</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) (<span class="ot">t ::</span> <span class="dt">Topping</span>)<span class="ot"> ::</span> <span class="dt">HamburgerT</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> <span class="dt">Space</span> b c d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> t b c d</a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a <span class="dt">Space</span> c d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a t c d</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a b <span class="dt">Space</span> d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a b t d</a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a b c <span class="dt">Space</span>) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a b c t</a>
+<a class="sourceLine" id="cb2-26" data-line-number="26">  <span class="dt">AddTopping</span> _ _ <span class="fu">=</span> <span class="dt">Fail</span></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">-- | A kind of the abstract hamburger</span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="kw">data</span> <span class="dt">HamburgerT</span> <span class="fu">=</span> <span class="dt">HamburgerC</span> <span class="dt">Topping</span> <span class="dt">Topping</span> <span class="dt">Topping</span> <span class="dt">Topping</span> <span class="co">-- ^ A type constructor of the abstract hamburger</span></a>
+<a class="sourceLine" id="cb2-30" data-line-number="30">                <span class="fu">|</span> <span class="dt">Fail</span> <span class="co">-- ^ Mean a fail of a mapping of @AddTopping@</span></a>
+<a class="sourceLine" id="cb2-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb2-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="co">{- The dependent type -}</span></a>
+<a class="sourceLine" id="cb2-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="co">-- |</span></a>
+<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="co">-- A concrete of the hamburger</span></a>
+<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="co">-- (A type constructor for a type of @HamburgerT@ kind).</span></a>
+<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="kw">data</span> <span class="dt">SHamburger</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-39" data-line-number="39">  <span class="dt">Concrete</span><span class="ot"> ::</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">SHamburger</span> (<span class="dt">HamburgerC</span> a b c<span class="ot"> d ::</span> <span class="dt">HamburgerT</span>)</a>
+<a class="sourceLine" id="cb2-40" data-line-number="40"></a>
+<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="co">-- | A singleton type for @Topping@ kind.</span></a>
+<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="kw">data</span> <span class="dt">STopping</span> <span class="fu">=</span> <span class="dt">SSpace</span> <span class="fu">|</span> <span class="dt">SCheese</span> <span class="fu">|</span> <span class="dt">STomato</span> <span class="fu">|</span> <span class="dt">SMeet</span> <span class="fu">|</span> <span class="dt">SUshi</span></a>
+<a class="sourceLine" id="cb2-43" data-line-number="43">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a>
+<a class="sourceLine" id="cb2-44" data-line-number="44"></a>
+<a class="sourceLine" id="cb2-45" data-line-number="45"><span class="co">-- | Represent the simply dependent type</span></a>
+<a class="sourceLine" id="cb2-46" data-line-number="46"><span class="kw">class</span> <span class="dt">Singleton</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-47" data-line-number="47"><span class="ot">  sing ::</span> <span class="dt">SHamburger</span> h</a>
+<a class="sourceLine" id="cb2-48" data-line-number="48"></a>
+<a class="sourceLine" id="cb2-49" data-line-number="49"></a>
+<a class="sourceLine" id="cb2-50" data-line-number="50"><span class="co">-- Define any instances for 126 patterns !</span></a>
+<a class="sourceLine" id="cb2-51" data-line-number="51">defineInstances</a>
+<a class="sourceLine" id="cb2-52" data-line-number="52"></a>
+<a class="sourceLine" id="cb2-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb2-54" data-line-number="54"><span class="kw">type</span> <span class="dt">BasicHamburgerC</span> <span class="fu">=</span> <span class="dt">HamburgerC</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span> <span class="dt">Space</span></a>
+<a class="sourceLine" id="cb2-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb2-56" data-line-number="56"><span class="kw">type</span> <span class="dt">HamburgerC1</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">BasicHamburgerC</span> <span class="dt">Cheese</span> <span class="co">-- these kind is @HamburgerT@</span></a>
+<a class="sourceLine" id="cb2-57" data-line-number="57"><span class="kw">type</span> <span class="dt">HamburgerC2</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC1</span> <span class="dt">Tomato</span></a>
+<a class="sourceLine" id="cb2-58" data-line-number="58"><span class="kw">type</span> <span class="dt">HamburgerC3</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC2</span> <span class="dt">Meet</span></a>
+<a class="sourceLine" id="cb2-59" data-line-number="59"><span class="kw">type</span> <span class="dt">HamburgerC4</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC3</span> <span class="dt">Ushi</span></a>
+<a class="sourceLine" id="cb2-60" data-line-number="60"><span class="kw">type</span> <span class="dt">HamburgerC5</span> <span class="fu">=</span> <span class="dt">AddTopping</span> <span class="dt">HamburgerC4</span> <span class="dt">Ushi</span> <span class="co">-- = Fail</span></a>
+<a class="sourceLine" id="cb2-61" data-line-number="61"></a>
+<a class="sourceLine" id="cb2-62" data-line-number="62">x0 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">BasicHamburgerC</span></a>
+<a class="sourceLine" id="cb2-63" data-line-number="63">x1 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">HamburgerC1</span></a>
+<a class="sourceLine" id="cb2-64" data-line-number="64">x2 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">HamburgerC2</span></a>
+<a class="sourceLine" id="cb2-65" data-line-number="65">x3 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">HamburgerC3</span></a>
+<a class="sourceLine" id="cb2-66" data-line-number="66">x4 <span class="fu">=</span><span class="ot"> sing ::</span> <span class="dt">SHamburger</span> <span class="dt">HamburgerC4</span></a>
+<a class="sourceLine" id="cb2-67" data-line-number="67"><span class="co">--x5 = sing :: SHamburger HamburgerC5 -- This is the compile error because Refl is not a Fail's value</span></a>
+<a class="sourceLine" id="cb2-68" data-line-number="68"></a>
+<a class="sourceLine" id="cb2-69" data-line-number="69"></a>
+<a class="sourceLine" id="cb2-70" data-line-number="70"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-71" data-line-number="71">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-72" data-line-number="72">  print x0</a>
+<a class="sourceLine" id="cb2-73" data-line-number="73">  print x1</a>
+<a class="sourceLine" id="cb2-74" data-line-number="74">  print x2</a>
+<a class="sourceLine" id="cb2-75" data-line-number="75">  print x3</a>
+<a class="sourceLine" id="cb2-76" data-line-number="76">  print x4</a></code></pre></div>
 <!-- }}} -->
 <!-- Hamburger/TH.hs {{{ -->
 <ul>
 <li><a href="https://github.com/aiya000/learning-Haskell/blob/d4d29ad26673e828bc0b0358d1cde42c295eb50b/Language/Haskell/Extension/Room/Hamburger/TH.hs">Hamburger/TH.hs</a></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE TemplateHaskell #-}</span>
-
-<span class="kw">module</span> <span class="dt">Hamburger.TH</span> <span class="kw">where</span>
-
-<span class="kw">import </span><span class="dt">Language.Haskell.TH</span> (<span class="dt">Type</span>(..), <span class="dt">Name</span>, mkName, <span class="dt">Exp</span>(..), <span class="dt">DecsQ</span>, <span class="dt">Dec</span>(..), <span class="dt">Clause</span>(..), <span class="dt">Pat</span>(..), <span class="dt">Body</span>(..), <span class="dt">Lit</span>(..))
-
-<span class="kw">type</span> <span class="dt">TypeName</span> <span class="fu">=</span> <span class="dt">String</span>
-
-<span class="kw">type</span> <span class="dt">Topping4</span> <span class="fu">=</span> (<span class="dt">TypeName</span>, <span class="dt">TypeName</span>, <span class="dt">TypeName</span>, <span class="dt">TypeName</span>)
-
-
-<span class="ot">topping4s ::</span> [<span class="dt">Topping4</span>]
-topping4s <span class="fu">=</span> [(w, x, y, z) <span class="fu">|</span> w <span class="ot">&lt;-</span> toppings, x <span class="ot">&lt;-</span> toppings, y <span class="ot">&lt;-</span> toppings, z <span class="ot">&lt;-</span> toppings]
-  <span class="kw">where</span>
-<span class="ot">    toppings ::</span> [<span class="dt">TypeName</span>]
-    toppings <span class="fu">=</span> [<span class="st">&quot;Space&quot;</span>, <span class="st">&quot;Cheese&quot;</span>, <span class="st">&quot;Tomato&quot;</span>, <span class="st">&quot;Meet&quot;</span>, <span class="st">&quot;Ushi&quot;</span>]
-
-<span class="co">-- | Make a AST of @Type@ is like &quot;(HamburgerC Space Cheese Tomato Meet)&quot;</span>
-<span class="ot">hamburgerC ::</span> <span class="dt">Topping4</span> <span class="ot">-&gt;</span> <span class="dt">Type</span>
-hamburgerC (w, x, y, z) <span class="fu">=</span> <span class="dt">ParensT</span> (<span class="dt">ConT</span> (mkName <span class="st">&quot;HamburgerC&quot;</span>) 
-                            <span class="ot">`AppT`</span> <span class="dt">ConT</span> (mkName w)
-                            <span class="ot">`AppT`</span> <span class="dt">ConT</span> (mkName x)
-                            <span class="ot">`AppT`</span> <span class="dt">ConT</span> (mkName y)
-                            <span class="ot">`AppT`</span> <span class="dt">ConT</span> (mkName z))
-
-<span class="co">-- |</span>
-<span class="co">-- Make a AST of @Exp@ is like &quot;Concrete SSpace SCheese STomato SMeet&quot;</span>
-<span class="co">-- (@Topping4@ elements are added &quot;S&quot; prefix for @STopping@).</span>
-<span class="ot">concrete ::</span> <span class="dt">Topping4</span> <span class="ot">-&gt;</span> <span class="dt">Exp</span>
-concrete (w, x, y, z) <span class="fu">=</span> <span class="dt">ConE</span> (mkName <span class="st">&quot;Concrete&quot;</span>)
-                 <span class="ot">`AppE`</span> <span class="dt">ConE</span> (mkName <span class="fu">$</span> <span class="st">&quot;S&quot;</span> <span class="fu">++</span> w)
-                 <span class="ot">`AppE`</span> <span class="dt">ConE</span> (mkName <span class="fu">$</span> <span class="st">&quot;S&quot;</span> <span class="fu">++</span> x)
-                 <span class="ot">`AppE`</span> <span class="dt">ConE</span> (mkName <span class="fu">$</span> <span class="st">&quot;S&quot;</span> <span class="fu">++</span> y)
-                 <span class="ot">`AppE`</span> <span class="dt">ConE</span> (mkName <span class="fu">$</span> <span class="st">&quot;S&quot;</span> <span class="fu">++</span> z)
-
-
-<span class="co">-- | Define @Singleton@ instances and @Show@ instances for any pattern of @topping4@</span>
-<span class="ot">defineInstances ::</span> <span class="dt">DecsQ</span>
-defineInstances <span class="fu">=</span> <span class="kw">do</span>
-  <span class="kw">let</span> singletonInstances <span class="fu">=</span> map defineSingletonInstance topping4s
-      showInstances      <span class="fu">=</span> map defineShowInstance topping4s
-  return <span class="fu">$</span> singletonInstances <span class="fu">++</span> showInstances
-  <span class="kw">where</span>
-<span class="ot">    defineSingletonInstance ::</span> <span class="dt">Topping4</span> <span class="ot">-&gt;</span> <span class="dt">Dec</span>
-    defineSingletonInstance t4<span class="fu">@</span>(w, x, y, z) <span class="fu">=</span>
-      <span class="dt">InstanceD</span> <span class="dt">Nothing</span> []
-        (<span class="dt">ConT</span> (mkName <span class="st">&quot;Singleton&quot;</span>) <span class="ot">`AppT`</span> hamburgerC t4)
-        [
-          <span class="dt">FunD</span> (mkName <span class="st">&quot;sing&quot;</span>) [<span class="dt">Clause</span> [] (<span class="dt">NormalB</span> <span class="fu">$</span> concrete t4) []]
-        ]
-
-<span class="ot">    defineShowInstance ::</span> <span class="dt">Topping4</span> <span class="ot">-&gt;</span> <span class="dt">Dec</span>
-    defineShowInstance t4<span class="fu">@</span>(w, x, y, z) <span class="fu">=</span>
-      <span class="dt">InstanceD</span> <span class="dt">Nothing</span> []
-        (<span class="dt">ConT</span> (mkName <span class="st">&quot;Show&quot;</span>) <span class="ot">`AppT`</span> <span class="dt">ParensT</span> (<span class="dt">ConT</span> (mkName <span class="st">&quot;SHamburger&quot;</span>) <span class="ot">`AppT`</span> hamburgerC t4))
-        [
-          <span class="dt">FunD</span> (mkName <span class="st">&quot;show&quot;</span>) [<span class="dt">Clause</span> [<span class="dt">WildP</span>] (<span class="dt">NormalB</span> <span class="fu">$</span>
-              (<span class="dt">LitE</span> <span class="fu">.</span> <span class="dt">StringL</span> <span class="fu">$</span> <span class="st">&quot;SHamburger (&quot;</span> <span class="fu">++</span> w <span class="fu">++</span> <span class="st">&quot; &quot;</span> <span class="fu">++</span> x <span class="fu">++</span> <span class="st">&quot; &quot;</span> <span class="fu">++</span> y <span class="fu">++</span> <span class="st">&quot; &quot;</span> <span class="fu">++</span> z <span class="fu">++</span> <span class="st">&quot;)&quot;</span>)
-          ) []]
-        ]</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">{-# LANGUAGE TemplateHaskell #-}</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">module</span> <span class="dt">Hamburger.TH</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Language.Haskell.TH</span> (<span class="dt">Type</span>(..), <span class="dt">Name</span>, mkName, <span class="dt">Exp</span>(..), <span class="dt">DecsQ</span>, <span class="dt">Dec</span>(..), <span class="dt">Clause</span>(..), <span class="dt">Pat</span>(..), <span class="dt">Body</span>(..), <span class="dt">Lit</span>(..))</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">type</span> <span class="dt">TypeName</span> <span class="fu">=</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw">type</span> <span class="dt">Topping4</span> <span class="fu">=</span> (<span class="dt">TypeName</span>, <span class="dt">TypeName</span>, <span class="dt">TypeName</span>, <span class="dt">TypeName</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="ot">topping4s ::</span> [<span class="dt">Topping4</span>]</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">topping4s <span class="fu">=</span> [(w, x, y, z) <span class="fu">|</span> w <span class="ot">&lt;-</span> toppings, x <span class="ot">&lt;-</span> toppings, y <span class="ot">&lt;-</span> toppings, z <span class="ot">&lt;-</span> toppings]</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="ot">    toppings ::</span> [<span class="dt">TypeName</span>]</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">    toppings <span class="fu">=</span> [<span class="st">&quot;Space&quot;</span>, <span class="st">&quot;Cheese&quot;</span>, <span class="st">&quot;Tomato&quot;</span>, <span class="st">&quot;Meet&quot;</span>, <span class="st">&quot;Ushi&quot;</span>]</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">-- | Make a AST of @Type@ is like &quot;(HamburgerC Space Cheese Tomato Meet)&quot;</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="ot">hamburgerC ::</span> <span class="dt">Topping4</span> <span class="ot">-&gt;</span> <span class="dt">Type</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">hamburgerC (w, x, y, z) <span class="fu">=</span> <span class="dt">ParensT</span> (<span class="dt">ConT</span> (mkName <span class="st">&quot;HamburgerC&quot;</span>) </a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">                            <span class="ot">`AppT`</span> <span class="dt">ConT</span> (mkName w)</a>
+<a class="sourceLine" id="cb3-22" data-line-number="22">                            <span class="ot">`AppT`</span> <span class="dt">ConT</span> (mkName x)</a>
+<a class="sourceLine" id="cb3-23" data-line-number="23">                            <span class="ot">`AppT`</span> <span class="dt">ConT</span> (mkName y)</a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">                            <span class="ot">`AppT`</span> <span class="dt">ConT</span> (mkName z))</a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">-- |</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">-- Make a AST of @Exp@ is like &quot;Concrete SSpace SCheese STomato SMeet&quot;</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">-- (@Topping4@ elements are added &quot;S&quot; prefix for @STopping@).</span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="ot">concrete ::</span> <span class="dt">Topping4</span> <span class="ot">-&gt;</span> <span class="dt">Exp</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30">concrete (w, x, y, z) <span class="fu">=</span> <span class="dt">ConE</span> (mkName <span class="st">&quot;Concrete&quot;</span>)</a>
+<a class="sourceLine" id="cb3-31" data-line-number="31">                 <span class="ot">`AppE`</span> <span class="dt">ConE</span> (mkName <span class="fu">$</span> <span class="st">&quot;S&quot;</span> <span class="fu">++</span> w)</a>
+<a class="sourceLine" id="cb3-32" data-line-number="32">                 <span class="ot">`AppE`</span> <span class="dt">ConE</span> (mkName <span class="fu">$</span> <span class="st">&quot;S&quot;</span> <span class="fu">++</span> x)</a>
+<a class="sourceLine" id="cb3-33" data-line-number="33">                 <span class="ot">`AppE`</span> <span class="dt">ConE</span> (mkName <span class="fu">$</span> <span class="st">&quot;S&quot;</span> <span class="fu">++</span> y)</a>
+<a class="sourceLine" id="cb3-34" data-line-number="34">                 <span class="ot">`AppE`</span> <span class="dt">ConE</span> (mkName <span class="fu">$</span> <span class="st">&quot;S&quot;</span> <span class="fu">++</span> z)</a>
+<a class="sourceLine" id="cb3-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb3-36" data-line-number="36"></a>
+<a class="sourceLine" id="cb3-37" data-line-number="37"><span class="co">-- | Define @Singleton@ instances and @Show@ instances for any pattern of @topping4@</span></a>
+<a class="sourceLine" id="cb3-38" data-line-number="38"><span class="ot">defineInstances ::</span> <span class="dt">DecsQ</span></a>
+<a class="sourceLine" id="cb3-39" data-line-number="39">defineInstances <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb3-40" data-line-number="40">  <span class="kw">let</span> singletonInstances <span class="fu">=</span> map defineSingletonInstance topping4s</a>
+<a class="sourceLine" id="cb3-41" data-line-number="41">      showInstances      <span class="fu">=</span> map defineShowInstance topping4s</a>
+<a class="sourceLine" id="cb3-42" data-line-number="42">  return <span class="fu">$</span> singletonInstances <span class="fu">++</span> showInstances</a>
+<a class="sourceLine" id="cb3-43" data-line-number="43">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-44" data-line-number="44"><span class="ot">    defineSingletonInstance ::</span> <span class="dt">Topping4</span> <span class="ot">-&gt;</span> <span class="dt">Dec</span></a>
+<a class="sourceLine" id="cb3-45" data-line-number="45">    defineSingletonInstance t4<span class="fu">@</span>(w, x, y, z) <span class="fu">=</span></a>
+<a class="sourceLine" id="cb3-46" data-line-number="46">      <span class="dt">InstanceD</span> <span class="dt">Nothing</span> []</a>
+<a class="sourceLine" id="cb3-47" data-line-number="47">        (<span class="dt">ConT</span> (mkName <span class="st">&quot;Singleton&quot;</span>) <span class="ot">`AppT`</span> hamburgerC t4)</a>
+<a class="sourceLine" id="cb3-48" data-line-number="48">        [</a>
+<a class="sourceLine" id="cb3-49" data-line-number="49">          <span class="dt">FunD</span> (mkName <span class="st">&quot;sing&quot;</span>) [<span class="dt">Clause</span> [] (<span class="dt">NormalB</span> <span class="fu">$</span> concrete t4) []]</a>
+<a class="sourceLine" id="cb3-50" data-line-number="50">        ]</a>
+<a class="sourceLine" id="cb3-51" data-line-number="51"></a>
+<a class="sourceLine" id="cb3-52" data-line-number="52"><span class="ot">    defineShowInstance ::</span> <span class="dt">Topping4</span> <span class="ot">-&gt;</span> <span class="dt">Dec</span></a>
+<a class="sourceLine" id="cb3-53" data-line-number="53">    defineShowInstance t4<span class="fu">@</span>(w, x, y, z) <span class="fu">=</span></a>
+<a class="sourceLine" id="cb3-54" data-line-number="54">      <span class="dt">InstanceD</span> <span class="dt">Nothing</span> []</a>
+<a class="sourceLine" id="cb3-55" data-line-number="55">        (<span class="dt">ConT</span> (mkName <span class="st">&quot;Show&quot;</span>) <span class="ot">`AppT`</span> <span class="dt">ParensT</span> (<span class="dt">ConT</span> (mkName <span class="st">&quot;SHamburger&quot;</span>) <span class="ot">`AppT`</span> hamburgerC t4))</a>
+<a class="sourceLine" id="cb3-56" data-line-number="56">        [</a>
+<a class="sourceLine" id="cb3-57" data-line-number="57">          <span class="dt">FunD</span> (mkName <span class="st">&quot;show&quot;</span>) [<span class="dt">Clause</span> [<span class="dt">WildP</span>] (<span class="dt">NormalB</span> <span class="fu">$</span></a>
+<a class="sourceLine" id="cb3-58" data-line-number="58">              (<span class="dt">LitE</span> <span class="fu">.</span> <span class="dt">StringL</span> <span class="fu">$</span> <span class="st">&quot;SHamburger (&quot;</span> <span class="fu">++</span> w <span class="fu">++</span> <span class="st">&quot; &quot;</span> <span class="fu">++</span> x <span class="fu">++</span> <span class="st">&quot; &quot;</span> <span class="fu">++</span> y <span class="fu">++</span> <span class="st">&quot; &quot;</span> <span class="fu">++</span> z <span class="fu">++</span> <span class="st">&quot;)&quot;</span>)</a>
+<a class="sourceLine" id="cb3-59" data-line-number="59">          ) []]</a>
+<a class="sourceLine" id="cb3-60" data-line-number="60">        ]</a></code></pre></div>
 <!-- }}} -->
 <h1 id="解説">解説</h1>
 <h2 id="型レベルハンバーガーの目的主題">型レベルハンバーガーの目的、主題</h2>
 <p>　型レベルハンバーガーは</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>5つ以上のトッピングを追加されると、例外ではなくコンパイルエラーで失敗を報告します</li>
 <li>失敗していない有効なハンバーガーは、値として取得できます</li>
 </ol>
 <p>というのが目的（主題）です。 （2つ目のやつは後付け）</p>
 <p>詳細にはこんな感じ。</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>5つ以上の<code>Topping</code>を追加されると（<code>x5</code>を介して）コンパイルエラーになります</li>
 <li><code>Topping</code>の追加はTypeFamiliesの型関数<code>AddTopping</code>によって追加されます</li>
 <li><code>Topping</code>の追加は種<code>HamburgerT</code>の型<code>Hamburger a b c d</code>に対して行われます
@@ -266,26 +266,26 @@ defineInstances <span class="fu">=</span> <span class="kw">do</span>
 </ul>
 <p>TemplateHaskellによってHamburger.hsのトップレベルで展開される<code>defineInstances</code>によって定義されます。 <code>defineInstances</code>はTH.hsによって提供されているメタ関数です。</p>
 <h2 id="型レベルハンバーガーへのtoppingの追加">型レベルハンバーガーへのToppingの追加</h2>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> family <span class="dt">AddTopping</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) (<span class="ot">t ::</span> <span class="dt">Topping</span>)<span class="ot"> ::</span> <span class="dt">HamburgerT</span> <span class="kw">where</span>
-  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> <span class="dt">Space</span> b c d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> t b c d
-  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a <span class="dt">Space</span> c d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a t c d
-  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a b <span class="dt">Space</span> d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a b t d
-  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a b c <span class="dt">Space</span>) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a b c t
-  <span class="dt">AddTopping</span> _ _ <span class="fu">=</span> <span class="dt">Fail</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">type</span> family <span class="dt">AddTopping</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) (<span class="ot">t ::</span> <span class="dt">Topping</span>)<span class="ot"> ::</span> <span class="dt">HamburgerT</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> <span class="dt">Space</span> b c d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> t b c d</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a <span class="dt">Space</span> c d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a t c d</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a b <span class="dt">Space</span> d) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a b t d</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">AddTopping</span> (<span class="dt">HamburgerC</span> a b c <span class="dt">Space</span>) t <span class="fu">=</span> <span class="dt">HamburgerC</span> a b c t</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="dt">AddTopping</span> _ _ <span class="fu">=</span> <span class="dt">Fail</span></a></code></pre></div>
 <p>　このパターンそのまんまですね、TypeFamiliesです。</p>
 <h2 id="型レベルプログラミングを解決するためにtemplatehaskellを使うのは1回-回った感があるth.hsについて">型レベルプログラミングを解決するためにTemplateHaskellを使うのは1回 回った感がある（TH.hsについて）</h2>
 <p>　TH.hsにある<code>defineInstances</code>は<code>SHamburger (HamburgerC a b c d :: HamburgerT)</code>の形をした126個の型の<code>Singleton</code>インスタンスを生成します。 （つまり<code>SHamburger (h :: HamburgerT)</code>のうち<code>Fail</code>以外に対する）</p>
 <p>　<code>Singleton</code>は依存型（もどき？）を扱うためのものです。</p>
 <p>　<a href="http://konn-san.com/prog/2013-advent-calendar.html">参考にしたページ</a>では自然数の帰納法を使ってインスタンスを実装してましたが、 依存型を使うことを考える前に考えた構造が全然帰納的でなかったので、TemplateHaskellを使って力技で解決しました。 （誰かうまい方法を教えてください！）</p>
 <h2 id="値レベルハンバーガー">値レベルハンバーガー</h2>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">SHamburger</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) <span class="kw">where</span>
-  <span class="dt">Concrete</span><span class="ot"> ::</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">SHamburger</span> (<span class="dt">HamburgerC</span> a b c<span class="ot"> d ::</span> <span class="dt">HamburgerT</span>)
-
-<span class="kw">data</span> <span class="dt">STopping</span> <span class="fu">=</span> <span class="dt">SSpace</span> <span class="fu">|</span> <span class="dt">SCheese</span> <span class="fu">|</span> <span class="dt">STomato</span> <span class="fu">|</span> <span class="dt">SMeet</span> <span class="fu">|</span> <span class="dt">SUshi</span>
-  <span class="kw">deriving</span> (<span class="dt">Show</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">data</span> <span class="dt">SHamburger</span> (<span class="ot">h ::</span> <span class="dt">HamburgerT</span>) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">Concrete</span><span class="ot"> ::</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">STopping</span> <span class="ot">-&gt;</span> <span class="dt">SHamburger</span> (<span class="dt">HamburgerC</span> a b c<span class="ot"> d ::</span> <span class="dt">HamburgerT</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">data</span> <span class="dt">STopping</span> <span class="fu">=</span> <span class="dt">SSpace</span> <span class="fu">|</span> <span class="dt">SCheese</span> <span class="fu">|</span> <span class="dt">STomato</span> <span class="fu">|</span> <span class="dt">SMeet</span> <span class="fu">|</span> <span class="dt">SUshi</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
 <p>　各<code>Singleton</code>インスタンス実装は<code>defineInstances</code>が行うので具体的なコードはありませんが、このようなものになります。</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> <span class="dt">Singleton</span> (<span class="dt">HamburgerC</span> <span class="dt">Cheese</span> <span class="dt">Ushi</span> <span class="dt">Meet</span> <span class="dt">Space</span>) <span class="kw">where</span>
-  sing <span class="fu">=</span> <span class="dt">Concrete</span> <span class="dt">SCheese</span> <span class="dt">SUshi</span> <span class="dt">SMeet</span> <span class="dt">SSpace</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">instance</span> <span class="dt">Singleton</span> (<span class="dt">HamburgerC</span> <span class="dt">Cheese</span> <span class="dt">Ushi</span> <span class="dt">Meet</span> <span class="dt">Space</span>) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  sing <span class="fu">=</span> <span class="dt">Concrete</span> <span class="dt">SCheese</span> <span class="dt">SUshi</span> <span class="dt">SMeet</span> <span class="dt">SSpace</span></a></code></pre></div>
 <p>　Haskellでは依存型は実際には使えないらしいので、インスタンスになる型と<code>sing</code>（の具体値）はこのような一対一対応になります。</p>
 <pre><code>型レベル: HamburgerC Cheese Ushi Meet Space
 値レベル: Concrete SCheese SUshi SMeet SSpace</code></pre>
@@ -299,7 +299,7 @@ defineInstances <span class="fu">=</span> <span class="kw">do</span>
 <p lang="ja" dir="ltr">
 @ U科各位<br><br>Java課題ソースコード<a href="https://t.co/NOUtZAxB44">https://t.co/NOUtZAxB44</a>
 </p>
-— 焼きそばメロンパン@🍣 (<span class="citation">@ice_arr</span>) <a href="https://twitter.com/ice_arr/status/876673209575251968">2017年6月19日</a>
+— 焼きそばメロンパン@🍣 (<span class="citation" data-cites="ice_arr">@ice_arr</span>) <a href="https://twitter.com/ice_arr/status/876673209575251968">2017年6月19日</a>
 </blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <h1 id="参考">参考</h1>
