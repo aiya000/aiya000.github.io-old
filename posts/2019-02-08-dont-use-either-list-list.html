@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - 関数型エクササイズ問題 => List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること</title>
+        <title>大銀河宇宙No.1_Haskeller - List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること</title>
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
@@ -40,7 +40,7 @@
     <div class="post-date">2019/02/08</div>
     
 
-    <div class="post-title">関数型エクササイズ問題 => List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること</div>
+    <div class="post-title">List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること</div>
 
     <ul class="post-tags">
         
@@ -58,10 +58,7 @@
 </div>
 
 <div class="post-body">
-    <p>ジェネリクス-エクササイズ・関数型エクササイズ向け記事です😌</p>
-<p>これを理解すると、ある程度のジェネリクス・代数的データ型に慣れることができます。</p>
-<h1 id="サブタイトル">サブタイトル</h1>
-<p><code>List&lt;Either&lt;E, A&gt;&gt;</code>から「全てのleft値 or 全てのright値」を取るときは、左に<code>NonEmptyList&lt;E&gt;</code>をかけること。</p>
+    <p><code>List&lt;Either&lt;E, A&gt;&gt;</code>から「全てのleft値 or 全てのright値」を取るときは、左に<code>NonEmptyList&lt;E&gt;</code>をかけること。</p>
 <h1 id="結論">結論</h1>
 <p><code>Either&lt;List&lt;E&gt;, List&lt;A&gt;&gt;</code>ではなく<code>Either&lt;NonEmptyList&lt;E&gt;, List&lt;A&gt;&gt;</code>を使いましょう！</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="im">arrow.core.Either</span></a>
@@ -111,7 +108,6 @@
 <p>しかしこれは型の上で見ると、空リストを渡したときに<code>Left(listOf())</code>が返ってくる可能性も見えてしまいます。</p>
 <p>（ドキュメント化はしてありますが……。）</p>
 <p>ですのでこのような場合は<code>NonEmptyList&lt;E&gt;</code>をかけることで、曖昧さがなくなります！</p>
-<p>終わり。</p>
 
     <hr />
 
@@ -122,7 +118,7 @@
         </li>
 
         <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2019-02-08-dont-use-either-list-list.html" class="hatena-bookmark-button" data-hatena-bookmark-title="関数型エクササイズ問題 => List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2019-02-08-dont-use-either-list-list.html" class="hatena-bookmark-button" data-hatena-bookmark-title="List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
             <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
@@ -138,7 +134,7 @@
 
     <p class="about-pr">
         この記事はこちらから修正リクエストを送ることができます。 <br />
-        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2019-02-08-dont-use-either-list-list.md">関数型エクササイズ問題 => List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること - github</a> <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2019-02-08-dont-use-either-list-list.md">List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること - github</a> <br />
         ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
     </p>
 </div>
