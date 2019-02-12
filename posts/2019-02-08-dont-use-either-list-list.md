@@ -1,13 +1,7 @@
 ---
-title: 関数型エクササイズ問題 => List&ltEither&ltE, A&gt&gtからEither&ltNonEmptyList&ltE&gt, List&ltA&gt&gtを取ること
+title: List&ltEither&ltE, A&gt&gtからEither&ltList&ltE&gt, List&ltA&gt&gtを取らない
 tags: Haskell, Kotlin
 ---
-
-ジェネリクス-エクササイズ・関数型エクササイズ向け記事です😌
-
-これを理解すると、ある程度のジェネリクス・代数的データ型に慣れることができます。
-
-# サブタイトル
 
 `List<Either<E, A>>`から「全てのleft値 or 全てのright値」を取るときは、左に`NonEmptyList<E>`をかけること。
 
@@ -80,5 +74,3 @@ fun <E, T> List<Either<E, T>>.collect(): Either<List<E>, List<T>>
 （ドキュメント化はしてありますが……。）
 
 ですのでこのような場合は`NonEmptyList<E>`をかけることで、曖昧さがなくなります！
-
-終わり。
