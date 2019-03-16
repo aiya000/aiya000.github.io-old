@@ -1,5 +1,5 @@
 #!/usr/bin/env stack
--- stack --resolver lts-8.11 --install-ghc runghc --package shelly --package text --package here --package safe-exceptions
+-- stack --resolver lts-12.12 --install-ghc runghc --package shelly --package text --package here --package safe-exceptions
 
 {-# LANGUAGE ExtendedDefaultRules #-}
 {-# LANGUAGE OverloadedStrings #-}
