@@ -13,10 +13,8 @@
     font-size: 200%;
 }
 
-.icon {
-    width: 64px;
-    border-radius: 8px;
-    margin-bottom: 16px;
+.circle-logo {
+    height: 150px;
 }
 
 .index-content {
