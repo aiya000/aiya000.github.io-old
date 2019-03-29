@@ -52,13 +52,13 @@ tags: イベント
 ## 関連ページ
 
 - [正誤表](http://aiya000.github.io/posts/2019-03-16-setulabo-errata.html)
-- [頒布物ページ - 技術書典6](公開され次第)
+- [頒布物ページ - 技術書典6](https://techbookfest.org/event/tbf06/circle/63720004)
 - [せつラボ 〜圏論の基本〜 で 省略された証明集 - aiya000/setulabo-with-monads-proofs - GitHub](https://github.com/aiya000/setulabo-with-monads-proofs)
 
 - - - - -
 
 　200部持っていきます！
-また本書のダウンロードカード100部と、[にこまき代数的構造の本]()も100部ほど持っていく予定です。
+また本書のダウンロードカード100部と、[にこまき代数的構造の本](./2018-09-12-techbookfest5.html)も100部ほど持っていく予定です。
 
 - 技術書典5でのにこまき本の売り切れ時刻（目安/100部）: 15時くらい
     - 前回買ってくださった方、ありがとうございます！ 売り切れ後に来てくださった方、ごめんなさい :bow:
