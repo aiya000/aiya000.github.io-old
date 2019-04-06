@@ -7,7 +7,7 @@ tags: イベント
 　技術書典6にて、圏論入門小説を頒布します！（こ11）
 
 - タイトル: せつラボ 〜圏論の基本〜
-- ページ数: 約80p
+- ページ数: 128p
 - 価格: 1,000円
 
 # サークルページ
@@ -30,7 +30,34 @@ tags: イベント
 　集合論・Haskellあたりについての、触り程度の知識があればとても読みやすいかと思います。
 ただし、ここらの知識を持たない方も考慮した内容になっています。
 
-## 目次
+- <a href="#toc-to" id="toc-from">目次</a>
+
+## サークル配置
+
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/%E6%8A%80%E8%A1%93%E6%9B%B8%E5%85%B8?src=hash&amp;ref_src=twsrc%5Etfw">#技術書典</a> のサークル配置が「こ11」に決まりました！<br><br>数学未入門者・初心者へ向けて、<br>圏論入門への小説を頒布します🦀<br><br>イラストとキャラデザは <a href="https://twitter.com/HassakuTb?ref_src=twsrc%5Etfw">@HassakuTb</a> さんにご協力頂いています。<br>よろしくお願いします！ <a href="https://t.co/tq0JUu7leJ">pic.twitter.com/tq0JUu7leJ</a></p>&mdash; あいや@圏論入門小説・技術書典6・こ11 (@public_ai000ya) <a href="https://twitter.com/public_ai000ya/status/1098232650085543937?ref_src=twsrc%5Etfw">2019年2月20日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+## 関連ページ
+
+- [正誤表](http://aiya000.github.io/posts/2019-03-16-setulabo-errata.html)
+- [頒布物ページ - 技術書典6](https://techbookfest.org/event/tbf06/circle/63720004)
+- [せつラボ 〜圏論の基本〜 で 省略された証明集 - aiya000/setulabo-with-monads-proofs - GitHub](https://github.com/aiya000/setulabo-with-monads-proofs)
+
+- - - - -
+
+　400部持っていきます！
+また本書のダウンロードカード100部と、[にこまき代数的構造の本](./2018-09-12-techbookfest5.html)も100部ほど持っていく予定です。
+一律1,000円です。
+
+　前回の本を100部刷って、約13時に完売でしたので、新刊も15時くらいまでは残っていると思われます。
+    - 前回買ってくださった方、ありがとうございます！
+    - 売り切れ後に来てくださった方、ごめんなさい :bow:
+
+　よろしくお願いします！
+
+- - -
+
+<a id="toc-to" href="#toc-from">↑戻る</a>
 
 - 第1章　登場人物
     - 1.1　η（えーた）
@@ -76,25 +103,3 @@ tags: イベント
     - 10.5　（本章での参考文献）
 - 第11章　終わり
 - 第12章　（後書き）
-
-## サークル配置
-
-<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/%E6%8A%80%E8%A1%93%E6%9B%B8%E5%85%B8?src=hash&amp;ref_src=twsrc%5Etfw">#技術書典</a> のサークル配置が「こ11」に決まりました！<br><br>数学未入門者・初心者へ向けて、<br>圏論入門への小説を頒布します🦀<br><br>イラストとキャラデザは <a href="https://twitter.com/HassakuTb?ref_src=twsrc%5Etfw">@HassakuTb</a> さんにご協力頂いています。<br>よろしくお願いします！ <a href="https://t.co/tq0JUu7leJ">pic.twitter.com/tq0JUu7leJ</a></p>&mdash; あいや@圏論入門小説・技術書典6・こ11 (@public_ai000ya) <a href="https://twitter.com/public_ai000ya/status/1098232650085543937?ref_src=twsrc%5Etfw">2019年2月20日</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-## 関連ページ
-
-- [正誤表](http://aiya000.github.io/posts/2019-03-16-setulabo-errata.html)
-- [頒布物ページ - 技術書典6](https://techbookfest.org/event/tbf06/circle/63720004)
-- [せつラボ 〜圏論の基本〜 で 省略された証明集 - aiya000/setulabo-with-monads-proofs - GitHub](https://github.com/aiya000/setulabo-with-monads-proofs)
-
-- - - - -
-
-　400部持っていきます！
-また本書のダウンロードカード100部と、[にこまき代数的構造の本](./2018-09-12-techbookfest5.html)も100部ほど持っていく予定です。
-一律1,000円です。
-
-- 技術書典5でのにこまき本の売り切れ時刻（目安/100部）: 15時くらい
-    - 前回買ってくださった方、ありがとうございます！ 売り切れ後に来てくださった方、ごめんなさい :bow:
-
-　よろしくお願いします！
