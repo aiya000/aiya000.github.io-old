@@ -4,7 +4,7 @@ tags: 頒布物
 ---
 # Special Thanks
 
-　[@tadsan](https://twitter.com/tadsan)さんは当日、弊サークルの売り子さんをしてくださり、売り上げに多大な貢献をしてくださりました。
+　[\@tadsan](https://twitter.com/tadsan)さんは当日、弊サークルの売り子さんをしてくださり、売り上げに多大な貢献をしてくださりました。
 
 にも関わらず、技術書典6での頒布時点での、本書のSpecial Thanksに書かれていませんでした……。
 
