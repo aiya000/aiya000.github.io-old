@@ -47,7 +47,7 @@ main = hakyllWith conf $ do
     route idRoute
     compile copyFileCompiler
 
-  match "css/*" $ do
+  match "css/**" $ do
     route idRoute
     compile compressCssCompiler
 
@@ -114,10 +114,6 @@ main = hakyllWith conf $ do
   match "templates/*" $
     compile templateCompiler
 
-  create ["css/highlight.css"] $ do
-    route idRoute
-    compile $ makeItem (compressCss $ styleToCss pygments)
-
   match "products.md" $ do
     route $ setExtension "html"
     compile $ modernPandocCompiler
@@ -139,6 +135,7 @@ main = hakyllWith conf $ do
       listContextWith (titleField "tagName") "tagNames" "tags" <>
       defaultContext
 
+
 -- | A `pandocCompiler` with emojis
 modernPandocCompiler :: Compiler (Item String)
 modernPandocCompiler =
@@ -156,6 +153,7 @@ modernPandocCompiler =
         case lookup attrName attrs of
           Nothing     -> newAttr : attrs
           Just oldVal -> (attrName, oldVal ++ ' ' : attrValue) : delete (attrName, oldVal) attrs
+
 
 conf :: Configuration
 conf = defaultConfiguration { previewPort = 25252 }
