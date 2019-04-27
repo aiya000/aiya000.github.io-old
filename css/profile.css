@@ -1,7 +1,12 @@
-ul.profile-intro {
+ul.profile-icons {
     list-style: none;
     margin-top: 8px;
     padding-left: 0;
+}
+
+li.my-icons img {
+    display: inline-block;
+    vertical-align: bottom;
 }
 
 img.icon {
@@ -10,8 +15,15 @@ img.icon {
     border-radius: 20px;
 }
 
+img.icon-mini {
+    width: 32px;
+    height: 32px;
+    border-radius: 20px;
+}
+
 img.sns-icon {
     height: 100px;
+    border-radius: 20px;
 }
 
 ul.vertical-enum {
