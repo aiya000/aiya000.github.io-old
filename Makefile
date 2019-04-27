@@ -4,7 +4,7 @@ build:
 	stack build && stack exec site build
 
 clean:
-	stack build && stack exec site clean
+	stack exec site clean
 
 watch:
 	make build && stack exec site watch
