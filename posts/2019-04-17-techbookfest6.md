@@ -29,14 +29,12 @@ tags: イベント, 備考録
 - 新刊「せつラボ 〜圏論の基礎〜」
     - [概要・サンプル](./2019-03-16-techbookfest6.html)
     - [電子書籍販売 - BOOTH](https://aiya000.booth.pm/items/1298622)
-    - [物理書籍販売 - BOOTH](https://aiya000.booth.pm/items/1316747) - [^booth-physics-notice]
+    - [物理書籍販売 - BOOTH](https://aiya000.booth.pm/items/1316747)
     - [物理書籍販売 - とらのあな](https://ec.toranoana.shop/tora/ec/item/040030721516)
 - 既刊「矢澤にこ先輩といっしょに代数！」
     - [概要・サンプル](./2018-09-12-techbookfest5.html)
     - [電子書籍販売 - BOOTH](https://aiya000.booth.pm/items/1040121)
     - [物理書籍販売 - とらのあな](https://ec.toranoana.shop/tora/ec/item/040030721521)
-
-[^booth-physics-notice]: Boothさんの準備ができ次第、販売開始。2019-04-17時点でまだ未開始。
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">入稿しました～～😭（祝）<br><br>圏論を題材にした、数学未入門者に数学の楽しさを知ってもらうための、小説風技術書です！<br><br>絵: <a href="https://twitter.com/HassakuTb?ref_src=twsrc%5Etfw">@HassakuTb</a> さん<br><br>よろしくお願いします🦀<a href="https://twitter.com/hashtag/%E6%8A%80%E8%A1%93%E6%9B%B8%E5%85%B8?src=hash&amp;ref_src=twsrc%5Etfw">#技術書典</a><a href="https://twitter.com/hashtag/%E3%81%9B%E3%81%A4%E3%83%A9%E3%83%9C?src=hash&amp;ref_src=twsrc%5Etfw">#せつラボ</a><br><br>サークルページ↓<a href="https://t.co/9IsrdOGoRI">https://t.co/9IsrdOGoRI</a><br><br>サンプル↓<a href="https://t.co/nloGh4fc1K">https://t.co/nloGh4fc1K</a> <a href="https://t.co/IT8pVrvJ4E">pic.twitter.com/IT8pVrvJ4E</a></p>&mdash; あいや@技術書典6・こ11 (@public_ai000ya) <a href="https://twitter.com/public_ai000ya/status/1113755967986868224?ref_src=twsrc%5Etfw">2019年4月4日</a></blockquote>
 
