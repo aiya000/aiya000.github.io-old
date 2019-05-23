@@ -1,0 +1,24 @@
+name: aiya000-github-io
+version: '0.1.0.0'
+synopsis: Hakyll project template from stack
+description: Please see README.md
+category: Web
+author: aiya000
+maintainer: aiya000.develop@gmail.com
+copyright: 2016 aiya000
+license: MIT
+homepage: https://github.com/aiya000/aiya000.github.io#README.md
+
+dependencies:
+  - base
+  - containers
+  - hakyll
+  - highlighting-kate
+  - lens
+  - pandoc
+  - tagsoup
+
+executables:
+  site:
+    main: site.hs
+    ghc-options: -threaded
