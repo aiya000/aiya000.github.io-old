@@ -1,4 +1,7 @@
+resolver: lts-13.22
 extra-package-dbs: []
 packages:
-- '.'
-resolver: lts-12.12
+  - '.'
+extra-deps:
+  - hakyll-4.12.5.2@sha256:435eec729639a4bf0d58f3c7c71929600f4130f10241275d5e7df856cc8aae90
+  - lrucache-1.2.0.1@sha256:18fc3d7052012c7ab3cd395160f34b53c5e1ec5379cc45185baf35b90ffadc2e
