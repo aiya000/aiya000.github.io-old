@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - ScopedTypeVariables下の1ランク多相で型が合わないとき</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - ScopedTypeVariables下の1ランク多相で型が合わないとき</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - ScopedTypeVariables下の1ランク多相で型が合わないとき" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - ScopedTypeVariables下の1ランク多相で型が合わないとき" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - ScopedTypeVariables下の1ランク多相で型が合わないとき</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2018-06-20-why-scoped-type-variable-type-mismatches-types.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - ScopedTypeVariables下の1ランク多相で型が合わないとき" />
+    <meta property="og:description" content="ScopedTypeVariables下の1ランク多相で型が合わないとき" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - ScopedTypeVariables下の1ランク多相で型が合わないとき" />
+    <meta name="twitter:description" content="ScopedTypeVariables下の1ランク多相で型が合わないとき" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2018/06/20</div>
     
@@ -55,19 +83,19 @@
 <div class="post-body">
     <h1 id="まとめ">まとめ</h1>
 <p>　forallを指定してあげると、一連の<code>a</code>, <code>b</code>が固定されてくれます。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">f ::</span> forall a b<span class="fu">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">f ::</span> <span class="kw">forall</span> a b<span class="op">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a></code></pre></div>
 <h1 id="解説">解説</h1>
 <p>　以下のようなコードを書くと</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ot">f ::</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">f g h x <span class="fu">=</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw">let</span> y <span class="fu">=</span> g<span class="ot"> x ::</span> b</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">      z <span class="fu">=</span> h<span class="ot"> x ::</span> b</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="kw">in</span> y <span class="fu">==</span> z</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">main <span class="fu">=</span> pure ()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="ot">f ::</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb2-4" title="4">f g h x <span class="ot">=</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="kw">let</span> y <span class="ot">=</span> g<span class="ot"> x ::</span> b</a>
+<a class="sourceLine" id="cb2-6" title="6">      z <span class="ot">=</span> h<span class="ot"> x ::</span> b</a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="kw">in</span> y <span class="op">==</span> z</a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-10" title="10">main <span class="ot">=</span> <span class="fu">pure</span> ()</a></code></pre></div>
 <p>以下のようなエラーがでます。 「<code>g x</code>によって推論されたその型<code>b'</code>と、指定されたその型<code>b</code>が同一ではない」の意です。</p>
 <p>意図として 「<code>g x :: b</code>の<code>b</code>は、<code>f</code>の型で指定された<code>b</code>そのものである」 ということを指定したつもりなのだけど…。</p>
 <pre><code>/tmp/nvimNLJJ6T/148.hs:5:11: error:
@@ -144,17 +172,17 @@
                 z = ...
               in y == z</code></pre>
 <p>ということで、確かに 「<code>g x :: b</code>の<code>b</code>は、<code>f</code>の型で指定された<code>b</code>そのものである」 ということを型検査に伝えてあげます。</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ot">f ::</span> forall a b<span class="fu">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">f g h x <span class="fu">=</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="kw">let</span> y <span class="fu">=</span> g<span class="ot"> x ::</span> b</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">      z <span class="fu">=</span> h<span class="ot"> x ::</span> b</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="kw">in</span> y <span class="fu">==</span> z</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10">main <span class="fu">=</span> pure ()</a></code></pre></div>
-<p>OK 🐕</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="ot">{-# LANGUAGE ScopedTypeVariables #-}</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="ot">f ::</span> <span class="kw">forall</span> a b<span class="op">.</span> <span class="dt">Eq</span> b <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb4-4" title="4">f g h x <span class="ot">=</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">let</span> y <span class="ot">=</span> g<span class="ot"> x ::</span> b</a>
+<a class="sourceLine" id="cb4-6" title="6">      z <span class="ot">=</span> h<span class="ot"> x ::</span> b</a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="kw">in</span> y <span class="op">==</span> z</a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb4-10" title="10">main <span class="ot">=</span> <span class="fu">pure</span> ()</a></code></pre></div>
+<p>OK <span class="emoji" data-emoji="dog2">🐕</span></p>
 <p>　そりゃそうなんですけど、いつも忘れて「！？」ってなりますよね。</p>
 
     <hr />
@@ -199,5 +227,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

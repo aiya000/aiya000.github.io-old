@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - TypeScriptでjQueryを扱う with tsd</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - TypeScriptでjQueryを扱う with tsd</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - TypeScriptでjQueryを扱う with tsd" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - TypeScriptでjQueryを扱う with tsd" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -35,6 +47,22 @@
         </nav>
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - TypeScriptでjQueryを扱う with tsd</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2015-08-19-jQuery_in_TypeScript.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - TypeScriptでjQueryを扱う with tsd" />
+    <meta property="og:description" content="TypeScriptでjQueryを扱う with tsd" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - TypeScriptでjQueryを扱う with tsd" />
+    <meta name="twitter:description" content="TypeScriptでjQueryを扱う with tsd" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
 
 <div class="post-info">
     <div class="post-date">2015/08/19</div>
@@ -88,32 +116,32 @@
 <h2 id="jqueryを使った型安全プログラミング">jQueryを使った型安全プログラミング</h2>
 <p>　まずは、なんの変哲もないhtmlファイルです。</p>
 <p>hello.html</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;ja&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw">&lt;head&gt;</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="kw">&lt;title&gt;&lt;/title&gt;</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="ot"> src=</span><span class="st">&quot;./jquery-2.1.4.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="ot"> src=</span><span class="st">&quot;./hello.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">&lt;/head&gt;</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="kw">&lt;body&gt;</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">  <span class="kw">&lt;/body&gt;</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;ja&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="kw">&lt;title&gt;&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="ot"> src=</span><span class="st">&quot;./jquery-2.1.4.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="ot"> src=</span><span class="st">&quot;./hello.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
 <p>　次にTypeScriptをコンパイルしてみます。<br />
 まずは、ちゃんと型エラーが出るか確認。</p>
 <p>hello.ts</p>
-<pre class="typescript"><code>// jQueryの型情報を読み込みます
-/// &lt;reference path=&quot;./typings/jquery/jquery.d.ts&quot;/&gt;
-$(() =&gt; { $(&quot;body&quot;).html(10); });</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// jQueryの型情報を読み込みます</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co">/// </span><span class="kw">&lt;reference</span><span class="ot"> path=</span><span class="dt">&quot;./typings/jquery/jquery.d.ts&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="fu">$</span>(() <span class="kw">=&gt;</span> <span class="op">{</span> <span class="fu">$</span>(<span class="st">&quot;body&quot;</span>).<span class="fu">html</span>(<span class="dv">10</span>)<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
 <pre><code>$ tsc hello.ts
 hello.ts(2,26): error TS2345: Argument of type 'number' is not assignable to parameter of type '(index: number, oldhtml: string) =&gt; string'.</code></pre>
 <p>多分、別のオーバーロードと思われてますね。<br />
 コンパイル弾かれたので成功っ！</p>
 <p>　今度は正しく動くか試してみます。</p>
 <p>hello.ts</p>
-<pre class="typescript"><code>// jQueryの型情報を読み込みます
-/// &lt;reference path=&quot;./typings/jquery/jquery.d.ts&quot;/&gt;
-$(() =&gt; { $(&quot;body&quot;).html(&quot;Hello, jQuery from TypeScript !!&quot;); });</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// jQueryの型情報を読み込みます</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">/// </span><span class="kw">&lt;reference</span><span class="ot"> path=</span><span class="dt">&quot;./typings/jquery/jquery.d.ts&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="fu">$</span>(() <span class="kw">=&gt;</span> <span class="op">{</span> <span class="fu">$</span>(<span class="st">&quot;body&quot;</span>).<span class="fu">html</span>(<span class="st">&quot;Hello, jQuery from TypeScript !!&quot;</span>)<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
 <pre><code>$ tsc hello.ts</code></pre>
 <p>　エラーが出ませんでした！<br />
 カレントディレクトリを見てみると、<strong>hello.js</strong>というファイルができています。</p>
@@ -164,5 +192,7 @@ $(() =&gt; { $(&quot;body&quot;).html(&quot;Hello, jQuery from TypeScript !!&quo
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

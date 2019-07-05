@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-02-11-derive_isstring.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。" />
+    <meta property="og:description" content="Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。" />
+    <meta name="twitter:description" content="Text(ByteString)をnewtypeした型でもOverloadedStringsできるよ。" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2017/02/11</div>
     
@@ -54,19 +82,19 @@
 
 <div class="post-body">
     <p><code>GeneralizedNewtypeDeriving</code>拡張を使う。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">newtype</span> <span class="dt">A</span> <span class="fu">=</span> <span class="dt">A</span> <span class="dt">Text</span> <span class="kw">deriving</span> (<span class="dt">IsString</span>, <span class="dt">Show</span>)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="ot">a ::</span> <span class="dt">A</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">a <span class="fu">=</span> <span class="st">&quot;ahoge&quot;</span>  <span class="co">-- 文字列リテラル of A</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">main <span class="fu">=</span> print a</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>)</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="kw">newtype</span> <span class="dt">A</span> <span class="ot">=</span> <span class="dt">A</span> <span class="dt">Text</span> <span class="kw">deriving</span> (<span class="dt">IsString</span>, <span class="dt">Show</span>)</a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="ot">a ::</span> <span class="dt">A</span></a>
+<a class="sourceLine" id="cb1-10" title="10">a <span class="ot">=</span> <span class="st">&quot;ahoge&quot;</span>  <span class="co">-- 文字列リテラル of A</span></a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-13" title="13">main <span class="ot">=</span> <span class="fu">print</span> a</a></code></pre></div>
 
     <hr />
 
@@ -110,5 +138,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

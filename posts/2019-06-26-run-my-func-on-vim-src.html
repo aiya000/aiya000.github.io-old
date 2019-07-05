@@ -1,0 +1,221 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Vimのソース内で自作した関数の結果を確認する</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Vimのソース内で自作した関数の結果を確認する" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Vimのソース内で自作した関数の結果を確認する" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                galaxy-sixth-sensey
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Vimのソース内で自作した関数の結果を確認する</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2019-06-26-run-my-func-on-vim-src.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Vimのソース内で自作した関数の結果を確認する" />
+    <meta property="og:description" content="Vimのソース内で自作した関数の結果を確認する" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Vimのソース内で自作した関数の結果を確認する" />
+    <meta name="twitter:description" content="Vimのソース内で自作した関数の結果を確認する" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2019/06/26</div>
+    
+
+    <div class="post-title">Vimのソース内で自作した関数の結果を確認する</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Vim.html">Vim</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/C.html">C</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <h2 id="起">起</h2>
+<p>　Vimにコントリビュートしたいけど、 「<code>char_u*</code>って？　<code>typval_T</code>ってなんじゃい？　<code>eval1</code>？　<code>:h expr1</code>？」 っていう状態だった。</p>
+<p>　とりあえず、自作関数で動作を確認したい。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" title="1">    <span class="dt">static</span> <span class="dt">void</span></a>
+<a class="sourceLine" id="cb1-2" title="2">mine(<span class="dt">void</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3">{</a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">static</span> <span class="dt">int</span> b = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">if</span> (!b) {</a>
+<a class="sourceLine" id="cb1-6" title="6">	b = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb1-7" title="7">	char_u* x = vim_strsave((char_u*) <span class="st">&quot;10&quot;</span>);</a>
+<a class="sourceLine" id="cb1-8" title="8">	typval_T y = { VAR_UNKNOWN, <span class="dv">0</span>, {<span class="dv">0</span>} };</a>
+<a class="sourceLine" id="cb1-9" title="9">	eval1(&amp;x, &amp;y, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb1-10" title="10">	printf(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>);  <span class="co">// ここをX行目と仮定する</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    }</a></code></pre></div>
+<h2 id="結">結</h2>
+<ol type="1">
+<li>eval.hの<code>ex_echo</code>関数をエディタで開く。</li>
+<li>その上に上記の<code>mine</code>関数を定義する。
+<ul>
+<li>名前は<code>mine</code>でなくてもよい。内容もお好みで。</li>
+</ul></li>
+<li><code>ex_echo</code>関数の変数宣言句の下で、<code>mine</code>を呼び出す。
+<ul>
+<li><div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1"><span class="co">/*</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"> * &quot;:echo expr1 ...&quot;	print each argument separated with a space, add a</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co"> *			newline at the end.</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co"> * &quot;:echon expr1 ...&quot;	print each argument plain.</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">void</span></a>
+<a class="sourceLine" id="cb2-7" title="7">ex_echo(exarg_T *eap)</a>
+<a class="sourceLine" id="cb2-8" title="8">{</a>
+<a class="sourceLine" id="cb2-9" title="9">    char_u	*arg = eap-&gt;arg;</a>
+<a class="sourceLine" id="cb2-10" title="10">    typval_T	rettv;</a>
+<a class="sourceLine" id="cb2-11" title="11">    char_u	*tofree;</a>
+<a class="sourceLine" id="cb2-12" title="12">    char_u	*p;</a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="dt">int</span>		needclr = TRUE;</a>
+<a class="sourceLine" id="cb2-14" title="14">    <span class="dt">int</span>		atstart = TRUE;</a>
+<a class="sourceLine" id="cb2-15" title="15">    char_u	numbuf[NUMBUFLEN];</a>
+<a class="sourceLine" id="cb2-16" title="16">    <span class="dt">int</span>		did_emsg_before = did_emsg;</a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="dt">int</span>		called_emsg_before = called_emsg;</a>
+<a class="sourceLine" id="cb2-18" title="18"></a>
+<a class="sourceLine" id="cb2-19" title="19">    mine();  <span class="co">// ha-ya!</span></a>
+<a class="sourceLine" id="cb2-20" title="20"></a>
+<a class="sourceLine" id="cb2-21" title="21">    <span class="cf">if</span> (eap-&gt;skip)</a>
+<a class="sourceLine" id="cb2-22" title="22">    ++emsg_skip;</a>
+<a class="sourceLine" id="cb2-23" title="23">    <span class="cf">while</span> (*arg != NUL &amp;&amp; *arg != <span class="ch">'|'</span> &amp;&amp; *arg != <span class="ch">'\n'</span> &amp;&amp; !got_int)</a></code></pre></div></li>
+</ul></li>
+<li>CLIで<code>make</code>。</li>
+<li>Vimで<code>:packadd termdebug</code>, <code>:execute 'Termdebug' expand('~/path/to/vim/src/vim')</code>。</li>
+<li>gdbウィンドウで<code>b mine</code>からの<code>run -u NONE --noplugin</code>。</li>
+<li>Vimウィンドウで<code>:echo 10</code>。
+<ul>
+<li><code>10</code>でなくてもよい。なんでもいいから<code>ex_echo</code>を呼び出す。</li>
+</ul></li>
+<li>gdbウィンドウで<code>n</code>して、<code>mine</code>のX行目へ進む。
+<ul>
+<li>X行目については、上記<code>mine</code>の定義を参照。</li>
+</ul></li>
+<li>gdbウィンドウで結果を確認する。
+<ul>
+<li><pre><code>Breakpoint 1, mine () at eval.c:8897
+8897    {
+(gdb) n
+8899        if (!b) {
+(gdb) 
+8900            b = 1;
+(gdb) 
+8901            char_u* x = vim_strsave((char_u*) &quot;10&quot;);
+(gdb) 
+8902            typval_T y = { VAR_UNKNOWN, 0, {0} };
+(gdb) 
+8903            eval1(&amp;x, &amp;y, 1);
+(gdb) 
+8904            printf(&quot;\n&quot;);
+(gdb) p x
+$1 = (char_u *) 0x5555558cbb52 &quot;&quot;
+(gdb) p y
+$2 = {v_type = VAR_NUMBER, v_lock = 0 '\000', vval = {v_number = 10, v_float = 4.9406564584124654e-323, v_string = 0xa &lt;error: Cannot access memory at address
+ 0xa&gt;, v_list = 0xa, v_dict = 0xa, v_partial = 0xa, v_job = 0xa, v_channel = 0xa, v_blob = 0xa}}
+(gdb) p y.v_type
+$3 = VAR_NUMBER
+(gdb) p y.vval.v_number
+$4 = 10</code></pre></li>
+</ul></li>
+</ol>
+<p>完了！</p>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2019-06-26-run-my-func-on-vim-src.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Vimのソース内で自作した関数の結果を確認する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2019-06-26-run-my-func-on-vim-src.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2019-06-26-run-my-func-on-vim-src.md">Vimのソース内で自作した関数の結果を確認する - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
+        </div>
+
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

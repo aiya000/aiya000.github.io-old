@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Haskellのmplusってもしかしてすごい便利じゃない？</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - Haskellのmplusってもしかしてすごい便利じゃない？</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Haskellのmplusってもしかしてすごい便利じゃない？" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Haskellのmplusってもしかしてすごい便利じゃない？" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Haskellのmplusってもしかしてすごい便利じゃない？</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2016-10-01-awesome_mplus_with_liftM2.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Haskellのmplusってもしかしてすごい便利じゃない？" />
+    <meta property="og:description" content="Haskellのmplusってもしかしてすごい便利じゃない？" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Haskellのmplusってもしかしてすごい便利じゃない？" />
+    <meta name="twitter:description" content="Haskellのmplusってもしかしてすごい便利じゃない？" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2016/10/01</div>
     
@@ -55,28 +83,28 @@
 <div class="post-body">
     <p>束縛(&lt;-)とcaseでインデントが多くネストしてしまいそうな式でも、少ないインデントで済ませられる。</p>
 <h1 id="maybeで使う">Maybeで使う</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control.Monad</span> (liftM2)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Control.Monad</span> (<span class="dt">MonadPlus</span>(..))</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  print <span class="fu">$</span> <span class="dt">Nothing</span>  <span class="ot">`mplus`</span> return <span class="dv">1</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  print <span class="fu">$</span> return <span class="dv">1</span> <span class="ot">`mplus`</span> (return <span class="dv">2</span><span class="ot"> ::</span> <span class="dt">Maybe</span> <span class="dt">Int</span>)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  print <span class="fu">$</span> <span class="dt">Nothing</span>  <span class="ot">`mplus`</span> (<span class="dt">Nothing</span><span class="ot">  ::</span> <span class="dt">Maybe</span> <span class="dt">Int</span>)</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">let</span> x <span class="fu">=</span> return (return <span class="dv">1</span>)<span class="ot"> ::</span> <span class="dt">IO</span> (<span class="dt">Maybe</span> <span class="dt">Int</span>)</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="kw">let</span> y <span class="fu">=</span> return <span class="dt">Nothing</span><span class="ot">    ::</span> <span class="dt">IO</span> (<span class="dt">Maybe</span> <span class="dt">Int</span>)</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">  print <span class="fu">=&lt;&lt;</span> liftM2 mplus x y</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">import</span> <span class="dt">Control.Monad</span> (liftM2)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">import</span> <span class="dt">Control.Monad</span> (<span class="dt">MonadPlus</span>(..))</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-5" title="5">main <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="fu">print</span> <span class="op">$</span> <span class="dt">Nothing</span>  <span class="ot">`mplus`</span> <span class="fu">return</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="fu">print</span> <span class="op">$</span> <span class="fu">return</span> <span class="dv">1</span> <span class="ot">`mplus`</span> (<span class="fu">return</span> <span class="dv">2</span><span class="ot"> ::</span> <span class="dt">Maybe</span> <span class="dt">Int</span>)</a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="fu">print</span> <span class="op">$</span> <span class="dt">Nothing</span>  <span class="ot">`mplus`</span> (<span class="dt">Nothing</span><span class="ot">  ::</span> <span class="dt">Maybe</span> <span class="dt">Int</span>)</a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="kw">let</span> x <span class="ot">=</span> <span class="fu">return</span> (<span class="fu">return</span> <span class="dv">1</span>)<span class="ot"> ::</span> <span class="dt">IO</span> (<span class="dt">Maybe</span> <span class="dt">Int</span>)</a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">let</span> y <span class="ot">=</span> <span class="fu">return</span> <span class="dt">Nothing</span><span class="ot">    ::</span> <span class="dt">IO</span> (<span class="dt">Maybe</span> <span class="dt">Int</span>)</a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="fu">print</span> <span class="op">=&lt;&lt;</span> liftM2 mplus x y</a></code></pre></div>
 <pre><code>Just 1
 Just 1
 Nothing
 Just 1</code></pre>
 <h1 id="io-maybeで使う">(IO Maybe)で使う</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">fooDBFile ::</span> (<span class="dt">MonadIO</span> m, <span class="dt">MonadThrow</span> m) <span class="ot">=&gt;</span> m (<span class="dt">Maybe</span> FilePath)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">fooDBFile <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw">let</span> maybeDir <span class="fu">=</span> liftM2 mplus (getEnv <span class="st">&quot;XDG_DATA_DIR&quot;</span>) (getEnv <span class="st">&quot;HOME&quot;</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw">case</span> maybeDir <span class="kw">of</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">    dir     <span class="ot">-&gt;</span> dir <span class="fu">++</span> <span class="st">&quot;/foo.db&quot;</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="dt">Nothing</span> <span class="ot">-&gt;</span> error</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">fooDBFile ::</span> (<span class="dt">MonadIO</span> m, <span class="dt">MonadThrow</span> m) <span class="ot">=&gt;</span> m (<span class="dt">Maybe</span> <span class="dt">FilePath</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2">fooDBFile <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">let</span> maybeDir <span class="ot">=</span> liftM2 mplus (getEnv <span class="st">&quot;XDG_DATA_DIR&quot;</span>) (getEnv <span class="st">&quot;HOME&quot;</span>)</a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">case</span> maybeDir <span class="kw">of</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    dir     <span class="ot">-&gt;</span> dir <span class="op">++</span> <span class="st">&quot;/foo.db&quot;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">error</span></a></code></pre></div>
 <p>ベンリ。</p>
 
     <hr />
@@ -121,5 +149,7 @@ Just 1</code></pre>
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

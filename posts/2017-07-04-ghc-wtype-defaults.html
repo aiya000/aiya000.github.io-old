@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-07-04-ghc-wtype-defaults.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ" />
+    <meta property="og:description" content="GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ" />
+    <meta name="twitter:description" content="GHCの-Wtype-defaultsを解決するにはちゃんと型付けするしかないかなあ" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2017/07/04</div>
     
@@ -54,8 +82,8 @@
 
 <div class="post-body">
     <p>Test.hs</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">main <span class="fu">=</span> print <span class="dv">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-2" title="2">main <span class="ot">=</span> <span class="fu">print</span> <span class="dv">10</span></a></code></pre></div>
 <p>このコードを<code>-Wtype-defaults</code>付きでコンパイルすると、以下の警告が出る。 （<code>-Wtype-defaults</code>はGHC-8.0.2ではデフォルトで無効）</p>
 <pre class="console"><code>$ stack runghc -- -Wtype-defaults Test.hs
 
@@ -69,8 +97,8 @@ Test.hs:2:8: warning: [-Wtype-defaults]
 <p>10が型推論で<code>(Num a, Show a) =&gt; a</code>に推論されているからだ。 GHCは10を最終的に単相型で型付けする必要がある……はずなので、デフォルトの<code>Integer</code>として型付けされていて、 このままだとパフォーマンスに影響が出る。（<code>Integer</code>より<code>Int</code>のが速い）</p>
 <p>型を付けて解決する。</p>
 <p>Test.hs</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">main <span class="fu">=</span> print (<span class="dv">10</span><span class="ot"> ::</span> <span class="dt">Int</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb3-2" title="2">main <span class="ot">=</span> <span class="fu">print</span> (<span class="dv">10</span><span class="ot"> ::</span> <span class="dt">Int</span>)</a></code></pre></div>
 <p>他にいい解決方法ないの？</p>
 <h1 id="参考ページ">参考ページ</h1>
 <ul>
@@ -119,5 +147,7 @@ Test.hs:2:8: warning: [-Wtype-defaults]
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

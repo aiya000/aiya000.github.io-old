@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -35,6 +47,22 @@
         </nav>
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-05-11-learn-haskell-with-muse.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」" />
+    <meta property="og:description" content="ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」" />
+    <meta name="twitter:description" content="ことり、穂乃果と一緒に学ぶHaskell（入門）その2「関数とデータ型」" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
 
 <div class="post-info">
     <div class="post-date">2017/05/11</div>
@@ -71,8 +99,8 @@
 <h1 id="前回">前回</h1>
 <p>ことり「次は、<code>Member</code>データ型を<code>main</code>で表示してみるよ」<br />
 ことり「これはこう書けるよ」</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="fu">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
 <p>ことり「<code>deriving (Show)</code>って行を追加したよ」<br />
 ことり「<strong>こういう単純なパターンを実装したい時には、derivingっていうのを使うよ！</strong>」</p>
 <p>穂乃果「でもことりちゃん、この<code>Show</code>ってなに？」<br />
@@ -87,8 +115,8 @@
 <h1 id="関数">関数</h1>
 <p>ことり「穂乃果ちゃん、関数の定義方法は授業では習った？」<br />
 穂乃果「い…いちおう……。　えーと、こういうのだっけ」</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">add1 ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">add1 x <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">add1 ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb2-2" title="2">add1 x <span class="ot">=</span> x <span class="op">+</span> <span class="dv">1</span></a></code></pre></div>
 <p>穂乃果「この<code>add1</code>の後に書いてある<code>x</code>が<code>Int</code>の引数…」</p>
 <p>穂乃果「でも<code>::</code>とか<code>-&gt;</code>とか、よくわかんないな……」<br />
 ことり「説明していくね」</p>
@@ -96,15 +124,15 @@
 ことり「<code>::</code>っていうのを使うと、ある名前（変数）に型を付けてあげられるよ」<br />
 ことり「『<code>add1</code>は<code>Int -&gt; Int</code>という型を持つ名前』ってことを書いているの」</p>
 <p>ことり「別の例を挙げると……」</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">ten ::</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">ten <span class="fu">=</span> <span class="dv">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">ten ::</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb3-2" title="2">ten <span class="ot">=</span> <span class="dv">10</span></a></code></pre></div>
 <p>ことり「Javaに直すと、こうかな」</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="dt">int</span> ten = <span class="dv">10</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" title="1"><span class="dt">int</span> ten = <span class="dv">10</span>;</a></code></pre></div>
 <p>穂乃果「なるほど、でもさっきの例と違って、これは数じゃなくて、変数じゃない？」<br />
 ことり「ふふふ、そうなんです。　Haskellでは関数と変数もあまり区別がなくってね……こほん。　ちょっとこれについてはまたあとでね」</p>
 <p>ことり「Haskellでは<code>-&gt;</code>というのが、関数の型を作ります。　例えば」<br />
 ことり「さっきの<code>Int -&gt; Int</code>は『引数にIntを1つ受け取って、戻り値にIntを返す』ということを表す型だよ。　Javaに直すとこうかな！」</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="dt">int</span> <span class="fu">add1</span>(<span class="dt">int</span> x) { <span class="kw">return</span> x + <span class="dv">1</span>; }</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" title="1"><span class="dt">int</span> <span class="fu">add1</span>(<span class="dt">int</span> x) { <span class="kw">return</span> x + <span class="dv">1</span>; }</a></code></pre></div>
 <p>穂乃果「なるほど！　Javaの関数定義だと戻り値の型が前に来てるけど」</p>
 <p><font color="blue"><strong>int</strong></font> add1(int x) { return x + 1; }</p>
 <p>穂乃果「Haskellだと戻り値の型が後に来るってことかな？」</p>
@@ -123,8 +151,8 @@ constTen x y = 10</p>
 <p>穂乃果「<code>Show</code>についてだけどことりちゃん、さっきことりちゃんはこう言ってたよね」</p>
 <hr />
 <p>ことり「うん、例えば<code>Show</code>は、<code>Show</code>を実装したデータ型である<code>Member</code>に対して<code>show :: Show a =&gt; a -&gt; String</code>なる関数の実装を与えるよ♪」</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="fu">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
 <hr />
 <p>穂乃果「<code>show :: Show a =&gt; a -&gt; String</code>これ……何かを受け取って<code>String</code>を返してるshow関数に見えるけど……<code>Show a =&gt; a</code>ってなんだろう……」<br />
 ことり「そのとおりだよ穂乃果ちゃん！」<br />
@@ -132,70 +160,70 @@ constTen x y = 10</p>
 <p>ことり「<code>a -&gt; String</code>っていうのは『何か<code>型a</code>を受け取って、<code>String</code>を返す』っていう型なんだ。 　だからさっき穂乃果ちゃんが言った『何かを受け取って<code>String</code>を返してる』っていうのは大正解なの♪」<br />
 穂乃果「エーッ！？　えーと、自分が言ったことなんだけど、よくわからないや……<code>型a</code>って、『何か』って何？　どういうこと？」</p>
 <p>ことり「<code>型a</code>っていうのは、何の型でもいいの。　任意の型a。　具体例を示すと」</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1">id<span class="ot"> ::</span> a <span class="ot">-&gt;</span> a</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">id x <span class="fu">=</span> x</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">id</span><span class="ot"> ::</span> a <span class="ot">-&gt;</span> a</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="fu">id</span> x <span class="ot">=</span> x</a></code></pre></div>
 <p>ことり「こんな、xを受け取ってxをそのまま返す関数とか。　これって別に、<code>a</code>が<code>Int</code>でも<code>Char</code>でも<code>Member</code>でも、同じことができるよね！ 　Haskellではそれをこうやって、簡単に書くことができるんだ」<br />
 穂乃果「そっか、<code>a</code>の内容に言及する必要がないんだね。　だから……もしかしてこれって、ジェネリクス？」<br />
 ことり「そのとおり！　Javaではこれをジェネリクスとして表現してるね」</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> Program {</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">	<span class="kw">public</span> <span class="dt">static</span> &lt;T&gt; T <span class="fu">id</span>(T x) {</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">		<span class="kw">return</span> x;</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">	}</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="fu">id</span>(<span class="dv">10</span>));</a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="fu">id</span>(<span class="ch">'x'</span>));</a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="fu">id</span>(<span class="st">&quot;kotohono&quot;</span>));</a>
-<a class="sourceLine" id="cb8-10" data-line-number="10">	}</a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">public</span> <span class="kw">class</span> Program {</a>
+<a class="sourceLine" id="cb8-2" title="2">	<span class="kw">public</span> <span class="dt">static</span> &lt;T&gt; T <span class="fu">id</span>(T x) {</a>
+<a class="sourceLine" id="cb8-3" title="3">		<span class="kw">return</span> x;</a>
+<a class="sourceLine" id="cb8-4" title="4">	}</a>
+<a class="sourceLine" id="cb8-5" title="5"></a>
+<a class="sourceLine" id="cb8-6" title="6">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
+<a class="sourceLine" id="cb8-7" title="7">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="fu">id</span>(<span class="dv">10</span>));</a>
+<a class="sourceLine" id="cb8-8" title="8">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="fu">id</span>(<span class="ch">'x'</span>));</a>
+<a class="sourceLine" id="cb8-9" title="9">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="fu">id</span>(<span class="st">&quot;kotohono&quot;</span>));</a>
+<a class="sourceLine" id="cb8-10" title="10">	}</a>
+<a class="sourceLine" id="cb8-11" title="11">}</a></code></pre></div>
 <hr />
 <p>ことり「次に<code>Show a =&gt; a</code>っていう表現だね。　これは」<br />
 ことり「さっきの<code>a</code>が『任意の型a（何でも）』だったのに比べて、『Showを実装する任意の型a（Showを実装するなら何でも）』って言えるかな」</p>
 <p>穂乃果「じゃあ<code>show :: Show a =&gt; a -&gt; String</code>っていうのは……Showを実装する型aを受け取って、文字列（<code>String</code>）を返す関数<code>show</code>？」<br />
 ことり「そのとおりです！」</p>
 <p>ことり「実はIntもCharもBoolもShowを実装するので、こんなことができるよ」</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  putStrLn (show <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb9-2" title="2">main <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="fu">putStrLn</span> (<span class="fu">show</span> <span class="dv">10</span>)</a></code></pre></div>
 <p>（文字列を受け取って、その文字列を標準出力に表示する関数putStrLn）</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1">putStrLn<span class="ot"> ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">putStrLn</span><span class="ot"> ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a></code></pre></div>
 <p>ことり「『型XがShowを実装する』ってことを、『型XはShowインスタンスである』って言ったりもするかな！ 　『IntはShowインスタンスである』みたいにね。」<br />
 ことり「Haskellでの『インスタンス』は、他のオブジェクト指向言語でのインスタンスとは趣が違うから注意だね。　値じゃなくて型に対する言葉なんだ」</p>
 <p>穂乃果「なるほど……こんな感じかな？」</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">class</span> <span class="bu">Member</span> <span class="kw">implements</span> Show {</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">	<span class="kw">public</span> <span class="bu">Member</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
-<a class="sourceLine" id="cb11-6" data-line-number="6">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">	}</a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9">	<span class="at">@Override</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10">	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">show</span>() {</a>
-<a class="sourceLine" id="cb11-11" data-line-number="11">		<span class="kw">return</span> <span class="st">&quot;Member &quot;</span> + <span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot; &quot;</span> + <span class="kw">this</span>.<span class="fu">age</span>;</a>
-<a class="sourceLine" id="cb11-12" data-line-number="12">	}</a>
-<a class="sourceLine" id="cb11-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb11-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="kw">interface</span> Show {</a>
-<a class="sourceLine" id="cb11-16" data-line-number="16">	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">show</span>();</a>
-<a class="sourceLine" id="cb11-17" data-line-number="17">}</a>
-<a class="sourceLine" id="cb11-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="kw">public</span> <span class="kw">class</span> Test {</a>
-<a class="sourceLine" id="cb11-20" data-line-number="20">	<span class="kw">public</span> <span class="dt">static</span> &lt;T&gt; T <span class="fu">id</span>(T x) { <span class="kw">return</span> x; }</a>
-<a class="sourceLine" id="cb11-21" data-line-number="21">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
-<a class="sourceLine" id="cb11-22" data-line-number="22">		<span class="bu">Member</span> kotori = <span class="kw">new</span> <span class="bu">Member</span>(<span class="st">&quot;南ことり&quot;</span>, <span class="dv">16</span>);</a>
-<a class="sourceLine" id="cb11-23" data-line-number="23">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(kotori.<span class="fu">show</span>());</a>
-<a class="sourceLine" id="cb11-24" data-line-number="24">	}</a>
-<a class="sourceLine" id="cb11-25" data-line-number="25">}</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">class</span> <span class="bu">Member</span> <span class="kw">implements</span> Show {</a>
+<a class="sourceLine" id="cb11-2" title="2">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
+<a class="sourceLine" id="cb11-3" title="3">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
+<a class="sourceLine" id="cb11-4" title="4">	<span class="kw">public</span> <span class="bu">Member</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</a>
+<a class="sourceLine" id="cb11-5" title="5">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
+<a class="sourceLine" id="cb11-6" title="6">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
+<a class="sourceLine" id="cb11-7" title="7">	}</a>
+<a class="sourceLine" id="cb11-8" title="8"></a>
+<a class="sourceLine" id="cb11-9" title="9">	<span class="at">@Override</span></a>
+<a class="sourceLine" id="cb11-10" title="10">	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">show</span>() {</a>
+<a class="sourceLine" id="cb11-11" title="11">		<span class="kw">return</span> <span class="st">&quot;Member &quot;</span> + <span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot; &quot;</span> + <span class="kw">this</span>.<span class="fu">age</span>;</a>
+<a class="sourceLine" id="cb11-12" title="12">	}</a>
+<a class="sourceLine" id="cb11-13" title="13">}</a>
+<a class="sourceLine" id="cb11-14" title="14"></a>
+<a class="sourceLine" id="cb11-15" title="15"><span class="kw">interface</span> Show {</a>
+<a class="sourceLine" id="cb11-16" title="16">	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">show</span>();</a>
+<a class="sourceLine" id="cb11-17" title="17">}</a>
+<a class="sourceLine" id="cb11-18" title="18"></a>
+<a class="sourceLine" id="cb11-19" title="19"><span class="kw">public</span> <span class="kw">class</span> Test {</a>
+<a class="sourceLine" id="cb11-20" title="20">	<span class="kw">public</span> <span class="dt">static</span> &lt;T&gt; T <span class="fu">id</span>(T x) { <span class="kw">return</span> x; }</a>
+<a class="sourceLine" id="cb11-21" title="21">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
+<a class="sourceLine" id="cb11-22" title="22">		<span class="bu">Member</span> kotori = <span class="kw">new</span> <span class="bu">Member</span>(<span class="st">&quot;南ことり&quot;</span>, <span class="dv">16</span>);</a>
+<a class="sourceLine" id="cb11-23" title="23">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(kotori.<span class="fu">show</span>());</a>
+<a class="sourceLine" id="cb11-24" title="24">	}</a>
+<a class="sourceLine" id="cb11-25" title="25">}</a></code></pre></div>
 <p>ことり「いいね穂乃果ちゃん！ 　型クラスはよく、interfaceと似てるって言われたりもするんだぁ 　今回の、<code>deriving</code>を利用した<code>Show</code>インスタンスの実装は、ちょうどそうなるね！」<br />
 穂乃果「やったぁ♪　……『<code>deriving</code>を利用した<code>Show</code>インスタンスの実装は』……？」</p>
 <p>ことり「うん、<code>deriving</code>って実は全ての型クラスに対してできるわけじゃなくってね、<code>Show</code>や基本的な型クラスのみができるんだ」<br />
 ことり「じゃあ<code>deriving</code>できない型クラスはどうやって使うのかって言うと……<code>instance</code>ってキーワードを使います。 　これを使って、<code>Show</code>インスタンスを自分で実装することもできるんだ」<br />
 ことり「<code>deriving</code>はあくまで、自分で実装するところをコンパイラが機械的にやってくれてるだけ……ほらここ」</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="at">@Override</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">public</span> <span class="bu">String</span> <span class="fu">show</span>() {</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">	<span class="kw">return</span> <span class="st">&quot;Member &quot;</span> + <span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot; &quot;</span> + <span class="kw">this</span>.<span class="fu">age</span>;</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb12-1" title="1"><span class="at">@Override</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">public</span> <span class="bu">String</span> <span class="fu">show</span>() {</a>
+<a class="sourceLine" id="cb12-3" title="3">	<span class="kw">return</span> <span class="st">&quot;Member &quot;</span> + <span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot; &quot;</span> + <span class="kw">this</span>.<span class="fu">age</span>;</a>
+<a class="sourceLine" id="cb12-4" title="4">}</a></code></pre></div>
 <p>ことり「returnする文字列を自分で構築してるよね。　これをHaskellはコンパイラが勝手にコードを書いてくれるんだ♪」</p>
 <p>穂乃果「ほえー……機械が勝手に書いてくれるんだぁ……」</p>
 <p>…………</p>
@@ -249,5 +277,7 @@ constTen x y = 10</p>
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Happyの%tokenではより一般的な形式を下にしなきゃだめ</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - Happyの%tokenではより一般的な形式を下にしなきゃだめ</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Happyの%tokenではより一般的な形式を下にしなきゃだめ" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Happyの%tokenではより一般的な形式を下にしなきゃだめ" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Happyの%tokenではより一般的な形式を下にしなきゃだめ</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2018-07-25-happy-order-of-tokens.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Happyの%tokenではより一般的な形式を下にしなきゃだめ" />
+    <meta property="og:description" content="Happyの%tokenではより一般的な形式を下にしなきゃだめ" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Happyの%tokenではより一般的な形式を下にしなきゃだめ" />
+    <meta name="twitter:description" content="Happyの%tokenではより一般的な形式を下にしなきゃだめ" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2018/07/25</div>
     
@@ -55,28 +83,28 @@
 <div class="post-body">
     <h1 id="正誤">正誤</h1>
 <p>正しい</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">%</span>token</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="fu">...</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="fu">...</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  natType  { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Nat&quot;</span>, _)   }</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  boolType { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Bool&quot;</span>, _)  }</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  ident    { (<span class="dt">TokenAnIdent</span> <span class="fu">$$</span>, _)      }</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="op">%</span>token</a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="op">...</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="op">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  natType  { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Nat&quot;</span>, _)   }</a>
+<a class="sourceLine" id="cb1-5" title="5">  boolType { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Bool&quot;</span>, _)  }</a>
+<a class="sourceLine" id="cb1-6" title="6">  ident    { (<span class="dt">TokenAnIdent</span> <span class="op">$$</span>, _)      }</a></code></pre></div>
 <p>誤り</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">%</span>token</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="fu">...</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  ident    { (<span class="dt">TokenAnIdent</span> <span class="fu">$$</span>, _)      }</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="fu">...</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  natType  { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Nat&quot;</span>, _)   }</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  boolType { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Bool&quot;</span>, _)  }</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="op">%</span>token</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="op">...</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  ident    { (<span class="dt">TokenAnIdent</span> <span class="op">$$</span>, _)      }</a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="op">...</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  natType  { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Nat&quot;</span>, _)   }</a>
+<a class="sourceLine" id="cb2-6" title="6">  boolType { (<span class="dt">TokenAnIdent</span> <span class="st">&quot;Bool&quot;</span>, _)  }</a></code></pre></div>
 <p>これはhappy製の単純型付きラムダ計算パーサーの、トークン宣言部です。</p>
 <p>「正しい」のようにしないと、このような実行時エラーが起きます。</p>
 <pre><code>&gt;&gt;&gt; parse &quot;\\x:Nat.10&quot;
 got a token &quot;Nat&quot;,
 but [natType, boolType] are expected.</code></pre>
-<p><code>&quot;Nat&quot; near_equal natType</code>ですが、先にidentの方にマッチするために、“Nat”がidentだと判断されています 🤘🙄🤘</p>
+<p><code>"Nat" near_equal natType</code>ですが、先にidentの方にマッチするために、“Nat”がidentだと判断されています 🤘🙄🤘</p>
 <h1 id="実際の修正例">実際の修正例</h1>
 <ul>
-<li><a href="https://github.com/aiya000/hs-sonoda/commit/443638210a2920139ca846cfa17c2e5546087436">🐛 Fix a parse failure of XXX of <code>\x:XXX.x</code> - aiya000/hs-sonoda@4436382 - GitHub</a></li>
+<li><a href="https://github.com/aiya000/hs-sonoda/commit/443638210a2920139ca846cfa17c2e5546087436"><span class="emoji" data-emoji="bug">🐛</span> Fix a parse failure of XXX of <code>\x:XXX.x</code> - aiya000/hs-sonoda@4436382 - GitHub</a></li>
 </ul>
 
     <hr />
@@ -121,5 +149,7 @@ but [natType, boolType] are expected.</code></pre>
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

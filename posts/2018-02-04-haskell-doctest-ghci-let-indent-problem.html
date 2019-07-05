@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2018-02-04-haskell-doctest-ghci-let-indent-problem.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation" />
+    <meta property="og:description" content="Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation" />
+    <meta name="twitter:description" content="Haskellのdoctest (ghci) の:{..:}中のletでincorrect indentation" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2018/02/04</div>
     
@@ -53,7 +81,7 @@
 </div>
 
 <div class="post-body">
-    <p>こんな感じのdoctestを書いていると怒られた 😭</p>
+    <p>こんな感じのdoctestを書いていると怒られた <span class="emoji" data-emoji="sob">😭</span></p>
 <pre><code>-- &gt;&gt;&gt; :{
 -- &gt;&gt;&gt; let result = &quot;good&quot;
 -- &gt;&gt;&gt; &quot;good&quot;
@@ -73,13 +101,13 @@ expected: &quot;good&quot;
 -- &gt;&gt;&gt; &quot;good&quot;
 -- &gt;&gt;&gt; :}
 -- &quot;good&quot;</code></pre>
-<p>ちなみにこれもだめだった 😕</p>
+<p>ちなみにこれもだめだった <span class="emoji" data-emoji="confused">😕</span></p>
 <pre><code>-- &gt;&gt;&gt; :{
 -- &gt;&gt;&gt; let result = &quot;good&quot;
 -- &gt;&gt;&gt; return &quot;good&quot;
 -- &gt;&gt;&gt; :}
 -- &quot;good&quot;</code></pre>
-<p>マジかよ ❗ ❗</p>
+<p>マジかよ <span class="emoji" data-emoji="exclamation">❗</span> <span class="emoji" data-emoji="exclamation">❗</span></p>
 <hr />
 <p>参考までに、以下は「こんな感じ」の実例。</p>
 <pre><code>-- &gt;&gt;&gt; :{
@@ -152,5 +180,7 @@ expected: &quot;good&quot;
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

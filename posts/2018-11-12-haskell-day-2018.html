@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - HaskellDay 2018で登壇してきた（代数的構造について）</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - HaskellDay 2018で登壇してきた（代数的構造について）</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - HaskellDay 2018で登壇してきた（代数的構造について）" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - HaskellDay 2018で登壇してきた（代数的構造について）" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - HaskellDay 2018で登壇してきた（代数的構造について）</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2018-11-12-haskell-day-2018.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - HaskellDay 2018で登壇してきた（代数的構造について）" />
+    <meta property="og:description" content="HaskellDay 2018で登壇してきた（代数的構造について）" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - HaskellDay 2018で登壇してきた（代数的構造について）" />
+    <meta name="twitter:description" content="HaskellDay 2018で登壇してきた（代数的構造について）" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2018/11/12</div>
     
@@ -58,7 +86,7 @@
 </div>
 
 <div class="post-body">
-    <p><a href="https://haskell-jp.connpass.com/event/92617/">HaskellDay 2018</a>にて、 30分の発表を行ってきました！ 🐕</p>
+    <p><a href="https://haskell-jp.connpass.com/event/92617/">HaskellDay 2018</a>にて、 30分の発表を行ってきました！ <span class="emoji" data-emoji="dog2">🐕</span></p>
 <ul>
 <li><a href="https://haskell-jp.connpass.com/event/92617/">Haskell Day 2018 - connpass</a></li>
 <li><a href="https://aiya000.github.io/Maid/haskell-day-2018-algebra/">発表資料 - Semigroupとは？ Monoid？ 環？</a></li>
@@ -69,13 +97,13 @@
 </figure>
 <h1 id="やったこと">やったこと</h1>
 <h2 id="抑揚をつけない">抑揚をつけない</h2>
-<p>今回の発表では、 話すときに絶対に抑揚をつけないことに気をつけました 👀</p>
+<p>今回の発表では、 話すときに絶対に抑揚をつけないことに気をつけました <span class="emoji" data-emoji="eyes">👀</span></p>
 <p>僕の場合、 抑揚をつけると喉が「ｸﾞｯ」って鳴ってしまうので、 それを避けるためです。</p>
 <p>これによって若干の聞きやすさが生じたのではないかと思います。</p>
 <h2 id="speaker-notes">Speaker Notes</h2>
 <p>資料はreveal.jsで作成しました。 そしてreveal.jsにはSpeaker Notesという、 発表者だけに見えるカンペを予め書いておく機能があります。</p>
-<p>☝️ にある発表資料を開いて、 sキーを押していただくと表示されるのですが、 Speaker Notesがびっしり書いてあるのがわかるかと思います。</p>
-<p>これは「抑揚をつけない」にも関連していて、 これによってアドリブを抑えることができた気がします 😎</p>
+<p><span class="emoji" data-emoji="point_up">☝️</span> にある発表資料を開いて、 sキーを押していただくと表示されるのですが、 Speaker Notesがびっしり書いてあるのがわかるかと思います。</p>
+<p>これは「抑揚をつけない」にも関連していて、 これによってアドリブを抑えることができた気がします <span class="emoji" data-emoji="sunglasses">😎</span></p>
 <p>ただ書きすぎたので、 次は以下のように箇条書きにしてみる予定。</p>
 <pre><code>- 「閉じた」演算について
 - 「二項」演算について
@@ -94,7 +122,7 @@ $ stack ghc LastHalf.hs   # OK</code></pre>
 <p>という感じで検証をしたので、だるかったです。</p>
 <p>Re:VIEWとかと同じように、 コードを.hsに書いて、 文書側でincludeした方が全然楽。</p>
 <hr />
-<p>そんなこんなで発表したら、 数人に「すごいええやん」って言ってもらえたので、 とてもうれしかったです ☺️</p>
+<p>そんなこんなで発表したら、 数人に「すごいええやん」って言ってもらえたので、 とてもうれしかったです <span class="emoji" data-emoji="relaxed">☺️</span></p>
 
     <hr />
 
@@ -138,5 +166,7 @@ $ stack ghc LastHalf.hs   # OK</code></pre>
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

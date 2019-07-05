@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Run a program of Eff in pure contexts</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - Run a program of Eff in pure contexts</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Run a program of Eff in pure contexts" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Run a program of Eff in pure contexts" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Run a program of Eff in pure contexts</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2018-02-18-idris-effects-in-pure-context.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Run a program of Eff in pure contexts" />
+    <meta property="og:description" content="Run a program of Eff in pure contexts" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Run a program of Eff in pure contexts" />
+    <meta name="twitter:description" content="Run a program of Eff in pure contexts" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2018/02/18</div>
     
@@ -54,29 +82,29 @@
 
 <div class="post-body">
     <p>In a situation, I have a program (<code>Eff</code>) with a <code>STATE</code> effect, and the program is pure.</p>
-<p>It can be run in a pure context like below 😂</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control</span><span class="fu">.</span><span class="dt">Monad</span><span class="fu">.</span><span class="dt">Identity</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">State</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Effects</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="kw">let</span> <span class="dt">Id</span> (<span class="fu">_</span> <span class="fu">**</span> [s]) <span class="fu">=</span> runEnv {m<span class="fu">=</span><span class="dt">Identity</span>} [<span class="kw">default</span>] <span class="fu">$</span> update (<span class="fu">+</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  printLn s</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">-- {output}</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">-- 1</span></a></code></pre></div>
+<p>It can be run in a pure context like below <span class="emoji" data-emoji="joy">😂</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">import</span> <span class="dt">Control</span><span class="fu">.</span><span class="dt">Monad</span><span class="fu">.</span><span class="dt">Identity</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">State</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">import</span> <span class="dt">Effects</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-6" title="6">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="kw">let</span> <span class="dt">Id</span> (<span class="fu">_</span> <span class="fu">**</span> [s]) <span class="fu">=</span> runEnv {m<span class="fu">=</span><span class="dt">Identity</span>} [<span class="kw">default</span>] <span class="fu">$</span> update (<span class="fu">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-8" title="8">  printLn s</a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">-- 1</span></a></code></pre></div>
 <h1 id="ps">PS</h1>
-<p>I took a <a href="https://github.com/idris-lang/Idris-dev/pull/4338">Pull Request</a>, Above code can be written as below (no <code>Identity</code> is needed), if the PR is approved 🐕</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode idr"><code class="sourceCode idris"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">State</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Effects</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">-- runPureEnv : (env : Env Basics.id xs) -&gt; (prog : EffM Basics.id a xs xs') -&gt; (x : a ** Env Basics.id (xs' x))</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">-- runPureEnv env prog = eff env prog (\r, env =&gt; (r ** env))</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="kw">let</span> (<span class="fu">_</span> <span class="fu">**</span> [s]) <span class="fu">=</span> runPureEnv [<span class="kw">default</span>] <span class="fu">$</span> update (<span class="fu">+</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">  printLn s</a></code></pre></div>
+<p>I took a <a href="https://github.com/idris-lang/Idris-dev/pull/4338">Pull Request</a>, Above code can be written as below (no <code>Identity</code> is needed), if the PR is approved <span class="emoji" data-emoji="dog2">🐕</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode idr"><code class="sourceCode idris"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">State</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">import</span> <span class="dt">Effects</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">-- runPureEnv : (env : Env Basics.id xs) -&gt; (prog : EffM Basics.id a xs xs') -&gt; (x : a ** Env Basics.id (xs' x))</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">-- runPureEnv env prog = eff env prog (\r, env =&gt; (r ** env))</span></a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-8" title="8">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="kw">let</span> (<span class="fu">_</span> <span class="fu">**</span> [s]) <span class="fu">=</span> runPureEnv [<span class="kw">default</span>] <span class="fu">$</span> update (<span class="fu">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-10" title="10">  printLn s</a></code></pre></div>
 
     <hr />
 
@@ -120,5 +148,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

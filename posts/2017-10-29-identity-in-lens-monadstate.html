@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - lens（のMonadState演算子など）で自己に言及したい時はidを使う</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-10-29-identity-in-lens-monadstate.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
+    <meta property="og:description" content="lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
+    <meta name="twitter:description" content="lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2017/10/29</div>
     
@@ -55,43 +83,43 @@
 <div class="post-body">
     <h1 id="まとめ">まとめ</h1>
 <p>　lensにて。 例えば<code>Int</code>や<code>[Int]</code>のような単一の状態を持つ<code>MonadState</code>の文脈で、 状態自身（自己）に言及したい場合は、このようにすることで実現できる。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control.Lens</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Control.Monad.State.Lazy</span> (<span class="dt">StateT</span>, runStateT)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">main <span class="fu">=</span> runStateT context [<span class="dv">0</span>] <span class="fu">&gt;&gt;=</span> print</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">-- dequeue behavior</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="ot">context ::</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">context <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  id <span class="fu">%=</span> (<span class="dv">10</span> <span class="fu">&lt;|</span>)</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">  id <span class="fu">%=</span> (<span class="fu">|&gt;</span> <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">-- {output}</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">-- ((),[10,0,20])</span></a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">infix <span class="dv">4</span> <span class="fu">%=</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ot">(%=) ::</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span> <span class="dt">ASetter</span> s s a b <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> m ()</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ot">(%=) ::</span> <span class="dt">ASetter</span> s s a b <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> <span class="dt">StateT</span> s m ()</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ot">(%=) ::</span> <span class="dt">ASetter'</span> s a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> <span class="dt">StateT</span> s m ()</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="ot">(%=) ::</span> <span class="dt">ASetter'</span> [<span class="dt">Int</span>] [<span class="dt">Int</span>] <span class="ot">-&gt;</span> ([<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]) <span class="ot">-&gt;</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="ot">(&lt;|) ::</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="ot">(|&gt;) ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">(<span class="dv">10</span> <span class="fu">&lt;|</span>)<span class="ot"> ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">(<span class="fu">|&gt;</span> <span class="dv">20</span>)<span class="ot"> ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="kw">type</span> <span class="dt">ASetter'</span> s a <span class="fu">=</span> <span class="dt">ASetter</span> s s a a</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">type</span> <span class="dt">ASetter</span> s t a b <span class="fu">=</span> (a <span class="ot">-&gt;</span> <span class="dt">Identity</span> b) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Identity</span> t</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">id<span class="ot"> ::</span> p s (f a) <span class="ot">-&gt;</span> p s (f a)</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">id<span class="ot"> ::</span> (s <span class="ot">-&gt;</span> f a) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> f a</a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">id<span class="ot"> ::</span> (s <span class="ot">-&gt;</span> <span class="dt">Identity</span> a) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Identity</span> a</a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">id<span class="ot"> ::</span> <span class="dt">ASetter'</span> s a</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">id<span class="ot"> ::</span> <span class="dt">ASetter'</span> [<span class="dt">Int</span>] [<span class="dt">Int</span>]</a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">-- なので</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">(id <span class="fu">%=</span>)<span class="ot"> ::</span> ([<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]) <span class="ot">-&gt;</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">import</span> <span class="dt">Control.Lens</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">import</span> <span class="dt">Control.Monad.State.Lazy</span> (<span class="dt">StateT</span>, runStateT)</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-5" title="5">main <span class="ot">=</span> runStateT context [<span class="dv">0</span>] <span class="op">&gt;&gt;=</span> <span class="fu">print</span></a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">-- dequeue behavior</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="ot">context ::</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-9" title="9">context <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="fu">id</span> <span class="op">%=</span> (<span class="dv">10</span> <span class="op">&lt;|</span>)</a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="fu">id</span> <span class="op">%=</span> (<span class="op">|&gt;</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co">-- {output}</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="co">-- ((),[10,0,20])</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1">infix <span class="dv">4</span> <span class="op">%=</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="ot">(%=) ::</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span> <span class="dt">ASetter</span> s s a b <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> m ()</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="ot">(%=) ::</span> <span class="dt">ASetter</span> s s a b <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> <span class="dt">StateT</span> s m ()</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="ot">(%=) ::</span> <span class="dt">ASetter'</span> s a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> <span class="dt">StateT</span> s m ()</a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="ot">(%=) ::</span> <span class="dt">ASetter'</span> [<span class="dt">Int</span>] [<span class="dt">Int</span>] <span class="ot">-&gt;</span> ([<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]) <span class="ot">-&gt;</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="ot">(&lt;|) ::</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="ot">(|&gt;) ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10">(<span class="dv">10</span> <span class="op">&lt;|</span>)<span class="ot"> ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
+<a class="sourceLine" id="cb2-11" title="11">(<span class="op">|&gt;</span> <span class="dv">20</span>)<span class="ot"> ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
+<a class="sourceLine" id="cb2-12" title="12"></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="kw">type</span> <span class="dt">ASetter'</span> s a <span class="ot">=</span> <span class="dt">ASetter</span> s s a a</a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="kw">type</span> <span class="dt">ASetter</span> s t a b <span class="ot">=</span> (a <span class="ot">-&gt;</span> <span class="dt">Identity</span> b) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Identity</span> t</a>
+<a class="sourceLine" id="cb2-15" title="15"></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="fu">id</span><span class="ot"> ::</span> p s (f a) <span class="ot">-&gt;</span> p s (f a)</a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="fu">id</span><span class="ot"> ::</span> (s <span class="ot">-&gt;</span> f a) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> f a</a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="fu">id</span><span class="ot"> ::</span> (s <span class="ot">-&gt;</span> <span class="dt">Identity</span> a) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Identity</span> a</a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="fu">id</span><span class="ot"> ::</span> <span class="dt">ASetter'</span> s a</a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="fu">id</span><span class="ot"> ::</span> <span class="dt">ASetter'</span> [<span class="dt">Int</span>] [<span class="dt">Int</span>]</a>
+<a class="sourceLine" id="cb2-21" title="21"></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co">-- なので</span></a>
+<a class="sourceLine" id="cb2-23" title="23"></a>
+<a class="sourceLine" id="cb2-24" title="24">(<span class="fu">id</span> <span class="op">%=</span>)<span class="ot"> ::</span> ([<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]) <span class="ot">-&gt;</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a></code></pre></div>
 <p>　ちなみに<code>Control.Lens.Equality</code>の<code>simple :: Equality' a a</code>の実定義は<code>id</code>。</p>
 <h1 id="参考">参考</h1>
 <ul>
@@ -145,5 +173,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

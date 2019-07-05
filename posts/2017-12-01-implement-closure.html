@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - 不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - 不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - 不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - 不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -35,6 +47,22 @@
         </nav>
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - 不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-12-01-implement-closure.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - 不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題" />
+    <meta property="og:description" content="不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - 不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題" />
+    <meta name="twitter:description" content="不変性を仮定した、環境をキャプチャしないクロージャ生成アルゴリズムとその問題" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
 
 <div class="post-info">
     <div class="post-date">2017/12/01</div>
@@ -69,7 +97,7 @@
 
 <div class="post-body">
     <p>　この記事は<a href="https://qiita.com/advent-calendar/2017/lang_dev">言語実装 Advent Calendar 2017</a>の、 12月1日の記事です。</p>
-<p>ファーストバッターやっていき 💪</p>
+<p>ファーストバッターやっていき <span class="emoji" data-emoji="muscle">💪</span></p>
 <h1 id="始まり">始まり</h1>
 <p>　皆さんは常々クロージャを作っていると思うのですが、 どのように作ってらっしゃるのでしょうか。</p>
 <p>環境全てをキャプチャ？</p>
@@ -80,18 +108,18 @@
 <p>　このLisp処理系の評価戦略は値呼びで、 スコープはレキシカルスコープです。</p>
 <h1 id="どんなアルゴリズム">どんなアルゴリズム？</h1>
 <p>　以下のようなとても基本的なクロージャを考えます。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb1-1" data-line-number="1">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">(def f (fn (a) x))</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">(f <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">; 10</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb1-1" title="1">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">(def f (fn (a) x))</a>
+<a class="sourceLine" id="cb1-3" title="3">(f <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">; 10</span></a></code></pre></div>
 <p><code>def</code>マクロは、渡された式を評価し、その結果を<strong>グローバル</strong>変数に束縛します。<br />
 <code>fn</code>マクロは一時関数を作成します（いわゆるラムダ式）。</p>
 <p>　このとき<code>(def f (fn (a) x))</code>によって<code>(fn (a) x)</code>が評価されたタイミングで、 その中の変数<code>x</code>をその実値である<code>(fn (a) 10)</code>として<strong>展開</strong>し、 最後にそれを<code>f</code>に束縛します。</p>
 <p>（以下、<code>===</code>は展開を表します）</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb2-1" data-line-number="1">(def f (fn (a) x))</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">===</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">; xを削除（置き換え）</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">(def f (fn (a) <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb2-1" title="1">(def f (fn (a) x))</a>
+<a class="sourceLine" id="cb2-2" title="2">===</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">; xを削除（置き換え）</span></a>
+<a class="sourceLine" id="cb2-4" title="4">(def f (fn (a) <span class="dv">10</span>))</a></code></pre></div>
 <h2 id="展開">展開？</h2>
 <hr />
 <p>※追記</p>
@@ -104,90 +132,90 @@
 </ul>
 <hr />
 <p>　「展開」は、外部環境の変数をその変数の値で（再帰的に）置き換えます。</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb3-1" data-line-number="1">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">(def f (fn (a) x))</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">===</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">; xを削除</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">(def f (fn (a) <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb3-1" title="1">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2">(def f (fn (a) x))</a>
+<a class="sourceLine" id="cb3-3" title="3">===</a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">; xを削除</span></a>
+<a class="sourceLine" id="cb3-5" title="5">(def f (fn (a) <span class="dv">10</span>))</a></code></pre></div>
 <p>「展開」は仮引数の変数を展開しません。</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb4-1" data-line-number="1">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">(def f (fn (a) (<span class="kw">do</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">    x</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">    a)))</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">===</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">; aを削除しない</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">(def f (fn (a) (<span class="kw">do</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="dv">10</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">    a)))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb4-1" title="1">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2">(def f (fn (a) (<span class="kw">do</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    x</a>
+<a class="sourceLine" id="cb4-4" title="4">    a)))</a>
+<a class="sourceLine" id="cb4-5" title="5">===</a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">; aを削除しない</span></a>
+<a class="sourceLine" id="cb4-7" title="7">(def f (fn (a) (<span class="kw">do</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="dv">10</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    a)))</a></code></pre></div>
 <p>「展開」は<code>+ - * /</code>などの基本的なシンボルとマクロのシンボルを展開しません。<br />
 （ここで「基本的な」とは、 実体がS式でない、これ以上は他のS式に展開できないことを表しますこと（実装がネイティブ実装である） ことを表します。）</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb5-1" data-line-number="1">(def *x* <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">(def plus (fn (x y) (<span class="op">+</span> x y *x*)))</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">(def f (fn () (<span class="kw">do</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">    (<span class="kw">print</span> (plus <span class="dv">1</span> <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">    (plus <span class="dv">1</span> <span class="dv">2</span>))))</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">===</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">(def *x* <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">; plusを削除（plusは(fn (x y) (+ x y *x*))に展開できる）</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">(def f (fn () (<span class="kw">do</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">    (<span class="kw">print</span> ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">    ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))))</a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">===</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">; *x*を削除</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">(def f (fn () (<span class="kw">do</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">    (<span class="kw">print</span> ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">    ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))))</a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">; +, print, fnは展開されない</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb5-1" title="1">(def *x* <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2">(def plus (fn (x y) (<span class="op">+</span> x y *x*)))</a>
+<a class="sourceLine" id="cb5-3" title="3">(def f (fn () (<span class="kw">do</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    (<span class="kw">print</span> (plus <span class="dv">1</span> <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb5-5" title="5">    (plus <span class="dv">1</span> <span class="dv">2</span>))))</a>
+<a class="sourceLine" id="cb5-6" title="6">===</a>
+<a class="sourceLine" id="cb5-7" title="7">(def *x* <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">; plusを削除（plusは(fn (x y) (+ x y *x*))に展開できる）</span></a>
+<a class="sourceLine" id="cb5-9" title="9">(def f (fn () (<span class="kw">do</span></a>
+<a class="sourceLine" id="cb5-10" title="10">    (<span class="kw">print</span> ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb5-11" title="11">    ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))))</a>
+<a class="sourceLine" id="cb5-12" title="12">===</a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co">; *x*を削除</span></a>
+<a class="sourceLine" id="cb5-14" title="14">(def f (fn () (<span class="kw">do</span></a>
+<a class="sourceLine" id="cb5-15" title="15">    (<span class="kw">print</span> ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb5-16" title="16">    ((fn (x y) (<span class="op">+</span> x y *x*)) <span class="dv">1</span> <span class="dv">2</span>))))</a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="co">; +, print, fnは展開されない</span></a></code></pre></div>
 <p>「展開」は再帰的に行われます。</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb6-1" data-line-number="1">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">(def y x)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">(def f (fn (a) y))</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">===</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">(def f (fn (a) x))</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">===</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">(def f (fn (a) <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb6-1" title="1">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2">(def y x)</a>
+<a class="sourceLine" id="cb6-3" title="3">(def f (fn (a) y))</a>
+<a class="sourceLine" id="cb6-4" title="4">===</a>
+<a class="sourceLine" id="cb6-5" title="5">(def f (fn (a) x))</a>
+<a class="sourceLine" id="cb6-6" title="6">===</a>
+<a class="sourceLine" id="cb6-7" title="7">(def f (fn (a) <span class="dv">10</span>))</a></code></pre></div>
 <p>「展開」は（いわゆる）評価を行いません。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb7-1" data-line-number="1">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">(def f (fn (a) (<span class="kw">do</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">    (<span class="kw">print</span> x)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">    (<span class="op">+</span> x <span class="dv">1</span>))))</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">===</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">(def f (fn (a) (<span class="kw">do</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">    (<span class="kw">print</span> <span class="dv">10</span>)  <span class="co">; 10は出力されない</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">    (<span class="op">+</span> <span class="dv">10</span> <span class="dv">1</span>)))) <span class="co">; (+ 10 1)は11に評価されない</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">; ここで展開は止まる</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb7-1" title="1">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2">(def f (fn (a) (<span class="kw">do</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    (<span class="kw">print</span> x)</a>
+<a class="sourceLine" id="cb7-4" title="4">    (<span class="op">+</span> x <span class="dv">1</span>))))</a>
+<a class="sourceLine" id="cb7-5" title="5">===</a>
+<a class="sourceLine" id="cb7-6" title="6">(def f (fn (a) (<span class="kw">do</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    (<span class="kw">print</span> <span class="dv">10</span>)  <span class="co">; 10は出力されない</span></a>
+<a class="sourceLine" id="cb7-8" title="8">    (<span class="op">+</span> <span class="dv">10</span> <span class="dv">1</span>)))) <span class="co">; (+ 10 1)は11に評価されない</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">; ここで展開は止まる</span></a></code></pre></div>
 <p>　つまるところ展開は、 できるところまで変数をその値に置き換え、 そしてそれは（いわゆる）評価ではない。 って感じです。</p>
 <h2 id="備考1-展開が行われるタイミングについて">備考1: 展開が行われるタイミングについて</h2>
 <p>　「展開」は、<code>(fn {func-name} {body})</code>の書式に沿ったS式が被評価される際に実行されます。</p>
 <p>例えば</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb8-1" data-line-number="1">(def f (fn (x) x))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb8-1" title="1">(def f (fn (x) x))</a></code></pre></div>
 <p>ここでの<code>def</code>マクロは加評価（評価する側）で、 <code>(fn (x) x)</code>は被評価（評価される側）です。</p>
 <p>　そして例えば<code>(fn {func-name} {body})</code>が関数適用（加評価）のがわになる場合は、 展開は特には要請されません。</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1">(def <span class="fu">*</span>x<span class="fu">*</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">((fn (x) (fn () (<span class="fu">+</span> <span class="fu">*</span>x<span class="fu">*</span> x))) <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="fu">===</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">; ここで<span class="fu">*</span>x<span class="fu">*</span>を展開してもしなくてもしなくても、特には変わらない</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">(def <span class="fu">*</span>x<span class="fu">*</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">(fn () (<span class="fu">+</span> <span class="fu">*</span>x<span class="fu">*</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1">(def <span class="op">*</span>x<span class="op">*</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb9-2" title="2">((fn (x) (fn () (<span class="op">+</span> <span class="op">*</span>x<span class="op">*</span> x))) <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="op">===</span></a>
+<a class="sourceLine" id="cb9-4" title="4">; ここで<span class="op">*</span>x<span class="op">*</span>を展開してもしなくてもしなくても、特には変わらない</a>
+<a class="sourceLine" id="cb9-5" title="5">(def <span class="op">*</span>x<span class="op">*</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb9-6" title="6">(fn () (<span class="op">+</span> <span class="op">*</span>x<span class="op">*</span> <span class="dv">1</span>))</a></code></pre></div>
 <h2 id="備考2-順序は問われない">備考2: 順序は問われない</h2>
 <p>　さっきから</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb10-1" data-line-number="1">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">(def y x)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">(def f (fn () y))</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">===</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">(def f (fn () x))</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">===</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">(def f (fn () <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb10-1" title="1">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb10-2" title="2">(def y x)</a>
+<a class="sourceLine" id="cb10-3" title="3">(def f (fn () y))</a>
+<a class="sourceLine" id="cb10-4" title="4">===</a>
+<a class="sourceLine" id="cb10-5" title="5">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb10-6" title="6">(def f (fn () x))</a>
+<a class="sourceLine" id="cb10-7" title="7">===</a>
+<a class="sourceLine" id="cb10-8" title="8">(def f (fn () <span class="dv">10</span>))</a></code></pre></div>
 <p>だったり</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb11-1" data-line-number="1">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">(def y x)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">(def f (fn () y))</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">===</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">(def y <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb11-6" data-line-number="6">(def f (fn () y))</a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">===</a>
-<a class="sourceLine" id="cb11-8" data-line-number="8">(def f (fn () <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb11-1" title="1">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb11-2" title="2">(def y x)</a>
+<a class="sourceLine" id="cb11-3" title="3">(def f (fn () y))</a>
+<a class="sourceLine" id="cb11-4" title="4">===</a>
+<a class="sourceLine" id="cb11-5" title="5">(def y <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb11-6" title="6">(def f (fn () y))</a>
+<a class="sourceLine" id="cb11-7" title="7">===</a>
+<a class="sourceLine" id="cb11-8" title="8">(def f (fn () <span class="dv">10</span>))</a></code></pre></div>
 <p>だったりしてますが、「展開」は ラムダ計算でいう（展開を適用とした）完全ベータ簡約だと思います。</p>
 <ul>
 <li><a href="https://ja.wikipedia.org/wiki/評価戦略#.E5.AE.8C.E5.85.A8.CE.B2-.E7.B0.A1.E7.B4.84">評価戦略（完全β-簡約） - Wikipedia</a></li>
@@ -209,37 +237,37 @@
 <h1 id="それによって起こる注意点および未解決の問題">それによって起こる注意点および未解決の問題</h1>
 <h2 id="不変性を仮定する必要がある">不変性を仮定する必要がある</h2>
 <p>　処理系で<code>setq</code>や<code>def</code>などによる、変数の再代入を許したときに、 作られたクロージャはそれに追随できません。</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb12-1" data-line-number="1">(def x <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">(def f (fn () x))</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">(f) <span class="co">; 10</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">(<span class="kw">setq</span> x <span class="dv">20</span>) <span class="co">; xを20に変更</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">(f) <span class="co">; 10</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">; ↑ 20ではない</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb12-1" title="1">(def x <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb12-2" title="2">(def f (fn () x))</a>
+<a class="sourceLine" id="cb12-3" title="3">(f) <span class="co">; 10</span></a>
+<a class="sourceLine" id="cb12-4" title="4">(<span class="kw">setq</span> x <span class="dv">20</span>) <span class="co">; xを20に変更</span></a>
+<a class="sourceLine" id="cb12-5" title="5">(f) <span class="co">; 10</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">; ↑ 20ではない</span></a></code></pre></div>
 <p>なので不変性を仮定する必要があります。</p>
 <p>具体的には、<code>setq</code>を定義しない。 <code>def</code>による変数の再定義を禁止するか、名前の上書きと見做すということが必要になります。</p>
 <p>上書きの見做し</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb13-1" data-line-number="1">(def x <span class="dv">10</span>) <span class="co">; A</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">(def x <span class="dv">20</span>) <span class="co">; B</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">; 以下、&quot;x&quot;というシンボルを用いたときは常にBが参照され、Aは参照できない。</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb13-1" title="1">(def x <span class="dv">10</span>) <span class="co">; A</span></a>
+<a class="sourceLine" id="cb13-2" title="2">(def x <span class="dv">20</span>) <span class="co">; B</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="co">; 以下、&quot;x&quot;というシンボルを用いたときは常にBが参照され、Aは参照できない。</span></a></code></pre></div>
 <h2 id="再帰関数をdefとfnの組み合わせで定義できない">再帰関数をdefとfnの組み合わせで定義できない</h2>
 <p>　関数定義を行う<code>defn</code>マクロを考えます。 これは（僕のように）短絡的に考えると、<code>def</code>と<code>fn</code>の組み合わせで実現できそうです。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb14-1" data-line-number="1">(defn f (x) (<span class="op">+</span> x <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">===</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">(def f (fn (x) (<span class="op">+</span> x <span class="dv">10</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb14-1" title="1">(defn f (x) (<span class="op">+</span> x <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb14-2" title="2">===</a>
+<a class="sourceLine" id="cb14-3" title="3">(def f (fn (x) (<span class="op">+</span> x <span class="dv">10</span>)))</a></code></pre></div>
 <p>しかし同じように再帰関数を定義しようとすると、展開が必ず無限再帰します。</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb15-1" data-line-number="1">(defn f (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>)))))</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">===</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">; defとfnに分解</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))))</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">===</a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">; 浅いfを削除</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))</a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">===</a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))</a>
-<a class="sourceLine" id="cb15-10" data-line-number="10">===</a>
-<a class="sourceLine" id="cb15-11" data-line-number="11">(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))</a>
-<a class="sourceLine" id="cb15-12" data-line-number="12">===</a>
-<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">; 襲い来る無限再帰</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb15-1" title="1">(defn f (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>)))))</a>
+<a class="sourceLine" id="cb15-2" title="2">===</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co">; defとfnに分解</span></a>
+<a class="sourceLine" id="cb15-4" title="4">(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))))</a>
+<a class="sourceLine" id="cb15-5" title="5">===</a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="co">; 浅いfを削除</span></a>
+<a class="sourceLine" id="cb15-7" title="7">(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))</a>
+<a class="sourceLine" id="cb15-8" title="8">===</a>
+<a class="sourceLine" id="cb15-9" title="9">(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))</a>
+<a class="sourceLine" id="cb15-10" title="10">===</a>
+<a class="sourceLine" id="cb15-11" title="11">(def f (fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> ((fn (x) (<span class="kw">if</span> (<span class="op">=</span> x <span class="dv">0</span>) <span class="dv">0</span> (<span class="op">+</span> <span class="dv">10</span> (f (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))) (<span class="op">-</span> x <span class="dv">1</span>))))))</a>
+<a class="sourceLine" id="cb15-12" title="12">===</a>
+<a class="sourceLine" id="cb15-13" title="13"><span class="co">; 襲い来る無限再帰</span></a></code></pre></div>
 <p>どうしようかね？</p>
 <h1 id="参考ページ">参考ページ</h1>
 <ul>
@@ -296,5 +324,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

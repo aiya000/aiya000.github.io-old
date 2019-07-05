@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -35,6 +47,22 @@
         </nav>
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-05-06-learn-haskell-with-muse.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」" />
+    <meta property="og:description" content="ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」" />
+    <meta name="twitter:description" content="ことり、穂乃果と一緒に学ぶHaskell（入門）その1「代数的データ型の定義」" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
 
 <div class="post-info">
     <div class="post-date">2017/05/06</div>
@@ -146,19 +174,19 @@
 </ol></li>
 </ol>
 <p>穂乃果「はーい！　これくらい簡単だよ！」</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">class</span> <span class="bu">Member</span> {</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">	<span class="kw">public</span> <span class="bu">Member</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">	}</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">class</span> <span class="bu">Member</span> {</a>
+<a class="sourceLine" id="cb1-2" title="2">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
+<a class="sourceLine" id="cb1-3" title="3">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
+<a class="sourceLine" id="cb1-4" title="4">	<span class="kw">public</span> <span class="bu">Member</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</a>
+<a class="sourceLine" id="cb1-5" title="5">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
+<a class="sourceLine" id="cb1-6" title="6">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
+<a class="sourceLine" id="cb1-7" title="7">	}</a>
+<a class="sourceLine" id="cb1-8" title="8">}</a></code></pre></div>
 <p>ことり「よくできました☆」ﾅﾃﾞﾅﾃﾞ<br />
 穂乃果「わーい！　わーい！」ｴﾍﾍﾍﾍ</p>
 <p>ことり「このコードをHaskellに直していくね」<br />
 ことり「Haskellでは、代数的データ型を<code>data</code>というキーワードを使って、作っていきます」</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="fu">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a></code></pre></div>
 <p>穂乃果「すごーい！　1行で書けちゃうんだー！」<br />
 ことり「うん、<strong>Haskellはよく、記述量が少ないって言われるんだー。</strong>　って穂乃果ちゃん、これくらいは授業でも見たはずじゃ……」<br />
 穂乃果「えへへ、実は<code>data</code>がこういうのを作るものだってことも、まだわかってなくて……」</p>
@@ -169,9 +197,9 @@
 ことり「ことり先生なんて……ｴﾍﾍ」</p>
 <p>ことり「これを実際に使うには……そうだ穂乃果ちゃん。　<code>main</code>ってもう習ったかなあ？」<br />
 穂乃果「習った！　穂乃果、<code>main</code>ならわかるよ！」</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  print <span class="dv">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb3-2" title="2">main <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="fu">print</span> <span class="dv">10</span></a></code></pre></div>
 <p>穂乃果「こういうやつ！」<br />
 ことり「さすが穂乃果ちゃん♪」<br />
 穂乃果「あっでもね……<code>:: IO ()</code>とか、<code>do</code>とかもよくわかってなくって……」<br />
@@ -183,17 +211,17 @@
 <p>穂乃果「10が表示されたね！　これくらいなら穂乃果もわかるよっ！」<br />
 ことり「さすがさすが♪」</p>
 <p>ことり「じゃあちょっと前の内容に戻って……Javaで、Memberクラスのインスタンスを生成するコードを書いてみてくれるかな」</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> Test {</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">		<span class="bu">Member</span> kotori = <span class="kw">new</span> <span class="bu">Member</span>(<span class="st">&quot;南ことり&quot;</span>, <span class="dv">16</span>);</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">	}</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">public</span> <span class="kw">class</span> Test {</a>
+<a class="sourceLine" id="cb5-2" title="2">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
+<a class="sourceLine" id="cb5-3" title="3">		<span class="bu">Member</span> kotori = <span class="kw">new</span> <span class="bu">Member</span>(<span class="st">&quot;南ことり&quot;</span>, <span class="dv">16</span>);</a>
+<a class="sourceLine" id="cb5-4" title="4">	}</a>
+<a class="sourceLine" id="cb5-5" title="5">}</a></code></pre></div>
 <p>穂乃果「こんな感じ？」<br />
 ことり「そんな感じだね、ありがとう♪　これをHaskellに直すとこうなるよ」</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="kw">let</span> kotori <span class="fu">=</span> <span class="dt">Member</span> <span class="st">&quot;南ことり&quot;</span> <span class="dv">16</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">  return ()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb6-2" title="2">main <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">let</span> kotori <span class="ot">=</span> <span class="dt">Member</span> <span class="st">&quot;南ことり&quot;</span> <span class="dv">16</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="fu">return</span> ()</a></code></pre></div>
 <p>穂乃果「<code>let</code>？　<code>return ()</code>？」<br />
 ことり「<code>let</code>は変数の定義に使うキーワードだよ！　Haskellだと、変数名の前に型名を書かなくてもいいの！」<br />
 ことり「<code>return ()</code>は……今は単なるno operationだと思っておいて欲しいな☆」<br />
@@ -202,30 +230,30 @@
 <p>ことり「次は、Memberデータ型を<code>main</code>で表示してみるよ」</p>
 <p>ことり「Javaでは、<code>toString()</code>っていうメソッドをオーバーライドすることがあったよね」<br />
 穂乃果「クラスインスタンスをprintするときに、いい感じにするあれ……だよね？」</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">class</span> <span class="bu">Member</span> {</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">	<span class="kw">public</span> <span class="bu">Member</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">	}</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">	<span class="at">@Override</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span>() {</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">		<span class="kw">return</span> <span class="st">&quot;Member &quot;</span> + <span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot; &quot;</span> + <span class="kw">this</span>.<span class="fu">age</span>;</a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">	}</a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">}</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">class</span> <span class="bu">Member</span> {</a>
+<a class="sourceLine" id="cb7-2" title="2">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
+<a class="sourceLine" id="cb7-3" title="3">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
+<a class="sourceLine" id="cb7-4" title="4">	<span class="kw">public</span> <span class="bu">Member</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</a>
+<a class="sourceLine" id="cb7-5" title="5">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
+<a class="sourceLine" id="cb7-6" title="6">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
+<a class="sourceLine" id="cb7-7" title="7">	}</a>
+<a class="sourceLine" id="cb7-8" title="8"></a>
+<a class="sourceLine" id="cb7-9" title="9">	<span class="at">@Override</span></a>
+<a class="sourceLine" id="cb7-10" title="10">	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span>() {</a>
+<a class="sourceLine" id="cb7-11" title="11">		<span class="kw">return</span> <span class="st">&quot;Member &quot;</span> + <span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot; &quot;</span> + <span class="kw">this</span>.<span class="fu">age</span>;</a>
+<a class="sourceLine" id="cb7-12" title="12">	}</a>
+<a class="sourceLine" id="cb7-13" title="13">}</a></code></pre></div>
 <p>ことり「そうそう！　これはこう書けるよ」</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="fu">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
 <p>ことり「<code>deriving (Show)</code>って行を追加したよ」<br />
 穂乃果「これも1行で書けちゃうの！？」<br />
 ことり「うん、そうなんだ♪　でも、もっと表示結果をカスタマイズしたいときは、もうちょっと書く必要があるかな」<br />
 ことり「<strong>こういう単純なパターンを実装したい時には、derivingっていうのを使うよ！</strong>」</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="kw">let</span> kotori <span class="fu">=</span> <span class="dt">Member</span> <span class="st">&quot;南ことり&quot;</span> <span class="dv">16</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">  print kotori</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb9-2" title="2">main <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="kw">let</span> kotori <span class="ot">=</span> <span class="dt">Member</span> <span class="st">&quot;南ことり&quot;</span> <span class="dv">16</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="fu">print</span> kotori</a></code></pre></div>
 <p>ことり「実行っと」</p>
 <pre class="console"><code>$ stack runghc -- DataType.hs
 Member &quot;南ことり&quot; 16</code></pre>
@@ -289,5 +317,7 @@ Member &quot;南ことり&quot; 16</code></pre>
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

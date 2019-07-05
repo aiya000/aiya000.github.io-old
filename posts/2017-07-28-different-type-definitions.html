@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - typeでは型引数を省略しないと高階型クラスインスタンスにできない</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - typeでは型引数を省略しないと高階型クラスインスタンスにできない</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - typeでは型引数を省略しないと高階型クラスインスタンスにできない" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - typeでは型引数を省略しないと高階型クラスインスタンスにできない" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - typeでは型引数を省略しないと高階型クラスインスタンスにできない</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-07-28-different-type-definitions.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - typeでは型引数を省略しないと高階型クラスインスタンスにできない" />
+    <meta property="og:description" content="typeでは型引数を省略しないと高階型クラスインスタンスにできない" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - typeでは型引数を省略しないと高階型クラスインスタンスにできない" />
+    <meta name="twitter:description" content="typeでは型引数を省略しないと高階型クラスインスタンスにできない" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2017/07/28</div>
     
@@ -53,40 +81,40 @@
 </div>
 
 <div class="post-body">
-    <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">class</span> <span class="dt">Foo</span> (<span class="ot">a ::</span> <span class="fu">*</span> <span class="ot">-&gt;</span> <span class="fu">*</span>)</a></code></pre></div>
+    <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">class</span> <span class="dt">Foo</span> (<span class="ot">a ::</span> <span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span>)</a></code></pre></div>
 <p>　のように、高階型に実装されることを要求する型クラスに対して</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Bar</span> a <span class="fu">=</span> <span class="dt">Bar</span> <span class="dt">Int</span> a</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">type</span> <span class="dt">Baz</span> a b <span class="fu">=</span> <span class="dt">Either</span> (<span class="dt">Bar</span> a) b</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">data</span> <span class="dt">Bar</span> a <span class="ot">=</span> <span class="dt">Bar</span> <span class="dt">Int</span> a</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">type</span> <span class="dt">Baz</span> a b <span class="ot">=</span> <span class="dt">Either</span> (<span class="dt">Bar</span> a) b</a></code></pre></div>
 <p>のようにすると</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">class</span> <span class="dt">Foo</span> (<span class="dt">Baz</span> a)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">class</span> <span class="dt">Foo</span> (<span class="dt">Baz</span> a)</a></code></pre></div>
 <p>できなくなってしまって</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Baz</span> a <span class="fu">=</span> <span class="dt">Either</span> (<span class="dt">Bar</span> a)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">type</span> <span class="dt">Baz</span> a <span class="ot">=</span> <span class="dt">Either</span> (<span class="dt">Bar</span> a)</a></code></pre></div>
 <p>のようにするとできるという感じです。</p>
 <hr />
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">{-# LANGUAGE FlexibleInstances #-}</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="ot">{-# LANGUAGE TypeSynonymInstances #-}</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, (:&gt;))</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw">import</span> <span class="dt">Control.Eff.Exception</span> (<span class="dt">Fail</span>, throwExc)</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">import</span> <span class="dt">Control.Monad.Fail</span> (<span class="dt">MonadFail</span>(..))</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">import</span> <span class="dt">Data.Void</span> (<span class="dt">Void</span>)</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="kw">import</span> <span class="dt">Prelude</span> <span class="kw">hiding</span> (fail)</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">-- `a`をつけると</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="kw">type</span> <span class="dt">Mine</span> a <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Fail</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>) a</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">-- compile error !</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="kw">instance</span> <span class="dt">MonadFail</span> <span class="dt">Mine</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">  fail _ <span class="fu">=</span> throwExc ()</a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb5-19" data-line-number="19">main <span class="fu">=</span> return ()</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">{-# LANGUAGE FlexibleInstances #-}</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="ot">{-# LANGUAGE TypeSynonymInstances #-}</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">import</span> <span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, (:&gt;))</a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="kw">import</span> <span class="dt">Control.Eff.Exception</span> (<span class="dt">Fail</span>, throwExc)</a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="kw">import</span> <span class="dt">Control.Monad.Fail</span> (<span class="dt">MonadFail</span>(..))</a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="kw">import</span> <span class="dt">Data.Void</span> (<span class="dt">Void</span>)</a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="kw">import</span> <span class="dt">Prelude</span> <span class="kw">hiding</span> (fail)</a>
+<a class="sourceLine" id="cb5-10" title="10"></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">-- `a`をつけると</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="kw">type</span> <span class="dt">Mine</span> a <span class="ot">=</span> <span class="dt">Eff</span> (<span class="dt">Fail</span> <span class="op">:&gt;</span> <span class="dt">Void</span>) a</a>
+<a class="sourceLine" id="cb5-13" title="13"></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="co">-- compile error !</span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="kw">instance</span> <span class="dt">MonadFail</span> <span class="dt">Mine</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb5-16" title="16">  <span class="fu">fail</span> _ <span class="ot">=</span> throwExc ()</a>
+<a class="sourceLine" id="cb5-17" title="17"></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb5-19" title="19">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
 <pre><code>Test.hs|13 col 10| error:
      • The type synonym ‘Mine’ should have 1 argument, but has been given none
      • In the instance declaration for ‘MonadFail Mine’</code></pre>
 <p><code>Mine</code>の型引数<code>a</code>を消してみるとコンパイルが通る。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Mine</span> <span class="fu">=</span> <span class="dt">Eff</span> (<span class="dt">Fail</span> <span class="fu">:&gt;</span> <span class="dt">Void</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">type</span> <span class="dt">Mine</span> <span class="ot">=</span> <span class="dt">Eff</span> (<span class="dt">Fail</span> <span class="op">:&gt;</span> <span class="dt">Void</span>)</a></code></pre></div>
 <p>つまりモナドスタックのような構造のうち部分は、このような</p>
 
     <hr />
@@ -131,5 +159,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

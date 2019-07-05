@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - 【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - 【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - 【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - 【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - 【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-06-12-profunctor-benri.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - 【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！" />
+    <meta property="og:description" content="【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - 【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！" />
+    <meta name="twitter:description" content="【結論】Textの中のStringにmap：String→StringするにはProfunctorが一番！" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2017/06/12</div>
     
@@ -55,47 +83,47 @@
 <div class="post-body">
     <h1 id="起">起</h1>
 <p>　ときどきTextにpack,unpackを介してString -&gt; Stringしたくなるシチュエーションに出会う。 でも普通に関数合成すると、なんだか格好悪いんだよね。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Data.Char</span> (toUpper)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">-- Data.TextのtoUpperを使えとか言っちゃだめ！ そしたら別の適切な例を教えて！</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="ot">upper ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">upper <span class="fu">=</span> map toUpper</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="ot">x ::</span> <span class="dt">Text</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">x <span class="fu">=</span> <span class="st">&quot;nico&quot;</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">  <span class="kw">let</span> niconico <span class="fu">=</span> T.pack <span class="fu">.</span> upper <span class="fu">$</span> T.unpack x <span class="co">-- 格好悪い</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">  TIO.putStrLn niconico</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">import</span> <span class="dt">Data.Char</span> (toUpper)</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">-- Data.TextのtoUpperを使えとか言っちゃだめ！ そしたら別の適切な例を教えて！</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="ot">upper ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb1-10" title="10">upper <span class="ot">=</span> <span class="fu">map</span> <span class="fu">toUpper</span></a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="ot">x ::</span> <span class="dt">Text</span></a>
+<a class="sourceLine" id="cb1-13" title="13">x <span class="ot">=</span> <span class="st">&quot;nico&quot;</span></a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-16" title="16">main <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-17" title="17">  <span class="kw">let</span> niconico <span class="ot">=</span> T.pack <span class="op">.</span> upper <span class="op">$</span> T.unpack x <span class="co">-- 格好悪い</span></a>
+<a class="sourceLine" id="cb1-18" title="18">  TIO.putStrLn niconico</a></code></pre></div>
 <h1 id="結">結</h1>
 <p>　<code>Profunctor</code>の<code>dimap</code>を使う。 <code>(-&gt;)</code>Profunctorを使えばdomainとcodomainの変更を一気にできるので、 <code>Text -&gt; String</code>と<code>String -&gt; String</code>と<code>String -&gt; Text</code>を格好良くできる！（まあ中身は👆と全くおんなじなんだけどでも見栄えいい）</p>
 <p>　これはその型と同型の型への操作に一般化できますので、<code>newtype</code>にも応用できます。</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Data.Char</span> (toUpper)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Data.Profunctor</span> (dimap)</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="ot">upper ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">upper <span class="fu">=</span> map toUpper</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="ot">x ::</span> <span class="dt">Text</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">x <span class="fu">=</span> <span class="st">&quot;nico&quot;</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">  <span class="kw">let</span> niconico <span class="fu">=</span> dimap T.unpack T.pack upper x <span class="co">-- 平坦な構文に見えるので、見やすい</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">  TIO.putStrLn niconico</a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">-- newtype Identity a = Identity { runIdentity :: a }</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">dimap runIdentity <span class="dt">Identity</span> f x</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">import</span> <span class="dt">Data.Char</span> (toUpper)</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw">import</span> <span class="dt">Data.Profunctor</span> (dimap)</a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="ot">upper ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb2-10" title="10">upper <span class="ot">=</span> <span class="fu">map</span> <span class="fu">toUpper</span></a>
+<a class="sourceLine" id="cb2-11" title="11"></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="ot">x ::</span> <span class="dt">Text</span></a>
+<a class="sourceLine" id="cb2-13" title="13">x <span class="ot">=</span> <span class="st">&quot;nico&quot;</span></a>
+<a class="sourceLine" id="cb2-14" title="14"></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb2-16" title="16">main <span class="ot">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-17" title="17">  <span class="kw">let</span> niconico <span class="ot">=</span> dimap T.unpack T.pack upper x <span class="co">-- 平坦な構文に見えるので、見やすい</span></a>
+<a class="sourceLine" id="cb2-18" title="18">  TIO.putStrLn niconico</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="co">-- newtype Identity a = Identity { runIdentity :: a }</span></a>
+<a class="sourceLine" id="cb3-2" title="2">dimap runIdentity <span class="dt">Identity</span> f x</a></code></pre></div>
 <h1 id="その他">その他</h1>
 <ul>
 <li><a href="http://hackage.haskell.org/package/foundation-0.0.10/docs/Foundation-Collection.html#t:InnerFunctor">Foundation.Collection InnerFunctor - Hackage</a>
@@ -151,5 +179,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

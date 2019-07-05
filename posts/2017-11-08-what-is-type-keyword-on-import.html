@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-11-08-what-is-type-keyword-on-import.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）" />
+    <meta property="og:description" content="Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）" />
+    <meta name="twitter:description" content="Haskell（GHC）のimport/module構文に表れるのtypeキーワードについて（ExplicitNamespaces）" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2017/11/08</div>
     
@@ -57,79 +85,79 @@
 <hr />
 <p>　GHCのHaskellでは（おそらく主に）<code>DataKinds</code>拡張を用いる場合にて、以下のように <code>import</code>/<code>module</code>構文内で<code>type</code>キーワードが表れる場合がある。</p>
 <p>Main.hs</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">{-# LANGUAGE ExplicitNamespaces #-}</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Test</span> (type (==&gt;))</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">main <span class="fu">=</span> return ()</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">{-# LANGUAGE ExplicitNamespaces #-}</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">import</span> <span class="dt">Test</span> (type (==&gt;))</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-6" title="6">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
 <p>Test.hs</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE DataKinds #-}</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ot">{-# LANGUAGE PolyKinds #-}</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">module</span> <span class="dt">Test</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  ( <span class="kw">type</span> (<span class="fu">==&gt;</span>)</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">  ) <span class="kw">where</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="kw">type</span> family (<span class="ot">x ::</span> <span class="dt">Bool</span>) <span class="fu">==&gt;</span> (<span class="ot">y ::</span> <span class="dt">Bool</span>)<span class="ot"> ::</span> <span class="dt">Bool</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">  <span class="dt">False</span> <span class="fu">==&gt;</span> _     <span class="fu">=</span> <span class="dt">True</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">  <span class="dt">True</span>  <span class="fu">==&gt;</span> <span class="dt">False</span> <span class="fu">=</span> <span class="dt">False</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">  <span class="dt">True</span>  <span class="fu">==&gt;</span> <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">True</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">{-# LANGUAGE DataKinds #-}</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="ot">{-# LANGUAGE PolyKinds #-}</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">module</span> <span class="dt">Test</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  ( <span class="kw">type</span> (<span class="op">==&gt;</span>)</a>
+<a class="sourceLine" id="cb2-9" title="9">  ) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="kw">type</span> <span class="kw">family</span> (<span class="ot">x ::</span> <span class="dt">Bool</span>) <span class="op">==&gt;</span> (<span class="ot">y ::</span> <span class="dt">Bool</span>)<span class="ot"> ::</span> <span class="dt">Bool</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-12" title="12">  <span class="dt">False</span> <span class="op">==&gt;</span> _     <span class="ot">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="dt">True</span>  <span class="op">==&gt;</span> <span class="dt">False</span> <span class="ot">=</span> <span class="dt">False</span></a>
+<a class="sourceLine" id="cb2-14" title="14">  <span class="dt">True</span>  <span class="op">==&gt;</span> <span class="dt">True</span>  <span class="ot">=</span> <span class="dt">True</span></a></code></pre></div>
 <p>　これは厳密には<code>ExplicitNamespaces</code>拡張によって提供されている構文で、Main.hsとTest.hsを以下のように 改変した場合にわかりやすい。</p>
 <p>Main.hs</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">{-# LANGUAGE ExplicitNamespaces #-}</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Test</span> (type (==&gt;), (==&gt;))</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">main <span class="fu">=</span> print <span class="fu">$</span> <span class="dt">False</span> <span class="fu">==&gt;</span> <span class="dt">True</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">{-# LANGUAGE ExplicitNamespaces #-}</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">import</span> <span class="dt">Test</span> (type (==&gt;), (==&gt;))</a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb3-6" title="6">main <span class="ot">=</span> <span class="fu">print</span> <span class="op">$</span> <span class="dt">False</span> <span class="op">==&gt;</span> <span class="dt">True</span></a></code></pre></div>
 <p>Test.hs</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">{-# LANGUAGE DataKinds #-}</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ot">{-# LANGUAGE PolyKinds #-}</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw">module</span> <span class="dt">Test</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">  ( <span class="kw">type</span> (<span class="fu">==&gt;</span>)</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">  , (<span class="fu">==&gt;</span>)</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10">  ) <span class="kw">where</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="kw">type</span> family (<span class="ot">x ::</span> <span class="dt">Bool</span>) <span class="fu">==&gt;</span> (<span class="ot">y ::</span> <span class="dt">Bool</span>)<span class="ot"> ::</span> <span class="dt">Bool</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">  <span class="dt">False</span> <span class="fu">==&gt;</span> _     <span class="fu">=</span> <span class="dt">True</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14">  <span class="dt">True</span>  <span class="fu">==&gt;</span> <span class="dt">False</span> <span class="fu">=</span> <span class="dt">False</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15">  <span class="dt">True</span>  <span class="fu">==&gt;</span> <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">True</span></a>
-<a class="sourceLine" id="cb4-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="ot">(==&gt;) ::</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="dt">False</span> <span class="fu">==&gt;</span> _     <span class="fu">=</span> <span class="dt">True</span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="dt">True</span>  <span class="fu">==&gt;</span> <span class="dt">False</span> <span class="fu">=</span> <span class="dt">False</span></a>
-<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="dt">True</span>  <span class="fu">==&gt;</span> <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">True</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="ot">{-# LANGUAGE DataKinds #-}</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="ot">{-# LANGUAGE PolyKinds #-}</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw">module</span> <span class="dt">Test</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  ( <span class="kw">type</span> (<span class="op">==&gt;</span>)</a>
+<a class="sourceLine" id="cb4-9" title="9">  , (<span class="op">==&gt;</span>)</a>
+<a class="sourceLine" id="cb4-10" title="10">  ) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="kw">type</span> <span class="kw">family</span> (<span class="ot">x ::</span> <span class="dt">Bool</span>) <span class="op">==&gt;</span> (<span class="ot">y ::</span> <span class="dt">Bool</span>)<span class="ot"> ::</span> <span class="dt">Bool</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="dt">False</span> <span class="op">==&gt;</span> _     <span class="ot">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb4-14" title="14">  <span class="dt">True</span>  <span class="op">==&gt;</span> <span class="dt">False</span> <span class="ot">=</span> <span class="dt">False</span></a>
+<a class="sourceLine" id="cb4-15" title="15">  <span class="dt">True</span>  <span class="op">==&gt;</span> <span class="dt">True</span>  <span class="ot">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb4-16" title="16"></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="ot">(==&gt;) ::</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="dt">False</span> <span class="op">==&gt;</span> _     <span class="ot">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="dt">True</span>  <span class="op">==&gt;</span> <span class="dt">False</span> <span class="ot">=</span> <span class="dt">False</span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="dt">True</span>  <span class="op">==&gt;</span> <span class="dt">True</span>  <span class="ot">=</span> <span class="dt">True</span></a></code></pre></div>
 <p>　つまるところ、Main.hsで<code>type family</code>の型演算子<code>==&gt;</code>をimportときに<code>type</code>キーワードが必要になる。 具体的には、以下はコンパイルエラーになる。</p>
 <p>Main.hs</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">{-# LANGUAGE ExplicitNamespaces #-}</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Test</span> ((==&gt;))</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">main <span class="fu">=</span> return ()</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">{-# LANGUAGE ExplicitNamespaces #-}</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">import</span> <span class="dt">Test</span> ((==&gt;))</a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb5-6" title="6">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
 <p>Test.hs</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">{-# LANGUAGE DataKinds #-}</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="ot">{-# LANGUAGE PolyKinds #-}</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">module</span> <span class="dt">Test</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">  ( (<span class="fu">==&gt;</span>)</a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">  ) <span class="kw">where</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="kw">type</span> family (<span class="ot">x ::</span> <span class="dt">Bool</span>) <span class="fu">==&gt;</span> (<span class="ot">y ::</span> <span class="dt">Bool</span>)<span class="ot"> ::</span> <span class="dt">Bool</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12">  <span class="dt">False</span> <span class="fu">==&gt;</span> _     <span class="fu">=</span> <span class="dt">True</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13">  <span class="dt">True</span>  <span class="fu">==&gt;</span> <span class="dt">False</span> <span class="fu">=</span> <span class="dt">False</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14">  <span class="dt">True</span>  <span class="fu">==&gt;</span> <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">True</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="ot">{-# LANGUAGE DataKinds #-}</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="ot">{-# LANGUAGE GADTs #-}</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="ot">{-# LANGUAGE PolyKinds #-}</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="kw">module</span> <span class="dt">Test</span></a>
+<a class="sourceLine" id="cb6-8" title="8">  ( (<span class="op">==&gt;</span>)</a>
+<a class="sourceLine" id="cb6-9" title="9">  ) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="kw">type</span> <span class="kw">family</span> (<span class="ot">x ::</span> <span class="dt">Bool</span>) <span class="op">==&gt;</span> (<span class="ot">y ::</span> <span class="dt">Bool</span>)<span class="ot"> ::</span> <span class="dt">Bool</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb6-12" title="12">  <span class="dt">False</span> <span class="op">==&gt;</span> _     <span class="ot">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="dt">True</span>  <span class="op">==&gt;</span> <span class="dt">False</span> <span class="ot">=</span> <span class="dt">False</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="dt">True</span>  <span class="op">==&gt;</span> <span class="dt">True</span>  <span class="ot">=</span> <span class="dt">True</span></a></code></pre></div>
 <p>コンパイルエラー</p>
 <pre><code>Test.hs:8:5: error:
     Not in scope: ‘==&gt;’
@@ -182,5 +210,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

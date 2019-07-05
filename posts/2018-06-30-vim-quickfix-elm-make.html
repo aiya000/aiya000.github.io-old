@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - VimのQuickFixでelm-makeの結果を表示する設定を書いた</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - VimのQuickFixでelm-makeの結果を表示する設定を書いた</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - VimのQuickFixでelm-makeの結果を表示する設定を書いた" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - VimのQuickFixでelm-makeの結果を表示する設定を書いた" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - VimのQuickFixでelm-makeの結果を表示する設定を書いた</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2018-06-30-vim-quickfix-elm-make.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - VimのQuickFixでelm-makeの結果を表示する設定を書いた" />
+    <meta property="og:description" content="VimのQuickFixでelm-makeの結果を表示する設定を書いた" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - VimのQuickFixでelm-makeの結果を表示する設定を書いた" />
+    <meta name="twitter:description" content="VimのQuickFixでelm-makeの結果を表示する設定を書いた" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2018/06/30</div>
     
@@ -58,13 +86,13 @@
 </div>
 
 <div class="post-body">
-    <p>　ソースはこちらに上げました 👇</p>
+    <p>　ソースはこちらに上げました <span class="emoji" data-emoji="point_down">👇</span></p>
 <ul>
 <li><a href="https://github.com/aiya000/dotfiles/blob/4d64e1a45ff2f34b03f8094bcee40fc7dddf9470/.vim/after/ftplugin/elm.vim">dotfiles/elm.vim at 4d64e1a45ff2f34b03f8094bcee40fc7dddf9470 - aiya000/dotfiles - GitHub</a></li>
 </ul>
-<p>　☝️</p>
+<p>　<span class="emoji" data-emoji="point_up">☝️</span></p>
 <p>　elm-makeはエラー情報をjson形式で出力するという最高の機能があるので、逆に<code>'errroformat'</code>の行単位でエラーを解析するVimのQuickFixではうまく解析できません。<br />
-（elm-makeはjson形式だけでなく、human readableな形式でもエラーを出力することができますが、こちらも行単位の報告ではないのです 🐕）</p>
+（elm-makeはjson形式だけでなく、human readableな形式でもエラーを出力することができますが、こちらも行単位の報告ではないのです <span class="emoji" data-emoji="dog2">🐕</span>）</p>
 <p>そのような場合はvital.vimのWeb.JSONモジュールを使うと最高です。 vital.vimはvim-jpの提供するVim script向け準標準ライブラリです。</p>
 <ul>
 <li><a href="https://github.com/vim-jp/vital.vim">GitHub - vim-jp/vital.vim: A comprehensive Vim utility functions for Vim plugins</a></li>
@@ -116,5 +144,7 @@
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

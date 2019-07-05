@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2018-12-02-vital.vim-Data.List.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）" />
+    <meta property="og:description" content="Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）" />
+    <meta name="twitter:description" content="Vim Advent Calendar 2018ボツ記事（vital.vimで関数型プログラミング入門）" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2018/12/02</div>
     
@@ -56,18 +84,18 @@
     <p>最近はvital.vimというVim scriptの準標準ライブラリでData.List・Data.OptionalやData.Eitherを開発していたのですが、 Vim scriptのような動的型付き言語でnullや例外を使わずにoptionalやeitherを使う利点がわからなくなり、 絶望したので以下の記事をボツにしました。</p>
 <p>ここに供養する。</p>
 <h1 id="vital.vimで関数型プログラミング入門">vital.vimで関数型プログラミング入門</h1>
-<p>Hi, クリスマスVim 😳</p>
+<p>Hi, クリスマスVim <span class="emoji" data-emoji="flushed">😳</span></p>
 <p>皆さん、Vim scriptプログラミングをしていますか？ vital.vimをご存知ですか？ vital.vimはVim scriptの準標準ライブラリです。</p>
-<p>僕個人の考えですが、Vim scriptは標準だと破壊的代入等を用いたプログラミングスタイル、いわゆる手続き型に特化しています。 しかしながらVim scriptはVimの機能を拡張する ✨ 汎用言語 ✨ ですので、明に手続きを書かずに簡潔に書きたい場合（破壊的代入を用いたくない場合）があります。 そこでvital.vimです！</p>
+<p>僕個人の考えですが、Vim scriptは標準だと破壊的代入等を用いたプログラミングスタイル、いわゆる手続き型に特化しています。 しかしながらVim scriptはVimの機能を拡張する <span class="emoji" data-emoji="sparkles">✨</span> 汎用言語 <span class="emoji" data-emoji="sparkles">✨</span> ですので、明に手続きを書かずに簡潔に書きたい場合（破壊的代入を用いたくない場合）があります。 そこでvital.vimです！</p>
 <p>今回はvital.vimの紹介を兼ね、いくつかの問題について簡潔に書くように試みてみます。</p>
 <h2 id="list">List</h2>
 <ul>
-<li>❌ &lt;- 簡潔でない例</li>
-<li>⭕ &lt;- 簡潔な例</li>
+<li><span class="emoji" data-emoji="x">❌</span> &lt;- 簡潔でない例</li>
+<li><span class="emoji" data-emoji="o">⭕</span> &lt;- 簡潔な例</li>
 </ul>
 <h3 id="filter-map">filter, map</h3>
 <p>リストの要素のうちある条件を満たすもののみを取ってみます。</p>
-<p>❌</p>
+<p><span class="emoji" data-emoji="x">❌</span></p>
 <pre class="vim"><code>let list = [1, 'a', 2]
 let nums = []
 
@@ -79,14 +107,14 @@ endfor
 
 echo nums
 &quot; [1, 2]</code></pre>
-<p>⭕</p>
+<p><span class="emoji" data-emoji="o">⭕</span></p>
 <pre class="vim"><code>echo filter([1, 'a', 2], { _, x -&gt;
   \ type(x) is type(0)
 \ })
 &quot; [1, 2]</code></pre>
 <p>綺麗ですね！</p>
 <h3 id="data.list.find">Data.List.find</h3>
-<p>この<code>filter()</code>と<code>map()</code>は標準関数でした。 もう少し難しい例を、vital.vimのData.Listで書いてみましょう。 ！ ❌</p>
+<p>この<code>filter()</code>と<code>map()</code>は標準関数でした。 もう少し難しい例を、vital.vimのData.Listで書いてみましょう。 ！ <span class="emoji" data-emoji="x">❌</span></p>
 <pre class="vim"><code>let list = [v:null, 10, 'a', 3.14]
 let float = v:null
 
@@ -99,7 +127,7 @@ endfor
 
 echo float
 &quot; 3.14</code></pre>
-<p>⭕</p>
+<p><span class="emoji" data-emoji="o">⭕</span></p>
 <pre class="vim"><code>let s:L = vital#vital#import('Data.List')
 
 let list = [v:null, 10, 'a', 3.14]
@@ -107,10 +135,10 @@ echo s:L.find(list, v:null, { x -&gt;
   \ type(x) is type(1.0)
 \ })
 &quot; 3.14</code></pre>
-<p>ワァオ！ 我々の心を捉えて離さない実数、3.14がこんなに簡単に出てきました 😳</p>
+<p>ワァオ！ 我々の心を捉えて離さない実数、3.14がこんなに簡単に出てきました <span class="emoji" data-emoji="flushed">😳</span></p>
 <p>そう、<code>find()</code>とは受け取った条件に、最初に合致した値を返す関数のことです。 （また「条件」とは引数を受け取って、boolを返す関数のことです）</p>
 <p>我々はもはや、逐一for文を書く必要すらないのです！</p>
-<p>他、様々なシチュエーションに対する各関数はこちらにあります 👇</p>
+<p>他、様々なシチュエーションに対する各関数はこちらにあります <span class="emoji" data-emoji="point_down">👇</span></p>
 <ul>
 <li><a href="https://github.com/vim-jp/vital.vim/blob/master/autoload/vital/__vital__/Data/List.vim">vital.vim/List.vim at master - vim-jp/vital.vim - GitHub</a></li>
 </ul>
@@ -159,5 +187,7 @@ echo s:L.find(list, v:null, { x -&gt;
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

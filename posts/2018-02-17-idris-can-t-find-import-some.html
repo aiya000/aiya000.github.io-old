@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -36,6 +48,22 @@
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2018-02-17-idris-can-t-find-import-some.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処" />
+    <meta property="og:description" content="IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処" />
+    <meta name="twitter:description" content="IdrisでEffectモジュールなどを使おうとしたときに出るCan't find import Effect/Barの対処" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
 <div class="post-info">
     <div class="post-date">2018/02/17</div>
     
@@ -55,15 +83,15 @@
 <div class="post-body">
     <h1 id="問題">問題</h1>
 <p>Main.idr</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">Default</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  printLn <span class="fu">$</span> the <span class="dt">Int</span> <span class="kw">default</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  printLn <span class="fu">$</span> the <span class="dt">Char</span> <span class="kw">default</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  printLn <span class="fu">$</span> the <span class="dt">Bool</span> <span class="kw">default</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  printLn <span class="fu">$</span> the <span class="dt">String</span> <span class="kw">default</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  printLn <span class="fu">$</span> the (<span class="dt">List</span> <span class="dt">String</span>) <span class="kw">default</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode idris"><code class="sourceCode idris"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">import</span> <span class="dt">Effect</span><span class="fu">.</span><span class="dt">Default</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">main</span> <span class="ot">:</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-4" title="4">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  printLn <span class="fu">$</span> the <span class="dt">Int</span> <span class="kw">default</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  printLn <span class="fu">$</span> the <span class="dt">Char</span> <span class="kw">default</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  printLn <span class="fu">$</span> the <span class="dt">Bool</span> <span class="kw">default</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  printLn <span class="fu">$</span> the <span class="dt">String</span> <span class="kw">default</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  printLn <span class="fu">$</span> the (<span class="dt">List</span> <span class="dt">String</span>) <span class="kw">default</span></a></code></pre></div>
 <pre class="shell-session"><code>$ idris -o Main Main.idr
 Can't find import Effect/Default</code></pre>
 <h1 id="解決">解決</h1>
@@ -123,5 +151,7 @@ False
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

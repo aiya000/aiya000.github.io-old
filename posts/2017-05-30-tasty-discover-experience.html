@@ -1,17 +1,29 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - tasty-discoverを使ってみた</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>大銀河宇宙No.1_Haskeller - tasty-discoverを使ってみた</title>
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - tasty-discoverを使ってみた" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - tasty-discoverを使ってみた" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../">
-                大銀河宇宙No.1_Haskeller
+                galaxy-sixth-sensey
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -35,6 +47,22 @@
         </nav>
 
         <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - tasty-discoverを使ってみた</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2017-05-30-tasty-discover-experience.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - tasty-discoverを使ってみた" />
+    <meta property="og:description" content="tasty-discoverを使ってみた" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - tasty-discoverを使ってみた" />
+    <meta name="twitter:description" content="tasty-discoverを使ってみた" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
 
 <div class="post-info">
     <div class="post-date">2017/05/30</div>
@@ -64,20 +92,20 @@
 <p>　完全にいいのですが、裏技があって、(unit|prop|scprop|spec|test)_<strong>function_name</strong>となるfunction_nameをsneak_caseにしておくと、テスト実行時に項目名にしてくれます。</p>
 <h1 id="例">例</h1>
 <p>Step1Test.hs</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">test_parser_and_printer_converts_left_to_right ::</span> [<span class="dt">TestTree</span>]</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">test_parser_and_printer_converts_left_to_right <span class="fu">=</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  [ testCase <span class="st">&quot;'123' -&gt; '123'&quot;</span> <span class="fu">$</span> <span class="st">&quot;123&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;123&quot;</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  , testCase <span class="st">&quot;'abc' -&gt; 'abc'&quot;</span> <span class="fu">$</span> <span class="st">&quot;abc&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;abc&quot;</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  , testCase <span class="st">&quot;'(123 456)' -&gt; '(123 456)'&quot;</span> <span class="fu">$</span> <span class="st">&quot;(123 456)&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456)&quot;</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  , testCase <span class="st">&quot;'( 123 456 789 )' -&gt; '(123 456 789)'&quot;</span> <span class="fu">$</span> <span class="st">&quot;( 123 456 789 )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456 789)&quot;</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  , testCase <span class="st">&quot;'( + 2 (* 3 4) )' -&gt; '(+ 2 (* 3 4))'&quot;</span> <span class="fu">$</span> <span class="st">&quot;( + 2 (* 3 4) )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(+ 2 (* 3 4))&quot;</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  ]</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="ot">    isConvertedTo ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Assertion</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">    isConvertedTo code expected <span class="fu">=</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">      <span class="kw">case</span> Parser.parse code <span class="kw">of</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">        <span class="dt">Left</span>  e     <span class="ot">-&gt;</span> assertFailure <span class="fu">$</span> <span class="st">&quot;The parse is failed: &quot;</span> <span class="fu">++</span> Parser.parseErrorPretty e</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">        <span class="dt">Right</span> sexpr <span class="ot">-&gt;</span> MT.toSyntax sexpr <span class="fu">@?=</span> expected</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">test_parser_and_printer_converts_left_to_right ::</span> [<span class="dt">TestTree</span>]</a>
+<a class="sourceLine" id="cb1-2" title="2">test_parser_and_printer_converts_left_to_right <span class="ot">=</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  [ testCase <span class="st">&quot;'123' -&gt; '123'&quot;</span> <span class="op">$</span> <span class="st">&quot;123&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;123&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  , testCase <span class="st">&quot;'abc' -&gt; 'abc'&quot;</span> <span class="op">$</span> <span class="st">&quot;abc&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;abc&quot;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  , testCase <span class="st">&quot;'(123 456)' -&gt; '(123 456)'&quot;</span> <span class="op">$</span> <span class="st">&quot;(123 456)&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456)&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  , testCase <span class="st">&quot;'( 123 456 789 )' -&gt; '(123 456 789)'&quot;</span> <span class="op">$</span> <span class="st">&quot;( 123 456 789 )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(123 456 789)&quot;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  , testCase <span class="st">&quot;'( + 2 (* 3 4) )' -&gt; '(+ 2 (* 3 4))'&quot;</span> <span class="op">$</span> <span class="st">&quot;( + 2 (* 3 4) )&quot;</span> <span class="ot">`isConvertedTo`</span> <span class="st">&quot;(+ 2 (* 3 4))&quot;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  ]</a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="ot">    isConvertedTo ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Assertion</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    isConvertedTo code expected <span class="ot">=</span></a>
+<a class="sourceLine" id="cb1-12" title="12">      <span class="kw">case</span> Parser.parse code <span class="kw">of</span></a>
+<a class="sourceLine" id="cb1-13" title="13">        <span class="dt">Left</span>  e     <span class="ot">-&gt;</span> assertFailure <span class="op">$</span> <span class="st">&quot;The parse is failed: &quot;</span> <span class="op">++</span> Parser.parseErrorPretty e</a>
+<a class="sourceLine" id="cb1-14" title="14">        <span class="dt">Right</span> sexpr <span class="ot">-&gt;</span> MT.toSyntax sexpr <span class="op">@?=</span> expected</a></code></pre></div>
 <p>出力</p>
 <pre class="console"><code>Progress: 1/2tasty-discover
   parser and printer converts left to right
@@ -133,5 +161,7 @@ Completed 2 action(s).</code></pre>
         <script type="text/javascript" src="../js/popper.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>
