@@ -39,7 +39,7 @@ export class Observable {
 ただし`super`の最低な`get/set`をなかったことにはできないので、deprecatedにしておいて、新しく`assign/take`というのを定義してあげることにします。
 （この`deprecated-decorator`は、そのメソッドが**実行時に**使用された際に、メッセージをコンソールに出力するものなので、**静的**なものではないようです。注意。）
 
-ヘルパー型さん
+ヘルパー型さん [^field-contravariants]
 ```typescript
 /**
  * Declare a type T of a property K via K of a type X.
@@ -49,11 +49,11 @@ export class Observable {
  * - Field<{foo: number, bar: string}, 'foo', string> = never
  */
 type Field<X, K extends string, T> = K extends keyof X
-  ? X[K] extends T ? K : never
+  ? T extends X[K] ? K : never
   : never
 ```
 
-冒涜的でないObservable
+冒涜的でないObservable [^take-null-possibility]
 ```typescript
 /**
  * Don't dirty your hands.
@@ -79,7 +79,7 @@ export default class Observable<X extends object> extends Untyped.Observable {
   /**
    * A type safety get()
    */
-  public take<K extends string, T>(key: Field<X, K, T>): T {
+  public take<K extends string, T>(key: Field<X, K, T>): T | undefined {
     return super.get(key)
   }
 
@@ -112,5 +112,9 @@ OK!!!
 - [Typgin NativeScript's untyped Observable - GitHub](https://gist.github.com/aiya000/5f12ca0276eabaf6bf1331ee2cd96fae)
 
 　TypeScriptのconditional typesは初めてだったので、いい~~型慣らし~~肩慣らしになったと思います。
+TypeScriptに型を付けてもらうのではなく、TypeScriptで型を付けにいく側にまわった気分はどうだ？
 
 　See you next time :wave:
+
+[^field-contravariants]: ここで`T extends X[K]`なのは、`const z = new Observable<{x: {xx: number}}>(); z.assign('x', {})`を許さないためです。
+[^take-null-possibility]: ここで`take`の戻り値がnullableなのは、`const z = new Observable<{x: number}>; z.take('x')`としたときにnullを返すためです。（Observableは必ずしも初期化を強制しない。）
