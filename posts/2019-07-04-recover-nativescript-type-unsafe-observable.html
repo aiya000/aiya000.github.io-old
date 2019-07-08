@@ -106,7 +106,7 @@
 <p>　え、<code>any</code>……？　あっ、あたなは最低です！　静的型付けをなんだと思っているのですか！</p>
 <h2 id="結-1">結</h2>
 <p>　TypeScriptの型付けはめっちゃ考えられているので、型引数で情報を渡してあげるだけで、それに対する安全な<code>get/set</code>の型を導出してあげられます。 ただし<code>super</code>の最低な<code>get/set</code>をなかったことにはできないので、deprecatedにしておいて、新しく<code>assign/take</code>というのを定義してあげることにします。 （この<code>deprecated-decorator</code>は、そのメソッドが<strong>実行時に</strong>使用された際に、メッセージをコンソールに出力するものなので、<strong>静的</strong>なものではないようです。注意。）</p>
-<p>ヘルパー型さん</p>
+<p>ヘルパー型さん <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="co"> * Declare a type T of a property K via K of a type X.</span></a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="co"> *</span></a>
@@ -115,9 +115,9 @@
 <a class="sourceLine" id="cb2-6" title="6"><span class="co"> * - Field&lt;{foo: number, bar: string}, 'foo', string&gt; = never</span></a>
 <a class="sourceLine" id="cb2-7" title="7"><span class="co"> */</span></a>
 <a class="sourceLine" id="cb2-8" title="8"><span class="kw">type</span> Field<span class="op">&lt;</span>X<span class="op">,</span> K <span class="kw">extends</span> <span class="dt">string</span><span class="op">,</span> T<span class="op">&gt;</span> <span class="op">=</span> K <span class="kw">extends</span> <span class="kw">keyof</span> X</a>
-<a class="sourceLine" id="cb2-9" title="9">  <span class="op">?</span> X<span class="op">[</span>K<span class="op">]</span> <span class="kw">extends</span> T <span class="op">?</span> K <span class="op">:</span> <span class="dt">never</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="op">?</span> T <span class="kw">extends</span> X<span class="op">[</span>K<span class="op">]</span> <span class="op">?</span> K <span class="op">:</span> <span class="dt">never</span></a>
 <a class="sourceLine" id="cb2-10" title="10">  <span class="op">:</span> <span class="dt">never</span></a></code></pre></div>
-<p>冒涜的でないObservable</p>
+<p>冒涜的でないObservable <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="co"> * Don't dirty your hands.</span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="co"> * You must use this instead of [[Untyped.Observable]].</span></a>
@@ -142,7 +142,7 @@
 <a class="sourceLine" id="cb3-22" title="22">  <span class="co">/**</span></a>
 <a class="sourceLine" id="cb3-23" title="23"><span class="co">   * A type safety get()</span></a>
 <a class="sourceLine" id="cb3-24" title="24"><span class="co">   */</span></a>
-<a class="sourceLine" id="cb3-25" title="25">  <span class="kw">public</span> <span class="fu">take</span><span class="op">&lt;</span>K <span class="kw">extends</span> <span class="dt">string</span><span class="op">,</span> T<span class="op">&gt;</span>(key<span class="op">:</span> Field<span class="op">&lt;</span>X<span class="op">,</span> K<span class="op">,</span> T<span class="op">&gt;</span>)<span class="op">:</span> T <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-25" title="25">  <span class="kw">public</span> <span class="fu">take</span><span class="op">&lt;</span>K <span class="kw">extends</span> <span class="dt">string</span><span class="op">,</span> T<span class="op">&gt;</span>(key<span class="op">:</span> Field<span class="op">&lt;</span>X<span class="op">,</span> K<span class="op">,</span> T<span class="op">&gt;</span>)<span class="op">:</span> T <span class="op">|</span> <span class="dt">undefined</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb3-26" title="26">    <span class="cf">return</span> <span class="va">super</span><span class="op">.</span><span class="fu">get</span>(key)</a>
 <a class="sourceLine" id="cb3-27" title="27">  <span class="op">}</span></a>
 <a class="sourceLine" id="cb3-28" title="28"></a>
@@ -168,8 +168,15 @@
 <ul>
 <li><a href="https://gist.github.com/aiya000/5f12ca0276eabaf6bf1331ee2cd96fae">Typgin NativeScript’s untyped Observable - GitHub</a></li>
 </ul>
-<p>　TypeScriptのconditional typesは初めてだったので、いい<del>型慣らし</del>肩慣らしになったと思います。</p>
+<p>　TypeScriptのconditional typesは初めてだったので、いい<del>型慣らし</del>肩慣らしになったと思います。 TypeScriptに型を付けてもらうのではなく、TypeScriptで型を付けにいく側にまわった気分はどうだ？</p>
 <p>　See you next time <span class="emoji" data-emoji="wave">👋</span></p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>ここで<code>T extends X[K]</code>なのは、<code>const z = new Observable&lt;{x: {xx: number}}&gt;(); z.assign('x', {})</code>を許さないためです。<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>ここで<code>take</code>の戻り値がnullableなのは、<code>const z = new Observable&lt;{x: number}&gt;; z.take('x')</code>としたときにnullを返すためです。（Observableは必ずしも初期化を強制しない。）<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
 
     <hr />
 
