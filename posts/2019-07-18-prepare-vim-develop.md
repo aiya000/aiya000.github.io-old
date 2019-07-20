@@ -51,6 +51,8 @@ export CCACHE_DIR=$SUGOI_IPPAI_YOURYO_ARU_TOKO
 
 ~~なんか今みたら、うまく動いてなかったっぽい……。~~
 
+誰かVimでccacheを使う方法わかったら、教えて！
+
 ## 3. eval.cとかを修正する
 
 がんばります。
