@@ -1,5 +1,5 @@
 ---
-title: 技術書典6にて圏論入門小説を頒布します！（こ11）（サンプルpdfあり）
+title: 【サンプルpdfあり】技術書典6にて圏論入門小説を頒布します！【こ11】
 tags: イベント
 ---
 # 概要
@@ -16,7 +16,7 @@ tags: イベント
 
 # サンプル（お試し本）
 
-- [せつラボ 〜圏論の基本〜 サンプル](/images/posts/2019-03-16-techbookfest6/sample-setulab-basics-of-category.pdf)
+- [せつラボ 〜圏論の基本〜 サンプル](/images/posts/2019-03-16-techbookfest6/sample.pdf)
 
 # 紹介
 
