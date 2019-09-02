@@ -1,0 +1,222 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - Vim本体にコントリビュートする際の僕の手順</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - Vim本体にコントリビュートする際の僕の手順" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - Vim本体にコントリビュートする際の僕の手順" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                galaxy-sixth-sensey
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Vim本体にコントリビュートする際の僕の手順</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2019-07-18-prepare-vim-develop.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Vim本体にコントリビュートする際の僕の手順" />
+    <meta property="og:description" content="Vim本体にコントリビュートする際の僕の手順" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Vim本体にコントリビュートする際の僕の手順" />
+    <meta name="twitter:description" content="Vim本体にコントリビュートする際の僕の手順" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2019/07/18</div>
+    
+
+    <div class="post-title">Vim本体にコントリビュートする際の僕の手順</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Vim.html">Vim</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <h2 id="デバッグビルド用のconfigureをシェルスクリプトにしておく">1. デバッグビルド用のconfigureをシェルスクリプトにしておく</h2>
+<p>これは最小限のビルドオプションなので、適宜修正。</p>
+<pre class="shell-session"><code>#!/bin/bash
+configure=$(cat &lt;&lt; EOS
+./configure \
+    --prefix=/usr/local/ \
+    --enable-fail-if-missing \
+    --enable-gui=no \
+    --enable-multibyte=yes \
+    --enable-perlinterp=no \
+    --enable-pythoninterp=no \
+    --enable-python3interp=no \
+    --enable-rubyinterp=no \
+    --enable-luainterp=no \
+    --with-lua-prefix=/usr \
+    --with-luajit \
+    --enable-cscope=yes \
+    --with-features=huge \
+    --with-compiledby=aiya000 \
+    --enable-terminal
+EOS
+)
+
+if [ -f ./configure ] ; then
+    echo &quot;$configure&quot;
+    eval &quot;$configure&quot;
+else
+    echo './configure cannot be found'
+fi</code></pre>
+<h2 id="ccacheでビルドを高速化する">2. ccacheでビルドを高速化する</h2>
+<ul>
+<li><a href="https://wiki.archlinux.jp/index.php/Ccache">Ccache - ArchWiki</a></li>
+</ul>
+<p>~/.zshrcあたり。</p>
+<pre class="shell-session"><code>export USE_CCACHE=1
+export $CCACHE_DISABLE=0
+export CCACHE_DIR=$SUGOI_IPPAI_YOURYO_ARU_TOKO</code></pre>
+<p><del>なんか今みたら、うまく動いてなかったっぽい……。</del></p>
+<p>誰かVimでccacheを使う方法わかったら、教えて！</p>
+<h2 id="eval.cとかを修正する">3. eval.cとかを修正する</h2>
+<p>がんばります。</p>
+<ul>
+<li><a href="https://qiita.com/mattn/items/ee438479b09055a2f305~">Vim のソースのいじり方(:terminal を作るまで) - Qiita</a></li>
+<li><a href="https://qiita.com/mopp/items/084abe28681202bda30e~">Vim本体に組み込み関数を追加するパッチを投げた - Qiita</a></li>
+<li><a href="https://www.kaoriya.net/blog/2014/09/19/">スパルタンVim 4.0のPDF公開 — KaoriYa</a></li>
+</ul>
+<h2 id="gdbでデバッグする">4. gdbでデバッグする</h2>
+<p>めっちゃがんばる。 <code>Termdebug</code>めっちゃよいので、ぜひ。</p>
+<ul>
+<li><code>:packadd termdebug</code></li>
+<li><code>:help :Termdebug</code></li>
+<li><code>:Termdebug path/to/vim/src/vim</code></li>
+</ul>
+<p>ちょっと <span class="emoji" data-emoji="point_down">👇</span> も参考になるかも。</p>
+<ul>
+<li><a href="./2019-06-26-run-my-func-on-vim-src.html">Vimのソース内で自作した関数の結果を確認する</a></li>
+</ul>
+<h2 id="googlesanitizersとかvalgrindでメモリリークを検出する">5. google/sanitizersとかvalgrindでメモリリークを検出する</h2>
+<ul>
+<li><p><a href="https://github.com/google/sanitizers/wiki/AddressSanitizer">AddressSanitizer - google/sanitizers Wiki - GitHub</a></p></li>
+<li><p>sanitizersの使い方はこちらなど <span class="emoji" data-emoji="point_right">👉</span> <a href="./2019-07-14-build-vim-with-asan.html">VimをSanitizer付きでビルドして、調査ログを吐く</a></p></li>
+</ul>
+<p>valgrindは知らなかった。 vim-jpのTsuyoshi CHOさん、ありがとうございます！</p>
+<pre class="shell-session"><code>$ cd src/testdir
+$ vim Makefile  # 下記のところをコメントアウトする</code></pre>
+<ul>
+<li><a href="https://github.com/vim/vim/blob/df9c6cad8cc318e26e99c3b055f0788e7d6582de/src/testdir/Makefile#L21">vim/Makefile - vim/vim - GitHub</a></li>
+</ul>
+<pre class="shell-session"><code>$ make test_自分で作ったやつなど.vim  # e.g. test_template_string.vim
+$ cat valgrind.test_作ったやつなど
+
+==3099== Memcheck, a memory error detector
+==3099== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3099== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==3099== Command: ../vim -f -u unix.vim -U NONE --noplugin --not-a-term -S runtest.vim test_template_string.vim --cmd au\ SwapExists\ *\ let\ v:swapchoice\ =\ &quot;e&quot;
+==3099== Parent PID: 3098
+==3099== 
+==3099== Conditional jump or move depends on uninitialised value(s)
+==3099==    at 0x234D76: utfc_ptr2len (mbyte.c:2119)
+==3099==    by 0x16DB72: embed_embedded (eval.c:6032)
+==3099==    by 0x16D486: parse_template (eval.c:5885)
+==3099==    by 0x16CE62: get_template_string_tv (eval.c:5655)
+==3099==    by 0x16AFCC: eval7 (eval.c:4625)
+==3099==    by 0x16A745: eval6 (eval.c:4305)
+.
+.
+.</code></pre>
+<p>ヤッター！！</p>
+<h2 id="修正する">6. 修正する</h2>
+<p>とてもがんばる。</p>
+<p>終わったら「5.」でリークが検出されなくなるまで、「3.」から「6.」をくりかえしゅ！！！</p>
+<p>ヤッター！！！！</p>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2019-07-18-prepare-vim-develop.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Vim本体にコントリビュートする際の僕の手順 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2019-07-18-prepare-vim-develop.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2019-07-18-prepare-vim-develop.md">Vim本体にコントリビュートする際の僕の手順 - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
+        </div>
+
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

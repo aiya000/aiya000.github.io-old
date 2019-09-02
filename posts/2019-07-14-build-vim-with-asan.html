@@ -1,0 +1,218 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <title>galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta property="og:url" content="https://aiya000.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く" />
+        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta property="og:site_name" content="galaxy-sixth-sensey" />
+        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@public_ai000ya" />
+        <meta name="twitter:creator" content="@public_ai000ya">
+        <meta name="twitter:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く" />
+        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../">
+                galaxy-sixth-sensey
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../archive.html">Archive</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2019-07-14-build-vim-with-asan.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く" />
+    <meta property="og:description" content="VimをSanitizer付きでビルドして、調査ログを吐く" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く" />
+    <meta name="twitter:description" content="VimをSanitizer付きでビルドして、調査ログを吐く" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2019/07/14</div>
+    
+
+    <div class="post-title">VimをSanitizer付きでビルドして、調査ログを吐く</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Vim.html">Vim</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <p>　vim-jpでichizokさんに指南をいただきました。 ありがとうございます <span class="emoji" data-emoji="sunglasses">😎</span></p>
+<h2 id="結">結</h2>
+<pre class="shell-session"><code>$ cd /path/to/vim
+$ SANITIZER_CFLAGS=&quot;-g -O1 -DABORT_ON_INTERNAL_ERROR -DEXITFREE -fsanitize=address -fno-omit-frame-pointer&quot; make
+
+Starting make in the src directory.
+If there are problems, cd to the src directory and run make there
+cd src &amp;&amp; make first
+make[1]: Entering directory '/path/to/vim/template-string/src'
+ccache gcc -c -I. -Iproto -DHAVE_CONFIG_H     -g3 -O0 -Wall  -g -O1 -DABORT_ON_INTERNAL_ERROR -DEXITFREE -fsanitize=address -fno-omit-frame-pointer      -o obj
+ects/eval.o eval.c
+make[2]: Entering directory '/path/to/vim/template-string/src/po'
+make[2]: Nothing to be done for 'first'.
+
+.
+.
+.
+
+$ cd src/testdir
+$ LD_PRELOAD='/usr/lib/libasan.so' ASAN_OPTIONS=&quot;print_stacktrace=1 log_path=asan&quot; make test_template_string
+
+rm -f test_template_string.res test.log messages
+make -f Makefile test_template_string.res
+make[1]: Entering directory '/path/to/vim/src/testdir'
+make[1]: *** [Makefile:162: test_template_string.res] Error 1
+make[1]: Leaving directory '/path/to/vim/src/testdir'
+make: *** [Makefile:76: test_template_string] Error 2
+
+$ ls asan.*
+asan.12870
+
+$ cat asan.12870
+
+=================================================================
+==12870==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 12 byte(s) in 1 object(s) allocated from:
+    #0 0x7f9b5fc79ada in __interceptor_malloc /build/gcc/src/gcc/libsanitizer/asan/asan_malloc_linux.cc:144
+    #1 0x55fccd45ddde in xmalloc (/usr/bin/bash+0x80dde)
+
+SUMMARY: AddressSanitizer: 12 byte(s) leaked in 1 allocation(s).</code></pre>
+<h2 id="起">起</h2>
+<p>　突然ですが現在、僕はVimにtemplate string対応を入れようと、活動しております。</p>
+<ul>
+<li><a href="https://github.com/vim/vim/issues/4491">Proposal: the string interpolation (the template string) - Issue #4491 - vim/vim - GitHub</a></li>
+<li><a href="https://github.com/vim/vim/pull/4634">Support ‘template string’ (‘string interpolation’) by aiya000 - Pull Request #4634 - vim/vim - GitHub</a></li>
+<li><a href="https://shinchoku.net/notes/38463">Vim scriptにstring interpolation対応を入れる - 進捗ノート</a></li>
+</ul>
+<p>　具体的にはこんな感じ。</p>
+<pre class="vim"><code>echo $'I have ${10}'  &quot; 'I have 10'
+echo $'I like ${function(&quot;function&quot;)}'  &quot; I like function('function')
+
+echo $'${[10, 20]}'  &quot; [10, 20]
+echo $'${{&quot;x&quot;: 10}}'  &quot; {'x': 10}
+echo $'${42.1}'  &quot; 42.1</code></pre>
+<p>　ところでC言語はメモリリークがコワイですよね。</p>
+<p>＼(・ω・＼)SAN値!(／・ω・)／ピンチ!<br />
+＼(・ω・＼)SAN値!(／・ω・)／ピンチ!<br />
+＼(・ω・＼)SAN値!(／・ω・)／ピンチ!<br />
+＼(・ω・＼)SAN値!(／・ω・)／ピン!</p>
+<p>ということでSAN値チェックです。</p>
+<ol type="1">
+<li>以下のフラグ付きでmakeする
+<ul>
+<li><code>SANITIZER_CFLAGS="-g -O1 -DABORT_ON_INTERNAL_ERROR -DEXITFREE -fsanitize=address -fno-omit-frame-pointer"</code></li>
+</ul></li>
+<li>以下のフラグ付きでVimを起動する
+<ul>
+<li><code>ASAN_OPTIONS="print_stacktrace=1 log_path=asan"</code></li>
+<li><code>ASan runtime does not come first in initial library list; you should either link runtime to your application or manually preload it with LD_PRELOAD.</code><br />
+って言われたら libasan.soがある場所を探して、<code>LD_PRELOAD='/path/to/libasan.so'</code>も付ける</li>
+</ul></li>
+<li>Vimを操作してみる
+<ul>
+<li>今回はtemplate string対応のデバッグなので、Vimで<code>:echo $'Hi ${"Vim"}'</code>などしてみたり</li>
+</ul></li>
+<li>カレントディレクトリに <code>asan\.[0-9]+</code> なファイルができる
+<ul>
+<li><strong>これが調査結果です！</strong></li>
+</ul></li>
+</ol>
+<p>完了！</p>
+<hr />
+<p>　なんでC言語を学ぶことが大切なのか？　僕にはそれが答えられます。 Vim本体にコントリビュートできるようになるからです。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://dic.pixiv.net/a/%EF%BC%BC%28%E3%83%BB%CF%89%E3%83%BB%EF%BC%BC%29SAN%E5%80%A4%21%28%2F%E3%83%BB%CF%89%E3%83%BB%29%2F%E3%83%94%E3%83%B3%E3%83%81%21">＼(・ω・＼)SAN値!(/・ω・)/ピンチ! (さんちぴんち)とは【ピクシブ百科事典】</a></li>
+</ul>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2019-07-14-build-vim-with-asan.html" class="hatena-bookmark-button" data-hatena-bookmark-title="VimをSanitizer付きでビルドして、調査ログを吐く - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2019-07-14-build-vim-with-asan.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2019-07-14-build-vim-with-asan.md">VimをSanitizer付きでビルドして、調査ログを吐く - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+        <div class="footer">
+            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+            and more (<a href="../licenses.html">about licenses</a>).
+        </div>
+
+        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+        <script type="text/javascript" src="../js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>
