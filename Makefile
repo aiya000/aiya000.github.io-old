@@ -1,3 +1,5 @@
+notify ?= notify-send
+
 all: build
 
 build:
@@ -7,7 +9,11 @@ clean:
 	stack exec site clean
 
 watch:
-	make build && stack exec site watch
+	watchexec --exts hs --restart -- $(MAKE) watch/build
+
+watch/build:
+	$(MAKE) build && $(notify) 'success' || $(notify) 'failure'
+	stack exec site watch
 
 open:
 	xdg-open 'http://127.0.0.1:25252'
