@@ -15,6 +15,13 @@ tags: イベント, 圏論, Haskell, 集合論
 
 第一版を買ってくださった方も**技術書典7の開催時以降**、「物理書籍の巻末にあるダウンロードURL」または「ダウンロードカードのダウンロードURL」により、最新版（第二版）をダウンロードできます！
 
+# その他おしながき
+## アクリルキーホルダー（μ）
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">μちゃんのアクリルキーホルダーを発注しました✊😊❤️<br><br>当日は500円で25個もっていく予定です<br>よろしくお願いします！<a href="https://twitter.com/hashtag/%E6%8A%80%E8%A1%93%E6%9B%B8%E5%85%B8?src=hash&amp;ref_src=twsrc%5Etfw">#技術書典</a><a href="https://twitter.com/hashtag/%E6%8A%80%E8%A1%93%E6%9B%B8%E5%85%B87?src=hash&amp;ref_src=twsrc%5Etfw">#技術書典7</a><a href="https://twitter.com/hashtag/%E3%81%9B%E3%81%A4%E3%83%A9%E3%83%9C?src=hash&amp;ref_src=twsrc%5Etfw">#せつラボ</a> <a href="https://t.co/ypV9qXf3Zf">https://t.co/ypV9qXf3Zf</a> <a href="https://t.co/r3ORdJWOvg">pic.twitter.com/r3ORdJWOvg</a></p>&mdash; あいや@技術書典7（え20C）せつラボ (@public_ai000ya) <a href="https://twitter.com/public_ai000ya/status/1170270108238794752?ref_src=twsrc%5Etfw">September 7, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+このアクリルキーホルダーが完売した場合、なんと8円もの利益が出ます！
+
 # サークルページ
 
 [![サークルカット](/images/posts/2019-09-01-techbookfest7/circle_cut.png)](https://techbookfest.org/event/tbf07/circle/5762742296248320)
