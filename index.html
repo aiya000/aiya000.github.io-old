@@ -6,28 +6,20 @@ title: Home
 <div class="index-title">
     <div class="index-title-internal">
         <img class="circle-logo" src="/images/circle-logo.png" alt="circle-logo"/>
+        <div>galaxy-sixth-sensey</div>
     </div>
 </div>
 
 <div class="index-content">
     <div class="index-left">
-        <img class="wani-san" src="/images/wani-san.png" alt="wani-san-image"/>
-        <div class="index-tagcloud">
-            $tagcloud$
-        </div>
-        <div class="index-twitter-widget">
-            <a class="twitter-timeline" data-width="300" data-height="381" data-link-color="#E95F28" href="https://twitter.com/public_ai000ya">Tweets by public_ai000ya</a>
-            <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-        <div class="index-amazon-wish-list">
-            <a href="https://www.amazon.co.jp/registry/wishlist/FNT8GFU9HYEK">欲しい物リスト</a>
-        </div>
+        $partial("templates/post-list.html")$
+        <a href="/archive.html">これ以前の記事</a>
     </div>
 
     <div class="index-right">
-        <h2>記事</h2>
-        $partial("templates/post-list.html")$
-        <a href="/archive.html">これ以前の記事</a>
+        <div class="index-tagcloud">
+            $tagcloud$
+        </div>
     </div>
 </div>
 

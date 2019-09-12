@@ -1,7 +1,7 @@
+<link rel="stylesheet" type="text/css" href="/css/post-list.css"/>
+
 <ul>
     $for(posts)$
-        <li>
-            $date$ - <a href="$url$">$title$</a>
-        </li>
+        <li class="post-list-title">$date$ - <a href="$url$">$title$</a>（$tags$）</li>
     $endfor$
 </ul>

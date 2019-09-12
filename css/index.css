@@ -1,6 +1,4 @@
 .index-title {
-    /* 2ADACC is that message, do you remember ? */
-    background-color: #2ADACC;
     border-radius: 4px;
     padding: 8px;
 }
@@ -18,24 +16,22 @@
 }
 
 .index-content {
-    margin-top: 32px;
+    margin-top: 64px;
 }
 
 .index-left {
     float: left;
-    width: 25%;
+    width: 75%;
+    border-style: solid;
+    border-color: black;
+    border-radius: 8px;
+    padding: 32px;
 }
 
 .index-right {
     float: left;
-    width: 75%;
+    width: 25%;
     padding-left: 32px;
-}
-
-.wani-san {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 16px;
 }
 
 .index-tagcloud {
@@ -46,14 +42,6 @@
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 8px;
-}
-
-.index-twitter-widget {
-    border-radius: 8px;
-}
-
-.index-amazon-wish-list a {
-    font-size: 140%;
 }
 
 .index-clear-styles {
