@@ -5,8 +5,8 @@ import Control.Lens ((<&>))
 import Data.List (delete)
 import Data.Monoid ((<>))
 import Hakyll
-import Text.HTML.TagSoup (Tag(..), isTagOpenName, Attribute)
 import Text.Highlighting.Kate (styleToCss, pygments)
+import Text.HTML.TagSoup (Tag(..), isTagOpenName, Attribute)
 import Text.Pandoc.Options (ReaderOptions(readerExtensions), Extension(Ext_emoji), extensionsFromList)
 
 
@@ -18,10 +18,10 @@ import Text.Pandoc.Options (ReaderOptions(readerExtensions), Extension(Ext_emoji
 -- set the split result as the field of @thisFieldName@ .
 -- And the final result is taken as 'Context a'.
 listContextWith :: Context String -> String -> String -> Context a
-listContextWith ctx thisFieldName targetFieldName = listField thisFieldName ctx $ do
+listContextWith context thisFieldName targetFieldName = listField thisFieldName context $ do
   metadata <- getUnderlying >>= getMetadata
   let metas = maybe [] (map trim . splitAll ",") $ lookupString targetFieldName metadata
-  return $ map (twice $ Item . fromFilePath) metas
+  pure $ map (twice $ Item . fromFilePath) metas
   where
     twice :: (a -> a -> b) -> a -> b
     twice f x = f x x
@@ -32,15 +32,15 @@ main = hakyllWith conf $ do
   tagsRules tags $ \tag pat -> do
     route idRoute
     compile $ do
-      posts <- loadAll pat >>= recentFirst
-      let ctx = constField "tag" tag <>
-                constField "title" ("Posts tagged " ++ tag) <>
-                listField "posts" postCtx (return posts) <>
-                defaultContext
+      let posts   = loadAll pat >>= recentFirst
+      let context = constField "tag" tag <>
+                    constField "title" ("Posts tagged " ++ tag) <>
+                    listField "posts" post posts <>
+                    defaultContext
       makeItem ""
-        >>= loadAndApplyTemplate "templates/tag.html" ctx
-        >>= loadAndApplyTemplate "templates/basic.html" ctx
-        >>= loadAndApplyTemplate "templates/default.html" ctx
+        >>= loadAndApplyTemplate "templates/tag.html" context
+        >>= loadAndApplyTemplate "templates/basic.html" context
+        >>= loadAndApplyTemplate "templates/default.html" context
         >>= relativizeUrls
 
   match "images/**" $ do
@@ -79,36 +79,36 @@ main = hakyllWith conf $ do
   match "posts/*" $ do
     route $ setExtension "html"
     compile $ modernPandocCompiler
-      >>= loadAndApplyTemplate "templates/post.html" postCtx
-      >>= loadAndApplyTemplate "templates/default.html" postCtx
+      >>= loadAndApplyTemplate "templates/post.html" post
+      >>= loadAndApplyTemplate "templates/default.html" post
       >>= relativizeUrls
 
   create ["archive.html"] $ do
     route idRoute
     compile $ do
-      posts <- loadAll "posts/*" >>= recentFirst
-      let archiveCtx = listField "posts" postCtx (return posts) <>
-                       constField "title" "Archives" <>
-                       defaultContext
+      let posts   = loadAll "posts/*" >>= recentFirst
+      let context = listField "posts" post posts <>
+                    constField "title" "Archives" <>
+                    defaultContext
       makeItem ""
-        >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-        >>= loadAndApplyTemplate "templates/basic.html" archiveCtx
-        >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+        >>= loadAndApplyTemplate "templates/archive.html" context
+        >>= loadAndApplyTemplate "templates/basic.html" context
+        >>= loadAndApplyTemplate "templates/default.html" context
         >>= relativizeUrls
 
   match "index.html" $ do
     route idRoute
     compile $ do
-      posts    <- loadAll "posts/*" >>= fmap (take 30) . recentFirst
       tagCloud <- renderTagCloud 80.0 200.0 tags
-      let indexCtx = listField "posts" postCtx (return posts) <>
-                     constField "title" "Home" <>
-                     constField "tagcloud" tagCloud <>
-                     defaultContext
+      let posts   = loadAll "posts/*" >>= fmap (take 30) . recentFirst
+      let context = listField "posts" post posts <>
+                    constField "title" "Home" <>
+                    constField "tagcloud" tagCloud <>
+                    defaultContext
       getResourceBody
-        >>= applyAsTemplate indexCtx
-        >>= loadAndApplyTemplate "templates/basic.html" indexCtx
-        >>= loadAndApplyTemplate "templates/default.html" indexCtx
+        >>= applyAsTemplate context
+        >>= loadAndApplyTemplate "templates/basic.html" context
+        >>= loadAndApplyTemplate "templates/default.html" context
         >>= relativizeUrls
 
   match "templates/*" $
@@ -127,11 +127,11 @@ main = hakyllWith conf $ do
     compile templateCompiler
   where
     -- See /posts/*.md and templates/post.html
-    postCtx :: Context String
-    postCtx =
+    post :: Context String
+    post =
       dateField "date" "%Y/%m/%d" <>
       constField "host" "aiya000.github.io" <>
-      --NOTE: Why "name" can be got if I use titleField ?
+      -- NOTE: Why "name" can be got if I use titleField ?
       listContextWith (titleField "tagName") "tagNames" "tags" <>
       defaultContext
 
