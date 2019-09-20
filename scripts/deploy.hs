@@ -1,5 +1,5 @@
 #!/usr/bin/env stack
--- stack --resolver lts-12.12 --install-ghc runghc --package shelly --package text --package here --package safe-exceptions
+-- stack --resolver lts-13.22 --install-ghc runghc --package shelly --package text --package here --package safe-exceptions
 
 {-# LANGUAGE ExtendedDefaultRules #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -10,8 +10,8 @@ import Control.Monad (forM_, when)
 import Data.Monoid ((<>))
 import Data.String.Here (i)
 import Data.Text (Text)
-import Shelly (Sh, shelly, verbosely, run, run_, (-|-), ls, toTextIgnore)
 import qualified Data.Text as Text
+import Shelly (Sh, shelly, verbosely, run, run_, (-|-), ls, toTextIgnore)
 
 default (Text)
 
