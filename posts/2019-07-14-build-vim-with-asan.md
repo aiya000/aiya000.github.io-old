@@ -5,6 +5,38 @@ tags: Vim
 　vim-jpでichizokさんに指南をいただきました。
 ありがとうございます :sunglasses:
 
+## 追記: Another answer
+
+valgrindを使う。
+
+```shell-session
+$ vim src/testdir/Makefile
+```
+
+```diff
+diff --git a/src/testdir/Makefile b/src/testdir/Makefile
+index bcf2f8c37..cb9af4887 100644
+--- a/src/testdir/Makefile
++++ b/src/testdir/Makefile
+@@ -18,7 +18,7 @@ REDIR_TEST_TO_NULL = --cmd 'au SwapExists * let v:swapchoice = "e"' > /dev/null
+ #   The output goes into a file "valgrind.testN"
+ #   Vim should be compiled with EXITFREE to avoid false warnings.
+ #   This will make testing about 10 times as slow.
+-# VALGRIND = valgrind --tool=memcheck --leak-check=yes --num-callers=25 --log-file=valgrind.$*
++VALGRIND = valgrind --tool=memcheck --leak-check=yes --num-callers=25 --log-file=valgrind.$*
+ 
+ default: nongui
+ 
+```
+
+```shell-session
+$ make clean  # 必要に応じて
+$ make -j4 -e CFLAGS='-g3 -O0 -Wall'
+$ cd src/testdir
+$ make test_template_string
+$ cat valgrind.test_template_string
+```
+
 ## 結
 
 ```shell-session
