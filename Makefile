@@ -1,4 +1,5 @@
 notify ?= notify-send
+open ?= xdg-open
 
 all: build
 
@@ -30,3 +31,6 @@ post:
 
 deploy:
 	./scripts/deploy.hs
+
+browse:
+	$(open) https://aiya000.github.io
