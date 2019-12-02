@@ -28,6 +28,10 @@
     padding: 32px;
 }
 
+.index-left .index-navigator {
+    margin-right: 20px;
+}
+
 .index-right {
     float: left;
     width: 25%;
