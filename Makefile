@@ -16,8 +16,13 @@ watch/build:
 	$(MAKE) build && $(notify) 'success' || $(notify) 'failure'
 	stack exec site watch
 
+start: open watch
+
 open:
 	xdg-open 'http://127.0.0.1:25252'
+
+browse:
+	$(open) https://aiya000.github.io
 
 POST_NAME := $$(date +'%Y-%m-%d')-$(name)
 
@@ -31,6 +36,3 @@ post:
 
 deploy:
 	./scripts/deploy.hs
-
-browse:
-	$(open) https://aiya000.github.io
