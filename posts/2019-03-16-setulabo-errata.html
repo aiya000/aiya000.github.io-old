@@ -21,28 +21,31 @@
         <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="../">
-                galaxy-sixth-sensey
-            </a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../profile.html">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../products.html">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../archive.html">Archive</a>
-                    </li>
-                </ul>
+        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="nav-link" href="../">Home</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="../about.html">About</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="../profile.html">Profile</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="../products.html">Products</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="../archive.html">Archive</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
@@ -83,12 +86,51 @@
 <div class="post-body">
     <h1 id="special-thanks">Special Thanks</h1>
 <p>　<a href="https://twitter.com/tadsan">@tadsan</a>さんは当日、弊サークルの売り子さんをしてくださり、売り上げに多大な貢献をしてくださりました。</p>
-<p>にも関わらず、技術書典6での頒布時点での、本書のSpecial Thanksに書かれていませんでした……。</p>
-<p>ですのでこの場をお借りして、感謝をあげさせてください。</p>
-<p>　<span class="citation" data-cites="tadsanさんの精力的な当日活動がなければ">@tadsanさんの精力的な当日活動がなければ</span>、今回の良き結果は残せなかったでしょう。</p>
-<p>本当に、ありがとうございました！</p>
+<p>にも関わらず、第一版の頒布時点での、本書のSpecial Thanksに書かれていませんでした……。 ですのでこの場をお借りして、感謝をあげさせてください。</p>
+<p>　<span class="citation" data-cites="tadsanさんの精力的な当日活動がなければ">@tadsanさんの精力的な当日活動がなければ</span>、今回の良き結果は残せなかったでしょう。 本当に、ありがとうございました！</p>
 <h1 id="内容">内容</h1>
 <p>　<a href="https://aiya000.booth.pm/items/1298622">せつラボ 〜圏論の基本〜</a>の誤りについての、Web正誤表です。 逐次、更新されます。</p>
+<h2 id="第二版で発生した誤りと修正">第二版で発生した誤りと修正</h2>
+<table class="table table-bordered">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">誤</th>
+<th style="text-align: left;">正</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P.46: 「リスト5.18: ダメ: IntとCharの両⽅を組み合わせた値 のコード」 <strong>(Int, Char)</strong> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+<td style="text-align: left;"><strong>Either Int Char</strong> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P.105:「リスト10.13: &amp;&amp;&amp;とは違う？ 関数<strong>a</strong>」</td>
+<td style="text-align: left;">「リスト10.13: &amp;&amp;&amp;とは違う？ 関数<strong>h</strong>」</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>誤</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">-- 以下は『成り立たない』</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>(<span class="op">-</span><span class="dv">10</span>, <span class="ch">'a'</span>)<span class="ot"> ::</span> (<span class="dt">Int</span>, <span class="dt">Char</span>)    <span class="co">--    (-10, 'a') ∈ (Int, Char)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>(<span class="dv">252</span>, <span class="ch">'q'</span>)<span class="ot"> ::</span> (<span class="dt">Int</span>, <span class="dt">Char</span>)    <span class="co">--    (252, 'q') ∈ (Int, Char)</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>(<span class="dv">100</span>, <span class="ch">'z'</span>)<span class="ot"> ::</span> (<span class="dt">Int</span>, <span class="dt">Char</span>)    <span class="co">--    (100, 'z') ∈ (Int, Char)</span></span></code></pre></div>
+<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn2" role="doc-endnote"><p>正</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">-- 以下は『成り立たない』</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>(<span class="op">-</span><span class="dv">10</span>, <span class="ch">'a'</span>)<span class="ot"> ::</span> <span class="dt">Either</span> <span class="dt">Int</span> <span class="dt">Char</span>    <span class="co">--    (-10, 'a') ∈ Either Int Char</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>(<span class="dv">252</span>, <span class="ch">'q'</span>)<span class="ot"> ::</span> <span class="dt">Either</span> <span class="dt">Int</span> <span class="dt">Char</span>    <span class="co">--    (252, 'q') ∈ Either Int Char</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>(<span class="dv">100</span>, <span class="ch">'z'</span>)<span class="ot"> ::</span> <span class="dt">Either</span> <span class="dt">Int</span> <span class="dt">Char</span>    <span class="co">--    (100, 'z') ∈ Either Int Char</span></span></code></pre></div>
+<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></li>
+</ol>
+</section>
 
     <hr />
 

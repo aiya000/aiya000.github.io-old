@@ -21,28 +21,31 @@
         <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="../">
-                galaxy-sixth-sensey
-            </a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../profile.html">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../products.html">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../archive.html">Archive</a>
-                    </li>
-                </ul>
+        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="nav-link" href="../">Home</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="../about.html">About</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="../profile.html">Profile</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="../products.html">Products</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="../archive.html">Archive</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
@@ -82,6 +85,27 @@
 
 <div class="post-body">
     <p>　vim-jpでichizokさんに指南をいただきました。 ありがとうございます <span class="emoji" data-emoji="sunglasses">😎</span></p>
+<h2 id="追記-another-answer">追記: Another answer</h2>
+<p>valgrindを使う。</p>
+<pre class="shell-session"><code>$ vim src/testdir/Makefile</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">diff --git a/src/testdir/Makefile b/src/testdir/Makefile</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>index bcf2f8c37..cb9af4887 100644</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="dt">--- a/src/testdir/Makefile</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">+++ b/src/testdir/Makefile</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="dt">@@ -18,7 +18,7 @@ REDIR_TEST_TO_NULL = --cmd 'au SwapExists * let v:swapchoice = &quot;e&quot;' &gt; /dev/null</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a> #   The output goes into a file &quot;valgrind.testN&quot;</span>
+<span id="cb2-7"><a href="#cb2-7"></a> #   Vim should be compiled with EXITFREE to avoid false warnings.</span>
+<span id="cb2-8"><a href="#cb2-8"></a> #   This will make testing about 10 times as slow.</span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="st">-# VALGRIND = valgrind --tool=memcheck --leak-check=yes --num-callers=25 --log-file=valgrind.$*</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="va">+VALGRIND = valgrind --tool=memcheck --leak-check=yes --num-callers=25 --log-file=valgrind.$*</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a> </span>
+<span id="cb2-12"><a href="#cb2-12"></a> default: nongui</span>
+<span id="cb2-13"><a href="#cb2-13"></a> </span></code></pre></div>
+<pre class="shell-session"><code>$ make clean  # 必要に応じて
+$ make -j4 -e CFLAGS='-g3 -O0 -Wall'
+$ cd src/testdir
+$ make test_template_string
+$ cat valgrind.test_template_string</code></pre>
 <h2 id="結">結</h2>
 <pre class="shell-session"><code>$ cd /path/to/vim
 $ SANITIZER_CFLAGS=&quot;-g -O1 -DABORT_ON_INTERNAL_ERROR -DEXITFREE -fsanitize=address -fno-omit-frame-pointer&quot; make
