@@ -1,6 +1,13 @@
-img {
+.minify img {
     margin: 16px;
     width: 20vw;
+    height: auto;
+    object-fit: contain;
+}
+
+.half img {
+    margin: 16px;
+    width: 50vw;
     height: auto;
     object-fit: contain;
 }

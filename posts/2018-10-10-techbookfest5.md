@@ -48,8 +48,10 @@ tags: イベント, 備考録
 それ以外にも当日・当日外含め多くの人にバックアップをしていただけました。
 ここに特記ない方々も感謝します、本当にありがとうございます :pray:
 
+<div class="half">
 ![](/images/posts/2018-10-10-techbookfest5/circle.jpg)
 ![](/images/posts/2018-10-10-techbookfest5/books.jpg)
+</div>
 
 　@blac_k_eyと@310_ktrは僕がサークル参加を表明したときに手伝いをお願いしました。
 @blac_k_eyは当日の売り子と物資支援を、
@@ -63,7 +65,9 @@ tags: イベント, 備考録
 
 　また運営の方々、このような素晴らしいイベントをありがとうございました！
 
+<div class="half">
 ![](/images/posts/2018-10-10-techbookfest5/distributer.jpg)
+</div>
 
 ## 頒布
 　初めてのサークル参加だったので不手際は多々ありましたが、
@@ -77,7 +81,9 @@ tags: イベント, 備考録
 ## 打ち上げ
 　『激』でした。
 
+<div class="half">
 ![](/images/posts/2018-10-10-techbookfest5/vivid.jpg)
+</div>
 
 # まとめ
 
@@ -90,7 +96,9 @@ tags: イベント, 備考録
 
 以下、当日買った本 :books:
 
+<div class="minify">
 ![](/images/posts/2018-10-10-techbookfest5/got1.jpg)
 ![](/images/posts/2018-10-10-techbookfest5/got2.jpg)
 ![](/images/posts/2018-10-10-techbookfest5/got3.jpg)
 ![](/images/posts/2018-10-10-techbookfest5/got4.jpg)
+</div>
