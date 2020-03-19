@@ -3,3 +3,17 @@ div.basic-content {
     margin: 7%;
     background-color: white;
 }
+
+.minify * {
+    margin: 16px;
+    width: 20vw;
+    height: auto;
+    object-fit: contain;
+}
+
+.half * {
+    margin: 16px;
+    width: 50vw;
+    height: auto;
+    object-fit: contain;
+}
