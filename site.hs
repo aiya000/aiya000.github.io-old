@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE ViewPatterns #-}
 
 import Control.Lens ((<&>))
@@ -87,6 +88,11 @@ main = hakyllWith conf $ do
       >>= loadAndApplyTemplate "templates/default.html" post
       >>= relativizeUrls
 
+  -- To deploy ./node_modules
+  create [".nojekyll"] $ do
+    route idRoute
+    compile $ makeItem @String ""
+
   create ["archive.html"] $ do
     route idRoute
     compile $ do
@@ -124,11 +130,6 @@ main = hakyllWith conf $ do
       >>= loadAndApplyTemplate "templates/products.html" defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
-
-  -- A part of index.html
-  match "affiliate.html" $ do
-    route idRoute
-    compile templateCompiler
   where
     -- See /posts/*.md and templates/post.html
     post :: Context String

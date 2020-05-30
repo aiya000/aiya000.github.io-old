@@ -21,7 +21,7 @@ watch/build:
 start: open watch
 
 open:
-	xdg-open 'http://127.0.0.1:25252'
+	$(open) 'http://127.0.0.1:25252'
 
 browse:
 	$(open) https://aiya000.github.io
