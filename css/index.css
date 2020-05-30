@@ -47,10 +47,14 @@
     background-color: white;
     border-style: solid;
     border-radius: 8px;
-    margin-bottom: 16px;
     padding: 8px;
 }
 
-.index-clear-styles {
-    clear: both;
+.index-affiliates {
+    border-radius: 8px;
+    border-style: solid;
+    height: 1050px;  /* 今のleftに合わせた */
+    margin-top: 16px;
+    overflow-y: scroll;
+    padding: 16px;
 }
