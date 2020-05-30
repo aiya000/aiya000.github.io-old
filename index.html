@@ -4,24 +4,29 @@ title: Home
 <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 
 <div class="index-title">
-    <div class="index-title-internal">
-        <img class="circle-logo" src="/images/circle-logo.png" alt="circle-logo"/>
-        <div>galaxy-sixth-sensey</div>
-    </div>
+  <div class="index-title-internal">
+    <img class="circle-logo" src="/images/circle-logo.png" alt="circle-logo"/>
+    <div>galaxy-sixth-sensey</div>
+  </div>
 </div>
 
 <div class="index-content">
-    <div class="index-left">
-        $partial("templates/post-list.html")$
-        <a class="index-navigator" href="/archive.html">これ以前の記事</a>
-        <a class="index-navigator" href="https://github.com/aiya000/aiya000.github.io/tree/src/posts/diary">日記</a>
+  <div class="index-left">
+    <div>
+      <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+      <div class="gcse-search"></div>
     </div>
 
-    <div class="index-right">
-        <div class="index-tagcloud">
-            $tagcloud$
-        </div>
+    $partial("templates/post-list.html")$
+    <a class="index-navigator" href="/archive.html">これ以前の記事</a>
+    <a class="index-navigator" href="https://github.com/aiya000/aiya000.github.io/tree/src/posts/diary">日記</a>
+  </div>
+
+  <div class="index-right">
+    <div class="index-tagcloud">
+      $tagcloud$
     </div>
+  </div>
 </div>
 
 <br class="index-clear-styles"/>
