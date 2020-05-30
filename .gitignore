@@ -21,3 +21,4 @@ _cache/
 _site/
 tags
 aiya000-github-io.cabal
+node_modules

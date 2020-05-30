@@ -55,6 +55,10 @@ main = hakyllWith conf $ do
     route idRoute
     compile copyFileCompiler
 
+  match "node_modules/**/*" $ do
+    route idRoute
+    compile copyFileCompiler
+
   match "about.md" $ do
     route $ setExtension "html"
     compile $ modernPandocCompiler

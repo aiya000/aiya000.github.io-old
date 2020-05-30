@@ -1,0 +1,12 @@
+{
+  "name": "aiya000.github.io",
+  "version": "1.0.0",
+  "description": "A blog by aiya000.",
+  "repository": "https://github.com/aiya000/aiya000.github.io",
+  "author": "aiya000 <aiya000.develop@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "4.5.0",
+    "jquery": "^3.5.1"
+  }
+}
