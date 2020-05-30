@@ -15,27 +15,30 @@
     height: 150px;
 }
 
-.index-content {
-    margin-top: 64px;
-}
-
 .index-left {
-    float: left;
-    width: 75%;
-    border-style: solid;
     border-color: black;
     border-radius: 8px;
-    padding: 32px;
+    border-style: solid;
+    width: 70%;
 }
 
-.index-left .index-navigator {
-    margin-right: 20px;
+@media screen and (max-width: 1024px) {
+    .index-left {
+        width: 100%;
+    }
 }
 
 .index-right {
-    float: left;
+    margin-left: 16px;
     width: 25%;
-    padding-left: 32px;
+}
+
+@media screen and (max-width: 1024px) {
+    .index-right {
+        margin-left: 0;
+        margin-top: 16px;
+        width: 100%;
+    }
 }
 
 .index-tagcloud {

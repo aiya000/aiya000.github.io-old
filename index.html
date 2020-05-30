@@ -5,16 +5,19 @@ title: Home
 
 <div class="index-title">
   <div class="index-title-internal">
-    <img class="circle-logo" src="/images/circle-logo.png" alt="circle-logo"/>
+    <img class="img-fluid" src="/images/circle-logo.png" alt="circle-logo"/>
     <div>galaxy-sixth-sensey</div>
   </div>
 </div>
 
-<div class="index-content">
-  <div class="index-left">
+<div class="mt-4 d-flex flex-row flex-wrap">
+  <div class="index-left p-2">
     $partial("templates/post-list.html")$
-    <a class="index-navigator" href="/archive.html">これ以前の記事</a>
-    <a class="index-navigator" href="https://github.com/aiya000/aiya000.github.io/tree/src/posts/diary">日記</a>
+
+    <div class="d-flex flex-row justify-content-center mt-4">
+      <a class="mr-3" href="/archive.html">これ以前の記事</a>
+      <a class="mr-3" href="https://github.com/aiya000/aiya000.github.io/tree/src/posts/diary">その他の日記</a>
+    </div>
   </div>
 
   <div class="index-right">
