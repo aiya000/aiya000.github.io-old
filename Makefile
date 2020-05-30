@@ -4,7 +4,9 @@ open ?= xdg-open
 all: build
 
 build:
-	stack build && stack exec site build
+	yarn install
+	stack build
+	stack exec site build
 
 clean:
 	stack exec site clean
@@ -34,5 +36,5 @@ post:
 	echo 'tags: '  >> "./posts/$(POST_NAME).md"
 	echo ---       >> "./posts/$(POST_NAME).md"
 
-deploy:
+deploy: build
 	./scripts/deploy.hs
