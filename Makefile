@@ -11,14 +11,14 @@ build:
 clean:
 	stack exec site clean
 
-watch:
-	watchexec --exts hs --restart -- $(MAKE) watch/build
+serve:
+	watchexec --exts hs --restart -- $(MAKE) serve/build
 
-watch/build:
+serve/build:
 	$(MAKE) build && $(notify) 'success' || $(notify) 'failure'
 	stack exec site watch
 
-start: open watch
+start: open serve
 
 open:
 	$(open) 'http://127.0.0.1:25252'
