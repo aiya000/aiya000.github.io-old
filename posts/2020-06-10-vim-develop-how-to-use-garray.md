@@ -65,6 +65,8 @@ foo(char_u **xs, size_t xs_size)  // char_uはVim特有の文字型
     ga_concat(&result, xs[xs_size - 1]);
 
     printf("%s\n", (char_u *)result.ga_data);
+
+    ga_clear(&result);
 }
 
 char_u *xs[3] = {
@@ -104,12 +106,14 @@ ga_init2(garray_T *gap, int itemsize, int growsize)
 ```
 
 `ga_append()` と `ga_concat()` は、要素が`char_u`な`garray_T`に特化した関数で、
-適宜メモリアロケーとしつつ`result.ga_data`にデータ（`char_u`及び`char_u*`）を追加していきます。
+適宜メモリアロケートしつつ`result.ga_data`にデータ（`char_u`及び`char_u*`）を追加していきます。
 
 これよって、むやみに手動メモリアロケ―としつつ
 `sprintf()`するという呪いのようなコードから解放されます。
 
 それこそが、`garray_T`の存在意義でしょう！
+
+最後に`ga_clear()`でアロケートされたメモリを解放（free）してあげます。
 
 ## 要素が`char_u`でない場合
 
@@ -144,6 +148,8 @@ for (i = 0; i < result.ga_len; ++i)
 // 1
 // 2
 // 3
+
+ga_clear(&result);
 ```
 
 `ga_grow(garray_T *ga, int n)`は`garray_T`がもうn個分の要素を持たない場合に、
@@ -158,6 +164,7 @@ for (i = 0; i < result.ga_len; ++i)
     - `ga_init()`, `ga_init2()`: コンスタントラクター
     - `ga_append()`, `ga_concat()`: `char_u`が要素の`garray_T`への追加関数
     - `ga_grow()`: 新たな要素を追加したいときの関数
+    - `ga_clear()`: 初期化済み`garray_T`を解放（free）する。
 - `garray_T`のプロパティ
     - `ga_data`: 全要素の実体
     - `ga_len`: 中の要素数
