@@ -1,0 +1,689 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - Vimをvalgrind付きでビルドして、メモリリークを検出する</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Vimをvalgrind付きでビルドして、メモリリークを検出する" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Vimをvalgrind付きでビルドして、メモリリークを検出する" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Vimをvalgrind付きでビルドして、メモリリークを検出する</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2020-02-24-build-vim-with-valgrind.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Vimをvalgrind付きでビルドして、メモリリークを検出する" />
+    <meta property="og:description" content="Vimをvalgrind付きでビルドして、メモリリークを検出する" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Vimをvalgrind付きでビルドして、メモリリークを検出する" />
+    <meta name="twitter:description" content="Vimをvalgrind付きでビルドして、メモリリークを検出する" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2020/02/24</div>
+    
+
+    <div class="post-title">Vimをvalgrind付きでビルドして、メモリリークを検出する</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Vim.html">Vim</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/C.html">C</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <pre class="shell-session"><code>$ vim src/testdir/Makefile</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">diff --git a/src/testdir/Makefile b/src/testdir/Makefile</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>index bcf2f8c37..cb9af4887 100644</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="dt">--- a/src/testdir/Makefile</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">+++ b/src/testdir/Makefile</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="dt">@@ -18,7 +18,7 @@ REDIR_TEST_TO_NULL = --cmd 'au SwapExists * let v:swapchoice = &quot;e&quot;' &gt; /dev/null</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a> #   The output goes into a file &quot;valgrind.testN&quot;</span>
+<span id="cb2-7"><a href="#cb2-7"></a> #   Vim should be compiled with EXITFREE to avoid false warnings.</span>
+<span id="cb2-8"><a href="#cb2-8"></a> #   This will make testing about 10 times as slow.</span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="st">-# VALGRIND = valgrind --tool=memcheck --leak-check=yes --num-callers=25 --log-file=valgrind.$*</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="va">+VALGRIND = valgrind --tool=memcheck --leak-check=yes --num-callers=25 --log-file=valgrind.$*</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a> </span>
+<span id="cb2-12"><a href="#cb2-12"></a> default: nongui</span>
+<span id="cb2-13"><a href="#cb2-13"></a> </span></code></pre></div>
+<pre class="shell-session"><code>$ make clean  # 必要に応じて
+$ make -j4 -e CFLAGS='-g3 -O0 -Wall'
+$ cd src/testdir
+$ make test_template_string  # 実行したいテストを実行する。多分だけど ../vim を実際に操作してもいい
+$ cat valgrind.test_template_string</code></pre>
+<p>結果</p>
+<pre><code>==46735== Memcheck, a memory error detector
+==46735== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==46735== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==46735== Command: ../vim -f -u unix.vim -U NONE --noplugin --not-a-term -S runtest.vim test_template_string.vim --cmd au\ SwapExists\ *\ let\ v:swapchoice\ =\ &quot;e&quot;
+==46735== Parent PID: 46734
+==46735== 
+==46735== 
+==46735== HEAP SUMMARY:
+==46735==     in use at exit: 621,592 bytes in 2,184 blocks
+==46735==   total heap usage: 7,098 allocs, 4,914 frees, 2,528,440 bytes allocated
+==46735== 
+==46735== 3 bytes in 1 blocks are possibly lost in loss record 114 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23A680: concat_str (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18960F: eval5 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188F2E: eval4 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188D80: eval3 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188BD9: eval2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1889F1: eval1 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18C1DC: get_template_string_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x189E6B: eval7 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18995E: eval6 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1893E1: eval5 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188F2E: eval4 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188D80: eval3 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188BD9: eval2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1889F1: eval1 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18890D: eval0 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A32B7: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34E9F6: call_user_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34F063: call_user_func_check (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34FB4B: call_func (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 6 bytes in 1 blocks are possibly lost in loss record 145 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C971: vim_strsave (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x269DC3: get_option_value (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18B318: get_option_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x189E29: eval7 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18995E: eval6 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1893E1: eval5 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188F2E: eval4 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188D80: eval3 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188BD9: eval2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1889F1: eval1 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18890D: eval0 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A32B7: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 14 bytes in 1 blocks are possibly lost in loss record 216 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C971: vim_strsave (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18E7E2: get_env_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x189E8A: eval7 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18995E: eval6 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1893E1: eval5 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188F2E: eval4 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188D80: eval3 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188BD9: eval2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1889F1: eval1 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18890D: eval0 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A32B7: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE79A: source_startup_scripts (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAAD5: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 15 bytes in 3 blocks are possibly lost in loss record 219 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C971: vim_strsave (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34BDA1: one_function_arg (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34C116: get_function_args (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3512F6: ex_function (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 28 bytes in 1 blocks are possibly lost in loss record 282 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A76AA: set_var_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18732E: set_var_lval (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A48D8: ex_let_one (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A33B9: ex_let_vars (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188193: next_for_item (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1CAF43: ex_while (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 31 bytes in 1 blocks are possibly lost in loss record 287 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A76AA: set_var_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18732E: set_var_lval (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A48D8: ex_let_one (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A33B9: ex_let_vars (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A3321: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34E9F6: call_user_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34F063: call_user_func_check (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34FB4B: call_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34CF61: get_func_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x35402D: ex_call (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 32 bytes in 1 blocks are possibly lost in loss record 311 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A76AA: set_var_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18732E: set_var_lval (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A48D8: ex_let_one (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A33B9: ex_let_vars (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A3321: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE79A: source_startup_scripts (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAAD5: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 33 bytes in 1 blocks are possibly lost in loss record 313 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C971: vim_strsave (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1904C7: copy_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A6747: get_var_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18A042: eval7 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18995E: eval6 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1893E1: eval5 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188F2E: eval4 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188D80: eval3 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188BD9: eval2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1889F1: eval1 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18890D: eval0 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A32B7: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34E9F6: call_user_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34F063: call_user_func_check (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34FB4B: call_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34CF61: get_func_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x35402D: ex_call (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 35 bytes in 1 blocks are possibly lost in loss record 315 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A76AA: set_var_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18732E: set_var_lval (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A48D8: ex_let_one (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A33B9: ex_let_vars (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A3321: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE79A: source_startup_scripts (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAAD5: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 37 bytes in 2 blocks are possibly lost in loss record 319 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18BE47: get_lit_string_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x189D58: eval7 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18995E: eval6 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1893E1: eval5 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188F2E: eval4 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188D80: eval3 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188BD9: eval2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1889F1: eval1 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18890D: eval0 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A32B7: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 39 bytes in 1 blocks are possibly lost in loss record 320 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23A680: concat_str (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x187C38: tv_op (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1872D3: set_var_lval (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A48D8: ex_let_one (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A33B9: ex_let_vars (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A3321: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34E9F6: call_user_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34F063: call_user_func_check (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34FB4B: call_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34CF61: get_func_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x35402D: ex_call (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 48 bytes in 1 blocks are possibly lost in loss record 379 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C73B: alloc_clear (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34C7ED: get_lambda_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x189DE6: eval7 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18995E: eval6 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1893E1: eval5 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188F2E: eval4 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188D80: eval3 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188BD9: eval2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1889F1: eval1 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18890D: eval0 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A32B7: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34E9F6: call_user_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34F063: call_user_func_check (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34FB4B: call_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34CF61: get_func_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x35402D: ex_call (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x190F27: ex_execute (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 72 bytes in 3 blocks are possibly lost in loss record 435 of 639
+==46735==    at 0x48386AF: malloc (vg_replace_malloc.c:308)
+==46735==    by 0x483ADE7: realloc (vg_replace_malloc.c:836)
+==46735==    by 0x23D9FD: ga_grow (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34BD69: one_function_arg (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34C116: get_function_args (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3512F6: ex_function (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 75 bytes in 3 blocks are possibly lost in loss record 437 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A76AA: set_var_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18732E: set_var_lval (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A48D8: ex_let_one (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A33B9: ex_let_vars (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A3321: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34E9F6: call_user_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34F063: call_user_func_check (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34FB4B: call_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34CF61: get_func_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x35402D: ex_call (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x190F27: ex_execute (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34E9F6: call_user_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34F063: call_user_func_check (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34FB4B: call_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34CF61: get_func_tv (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 99 bytes in 3 blocks are possibly lost in loss record 464 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C9B8: vim_strnsave (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1C8B33: eval_vars (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x19685F: f_expand (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1940AA: call_internal_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34FBBF: call_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x34CF61: get_func_tv (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188819: eval_func (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18A013: eval7 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18995E: eval6 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1893E1: eval5 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188F2E: eval4 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188D80: eval3 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x188BD9: eval2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1889F1: eval1 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18890D: eval0 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A32B7: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 558 bytes in 17 blocks are possibly lost in loss record 545 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A76AA: set_var_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x18732E: set_var_lval (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A48D8: ex_let_one (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A33B9: ex_let_vars (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A3321: ex_let_const (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1A2EB4: ex_let (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 560 bytes in 2 blocks are possibly lost in loss record 546 of 639
+==46735==    at 0x483AD7B: realloc (vg_replace_malloc.c:836)
+==46735==    by 0x23D9FD: ga_grow (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x35267D: ex_function (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 749 bytes in 2 blocks are possibly lost in loss record 558 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C73B: alloc_clear (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x352C65: ex_function (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 1,352 bytes in 4 blocks are possibly lost in loss record 578 of 639
+==46735==    at 0x483AD7B: realloc (vg_replace_malloc.c:836)
+==46735==    by 0x23D9FD: ga_grow (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x35267D: ex_function (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 1,425 bytes in 4 blocks are possibly lost in loss record 584 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C73B: alloc_clear (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x352C65: ex_function (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 1,676 bytes in 68 blocks are possibly lost in loss record 592 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C971: vim_strsave (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x352694: ex_function (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== 3,363 bytes in 122 blocks are possibly lost in loss record 604 of 639
+==46735==    at 0x483877F: malloc (vg_replace_malloc.c:309)
+==46735==    by 0x23C82D: lalloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C6D8: alloc (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x23C971: vim_strsave (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x352694: ex_function (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1CDE: do_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D10C5: cmd_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x2D1111: ex_source (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BE521: do_one_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BB840: do_cmdline (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x1BADCE: do_cmdline_cmd (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AE5D8: exe_commands (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AB164: vim_main2 (in /path/to/vim/template-string/src/vim)
+==46735==    by 0x3AAADA: main (in /path/to/vim/template-string/src/vim)
+==46735== 
+==46735== LEAK SUMMARY:
+==46735==    definitely lost: 0 bytes in 0 blocks
+==46735==    indirectly lost: 0 bytes in 0 blocks
+==46735==      possibly lost: 10,250 bytes in 243 blocks
+==46735==    still reachable: 611,342 bytes in 1,941 blocks
+==46735==         suppressed: 0 bytes in 0 blocks
+==46735== Reachable blocks (those to which a pointer was found) are not shown.
+==46735== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==46735== 
+==46735== For lists of detected and suppressed errors, rerun with: -s
+==46735== ERROR SUMMARY: 22 errors from 22 contexts (suppressed: 0 from 0)</code></pre>
+<p>ここで<code>definitely lost</code>が0でないようなら、 <code>X bytes in X blocks are definitely lost in loss record X of X</code> と書かれたコールスタック内にあるメモリリークを修正する必要があります。</p>
+<pre><code>==46735== LEAK SUMMARY:
+==46735==    definitely lost: 0 bytes in 0 blocks</code></pre>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2020-02-24-build-vim-with-valgrind.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Vimをvalgrind付きでビルドして、メモリリークを検出する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2020-02-24-build-vim-with-valgrind.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2020-02-24-build-vim-with-valgrind.md">Vimをvalgrind付きでビルドして、メモリリークを検出する - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
+
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

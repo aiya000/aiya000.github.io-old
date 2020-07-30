@@ -1,55 +1,60 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-        <title>galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta property="og:url" content="https://aiya000.github.io" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
-        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta property="og:site_name" content="galaxy-sixth-sensey" />
-        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@public_ai000ya" />
-        <meta name="twitter:creator" content="@public_ai000ya">
-        <meta name="twitter:title" content="galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
-        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
-                </div>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="nav-link" href="../">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../about.html">About</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../products.html">Products</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../archive.html">Archive</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
     <title>galaxy-sixth-sensey - lens（のMonadState演算子など）で自己に言及したい時はidを使う</title>
@@ -86,43 +91,43 @@
 <div class="post-body">
     <h1 id="まとめ">まとめ</h1>
 <p>　lensにて。 例えば<code>Int</code>や<code>[Int]</code>のような単一の状態を持つ<code>MonadState</code>の文脈で、 状態自身（自己）に言及したい場合は、このようにすることで実現できる。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">import</span> <span class="dt">Control.Lens</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">import</span> <span class="dt">Control.Monad.State.Lazy</span> (<span class="dt">StateT</span>, runStateT)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-5" title="5">main <span class="ot">=</span> runStateT context [<span class="dv">0</span>] <span class="op">&gt;&gt;=</span> <span class="fu">print</span></a>
-<a class="sourceLine" id="cb1-6" title="6"></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co">-- dequeue behavior</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="ot">context ::</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-9" title="9">context <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-10" title="10">  <span class="fu">id</span> <span class="op">%=</span> (<span class="dv">10</span> <span class="op">&lt;|</span>)</a>
-<a class="sourceLine" id="cb1-11" title="11">  <span class="fu">id</span> <span class="op">%=</span> (<span class="op">|&gt;</span> <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="co">-- {output}</span></a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="co">-- ((),[10,0,20])</span></a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1">infix <span class="dv">4</span> <span class="op">%=</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="ot">(%=) ::</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span> <span class="dt">ASetter</span> s s a b <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> m ()</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="ot">(%=) ::</span> <span class="dt">ASetter</span> s s a b <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> <span class="dt">StateT</span> s m ()</a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="ot">(%=) ::</span> <span class="dt">ASetter'</span> s a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> <span class="dt">StateT</span> s m ()</a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="ot">(%=) ::</span> <span class="dt">ASetter'</span> [<span class="dt">Int</span>] [<span class="dt">Int</span>] <span class="ot">-&gt;</span> ([<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]) <span class="ot">-&gt;</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb2-6" title="6"></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="ot">(&lt;|) ::</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="ot">(|&gt;) ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
-<a class="sourceLine" id="cb2-9" title="9"></a>
-<a class="sourceLine" id="cb2-10" title="10">(<span class="dv">10</span> <span class="op">&lt;|</span>)<span class="ot"> ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
-<a class="sourceLine" id="cb2-11" title="11">(<span class="op">|&gt;</span> <span class="dv">20</span>)<span class="ot"> ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</a>
-<a class="sourceLine" id="cb2-12" title="12"></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="kw">type</span> <span class="dt">ASetter'</span> s a <span class="ot">=</span> <span class="dt">ASetter</span> s s a a</a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="kw">type</span> <span class="dt">ASetter</span> s t a b <span class="ot">=</span> (a <span class="ot">-&gt;</span> <span class="dt">Identity</span> b) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Identity</span> t</a>
-<a class="sourceLine" id="cb2-15" title="15"></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="fu">id</span><span class="ot"> ::</span> p s (f a) <span class="ot">-&gt;</span> p s (f a)</a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="fu">id</span><span class="ot"> ::</span> (s <span class="ot">-&gt;</span> f a) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> f a</a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="fu">id</span><span class="ot"> ::</span> (s <span class="ot">-&gt;</span> <span class="dt">Identity</span> a) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Identity</span> a</a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="fu">id</span><span class="ot"> ::</span> <span class="dt">ASetter'</span> s a</a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="fu">id</span><span class="ot"> ::</span> <span class="dt">ASetter'</span> [<span class="dt">Int</span>] [<span class="dt">Int</span>]</a>
-<a class="sourceLine" id="cb2-21" title="21"></a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="co">-- なので</span></a>
-<a class="sourceLine" id="cb2-23" title="23"></a>
-<a class="sourceLine" id="cb2-24" title="24">(<span class="fu">id</span> <span class="op">%=</span>)<span class="ot"> ::</span> ([<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]) <span class="ot">-&gt;</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">import</span> <span class="dt">Control.Lens</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">import</span> <span class="dt">Control.Monad.State.Lazy</span> (<span class="dt">StateT</span>, runStateT)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb1-5"><a href="#cb1-5"></a>main <span class="ot">=</span> runStateT context [<span class="dv">0</span>] <span class="op">&gt;&gt;=</span> <span class="fu">print</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">-- dequeue behavior</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ot">context ::</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</span>
+<span id="cb1-9"><a href="#cb1-9"></a>context <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">id</span> <span class="op">%=</span> (<span class="dv">10</span> <span class="op">&lt;|</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">id</span> <span class="op">%=</span> (<span class="op">|&gt;</span> <span class="dv">20</span>)</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">-- {output}</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">-- ((),[10,0,20])</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a>infix <span class="dv">4</span> <span class="op">%=</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="ot">(%=) ::</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span> <span class="dt">ASetter</span> s s a b <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> m ()</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="ot">(%=) ::</span> <span class="dt">ASetter</span> s s a b <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> <span class="dt">StateT</span> s m ()</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="ot">(%=) ::</span> <span class="dt">ASetter'</span> s a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> <span class="dt">StateT</span> s m ()</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="ot">(%=) ::</span> <span class="dt">ASetter'</span> [<span class="dt">Int</span>] [<span class="dt">Int</span>] <span class="ot">-&gt;</span> ([<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]) <span class="ot">-&gt;</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="ot">(&lt;|) ::</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="ot">(|&gt;) ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>(<span class="dv">10</span> <span class="op">&lt;|</span>)<span class="ot"> ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</span>
+<span id="cb2-11"><a href="#cb2-11"></a>(<span class="op">|&gt;</span> <span class="dv">20</span>)<span class="ot"> ::</span> <span class="dt">Seq</span> a <span class="ot">-&gt;</span> <span class="dt">Seq</span> a</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">type</span> <span class="dt">ASetter'</span> s a <span class="ot">=</span> <span class="dt">ASetter</span> s s a a</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="kw">type</span> <span class="dt">ASetter</span> s t a b <span class="ot">=</span> (a <span class="ot">-&gt;</span> <span class="dt">Identity</span> b) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Identity</span> t</span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="fu">id</span><span class="ot"> ::</span> p s (f a) <span class="ot">-&gt;</span> p s (f a)</span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="fu">id</span><span class="ot"> ::</span> (s <span class="ot">-&gt;</span> f a) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> f a</span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="fu">id</span><span class="ot"> ::</span> (s <span class="ot">-&gt;</span> <span class="dt">Identity</span> a) <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Identity</span> a</span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="fu">id</span><span class="ot"> ::</span> <span class="dt">ASetter'</span> s a</span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="fu">id</span><span class="ot"> ::</span> <span class="dt">ASetter'</span> [<span class="dt">Int</span>] [<span class="dt">Int</span>]</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co">-- なので</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a></span>
+<span id="cb2-24"><a href="#cb2-24"></a>(<span class="fu">id</span> <span class="op">%=</span>)<span class="ot"> ::</span> ([<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]) <span class="ot">-&gt;</span> <span class="dt">StateT</span> [<span class="dt">Int</span>] <span class="dt">IO</span> ()</span></code></pre></div>
 <p>　ちなみに<code>Control.Lens.Equality</code>の<code>simple :: Equality' a a</code>の実定義は<code>id</code>。</p>
 <h1 id="参考">参考</h1>
 <ul>
@@ -167,16 +172,15 @@
 <script src="../js/facebook-sdk-2.8.js"></script>
 
 
-        <div class="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
-            and more (<a href="../licenses.html">about licenses</a>).
-        </div>
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
 
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
-        <script type="text/javascript" src="../js/highlight.pack.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
 </html>

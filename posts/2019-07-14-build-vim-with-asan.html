@@ -1,69 +1,74 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-        <title>galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta property="og:url" content="https://aiya000.github.io" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く" />
-        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta property="og:site_name" content="galaxy-sixth-sensey" />
-        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@public_ai000ya" />
-        <meta name="twitter:creator" content="@public_ai000ya">
-        <meta name="twitter:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く" />
-        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
-                </div>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - VimをSanitizer付きでビルドして、メモリリークを検出する</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、メモリリークを検出する" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、メモリリークを検出する" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="nav-link" href="../">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../about.html">About</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../products.html">Products</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../archive.html">Archive</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-    <title>galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く</title>
+    <title>galaxy-sixth-sensey - VimをSanitizer付きでビルドして、メモリリークを検出する</title>
     <meta property="og:url" content="https://aiya000.github.io/posts/2019-07-14-build-vim-with-asan.html" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く" />
-    <meta property="og:description" content="VimをSanitizer付きでビルドして、調査ログを吐く" />
+    <meta property="og:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、メモリリークを検出する" />
+    <meta property="og:description" content="VimをSanitizer付きでビルドして、メモリリークを検出する" />
     <meta property="og:site_name" content="galaxy-sixth-sensey" />
     <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@public_ai000ya" />
     <meta name="twitter:creator" content="@public_ai000ya">
-    <meta name="twitter:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、調査ログを吐く" />
-    <meta name="twitter:description" content="VimをSanitizer付きでビルドして、調査ログを吐く" />
+    <meta name="twitter:title" content="galaxy-sixth-sensey - VimをSanitizer付きでビルドして、メモリリークを検出する" />
+    <meta name="twitter:description" content="VimをSanitizer付きでビルドして、メモリリークを検出する" />
     <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
 </head>
 
@@ -71,7 +76,7 @@
     <div class="post-date">2019/07/14</div>
     
 
-    <div class="post-title">VimをSanitizer付きでビルドして、調査ログを吐く</div>
+    <div class="post-title">VimをSanitizer付きでビルドして、メモリリークを検出する</div>
 
     <ul class="post-tags">
         
@@ -80,35 +85,21 @@
                 <a href="../tags/Vim.html">Vim</a>
             </li>
         
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/C.html">C</a>
+            </li>
+        
     </ul>
 </div>
 
 <div class="post-body">
     <p>　vim-jpでichizokさんに指南をいただきました。 ありがとうございます <span class="emoji" data-emoji="sunglasses">😎</span></p>
-<h2 id="追記-another-answer">追記: Another answer</h2>
-<p>valgrindを使う。</p>
-<pre class="shell-session"><code>$ vim src/testdir/Makefile</code></pre>
-<div class="sourceCode" id="cb2"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">diff --git a/src/testdir/Makefile b/src/testdir/Makefile</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>index bcf2f8c37..cb9af4887 100644</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="dt">--- a/src/testdir/Makefile</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">+++ b/src/testdir/Makefile</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="dt">@@ -18,7 +18,7 @@ REDIR_TEST_TO_NULL = --cmd 'au SwapExists * let v:swapchoice = &quot;e&quot;' &gt; /dev/null</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a> #   The output goes into a file &quot;valgrind.testN&quot;</span>
-<span id="cb2-7"><a href="#cb2-7"></a> #   Vim should be compiled with EXITFREE to avoid false warnings.</span>
-<span id="cb2-8"><a href="#cb2-8"></a> #   This will make testing about 10 times as slow.</span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="st">-# VALGRIND = valgrind --tool=memcheck --leak-check=yes --num-callers=25 --log-file=valgrind.$*</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="va">+VALGRIND = valgrind --tool=memcheck --leak-check=yes --num-callers=25 --log-file=valgrind.$*</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a> </span>
-<span id="cb2-12"><a href="#cb2-12"></a> default: nongui</span>
-<span id="cb2-13"><a href="#cb2-13"></a> </span></code></pre></div>
-<pre class="shell-session"><code>$ make clean  # 必要に応じて
-$ make -j4 -e CFLAGS='-g3 -O0 -Wall'
-$ cd src/testdir
-$ make test_template_string
-$ cat valgrind.test_template_string</code></pre>
 <h2 id="結">結</h2>
 <pre class="shell-session"><code>$ cd /path/to/vim
-$ SANITIZER_CFLAGS=&quot;-g -O1 -DABORT_ON_INTERNAL_ERROR -DEXITFREE -fsanitize=address -fno-omit-frame-pointer&quot; make
+$ SANITIZER_CFLAGS=&quot;-g -O1 -DABORT_ON_INTERNAL_ERROR -DEXITFREE -fsanitize=address -fno-omit-frame-pointer&quot;
+$ ASAN_OPTIONS=&quot;print_stacktrace=1 log_path=asan&quot;
+$ make
 
 Starting make in the src directory.
 If there are problems, cd to the src directory and run make there
@@ -124,7 +115,7 @@ make[2]: Nothing to be done for 'first'.
 .
 
 $ cd src/testdir
-$ LD_PRELOAD='/usr/lib/libasan.so' ASAN_OPTIONS=&quot;print_stacktrace=1 log_path=asan&quot; make test_template_string
+$ make test_template_string
 
 rm -f test_template_string.res test.log messages
 make -f Makefile test_template_string.res
@@ -136,16 +127,128 @@ make: *** [Makefile:76: test_template_string] Error 2
 $ ls asan.*
 asan.12870
 
-$ cat asan.12870
+$ cat asan.12870</code></pre>
+<hr />
+<p>結果</p>
+<details>
+<p><summary>cat asan.12870</summary></p>
+<!-- {{{ -->
+<pre><code>=================================================================
+==35931==ERROR: LeakSanitizer: detected memory leaks
 
-=================================================================
-==12870==ERROR: LeakSanitizer: detected memory leaks
+Direct leak of 520 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590adfa521  (/usr/lib/libXt.so.6+0x13521)
 
-Direct leak of 12 byte(s) in 1 object(s) allocated from:
-    #0 0x7f9b5fc79ada in __interceptor_malloc /build/gcc/src/gcc/libsanitizer/asan/asan_malloc_linux.cc:144
-    #1 0x55fccd45ddde in xmalloc (/usr/bin/bash+0x80dde)
+Indirect leak of 21152 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590a88d291  (/usr/lib/libxcb.so.1+0xc291)
 
-SUMMARY: AddressSanitizer: 12 byte(s) leaked in 1 allocation(s).</code></pre>
+Indirect leak of 16384 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590acd7c13  (/usr/lib/libX11.so.6+0x30c13)
+
+Indirect leak of 5040 byte(s) in 2 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590acd7f7d  (/usr/lib/libX11.so.6+0x30f7d)
+
+Indirect leak of 4688 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590acd78bf  (/usr/lib/libX11.so.6+0x308bf)
+    #2 0x5631814de807  (/path/to/vim/template-string/src/vim+0x50e807)
+    #3 0x5631814af9ae  (/path/to/vim/template-string/src/vim+0x4df9ae)
+    #4 0x563181718296  (/path/to/vim/template-string/src/vim+0x748296)
+    #5 0x563181714ff6  (/path/to/vim/template-string/src/vim+0x744ff6)
+    #6 0x7f590a8db152  (/usr/lib/libc.so.6+0x27152)
+
+Indirect leak of 2372 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203612  (/path/to/vim/template-string/src/vim+0x233612)
+    #1 0x7f590a88d47c  (/usr/lib/libxcb.so.1+0xc47c)
+
+Indirect leak of 628 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590acd83f1  (/usr/lib/libX11.so.6+0x313f1)
+
+Indirect leak of 168 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590acd81a0  (/usr/lib/libX11.so.6+0x311a0)
+
+Indirect leak of 160 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590acc67cc  (/usr/lib/libX11.so.6+0x1f7cc)
+
+Indirect leak of 152 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590ad3db8f  (/usr/lib/libX11.so.6+0x96b8f)
+
+Indirect leak of 132 byte(s) in 6 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590adfa2f5  (/usr/lib/libXt.so.6+0x132f5)
+
+Indirect leak of 128 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590acd7e2c  (/usr/lib/libX11.so.6+0x30e2c)
+
+Indirect leak of 128 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590acd180c  (/usr/lib/libX11.so.6+0x2a80c)
+
+Indirect leak of 112 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590acd7efd  (/usr/lib/libX11.so.6+0x30efd)
+
+Indirect leak of 104 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590ace6f3f  (/usr/lib/libX11.so.6+0x3ff3f)
+
+Indirect leak of 72 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203441  (/path/to/vim/template-string/src/vim+0x233441)
+    #1 0x7f590acd7c76  (/usr/lib/libX11.so.6+0x30c76)
+
+Indirect leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590ace7055  (/usr/lib/libX11.so.6+0x40055)
+
+Indirect leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590ace703e  (/usr/lib/libX11.so.6+0x4003e)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590ace914e  (/usr/lib/libX11.so.6+0x4214e)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590a88faa7  (/usr/lib/libxcb.so.1+0xeaa7)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203612  (/path/to/vim/template-string/src/vim+0x233612)
+    #1 0x7f590a89056f  (/usr/lib/libxcb.so.1+0xf56f)
+
+Indirect leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590ace7656  (/usr/lib/libX11.so.6+0x40656)
+
+Indirect leak of 21 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590acd7d95  (/usr/lib/libX11.so.6+0x30d95)
+
+Indirect leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x563181203289  (/path/to/vim/template-string/src/vim+0x233289)
+    #1 0x7f590a89092e  (/usr/lib/libxcb.so.1+0xf92e)
+
+Indirect leak of 10 byte(s) in 1 object(s) allocated from:
+    #0 0x563181180e99  (/path/to/vim/template-string/src/vim+0x1b0e99)
+    #1 0x7f590acd181d  (/usr/lib/libX11.so.6+0x2a81d)
+
+Indirect leak of 3 byte(s) in 1 object(s) allocated from:
+    #0 0x563181180e99  (/path/to/vim/template-string/src/vim+0x1b0e99)
+    #1 0x7f590acd78d4  (/usr/lib/libX11.so.6+0x308d4)
+
+SUMMARY: AddressSanitizer: 52214 byte(s) leaked in 32 allocation(s).</code></pre>
+<!-- }}} -->
+</details>
+<hr />
 <h2 id="起">起</h2>
 <p>　突然ですが現在、僕はVimにtemplate string対応を入れようと、活動しております。</p>
 <ul>
@@ -189,6 +292,27 @@ echo $'${42.1}'  &quot; 42.1</code></pre>
 <p>完了！</p>
 <hr />
 <p>　なんでC言語を学ぶことが大切なのか？　僕にはそれが答えられます。 Vim本体にコントリビュートできるようになるからです。</p>
+<h2 id="正しく検出できない">正しく検出できない？</h2>
+<p>　結果が下記のように、明らかにVimへのチェックができていない感じになることがありました。</p>
+<pre><code>=================================================================
+==12870==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 12 byte(s) in 1 object(s) allocated from:
+    #0 0x7f9b5fc79ada in __interceptor_malloc /build/gcc/src/gcc/libsanitizer/asan/asan_malloc_linux.cc:144
+    #1 0x55fccd45ddde in xmalloc (/usr/bin/bash+0x80dde)
+
+SUMMARY: AddressSanitizer: 12 byte(s) leaked in 1 allocation(s).</code></pre>
+<p>僕の場合、gccではなくclangを使うようにしたら、うまくいきました。</p>
+<pre class="shell-session"><code>$ export CC=${CC:-clang}
+$ export CC_FOR_BUILD=${CC_FOR_BUILD:-clang}
+$ make -j4 -e CFLAGS='-Wall'
+$ cd src/testdir
+$ make test_template_string</code></pre>
+<p>あるいは下記のissueのいずれかが参考になるかもしれません。</p>
+<ul>
+<li><a href="https://github.com/google/sanitizers/issues/856">Workarounds for #837 (Shadow memory range interleaves with an existing memory mapping. ASan cannot proceed correctly. ABORTING.) - Issue #856 - google/sanitizers - GitHub</a></li>
+<li><a href="https://github.com/ldc-developers/ldc/issues/2488">-fsanitize=address doesn’t link libasan on Arch Linux - Issue #2488 - ldc-developers/ldc - GitHub</a></li>
+</ul>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://dic.pixiv.net/a/%EF%BC%BC%28%E3%83%BB%CF%89%E3%83%BB%EF%BC%BC%29SAN%E5%80%A4%21%28%2F%E3%83%BB%CF%89%E3%83%BB%29%2F%E3%83%94%E3%83%B3%E3%83%81%21">＼(・ω・＼)SAN値!(/・ω・)/ピンチ! (さんちぴんち)とは【ピクシブ百科事典】</a></li>
@@ -203,7 +327,7 @@ echo $'${42.1}'  &quot; 42.1</code></pre>
         </li>
 
         <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
-            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2019-07-14-build-vim-with-asan.html" class="hatena-bookmark-button" data-hatena-bookmark-title="VimをSanitizer付きでビルドして、調査ログを吐く - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2019-07-14-build-vim-with-asan.html" class="hatena-bookmark-button" data-hatena-bookmark-title="VimをSanitizer付きでビルドして、メモリリークを検出する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
             <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
@@ -219,7 +343,7 @@ echo $'${42.1}'  &quot; 42.1</code></pre>
 
     <p class="about-pr">
         この記事はこちらから修正リクエストを送ることができます。 <br />
-        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2019-07-14-build-vim-with-asan.md">VimをSanitizer付きでビルドして、調査ログを吐く - github</a> <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2019-07-14-build-vim-with-asan.md">VimをSanitizer付きでビルドして、メモリリークを検出する - github</a> <br />
         ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
     </p>
 </div>
@@ -227,16 +351,15 @@ echo $'${42.1}'  &quot; 42.1</code></pre>
 <script src="../js/facebook-sdk-2.8.js"></script>
 
 
-        <div class="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
-            and more (<a href="../licenses.html">about licenses</a>).
-        </div>
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
 
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
-        <script type="text/javascript" src="../js/highlight.pack.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
 </html>

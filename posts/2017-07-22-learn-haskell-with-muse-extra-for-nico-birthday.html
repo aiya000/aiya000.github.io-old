@@ -1,55 +1,60 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-        <title>galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta property="og:url" content="https://aiya000.github.io" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里" />
-        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta property="og:site_name" content="galaxy-sixth-sensey" />
-        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@public_ai000ya" />
-        <meta name="twitter:creator" content="@public_ai000ya">
-        <meta name="twitter:title" content="galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里" />
-        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
-                </div>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="nav-link" href="../">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../about.html">About</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../products.html">Products</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../archive.html">Archive</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
     <title>galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「extensible-effectsの基本作用」 +絵里</title>
@@ -140,37 +145,37 @@
 絵里「なるほど、すごいわね！」（←わかってない）</p>
 <h1 id="monadスタックの大体としての作用の合成">Monadスタックの大体としての作用の合成</h1>
 <p>希「てな感じに、<code>State Foo</code>, <code>Reader Bar</code>のようなモノを<code>Member</code>または<code>SetMember</code>で指定するわけやね」</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">context ::</span> (<span class="dt">Member</span> (<span class="dt">State</span> <span class="dt">Foo</span>) r, <span class="dt">Member</span> (<span class="dt">Reader</span> <span class="dt">Bar</span>) r) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">impureContext ::</span> ( <span class="dt">Member</span> (<span class="dt">State</span> <span class="dt">Foo</span>) r, <span class="dt">Member</span> (<span class="dt">Reader</span> <span class="dt">Bar</span>) r</a>
-<a class="sourceLine" id="cb2-2" title="2">                 , <span class="dt">SetMember</span> <span class="dt">Lift</span> (<span class="dt">Lift</span> <span class="dt">IO</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3">                 ) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="ot">context ::</span> (<span class="dt">Member</span> (<span class="dt">State</span> <span class="dt">Foo</span>) r, <span class="dt">Member</span> (<span class="dt">Reader</span> <span class="dt">Bar</span>) r) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="ot">impureContext ::</span> ( <span class="dt">Member</span> (<span class="dt">State</span> <span class="dt">Foo</span>) r, <span class="dt">Member</span> (<span class="dt">Reader</span> <span class="dt">Bar</span>) r</span>
+<span id="cb2-2"><a href="#cb2-2"></a>                 , <span class="dt">SetMember</span> <span class="dt">Lift</span> (<span class="dt">Lift</span> <span class="dt">IO</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>                 ) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r a</span></code></pre></div>
 <p>希「これを見ても『<code>Monad</code>スタックを代替する』っていうのはよくわからへんと思う。　<code>MonadTrans</code>使っても同じこと書けるしな」</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">context' ::</span> (<span class="dt">MonadState</span> <span class="dt">Foo</span> m, <span class="dt">MonadReader</span> <span class="dt">Bar</span> m) <span class="ot">=&gt;</span> m a</a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="ot">impureContext' ::</span> ( <span class="dt">MonadState</span> <span class="dt">Foo</span> m, <span class="dt">MonadReader</span> <span class="dt">Bar</span> m</a>
-<a class="sourceLine" id="cb4-2" title="2">                  , <span class="dt">MonadIO</span> m</a>
-<a class="sourceLine" id="cb4-3" title="3">                  ) <span class="ot">=&gt;</span> m a</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="ot">context' ::</span> (<span class="dt">MonadState</span> <span class="dt">Foo</span> m, <span class="dt">MonadReader</span> <span class="dt">Bar</span> m) <span class="ot">=&gt;</span> m a</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="ot">impureContext' ::</span> ( <span class="dt">MonadState</span> <span class="dt">Foo</span> m, <span class="dt">MonadReader</span> <span class="dt">Bar</span> m</span>
+<span id="cb4-2"><a href="#cb4-2"></a>                  , <span class="dt">MonadIO</span> m</span>
+<span id="cb4-3"><a href="#cb4-3"></a>                  ) <span class="ot">=&gt;</span> m a</span></code></pre></div>
 <p>絵里「すごく見た目が同じね」<br />
 希「そう、ここまでは同じなんよ。　でも、型を具体化した時にその特徴が表れるんや！」</p>
 <h2 id="作用の合成やん">作用の合成やん</h2>
 <p>希「さっきの<code>impureContext</code>の型を具体してみるで〜」</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">impureContext ::</span> <span class="dt">Eff</span> (<span class="dt">State</span> <span class="dt">Foo</span> <span class="op">:&gt;</span> <span class="dt">Reader</span> <span class="dt">Bar</span> <span class="op">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="op">:&gt;</span> <span class="dt">Void</span>) a</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1"></a><span class="ot">impureContext ::</span> <span class="dt">Eff</span> (<span class="dt">State</span> <span class="dt">Foo</span> <span class="op">:&gt;</span> <span class="dt">Reader</span> <span class="dt">Bar</span> <span class="op">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="op">:&gt;</span> <span class="dt">Void</span>) a</span></code></pre></div>
 <p>希「具体化する時は、右端に<code>Void</code>を忘れんようにね」</p>
 <p>にこ「<code>(:&gt;)</code>って？」</p>
 <p>希「GHCの<code>TypeOperators</code>っていう拡張で書けるようになる、いわゆる型演算子やね」<br />
 希「まあイメージ的にはこんなデータ型やね。　実際は各関数の型を制御するための幽霊型として<code>EmptyDataDecl</code>を使って定義されてるんやけど」</p>
 <p>イメージ</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">data</span> a <span class="op">:&gt;</span> b <span class="ot">=</span> <span class="dt">SumOfType</span> a b</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">data</span> a <span class="op">:&gt;</span> b <span class="ot">=</span> <span class="dt">SumOfType</span> a b</span></code></pre></div>
 <p>にこ「つまりは<code>(:&gt;)</code>は<code>a</code>,<code>b</code>という情報を持つ型……単なる型と型の足し算を表す型って感じかしら」<br />
 希「さすがやねにこっち、その通りや」</p>
 <p>絵里「なるほど……」（←わかってない）</p>
 <p>希「ここでは<code>(:&gt;)</code>の左辺の型及び右辺の型を『作用』って言っていくで〜」</p>
 <p>希「そして……これに対して、さっきの<code>impureContext'</code>を具体化するとこんな感じのスタックになるね」</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="ot">impureContext' ::</span> <span class="dt">StateT</span> <span class="dt">Foo</span> (<span class="dt">ReaderT</span> <span class="dt">Bar</span> <span class="dt">IO</span>) a</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">impureContext' ::</span> <span class="dt">StateT</span> <span class="dt">Foo</span> (<span class="dt">ReaderT</span> <span class="dt">Bar</span> <span class="dt">IO</span>) a</span></code></pre></div>
 <p>希「よりわかりやすい例としては、前者は作用のみを<code>type</code>できるけど、後者は全体が各<code>Monad</code>のスタックを現してるから部分ぶぶんは<code>type</code>できへんね♡」</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">type</span> <span class="dt">LibraryEffect</span> <span class="ot">=</span> <span class="dt">State</span> <span class="dt">Foo</span> <span class="op">:&gt;</span> <span class="dt">Reader</span> <span class="dt">Bar</span> <span class="op">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="op">:&gt;</span> <span class="dt">Void</span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="ot">impureContext ::</span> <span class="dt">Eff</span> <span class="dt">LibraryEffect</span> a</a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">type</span> <span class="dt">Library</span> a <span class="ot">=</span> <span class="dt">StateT</span> <span class="dt">Foo</span> (<span class="dt">ReaderT</span> <span class="dt">Bar</span> <span class="dt">IO</span>) a</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="ot">impureContext' ::</span> <span class="dt">Library</span> a</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">type</span> <span class="dt">LibraryEffect</span> <span class="ot">=</span> <span class="dt">State</span> <span class="dt">Foo</span> <span class="op">:&gt;</span> <span class="dt">Reader</span> <span class="dt">Bar</span> <span class="op">:&gt;</span> <span class="dt">Lift</span> <span class="dt">IO</span> <span class="op">:&gt;</span> <span class="dt">Void</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ot">impureContext ::</span> <span class="dt">Eff</span> <span class="dt">LibraryEffect</span> a</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">type</span> <span class="dt">Library</span> a <span class="ot">=</span> <span class="dt">StateT</span> <span class="dt">Foo</span> (<span class="dt">ReaderT</span> <span class="dt">Bar</span> <span class="dt">IO</span>) a</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="ot">impureContext' ::</span> <span class="dt">Library</span> a</span></code></pre></div>
 <p>にこ「なるほど、確かにスタックを積んでる感じはしないわね。　<code>LibraryEffect</code>の定義なんて、綺麗なものねー」</p>
 <p>希「そうなんよ！　<code>State Foo :&gt; Reader Bar</code>なんて、なんか『合成』って感じがせえへん！？」<br />
 にこ「するわね！！」<br />
@@ -178,9 +183,9 @@
 <h1 id="夏色えがおで12run">夏色えがおで1,2,run!</h1>
 <p>希「あとは<code>runReader</code>やらで、その合成……幽霊型を除去したりするだけやね♪」<br />
 絵里「だけね！」</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" title="1"><span class="co">-- Reader e :&gt; rからReader eを引いてrにする</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="ot">runReader ::</span> <span class="dt">Typeable</span> e</a>
-<a class="sourceLine" id="cb10-3" title="3">          <span class="ot">=&gt;</span> <span class="dt">Eff</span> (<span class="dt">Reader</span> e <span class="op">:&gt;</span> r) w <span class="ot">-&gt;</span> e <span class="ot">-&gt;</span> <span class="dt">Eff</span> r w</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">-- Reader e :&gt; rからReader eを引いてrにする</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ot">runReader ::</span> <span class="dt">Typeable</span> e</span>
+<span id="cb10-3"><a href="#cb10-3"></a>          <span class="ot">=&gt;</span> <span class="dt">Eff</span> (<span class="dt">Reader</span> e <span class="op">:&gt;</span> r) w <span class="ot">-&gt;</span> e <span class="ot">-&gt;</span> <span class="dt">Eff</span> r w</span></code></pre></div>
 <h1 id="extensible-effectsには怖いこともあってな">extensible-effectsには怖いこともあってな……</h1>
 <p>希「まあeffはこんな感じやね！　<code>MonadTrans</code>と比べて楽に書けるって人もいそうやんっ」<br />
 にこ「私もさっそく試してみようかしら！」</p>
@@ -188,28 +193,28 @@
 にこ「」ｶﾀｶﾀｶﾀｶﾀ型ｶﾀ</p>
 <p>希「型を具体化せずに、綺麗な抽象化を保ったままミスをすると……ちょっと面白さんなコンパイルエラーが出るからそこはおおきにな♡」<br />
 にこ「ｸﾞｱｱｱｱｱｱｱｱｱ！！」</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" title="1"><span class="ot">{-# LANGUAGE FlexibleContexts #-}</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
-<a class="sourceLine" id="cb11-3" title="3"></a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="kw">import</span> <span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, <span class="dt">Member</span>, (:&gt;))</a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="kw">import</span> <span class="dt">Control.Eff.Exception</span> (<span class="dt">Exc</span>)</a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="kw">import</span> <span class="dt">Control.Eff.Reader.Lazy</span> (<span class="dt">Reader</span>)</a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="kw">import</span> <span class="dt">Control.Eff.State.Lazy</span> (<span class="dt">State</span>)</a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="kw">import</span> <span class="dt">Data.Void</span> (<span class="dt">Void</span>)</a>
-<a class="sourceLine" id="cb11-9" title="9"></a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="kw">data</span> <span class="dt">Foo</span></a>
-<a class="sourceLine" id="cb11-11" title="11"><span class="kw">data</span> <span class="dt">Bar</span></a>
-<a class="sourceLine" id="cb11-12" title="12"></a>
-<a class="sourceLine" id="cb11-13" title="13"><span class="ot">context ::</span> (<span class="dt">Member</span> (<span class="dt">State</span> <span class="dt">Foo</span>) r, <span class="dt">Member</span> (<span class="dt">Reader</span> <span class="dt">Bar</span>) r, <span class="dt">Member</span> (<span class="dt">Exc</span> <span class="dt">String</span>) r) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r ()</a>
-<a class="sourceLine" id="cb11-14" title="14">context <span class="ot">=</span> <span class="fu">return</span> ()</a>
-<a class="sourceLine" id="cb11-15" title="15"></a>
-<a class="sourceLine" id="cb11-16" title="16"><span class="ot">realContext ::</span> <span class="dt">Eff</span> (<span class="dt">State</span> <span class="dt">Foo</span> <span class="op">:&gt;</span> <span class="dt">Reader</span> <span class="dt">Bar</span> <span class="op">:&gt;</span> <span class="dt">Void</span>) ()</a>
-<a class="sourceLine" id="cb11-17" title="17">realContext <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb11-18" title="18">  a <span class="ot">&lt;-</span> context</a>
-<a class="sourceLine" id="cb11-19" title="19">  <span class="fu">return</span> a</a>
-<a class="sourceLine" id="cb11-20" title="20"></a>
-<a class="sourceLine" id="cb11-21" title="21"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb11-22" title="22">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1"></a><span class="ot">{-# LANGUAGE FlexibleContexts #-}</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="ot">{-# LANGUAGE TypeOperators #-}</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">import</span> <span class="dt">Control.Eff</span> (<span class="dt">Eff</span>, <span class="dt">Member</span>, (:&gt;))</span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">import</span> <span class="dt">Control.Eff.Exception</span> (<span class="dt">Exc</span>)</span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="kw">import</span> <span class="dt">Control.Eff.Reader.Lazy</span> (<span class="dt">Reader</span>)</span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="kw">import</span> <span class="dt">Control.Eff.State.Lazy</span> (<span class="dt">State</span>)</span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="kw">import</span> <span class="dt">Data.Void</span> (<span class="dt">Void</span>)</span>
+<span id="cb11-9"><a href="#cb11-9"></a></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="kw">data</span> <span class="dt">Foo</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="kw">data</span> <span class="dt">Bar</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="ot">context ::</span> (<span class="dt">Member</span> (<span class="dt">State</span> <span class="dt">Foo</span>) r, <span class="dt">Member</span> (<span class="dt">Reader</span> <span class="dt">Bar</span>) r, <span class="dt">Member</span> (<span class="dt">Exc</span> <span class="dt">String</span>) r) <span class="ot">=&gt;</span> <span class="dt">Eff</span> r ()</span>
+<span id="cb11-14"><a href="#cb11-14"></a>context <span class="ot">=</span> <span class="fu">return</span> ()</span>
+<span id="cb11-15"><a href="#cb11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="ot">realContext ::</span> <span class="dt">Eff</span> (<span class="dt">State</span> <span class="dt">Foo</span> <span class="op">:&gt;</span> <span class="dt">Reader</span> <span class="dt">Bar</span> <span class="op">:&gt;</span> <span class="dt">Void</span>) ()</span>
+<span id="cb11-17"><a href="#cb11-17"></a>realContext <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a>  a <span class="ot">&lt;-</span> context</span>
+<span id="cb11-19"><a href="#cb11-19"></a>  <span class="fu">return</span> a</span>
+<span id="cb11-20"><a href="#cb11-20"></a></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb11-22"><a href="#cb11-22"></a>main <span class="ot">=</span> <span class="fu">return</span> ()</span></code></pre></div>
 <pre><code>• Couldn't match type ‘extensible-effects-1.11.0.4:Data.OpenUnion.Internal.OpenUnion2.Member'
                          (Exc String) Void’
                  with ‘'True’
@@ -269,16 +274,15 @@
 <script src="../js/facebook-sdk-2.8.js"></script>
 
 
-        <div class="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
-            and more (<a href="../licenses.html">about licenses</a>).
-        </div>
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
 
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
-        <script type="text/javascript" src="../js/highlight.pack.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
 </html>

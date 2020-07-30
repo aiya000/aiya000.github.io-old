@@ -1,55 +1,60 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-        <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta property="og:url" content="https://aiya000.github.io" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」" />
-        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta property="og:site_name" content="galaxy-sixth-sensey" />
-        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@public_ai000ya" />
-        <meta name="twitter:creator" content="@public_ai000ya">
-        <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」" />
-        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
-                </div>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="nav-link" href="../">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../about.html">About</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../products.html">Products</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../archive.html">Archive</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
     <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その5「様々な文字列型とIsStringそしてOverloadedStrings」</title>
@@ -138,7 +143,7 @@
 穂乃果「ななつ……どうゆうことなの！？」</p>
 <p>ことり「うーん、かつてのHaskellが<code>String</code>で日本語とかを扱うことが苦手だったっていう歴史的経緯が含まれたりもするんだけど……」<br />
 ことり「実は<code>String</code>って、単なる<code>[Char]</code>の別名でね。　これは<code>String</code>をリストとしての側面を与える代わりに、処理効率はよくないとされてるんだ。　一般的には。」</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">type</span> <span class="dt">String</span> <span class="ot">=</span> [<span class="dt">Char</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">type</span> <span class="dt">String</span> <span class="ot">=</span> [<span class="dt">Char</span>]</span></code></pre></div>
 <p>ことり「それを改善するために作られたのがこの2つ」</p>
 <ul>
 <li><a href="https://hackage.haskell.org/package/text-1.2.2.2">text: An efficient packed Unicode text type.</a></li>
@@ -190,46 +195,46 @@
 <p>ことり「<code>IsString</code>……はね。　ここで出てきた<code>ByteString</code>と<code>Text</code>が<code>IsString</code>インスタンスなんだ」<br />
 穂乃果「ほむ……<code>IsString</code>ってどんな型クラスなの？」</p>
 <p>ことり「Javaで文字列型っていうと、普通はString型だけでしょ？　こうやって簡単に代入できる」</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" title="1"><span class="bu">String</span> powerful = <span class="st">&quot;wao-wao&quot;</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">String</span> powerful = <span class="st">&quot;wao-wao&quot;</span>;</span></code></pre></div>
 <p>ことり「でもHaskellでは<code>Text</code>や<code>ByteString</code>みたいに文字列型を自由に定義できることを許されているんだ」<br />
 ことり「そこで問題になるのが、<code>"wao-wao"</code>みたいなリテラルが<code>String</code>型である。 　ってところなんだ」</p>
 <p>ことり「<code>String</code>型の名前（変数）を定義するには、こうするよね」</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">powerful ::</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb3-2" title="2">powerful <span class="ot">=</span> <span class="st">&quot;wao-wao&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="ot">powerful ::</span> <span class="dt">String</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>powerful <span class="ot">=</span> <span class="st">&quot;wao-wao&quot;</span></span></code></pre></div>
 <p>ことり「でも同じことを<code>Text</code>や<code>ByteString</code>に対してやると、普通はこんな感じになっちゃうの」</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">import</span> <span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>) <span class="co">-- ByteStringを使いたいならChar8（or Lazy.Char8）がおすすめだよ！</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.ByteString.Char8</span> <span class="kw">as</span> <span class="dt">B</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></a>
-<a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">-- B.pack :: String -&gt; ByteString</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="ot">powerfulB ::</span> <span class="dt">ByteString</span></a>
-<a class="sourceLine" id="cb4-8" title="8">powerfulB <span class="ot">=</span> B.pack <span class="st">&quot;wao-wao&quot;</span></a>
-<a class="sourceLine" id="cb4-9" title="9"></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co">-- T.pack :: String -&gt; Text</span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="ot">powerfulT ::</span> <span class="dt">Text</span></a>
-<a class="sourceLine" id="cb4-12" title="12">powerfulT <span class="ot">=</span> T.pack <span class="st">&quot;wao-wao&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">import</span> <span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>) <span class="co">-- ByteStringを使いたいならChar8（or Lazy.Char8）がおすすめだよ！</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.ByteString.Char8</span> <span class="kw">as</span> <span class="dt">B</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">-- B.pack :: String -&gt; ByteString</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="ot">powerfulB ::</span> <span class="dt">ByteString</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>powerfulB <span class="ot">=</span> B.pack <span class="st">&quot;wao-wao&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">-- T.pack :: String -&gt; Text</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="ot">powerfulT ::</span> <span class="dt">Text</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>powerfulT <span class="ot">=</span> T.pack <span class="st">&quot;wao-wao&quot;</span></span></code></pre></div>
 <h3 id="overloadedstrings-1">OverloadedStrings</h3>
 <p>穂乃果「<code>pack</code>っていう関数が、<code>String</code>からそれぞれへの変換をしてるんだよね、これ」<br />
 ことり「その通り。 　<code>String</code>が<code>pack</code>無しで扱えるのに対して、<code>ByteString</code>と<code>Text</code>は<code>pack</code>が必要になっちゃう」</p>
 <p>ことり「せっかくHaskellが文字列型を自由に定義することを許してるのに、これは面倒だよね」</p>
 <p>ことり「そこでファイルの<strong>先頭</strong>に、LANGUAGEプラグマって呼ばれるものを書いてあげると、なんと<code>pack</code>が必要なくなるの☆」</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
-<a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw">import</span> <span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>)</a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
-<a class="sourceLine" id="cb5-6" title="6"></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="ot">powerfulB ::</span> <span class="dt">ByteString</span></a>
-<a class="sourceLine" id="cb5-8" title="8">powerfulB <span class="ot">=</span> <span class="st">&quot;wao-wao&quot;</span></a>
-<a class="sourceLine" id="cb5-9" title="9"></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="ot">powerfulT ::</span> <span class="dt">Text</span></a>
-<a class="sourceLine" id="cb5-11" title="11">powerfulT <span class="ot">=</span> <span class="st">&quot;wao-wao&quot;</span></a>
-<a class="sourceLine" id="cb5-12" title="12"></a>
-<a class="sourceLine" id="cb5-13" title="13"><span class="co">-- TIO.putStrLnはTextを画面に出力する</span></a>
-<a class="sourceLine" id="cb5-14" title="14"><span class="co">-- TIO.putStrLn :: Text -&gt; IO ()</span></a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb5-16" title="16">main <span class="ot">=</span> TIO.putStrLn (<span class="st">&quot;powerful day !&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1"></a><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">import</span> <span class="dt">Data.ByteString.Char8</span> (<span class="dt">ByteString</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">import</span> <span class="dt">Data.Text</span> (<span class="dt">Text</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="ot">powerfulB ::</span> <span class="dt">ByteString</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>powerfulB <span class="ot">=</span> <span class="st">&quot;wao-wao&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="ot">powerfulT ::</span> <span class="dt">Text</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>powerfulT <span class="ot">=</span> <span class="st">&quot;wao-wao&quot;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">-- TIO.putStrLnはTextを画面に出力する</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">-- TIO.putStrLn :: Text -&gt; IO ()</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb5-16"><a href="#cb5-16"></a>main <span class="ot">=</span> TIO.putStrLn (<span class="st">&quot;powerful day !&quot;</span><span class="ot"> ::</span> <span class="dt">Text</span>)</span></code></pre></div>
 <h3 id="isstring">IsString</h3>
 <p>穂乃果「えっ、<code>"wao-wao"</code>がそれぞれ違う型の値になるってこと？？？」<br />
 穂乃果「それってすごいね！　……でもなんだろう、なんだかわからないんだけど、ちょっともやもやする……」</p>
@@ -245,16 +250,16 @@
 <p>ことり「ふふふ。 　大丈夫だよ、そういう不健全さはHaskellには（ほとんど）ないの！」</p>
 <p>ことり「<code>OverloadedStrings</code>を使った後は、文字列リテラルは<code>IsString a =&gt; a</code>として扱われます」<br />
 ことり「具体的には、以下を可能にするよ」</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
-<a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>)</a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></a>
-<a class="sourceLine" id="cb6-5" title="5"></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="ot">powerful' ::</span> <span class="dt">IsString</span> a <span class="ot">=&gt;</span> a</a>
-<a class="sourceLine" id="cb6-7" title="7">powerful' <span class="ot">=</span> <span class="st">&quot;wao-wao&quot;</span></a>
-<a class="sourceLine" id="cb6-8" title="8"></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb6-10" title="10">main <span class="ot">=</span> TIO.putStrLn powerful'</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">import</span> <span class="dt">Data.String</span> (<span class="dt">IsString</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text.IO</span> <span class="kw">as</span> <span class="dt">TIO</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ot">powerful' ::</span> <span class="dt">IsString</span> a <span class="ot">=&gt;</span> a</span>
+<span id="cb6-7"><a href="#cb6-7"></a>powerful' <span class="ot">=</span> <span class="st">&quot;wao-wao&quot;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb6-10"><a href="#cb6-10"></a>main <span class="ot">=</span> TIO.putStrLn powerful'</span></code></pre></div>
 <p>ことり「そして<code>TIO.putStrLn powerful'</code>時点で<code>powerful'</code>が<code>Text</code>として推論されます！ 　<code>TIO.putStrLn</code>が<code>Text -&gt; IO ()</code>だからね♪」</p>
 <p>穂乃果「なるほど……リテラルが多相的な型として扱われるんだ。 　なんか少し変な感じだけど、さっきの変な感じはなくなったなあ」</p>
 <p>穂乃果「すごいねー。　ありがと、ことりちゃん！」<br />
@@ -315,16 +320,15 @@
 <script src="../js/facebook-sdk-2.8.js"></script>
 
 
-        <div class="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
-            and more (<a href="../licenses.html">about licenses</a>).
-        </div>
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
 
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
-        <script type="text/javascript" src="../js/highlight.pack.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
 </html>

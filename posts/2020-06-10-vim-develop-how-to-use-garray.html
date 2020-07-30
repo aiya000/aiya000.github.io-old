@@ -1,0 +1,272 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - 【Vimにコントリビュート】garray_Tの使い方</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - 【Vimにコントリビュート】garray_Tの使い方" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - 【Vimにコントリビュート】garray_Tの使い方" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - 【Vimにコントリビュート】garray_Tの使い方</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2020-06-10-vim-develop-how-to-use-garray.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - 【Vimにコントリビュート】garray_Tの使い方" />
+    <meta property="og:description" content="【Vimにコントリビュート】garray_Tの使い方" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - 【Vimにコントリビュート】garray_Tの使い方" />
+    <meta name="twitter:description" content="【Vimにコントリビュート】garray_Tの使い方" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2020/06/10</div>
+    
+
+    <div class="post-title">【Vimにコントリビュート】garray_Tの使い方</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Vim.html">Vim</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/C.html">C</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <h1 id="はじめに">はじめに</h1>
+<p>Vimは古典的C言語（多分C99以下の企画）で書かれており、 またライブラリの依存関係を最小に抑えておきたいためでしょうか、 Vimのソースコード内に独自のAPI（<code>struct</code>や諸関数）が含まれています。</p>
+<p>今回、私はVimへの下記PullRequestを、一年に渡って作成しています。</p>
+<ul>
+<li><a href="https://github.com/vim/vim/pull/4634">Support ‘template string’ (‘string interpolation’) by aiya000 - Pull Request #4634 - vim/vim - GitHub</a></li>
+</ul>
+<p>（よければPRのトップコメントに <span class="emoji" data-emoji="+1">👍</span> する等で、応援してください！ マージされる可能性が高まります！）</p>
+<p>そこで<code>garray_T</code>という便利な<code>struct</code>を発見したので、解説させていただきます。</p>
+<p>※ 筆者はVimコントリビュート初心者です。誤ったことを言っていたら、ごめんなさい。</p>
+<h1 id="garray_tの用途使い方"><code>garray_T</code>の用途・使い方</h1>
+<h2 id="要素がchar_uな場合">要素が<code>char_u</code>な場合</h2>
+<p><code>garray_T</code>はC++の<code>std::vector&lt;T&gt;</code>や、Javaの<code>ArrayList&lt;T&gt;</code>、Kotlinの<code>MutableList&lt;T&gt;</code>に相当します。 ただしCにジェネリクスはないので、型引数を持つ代わりに、キャストを前提としています。</p>
+<p>定義は以下です。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">/*</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"> * Structure used for growing arrays.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"> * This is used to store information that only grows, is deleted all at</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"> * once, and needs to be accessed by index.  See ga_clear() and ga_grow().</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"> */</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">typedef</span> <span class="kw">struct</span> growarray</span>
+<span id="cb1-7"><a href="#cb1-7"></a>{</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="dt">int</span>	    ga_len;		    <span class="co">// current number of items used</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="dt">int</span>	    ga_maxlen;		    <span class="co">// maximum number of items possible</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="dt">int</span>	    ga_itemsize;	    <span class="co">// sizeof(item)</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="dt">int</span>	    ga_growsize;	    <span class="co">// number of items to grow each time</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="dt">void</span>    *ga_data;		    <span class="co">// pointer to the first item</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>} garray_T;</span></code></pre></div>
+<p>以下のように使用します。</p>
+<p>（以下、コンパイルは未検証です。……Vimのソースコードを持ってくるのは、とっても大変なので <span class="emoji" data-emoji="bow">🙇</span>）</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// Vimのコーディングスタイルに多分従っているコード</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="dt">static</span> <span class="dt">void</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>foo(char_u **xs, <span class="dt">size_t</span> xs_size)  <span class="co">// char_uはVim特有の文字型</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>{</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="dt">int</span>         i;</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    garray_T    result;  <span class="co">// char_uの可変配列 = 可変文字列</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    ga_init2(&amp;result, <span class="kw">sizeof</span>(char_u), <span class="dv">80</span>);</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    ga_append(&amp;result, <span class="ch">'&quot;'</span>);</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="cf">for</span> (i = <span class="dv">0</span>; i &lt; xs_size - <span class="dv">1</span>; ++i)</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    {</span>
+<span id="cb2-12"><a href="#cb2-12"></a>        ga_concat(&amp;result, xs[i]);</span>
+<span id="cb2-13"><a href="#cb2-13"></a>        ga_append(&amp;result, <span class="ch">','</span>);</span>
+<span id="cb2-14"><a href="#cb2-14"></a>    }</span>
+<span id="cb2-15"><a href="#cb2-15"></a>    ga_concat(&amp;result, xs[xs_size - <span class="dv">1</span>]);</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a>    printf(<span class="st">&quot;%s</span><span class="sc">\n</span><span class="st">&quot;</span>, (char_u *)result.ga_data);</span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a>    ga_clear(&amp;result);</span>
+<span id="cb2-20"><a href="#cb2-20"></a>}</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a>char_u *xs[<span class="dv">3</span>] = {</span>
+<span id="cb2-23"><a href="#cb2-23"></a>    (char_u *)<span class="st">&quot;foo&quot;</span>,</span>
+<span id="cb2-24"><a href="#cb2-24"></a>    (char_u *)<span class="st">&quot;bar&quot;</span>,</span>
+<span id="cb2-25"><a href="#cb2-25"></a>    (char_u *)<span class="st">&quot;baz&quot;</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>};</span>
+<span id="cb2-27"><a href="#cb2-27"></a>foo(xs, <span class="dv">3</span>);  <span class="co">// &quot;foo,bar,baz&quot;</span></span></code></pre></div>
+<p><code>ga_init2()</code>は<code>garray_T</code>のコンスタントラクターです。 引数にそれぞれ「初期化先、要素のサイズ、メモリアロケートするときの増分」を指定します。</p>
+<p>コンスタントラクターとして<code>ga_init()</code>を使うこともできます。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">/*</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"> * Initialize a growing array.	Don't forget to set ga_itemsize and</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"> * ga_growsize!  Or use ga_init2().</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"> */</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="dt">void</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>ga_init(garray_T *gap)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>{</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    gap-&gt;ga_data = NULL;</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    gap-&gt;ga_maxlen = <span class="dv">0</span>;</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    gap-&gt;ga_len = <span class="dv">0</span>;</span>
+<span id="cb3-11"><a href="#cb3-11"></a>}</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>    <span class="dt">void</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>ga_init2(garray_T *gap, <span class="dt">int</span> itemsize, <span class="dt">int</span> growsize)</span>
+<span id="cb3-15"><a href="#cb3-15"></a>{</span>
+<span id="cb3-16"><a href="#cb3-16"></a>    ga_init(gap);</span>
+<span id="cb3-17"><a href="#cb3-17"></a>    gap-&gt;ga_itemsize = itemsize;</span>
+<span id="cb3-18"><a href="#cb3-18"></a>    gap-&gt;ga_growsize = growsize;</span>
+<span id="cb3-19"><a href="#cb3-19"></a>}</span></code></pre></div>
+<p><code>ga_append()</code> と <code>ga_concat()</code> は、要素が<code>char_u</code>な<code>garray_T</code>に特化した関数で、 適宜メモリアロケートしつつ<code>result.ga_data</code>にデータ（<code>char_u</code>及び<code>char_u*</code>）を追加していきます。</p>
+<p>これよって、むやみに手動メモリアロケ―としつつ <code>sprintf()</code>するという呪いのようなコードから解放されます。</p>
+<p>それこそが、<code>garray_T</code>の存在意義でしょう！</p>
+<p>最後に<code>ga_clear()</code>でアロケートされたメモリを解放（free）してあげます。</p>
+<h2 id="要素がchar_uでない場合">要素が<code>char_u</code>でない場合</h2>
+<p><code>garray_T</code>は要素が<code>char_u</code>でない場合も使用できます。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a>    <span class="dt">static</span> <span class="dt">void</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>to_scalable(<span class="dt">int</span> *xs, <span class="dt">size_t</span> xs_size, garray_T *result)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>{</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="dt">int</span> i;</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    ga_init2(result, <span class="kw">sizeof</span>(<span class="dt">int</span>), <span class="dv">80</span>);</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="cf">for</span> (i = <span class="dv">0</span>; i &lt; xs_size; ++i)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    {</span>
+<span id="cb4-10"><a href="#cb4-10"></a>        ga_grow(result, <span class="dv">1</span>);</span>
+<span id="cb4-11"><a href="#cb4-11"></a>        ++result-&gt;ga_len;</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>        ((<span class="dt">int</span> *)result)[result-&gt;ga_len - <span class="dv">1</span>] = xs[i];</span>
+<span id="cb4-14"><a href="#cb4-14"></a>    }</span>
+<span id="cb4-15"><a href="#cb4-15"></a>}</span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="dt">int</span>         i;</span>
+<span id="cb4-18"><a href="#cb4-18"></a>garray_T    result;</span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="dt">int</span>         xs[<span class="dv">3</span>] = { <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> };</span>
+<span id="cb4-20"><a href="#cb4-20"></a>to_scalable(xs, <span class="dv">3</span>, &amp;result);</span>
+<span id="cb4-21"><a href="#cb4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="cf">for</span> (i = <span class="dv">0</span>; i &lt; result.ga_len; ++i)</span>
+<span id="cb4-23"><a href="#cb4-23"></a>{</span>
+<span id="cb4-24"><a href="#cb4-24"></a>    printf(<span class="st">&quot;%d</span><span class="sc">\n</span><span class="st">&quot;</span>, ((<span class="dt">int</span> *)result.ga_len)[i]);</span>
+<span id="cb4-25"><a href="#cb4-25"></a>}</span>
+<span id="cb4-26"><a href="#cb4-26"></a><span class="co">// 1</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="co">// 2</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="co">// 3</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a></span>
+<span id="cb4-30"><a href="#cb4-30"></a>ga_clear(&amp;result);</span></code></pre></div>
+<p><code>ga_grow(garray_T *ga, int n)</code>は<code>garray_T</code>がもうn個分の要素を持たない場合に、 <code>ga_data</code>を拡張する関数です。</p>
+<p><code>ga_len</code>は<code>garray_T</code>中の要素数を表し、手動で増分する必要があります。 （多分……。）</p>
+<h1 id="まとめ">まとめ</h1>
+<ul>
+<li>関数
+<ul>
+<li><code>ga_init()</code>, <code>ga_init2()</code>: コンスタントラクター</li>
+<li><code>ga_append()</code>, <code>ga_concat()</code>: <code>char_u</code>が要素の<code>garray_T</code>への追加関数</li>
+<li><code>ga_grow()</code>: 新たな要素を追加したいときの関数</li>
+<li><code>ga_clear()</code>: 初期化済み<code>garray_T</code>を解放（free）する。</li>
+</ul></li>
+<li><code>garray_T</code>のプロパティ
+<ul>
+<li><code>ga_data</code>: 全要素の実体</li>
+<li><code>ga_len</code>: 中の要素数</li>
+</ul></li>
+</ul>
+<p>Enjoy vimming!</p>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2020-06-10-vim-develop-how-to-use-garray.html" class="hatena-bookmark-button" data-hatena-bookmark-title="【Vimにコントリビュート】garray_Tの使い方 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2020-06-10-vim-develop-how-to-use-garray.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2020-06-10-vim-develop-how-to-use-garray.md">【Vimにコントリビュート】garray_Tの使い方 - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
+
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

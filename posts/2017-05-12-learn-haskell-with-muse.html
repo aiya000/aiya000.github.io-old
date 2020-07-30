@@ -1,55 +1,60 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-        <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta property="og:url" content="https://aiya000.github.io" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」" />
-        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta property="og:site_name" content="galaxy-sixth-sensey" />
-        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@public_ai000ya" />
-        <meta name="twitter:creator" content="@public_ai000ya">
-        <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」" />
-        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
-                </div>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="nav-link" href="../">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../about.html">About</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../products.html">Products</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../archive.html">Archive</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
     <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その3「代数的データ型の定義2」</title>
@@ -102,14 +107,14 @@
 <h1 id="前回">前回</h1>
 <p>ことり「穂乃果ちゃん、関数の定義方法は授業では習った？」<br />
 穂乃果「い…いちおう……。　えーと、こういうのだっけ」</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">add1 ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb1-2" title="2">add1 x <span class="ot">=</span> x <span class="op">+</span> <span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="ot">add1 ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>add1 x <span class="ot">=</span> x <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 <p>ことり「<code>:: Int -&gt; Int</code>っていうのは、<code>add1</code>っていう関数に<code>Int -&gt; Int</code>っていう型を付けているんだ　Javaに直すとこうかな！」</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" title="1"><span class="dt">int</span> <span class="fu">add1</span>(<span class="dt">int</span> x) { <span class="kw">return</span> x + <span class="dv">1</span>; }</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> <span class="fu">add1</span>(<span class="dt">int</span> x) { <span class="kw">return</span> x + <span class="dv">1</span>; }</span></code></pre></div>
 <hr />
 <p>ことり「<code>Show</code>は、<code>Show</code>を実装したデータ型である<code>Member</code>に対して<code>show :: Show a =&gt; a -&gt; String</code>なる関数の実装を与えるよ♪」</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
 <p>穂乃果「<code>show :: Show a =&gt; a -&gt; String</code>っていうのは……Showを実装する型aを受け取って、文字列（<code>String</code>）を返す関数<code>show</code>？」<br />
 ことり「そのとおりです！」</p>
 <h1 id="束の間">束の間</h1>
@@ -152,42 +157,42 @@
 ことり「前のときに穂乃果ちゃんが『<code>name</code>とか、<code>age</code>とかっていう名前は書かないでいいの？』って言ってたよね」</p>
 <hr />
 <p>（Haskellでのコード）</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span> <span class="dt">String</span> <span class="dt">Int</span></span></code></pre></div>
 <p>（Javaでのコード）</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">class</span> <span class="bu">Member</span> {</a>
-<a class="sourceLine" id="cb5-2" title="2">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
-<a class="sourceLine" id="cb5-3" title="3">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
-<a class="sourceLine" id="cb5-4" title="4">	<span class="kw">public</span> <span class="bu">Member</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</a>
-<a class="sourceLine" id="cb5-5" title="5">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
-<a class="sourceLine" id="cb5-6" title="6">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
-<a class="sourceLine" id="cb5-7" title="7">	}</a>
-<a class="sourceLine" id="cb5-8" title="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">class</span> <span class="bu">Member</span> {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>	<span class="kw">public</span> <span class="bu">String</span> name;</span>
+<span id="cb5-3"><a href="#cb5-3"></a>	<span class="kw">public</span> <span class="dt">int</span> age;</span>
+<span id="cb5-4"><a href="#cb5-4"></a>	<span class="kw">public</span> <span class="bu">Member</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</span>
+<span id="cb5-5"><a href="#cb5-5"></a>		<span class="kw">this</span>.<span class="fu">name</span> = name;</span>
+<span id="cb5-6"><a href="#cb5-6"></a>		<span class="kw">this</span>.<span class="fu">age</span> = age;</span>
+<span id="cb5-7"><a href="#cb5-7"></a>	}</span>
+<span id="cb5-8"><a href="#cb5-8"></a>}</span></code></pre></div>
 <p>穂乃果「<code>name</code>とか、<code>age</code>っていう名前は書かないでいいの？」<br />
 ことり「名前をつけることもできるんだけど、今はまだ置いておいてね」</p>
 <hr />
 <p>ことり「Haskellでは名前が必要なときに、<strong>レコード構文</strong>を使うよ！」</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span></a>
-<a class="sourceLine" id="cb6-2" title="2">  {<span class="ot"> name ::</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb6-3" title="3">  ,<span class="ot"> age ::</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb6-4" title="4">  }</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  {<span class="ot"> name ::</span> <span class="dt">String</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  ,<span class="ot"> age ::</span> <span class="dt">Int</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  }</span></code></pre></div>
 <p>ことり「値の定義では従来と同じ方法の他に、レコードに直接代入したように見えるような構文が使えるよ」</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="ot">honoka ::</span> <span class="dt">Member</span></a>
-<a class="sourceLine" id="cb7-2" title="2">honoka <span class="ot">=</span> <span class="dt">Member</span> <span class="st">&quot;honoka&quot;</span> <span class="dv">16</span></a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1"><span class="ot">honoka ::</span> <span class="dt">Member</span></a>
-<a class="sourceLine" id="cb8-2" title="2">honoka <span class="ot">=</span> <span class="dt">Member</span></a>
-<a class="sourceLine" id="cb8-3" title="3">  { name <span class="ot">=</span> <span class="st">&quot;honoka&quot;</span></a>
-<a class="sourceLine" id="cb8-4" title="4">  , age <span class="ot">=</span> <span class="dv">16</span></a>
-<a class="sourceLine" id="cb8-5" title="5">  }</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">honoka ::</span> <span class="dt">Member</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>honoka <span class="ot">=</span> <span class="dt">Member</span> <span class="st">&quot;honoka&quot;</span> <span class="dv">16</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1"></a><span class="ot">honoka ::</span> <span class="dt">Member</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>honoka <span class="ot">=</span> <span class="dt">Member</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  { name <span class="ot">=</span> <span class="st">&quot;honoka&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  , age <span class="ot">=</span> <span class="dv">16</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  }</span></code></pre></div>
 <p>穂乃果「すごーい！　“honoka”とか16が何の値なのかわかりやすくなったー！」<br />
 ことり「えへへ。　そして定義したレコードは、データ値からデータ値を取り出す関数として自動実装されるの！」</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb9-2" title="2">main <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb9-3" title="3">  <span class="fu">putStrLn</span> (<span class="st">&quot;name: &quot;</span> <span class="op">++</span> name honoka)</a>
-<a class="sourceLine" id="cb9-4" title="4">  <span class="fu">putStrLn</span> (<span class="st">&quot;age: &quot;</span> <span class="op">++</span> <span class="fu">show</span> (age honoka))</a>
-<a class="sourceLine" id="cb9-5" title="5"></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="co">-- vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">-- name: honoka</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="co">-- age: 16</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb9-2"><a href="#cb9-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;name: &quot;</span> <span class="op">++</span> name honoka)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;age: &quot;</span> <span class="op">++</span> <span class="fu">show</span> (age honoka))</span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">-- vvv 出力 vvv</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">-- name: honoka</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">-- age: 16</span></span></code></pre></div>
 <p>ことり「<code>++</code>は、文字列同士を結合する演算子だよ！」</p>
 <ul>
 <li><code>(++) :: String -&gt; String -&gt; String</code></li>
@@ -211,24 +216,24 @@
 穂乃果「おー！」</p>
 <h2 id="関数でのパターンマッチ">関数でのパターンマッチ</h2>
 <p>ことり「代数的データ型の最高最大、一番の武器と言ってもいい。　<strong>パターンマッチ</strong>だよ」</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" title="1"><span class="ot">honoka ::</span> <span class="dt">Member</span></a>
-<a class="sourceLine" id="cb10-2" title="2">honoka <span class="ot">=</span> <span class="dt">Member</span></a>
-<a class="sourceLine" id="cb10-3" title="3">  { name <span class="ot">=</span> <span class="st">&quot;honoka&quot;</span></a>
-<a class="sourceLine" id="cb10-4" title="4">  , age <span class="ot">=</span> <span class="dv">16</span></a>
-<a class="sourceLine" id="cb10-5" title="5">  }</a>
-<a class="sourceLine" id="cb10-6" title="6"></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb10-8" title="8">main <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb10-9" title="9">  prettyPrintMember honoka</a>
-<a class="sourceLine" id="cb10-10" title="10"></a>
-<a class="sourceLine" id="cb10-11" title="11"><span class="ot">prettyPrintMember ::</span> <span class="dt">Member</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb10-12" title="12">prettyPrintMember (<span class="dt">Member</span> herName herAge) <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb10-13" title="13">  <span class="fu">putStrLn</span> (<span class="st">&quot;name: &quot;</span> <span class="op">++</span> herName)</a>
-<a class="sourceLine" id="cb10-14" title="14">  <span class="fu">putStrLn</span> (<span class="st">&quot;age: &quot;</span> <span class="op">++</span> <span class="fu">show</span> herAge)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1"></a><span class="ot">honoka ::</span> <span class="dt">Member</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>honoka <span class="ot">=</span> <span class="dt">Member</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  { name <span class="ot">=</span> <span class="st">&quot;honoka&quot;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  , age <span class="ot">=</span> <span class="dv">16</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  }</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb10-8"><a href="#cb10-8"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>  prettyPrintMember honoka</span>
+<span id="cb10-10"><a href="#cb10-10"></a></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="ot">prettyPrintMember ::</span> <span class="dt">Member</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb10-12"><a href="#cb10-12"></a>prettyPrintMember (<span class="dt">Member</span> herName herAge) <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;name: &quot;</span> <span class="op">++</span> herName)</span>
+<span id="cb10-14"><a href="#cb10-14"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;age: &quot;</span> <span class="op">++</span> <span class="fu">show</span> herAge)</span></code></pre></div>
 <p>穂乃果「<code>prettyPrintMember</code>は<code>Member</code>を受け取って、それを表示する関数……だよね。　あれ、仮引数ってどこにいっちゃったの？」<br />
 ことり「仮引数はちゃんとここにあるよ♪」</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" title="1"><span class="co">--                vvvvvvvv ここ vvvvvvvvv</span></a>
-<a class="sourceLine" id="cb11-2" title="2">prettyPrintMember (<span class="dt">Member</span> herName herAge) <span class="ot">=</span> <span class="op">...</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">--                vvvvvvvv ここ vvvvvvvvv</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>prettyPrintMember (<span class="dt">Member</span> herName herAge) <span class="ot">=</span> <span class="op">...</span></span></code></pre></div>
 <p>ことり「これこそがパターンマッチだよ！」<br />
 ことり「<code>main</code>の<code>prettyPrintMember (Member "honoka" 16)</code>っていう呼び出しを」<br />
 ことり「<code>prettyPrintMember (Member "honoka" 16)</code>っていう風に分解してくれるんだ。 　自動的に<code>herName</code>に<code>"honoka"</code>、<code>herAge</code>に<code>16</code>っていう値が束縛してくれます」<br />
@@ -244,84 +249,84 @@
 <p>ことり「次は列挙型について」</p>
 <p>穂乃果「あれ、Javaにも列挙型ってあったよね。　何か関係があったりするの？」<br />
 ことり「関係があるも何も、ほとんど同じものなんだ。　わたしたちμ’ｓは、こうやって書けるよ」</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">data</span> <span class="dt">Muse</span> <span class="ot">=</span> <span class="dt">Hanayo</span> <span class="op">|</span> <span class="dt">Rin</span> <span class="op">|</span> <span class="dt">Maki</span> <span class="op">|</span> <span class="dt">Umi</span> <span class="op">|</span> <span class="dt">Kotori</span> <span class="op">|</span> <span class="dt">Honoka</span> <span class="op">|</span> <span class="dt">Eli</span> <span class="op">|</span> <span class="dt">Nico</span> <span class="op">|</span> <span class="dt">Nozomi</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">data</span> <span class="dt">Muse</span> <span class="ot">=</span> <span class="dt">Hanayo</span> <span class="op">|</span> <span class="dt">Rin</span> <span class="op">|</span> <span class="dt">Maki</span> <span class="op">|</span> <span class="dt">Umi</span> <span class="op">|</span> <span class="dt">Kotori</span> <span class="op">|</span> <span class="dt">Honoka</span> <span class="op">|</span> <span class="dt">Eli</span> <span class="op">|</span> <span class="dt">Nico</span> <span class="op">|</span> <span class="dt">Nozomi</span></span></code></pre></div>
 <p>穂乃果「あーっ！　私たちだー！」<br />
 ことり「ふふ、あとは適当にShowをderivingして」</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">data</span> <span class="dt">Muse</span> <span class="ot">=</span> <span class="dt">Hanayo</span> <span class="op">|</span> <span class="dt">Rin</span> <span class="op">|</span> <span class="dt">Maki</span> <span class="op">|</span> <span class="dt">Umi</span> <span class="op">|</span> <span class="dt">Kotori</span> <span class="op">|</span> <span class="dt">Honoka</span> <span class="op">|</span> <span class="dt">Eli</span> <span class="op">|</span> <span class="dt">Nico</span> <span class="op">|</span> <span class="dt">Nozomi</span></a>
-<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">data</span> <span class="dt">Muse</span> <span class="ot">=</span> <span class="dt">Hanayo</span> <span class="op">|</span> <span class="dt">Rin</span> <span class="op">|</span> <span class="dt">Maki</span> <span class="op">|</span> <span class="dt">Umi</span> <span class="op">|</span> <span class="dt">Kotori</span> <span class="op">|</span> <span class="dt">Honoka</span> <span class="op">|</span> <span class="dt">Eli</span> <span class="op">|</span> <span class="dt">Nico</span> <span class="op">|</span> <span class="dt">Nozomi</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
 <p>ことり「簡単に出力できます」</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb14-2" title="2">main <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb14-3" title="3">  <span class="fu">print</span> <span class="dt">Umi</span></a>
-<a class="sourceLine" id="cb14-4" title="4">  <span class="fu">print</span> <span class="dt">Honoka</span></a>
-<a class="sourceLine" id="cb14-5" title="5">  <span class="fu">print</span> <span class="dt">Kotori</span></a>
-<a class="sourceLine" id="cb14-6" title="6"></a>
-<a class="sourceLine" id="cb14-7" title="7"><span class="co">-- vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb14-8" title="8"><span class="co">-- Umi</span></a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="co">-- Honoka</span></a>
-<a class="sourceLine" id="cb14-10" title="10"><span class="co">-- Kotori</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb14-1"><a href="#cb14-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb14-2"><a href="#cb14-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">print</span> <span class="dt">Umi</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">print</span> <span class="dt">Honoka</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">print</span> <span class="dt">Kotori</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">-- vvv 出力 vvv</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">-- Umi</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">-- Honoka</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co">-- Kotori</span></span></code></pre></div>
 <p>ことり「<code>print</code>は、引数を<code>show</code>してから<code>putStrLn</code>する関数です」</p>
 <ul>
 <li><code>print x = putStrLn (show x)</code></li>
 </ul>
 <p>穂乃果「本当だ。　Javaとおんなじだね」</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">enum</span> Muse { Hanayo, Rin, Maki, Umi, Kotori, Honoka, Eli, Nico, Nozomi }</a>
-<a class="sourceLine" id="cb15-2" title="2"></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="kw">public</span> <span class="kw">class</span> Program {</a>
-<a class="sourceLine" id="cb15-4" title="4">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
-<a class="sourceLine" id="cb15-5" title="5">		Muse eli = Muse.<span class="fu">Eli</span>;</a>
-<a class="sourceLine" id="cb15-6" title="6">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(eli);</a>
-<a class="sourceLine" id="cb15-7" title="7">	}</a>
-<a class="sourceLine" id="cb15-8" title="8">}</a>
-<a class="sourceLine" id="cb15-9" title="9"></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="co">// vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="co">// Eli</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">enum</span> Muse { Hanayo, Rin, Maki, Umi, Kotori, Honoka, Eli, Nico, Nozomi }</span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">public</span> <span class="kw">class</span> Program {</span>
+<span id="cb15-4"><a href="#cb15-4"></a>	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</span>
+<span id="cb15-5"><a href="#cb15-5"></a>		Muse eli = Muse.<span class="fu">Eli</span>;</span>
+<span id="cb15-6"><a href="#cb15-6"></a>		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(eli);</span>
+<span id="cb15-7"><a href="#cb15-7"></a>	}</span>
+<span id="cb15-8"><a href="#cb15-8"></a>}</span>
+<span id="cb15-9"><a href="#cb15-9"></a></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co">// vvv 出力 vvv</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="co">// Eli</span></span></code></pre></div>
 <p>ことり「これもパターンマッチすることができるよ」</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" title="1"><span class="ot">helloTo ::</span> <span class="dt">Muse</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb16-2" title="2">helloTo <span class="dt">Umi</span>    <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="st">&quot;ｳﾐﾁｬﾝ♡&quot;</span></a>
-<a class="sourceLine" id="cb16-3" title="3">helloTo <span class="dt">Honoka</span> <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="st">&quot;ﾎﾉｶﾁｬﾝ!&quot;</span></a>
-<a class="sourceLine" id="cb16-4" title="4">helloTo <span class="dt">Kotori</span> <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="st">&quot;わたしだね&quot;</span></a>
-<a class="sourceLine" id="cb16-5" title="5">helloTo x      <span class="ot">=</span> <span class="fu">putStrLn</span> (<span class="st">&quot;おはようっ♪ &gt; &quot;</span> <span class="op">++</span> <span class="fu">show</span> x)</a>
-<a class="sourceLine" id="cb16-6" title="6"></a>
-<a class="sourceLine" id="cb16-7" title="7"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb16-8" title="8">main <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb16-9" title="9">  helloTo <span class="dt">Umi</span></a>
-<a class="sourceLine" id="cb16-10" title="10">  helloTo <span class="dt">Honoka</span></a>
-<a class="sourceLine" id="cb16-11" title="11">  helloTo <span class="dt">Kotori</span></a>
-<a class="sourceLine" id="cb16-12" title="12">  helloTo <span class="dt">Hanayo</span></a>
-<a class="sourceLine" id="cb16-13" title="13">  helloTo <span class="dt">Nico</span></a>
-<a class="sourceLine" id="cb16-14" title="14">  helloTo <span class="dt">Nozomi</span></a>
-<a class="sourceLine" id="cb16-15" title="15"></a>
-<a class="sourceLine" id="cb16-16" title="16"><span class="co">-- vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb16-17" title="17"><span class="co">-- ｳﾐﾁｬﾝ♡</span></a>
-<a class="sourceLine" id="cb16-18" title="18"><span class="co">-- ﾎﾉｶﾁｬﾝ!</span></a>
-<a class="sourceLine" id="cb16-19" title="19"><span class="co">-- わたしだね</span></a>
-<a class="sourceLine" id="cb16-20" title="20"><span class="co">-- おはようっ♪ &gt; Hanayo</span></a>
-<a class="sourceLine" id="cb16-21" title="21"><span class="co">-- おはようっ♪ &gt; Nico</span></a>
-<a class="sourceLine" id="cb16-22" title="22"><span class="co">-- おはようっ♪ &gt; Nozomi</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1"></a><span class="ot">helloTo ::</span> <span class="dt">Muse</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb16-2"><a href="#cb16-2"></a>helloTo <span class="dt">Umi</span>    <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="st">&quot;ｳﾐﾁｬﾝ♡&quot;</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>helloTo <span class="dt">Honoka</span> <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="st">&quot;ﾎﾉｶﾁｬﾝ!&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>helloTo <span class="dt">Kotori</span> <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="st">&quot;わたしだね&quot;</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>helloTo x      <span class="ot">=</span> <span class="fu">putStrLn</span> (<span class="st">&quot;おはようっ♪ &gt; &quot;</span> <span class="op">++</span> <span class="fu">show</span> x)</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb16-8"><a href="#cb16-8"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>  helloTo <span class="dt">Umi</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>  helloTo <span class="dt">Honoka</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>  helloTo <span class="dt">Kotori</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a>  helloTo <span class="dt">Hanayo</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a>  helloTo <span class="dt">Nico</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a>  helloTo <span class="dt">Nozomi</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="co">-- vvv 出力 vvv</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="co">-- ｳﾐﾁｬﾝ♡</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="co">-- ﾎﾉｶﾁｬﾝ!</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="co">-- わたしだね</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="co">-- おはようっ♪ &gt; Hanayo</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a><span class="co">-- おはようっ♪ &gt; Nico</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="co">-- おはようっ♪ &gt; Nozomi</span></span></code></pre></div>
 <p>穂乃果「えっ、<code>helloTo</code>関数の定義がいっぱいあるよ？？？」<br />
 ことり「ふっふっふっ、これもパターンマッチの恩恵なのです」</p>
 <p>ことり「Haskellでは具体型の名称、値構築子、代数的データ型の値、型クラスの名称の頭文字は、必ず英字大文字なの」</p>
 <p>ことり「値構築子、または値コンストラクタっていうのは、<code>Member</code>型の<code>Member String Int</code>の<code>Member</code> ……<code>honoka</code>みたいな値を作るときに<code>String</code>と<code>Int</code>の値を受け取る部分ことだよ」</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">data</span> <span class="dt">Member</span>        <span class="co">-- 具体型の名称</span></a>
-<a class="sourceLine" id="cb17-2" title="2">         <span class="ot">=</span> <span class="dt">Member</span>  <span class="co">-- 値構築子</span></a>
-<a class="sourceLine" id="cb17-3" title="3">              <span class="dt">String</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb17-4" title="4"></a>
-<a class="sourceLine" id="cb17-5" title="5"><span class="fu">show</span> <span class="ot">::</span></a>
-<a class="sourceLine" id="cb17-6" title="6">    a  <span class="co">-- 具体的でない（抽象的な）型の仮名称は頭文字が英字大文字でない</span></a>
-<a class="sourceLine" id="cb17-7" title="7">    <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb17-8" title="8"></a>
-<a class="sourceLine" id="cb17-9" title="9"><span class="kw">data</span> <span class="dt">Muse</span> <span class="ot">=</span> <span class="dt">Hanayo</span>  <span class="co">-- 代数的データ型の値</span></a>
-<a class="sourceLine" id="cb17-10" title="10">          <span class="op">|</span> <span class="dt">Rin</span> <span class="op">|</span> <span class="dt">Maki</span> <span class="op">|</span> <span class="dt">Umi</span> <span class="op">|</span> <span class="dt">Kotori</span> <span class="op">|</span> <span class="dt">Honoka</span> <span class="op">|</span> <span class="dt">Eli</span> <span class="op">|</span> <span class="dt">Nico</span> <span class="op">|</span> <span class="dt">Nozomi</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">data</span> <span class="dt">Member</span>        <span class="co">-- 具体型の名称</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>         <span class="ot">=</span> <span class="dt">Member</span>  <span class="co">-- 値構築子</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>              <span class="dt">String</span> <span class="dt">Int</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">show</span> <span class="ot">::</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>    a  <span class="co">-- 具体的でない（抽象的な）型の仮名称は頭文字が英字大文字でない</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>    <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="kw">data</span> <span class="dt">Muse</span> <span class="ot">=</span> <span class="dt">Hanayo</span>  <span class="co">-- 代数的データ型の値</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>          <span class="op">|</span> <span class="dt">Rin</span> <span class="op">|</span> <span class="dt">Maki</span> <span class="op">|</span> <span class="dt">Umi</span> <span class="op">|</span> <span class="dt">Kotori</span> <span class="op">|</span> <span class="dt">Honoka</span> <span class="op">|</span> <span class="dt">Eli</span> <span class="op">|</span> <span class="dt">Nico</span> <span class="op">|</span> <span class="dt">Nozomi</span></span></code></pre></div>
 <ul>
 <li><code>Show</code> – 型クラス名</li>
 </ul>
 <p>ことり「そしてこれらを関数の仮引数部に与えたときに、関数でのパターンマッチが起こるんだ」</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" title="1"><span class="ot">helloTo ::</span> <span class="dt">Muse</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb18-2" title="2">helloTo <span class="dt">Umi</span>  <span class="co">-- 仮引数部に値が書かれているので、パターンマッチが起こる</span></a>
-<a class="sourceLine" id="cb18-3" title="3">    <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="st">&quot;ｳﾐﾁｬﾝ♡&quot;</span></a>
-<a class="sourceLine" id="cb18-4" title="4">helloTo x  <span class="co">-- 仮引数部に名前（変数、具体的な値でないもの）が書かれているので、パターンマッチでない束縛が起こる</span></a>
-<a class="sourceLine" id="cb18-5" title="5">    <span class="ot">=</span> <span class="fu">putStrLn</span> (<span class="st">&quot;おはようっ♪ &gt; &quot;</span> <span class="op">++</span> <span class="fu">show</span> x)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb18-1"><a href="#cb18-1"></a><span class="ot">helloTo ::</span> <span class="dt">Muse</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb18-2"><a href="#cb18-2"></a>helloTo <span class="dt">Umi</span>  <span class="co">-- 仮引数部に値が書かれているので、パターンマッチが起こる</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>    <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="st">&quot;ｳﾐﾁｬﾝ♡&quot;</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>helloTo x  <span class="co">-- 仮引数部に名前（変数、具体的な値でないもの）が書かれているので、パターンマッチでない束縛が起こる</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="ot">=</span> <span class="fu">putStrLn</span> (<span class="st">&quot;おはようっ♪ &gt; &quot;</span> <span class="op">++</span> <span class="fu">show</span> x)</span></code></pre></div>
 <p>ことり「直積型でのパターンマッチが起こるのも、同じ理屈だよ♪」</p>
 <p>穂乃果「これって……すごいね。　switchじゃないのに、switchみたいに分岐ができてる……」<br />
 ことり「でしょ！　Haskellはifなどの分岐を極力使わないで書ける言語なんだ！」</p>
@@ -329,101 +334,101 @@
 <p>ことり「最後に直和型。　今回はこれで最後だから頑張って☆」<br />
 穂乃果「うん！　ファイトだよっ！」</p>
 <p>ことり「直和型は、列挙型と直積型が合わさったようなもので、列挙子がフィールドを持ちます！」</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">data</span> <span class="dt">Student</span> <span class="ot">=</span> <span class="dt">OtonokiStudent</span> <span class="dt">String</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb19-2" title="2">             <span class="op">|</span> <span class="dt">UranohoshiStudent</span> <span class="dt">String</span> <span class="dt">Int</span> <span class="dt">Bool</span></a>
-<a class="sourceLine" id="cb19-3" title="3">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">data</span> <span class="dt">Student</span> <span class="ot">=</span> <span class="dt">OtonokiStudent</span> <span class="dt">String</span> <span class="dt">Int</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>             <span class="op">|</span> <span class="dt">UranohoshiStudent</span> <span class="dt">String</span> <span class="dt">Int</span> <span class="dt">Bool</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
 <p>ことり「もちろんレコードも使えるよ」</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb20-1" title="1"><span class="co">-- 直和型</span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="kw">data</span> <span class="dt">Student</span> <span class="ot">=</span> <span class="dt">OtonokiStudent</span> {<span class="ot"> otonokiName ::</span> <span class="dt">String</span>,<span class="ot"> otonokiAge ::</span> <span class="dt">Int</span> }</a>
-<a class="sourceLine" id="cb20-3" title="3">             <span class="op">|</span> <span class="dt">UranohoshiStudent</span> {<span class="ot"> uranohoshiName ::</span> <span class="dt">String</span>,<span class="ot"> uranohoshiAge ::</span> <span class="dt">Int</span>,<span class="ot"> likeMikan ::</span> <span class="dt">Bool</span> }</a>
-<a class="sourceLine" id="cb20-4" title="4">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">-- 直和型</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">data</span> <span class="dt">Student</span> <span class="ot">=</span> <span class="dt">OtonokiStudent</span> {<span class="ot"> otonokiName ::</span> <span class="dt">String</span>,<span class="ot"> otonokiAge ::</span> <span class="dt">Int</span> }</span>
+<span id="cb20-3"><a href="#cb20-3"></a>             <span class="op">|</span> <span class="dt">UranohoshiStudent</span> {<span class="ot"> uranohoshiName ::</span> <span class="dt">String</span>,<span class="ot"> uranohoshiAge ::</span> <span class="dt">Int</span>,<span class="ot"> likeMikan ::</span> <span class="dt">Bool</span> }</span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
 <p>ことり「今回のコード例はこちら」<br />
 ことり「名前空間がバッティングするので、<code>OtonokiStudent</code>と<code>UranohoshiStudent</code>のレコード名は固有のものにしてあるよ」</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" title="1"><span class="ot">prettyPrintStudent ::</span> <span class="dt">Student</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb21-2" title="2">prettyPrintStudent (<span class="dt">OtonokiStudent</span> herName herAge) <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb21-3" title="3">  <span class="fu">putStrLn</span> <span class="st">&quot;音ノ木坂学院生徒&quot;</span></a>
-<a class="sourceLine" id="cb21-4" title="4">  <span class="fu">putStrLn</span> (<span class="st">&quot;name: &quot;</span> <span class="op">++</span> herName)</a>
-<a class="sourceLine" id="cb21-5" title="5">  <span class="fu">putStrLn</span> (<span class="st">&quot;age: &quot;</span> <span class="op">++</span> <span class="fu">show</span> herAge)</a>
-<a class="sourceLine" id="cb21-6" title="6">prettyPrintStudent (<span class="dt">UranohoshiStudent</span> herName herAge sheLikesMikan) <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb21-7" title="7">  <span class="fu">putStrLn</span> <span class="st">&quot;浦の星女学院生徒&quot;</span></a>
-<a class="sourceLine" id="cb21-8" title="8">  <span class="fu">putStrLn</span> (<span class="st">&quot;name: &quot;</span> <span class="op">++</span> herName)</a>
-<a class="sourceLine" id="cb21-9" title="9">  <span class="fu">putStrLn</span> (<span class="st">&quot;age: &quot;</span> <span class="op">++</span> <span class="fu">show</span> herAge)</a>
-<a class="sourceLine" id="cb21-10" title="10">  <span class="fu">putStrLn</span> (<span class="st">&quot;みかんのこと好き？: &quot;</span> <span class="op">++</span> <span class="fu">show</span> sheLikesMikan)</a>
-<a class="sourceLine" id="cb21-11" title="11"></a>
-<a class="sourceLine" id="cb21-12" title="12"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb21-13" title="13">main <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb21-14" title="14">  <span class="kw">let</span> umi     <span class="ot">=</span> <span class="dt">OtonokiStudent</span> <span class="st">&quot;園田海未&quot;</span> <span class="dv">16</span>         <span class="co">--</span></a>
-<a class="sourceLine" id="cb21-15" title="15">      yoshiko <span class="ot">=</span> <span class="dt">UranohoshiStudent</span> <span class="st">&quot;ヨハネ&quot;</span> <span class="dv">15</span> <span class="dt">False</span>  <span class="co">-- do式内のletブロックは、複数の名前を定義できるよ</span></a>
-<a class="sourceLine" id="cb21-16" title="16">  prettyPrintStudent umi</a>
-<a class="sourceLine" id="cb21-17" title="17">  prettyPrintStudent yoshiko</a>
-<a class="sourceLine" id="cb21-18" title="18"></a>
-<a class="sourceLine" id="cb21-19" title="19"><span class="co">-- vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb21-20" title="20"><span class="co">-- 音ノ木坂学院生徒</span></a>
-<a class="sourceLine" id="cb21-21" title="21"><span class="co">-- name: 園田海未</span></a>
-<a class="sourceLine" id="cb21-22" title="22"><span class="co">-- age: 16</span></a>
-<a class="sourceLine" id="cb21-23" title="23"><span class="co">-- 浦の星女学院生徒</span></a>
-<a class="sourceLine" id="cb21-24" title="24"><span class="co">-- name: ヨハネ</span></a>
-<a class="sourceLine" id="cb21-25" title="25"><span class="co">-- age: 15</span></a>
-<a class="sourceLine" id="cb21-26" title="26"><span class="co">-- みかんのこと好き？: False</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1"></a><span class="ot">prettyPrintStudent ::</span> <span class="dt">Student</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb21-2"><a href="#cb21-2"></a>prettyPrintStudent (<span class="dt">OtonokiStudent</span> herName herAge) <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">putStrLn</span> <span class="st">&quot;音ノ木坂学院生徒&quot;</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;name: &quot;</span> <span class="op">++</span> herName)</span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;age: &quot;</span> <span class="op">++</span> <span class="fu">show</span> herAge)</span>
+<span id="cb21-6"><a href="#cb21-6"></a>prettyPrintStudent (<span class="dt">UranohoshiStudent</span> herName herAge sheLikesMikan) <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">putStrLn</span> <span class="st">&quot;浦の星女学院生徒&quot;</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;name: &quot;</span> <span class="op">++</span> herName)</span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;age: &quot;</span> <span class="op">++</span> <span class="fu">show</span> herAge)</span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="fu">putStrLn</span> (<span class="st">&quot;みかんのこと好き？: &quot;</span> <span class="op">++</span> <span class="fu">show</span> sheLikesMikan)</span>
+<span id="cb21-11"><a href="#cb21-11"></a></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb21-13"><a href="#cb21-13"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a>  <span class="kw">let</span> umi     <span class="ot">=</span> <span class="dt">OtonokiStudent</span> <span class="st">&quot;園田海未&quot;</span> <span class="dv">16</span>         <span class="co">--</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a>      yoshiko <span class="ot">=</span> <span class="dt">UranohoshiStudent</span> <span class="st">&quot;ヨハネ&quot;</span> <span class="dv">15</span> <span class="dt">False</span>  <span class="co">-- do式内のletブロックは、複数の名前を定義できるよ</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a>  prettyPrintStudent umi</span>
+<span id="cb21-17"><a href="#cb21-17"></a>  prettyPrintStudent yoshiko</span>
+<span id="cb21-18"><a href="#cb21-18"></a></span>
+<span id="cb21-19"><a href="#cb21-19"></a><span class="co">-- vvv 出力 vvv</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="co">-- 音ノ木坂学院生徒</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a><span class="co">-- name: 園田海未</span></span>
+<span id="cb21-22"><a href="#cb21-22"></a><span class="co">-- age: 16</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a><span class="co">-- 浦の星女学院生徒</span></span>
+<span id="cb21-24"><a href="#cb21-24"></a><span class="co">-- name: ヨハネ</span></span>
+<span id="cb21-25"><a href="#cb21-25"></a><span class="co">-- age: 15</span></span>
+<span id="cb21-26"><a href="#cb21-26"></a><span class="co">-- みかんのこと好き？: False</span></span></code></pre></div>
 <p>穂乃果「えーっ！　これは……Javaで書くとどうなるんだろう……」<br />
 ことり「これはね、ScalaとかKotlinでも使う書き方があって、それで表現できるんだけど……ちょっとJavaだと可読性が悪くなるんだぁ」<br />
 ことり「ちょっとコードが長くなるよ……注意してね」</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">interface</span> Student {}</a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="kw">class</span> OtonokiStudent <span class="kw">implements</span> Student {</a>
-<a class="sourceLine" id="cb22-3" title="3">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
-<a class="sourceLine" id="cb22-4" title="4">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
-<a class="sourceLine" id="cb22-5" title="5">	<span class="kw">public</span> <span class="fu">OtonokiStudent</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</a>
-<a class="sourceLine" id="cb22-6" title="6">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
-<a class="sourceLine" id="cb22-7" title="7">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
-<a class="sourceLine" id="cb22-8" title="8">	}</a>
-<a class="sourceLine" id="cb22-9" title="9">}</a>
-<a class="sourceLine" id="cb22-10" title="10"><span class="kw">class</span> UranohoshiStudent <span class="kw">implements</span> Student {</a>
-<a class="sourceLine" id="cb22-11" title="11">	<span class="kw">public</span> <span class="bu">String</span> name;</a>
-<a class="sourceLine" id="cb22-12" title="12">	<span class="kw">public</span> <span class="dt">int</span> age;</a>
-<a class="sourceLine" id="cb22-13" title="13">	<span class="kw">public</span> <span class="dt">boolean</span> likeMikan;</a>
-<a class="sourceLine" id="cb22-14" title="14">	<span class="kw">public</span> <span class="fu">UranohoshiStudent</span>(<span class="bu">String</span> name, <span class="dt">int</span> age, <span class="dt">boolean</span> likeMikan) {</a>
-<a class="sourceLine" id="cb22-15" title="15">		<span class="kw">this</span>.<span class="fu">name</span> = name;</a>
-<a class="sourceLine" id="cb22-16" title="16">		<span class="kw">this</span>.<span class="fu">age</span> = age;</a>
-<a class="sourceLine" id="cb22-17" title="17">		<span class="kw">this</span>.<span class="fu">likeMikan</span> = likeMikan;</a>
-<a class="sourceLine" id="cb22-18" title="18">	}</a>
-<a class="sourceLine" id="cb22-19" title="19">}</a>
-<a class="sourceLine" id="cb22-20" title="20"></a>
-<a class="sourceLine" id="cb22-21" title="21"><span class="kw">class</span> StudentFunctions {</a>
-<a class="sourceLine" id="cb22-22" title="22">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">prettyPrintStudent</span>(Student she) {</a>
-<a class="sourceLine" id="cb22-23" title="23">		<span class="kw">if</span> (she <span class="kw">instanceof</span> OtonokiStudent) {</a>
-<a class="sourceLine" id="cb22-24" title="24">			OtonokiStudent otonokiGirl = (OtonokiStudent)she;</a>
-<a class="sourceLine" id="cb22-25" title="25">			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;音ノ木坂学院生徒&quot;</span>);</a>
-<a class="sourceLine" id="cb22-26" title="26">			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;name: &quot;</span> + otonokiGirl.<span class="fu">name</span>);</a>
-<a class="sourceLine" id="cb22-27" title="27">			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;age: &quot;</span> + otonokiGirl.<span class="fu">age</span>);</a>
-<a class="sourceLine" id="cb22-28" title="28">		} <span class="kw">else</span> <span class="kw">if</span>(she <span class="kw">instanceof</span> UranohoshiStudent) {</a>
-<a class="sourceLine" id="cb22-29" title="29">			UranohoshiStudent uranohoshiGirl = (UranohoshiStudent)she;</a>
-<a class="sourceLine" id="cb22-30" title="30">			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;浦の星女学院生徒&quot;</span>);</a>
-<a class="sourceLine" id="cb22-31" title="31">			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;name: &quot;</span> + uranohoshiGirl.<span class="fu">name</span>);</a>
-<a class="sourceLine" id="cb22-32" title="32">			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;age: &quot;</span> + uranohoshiGirl.<span class="fu">age</span>);</a>
-<a class="sourceLine" id="cb22-33" title="33">			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;みかんのこと好き？: &quot;</span> + uranohoshiGirl.<span class="fu">likeMikan</span>);</a>
-<a class="sourceLine" id="cb22-34" title="34">		} <span class="kw">else</span> {</a>
-<a class="sourceLine" id="cb22-35" title="35">			<span class="kw">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span>(<span class="st">&quot;undefined behavior is detected&quot;</span>);</a>
-<a class="sourceLine" id="cb22-36" title="36">		}</a>
-<a class="sourceLine" id="cb22-37" title="37">	}</a>
-<a class="sourceLine" id="cb22-38" title="38">}</a>
-<a class="sourceLine" id="cb22-39" title="39"></a>
-<a class="sourceLine" id="cb22-40" title="40"><span class="kw">public</span> <span class="kw">class</span> Program {</a>
-<a class="sourceLine" id="cb22-41" title="41">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
-<a class="sourceLine" id="cb22-42" title="42">		Student umi = <span class="kw">new</span> <span class="fu">OtonokiStudent</span>(<span class="st">&quot;園田海未&quot;</span>, <span class="dv">16</span>);</a>
-<a class="sourceLine" id="cb22-43" title="43">		Student yoshiko = <span class="kw">new</span> <span class="fu">UranohoshiStudent</span>(<span class="st">&quot;ヨハネ&quot;</span>, <span class="dv">15</span>, <span class="kw">false</span>);</a>
-<a class="sourceLine" id="cb22-44" title="44">		StudentFunctions.<span class="fu">prettyPrintStudent</span>(umi);</a>
-<a class="sourceLine" id="cb22-45" title="45">		StudentFunctions.<span class="fu">prettyPrintStudent</span>(yoshiko);</a>
-<a class="sourceLine" id="cb22-46" title="46">	}</a>
-<a class="sourceLine" id="cb22-47" title="47">}</a>
-<a class="sourceLine" id="cb22-48" title="48"></a>
-<a class="sourceLine" id="cb22-49" title="49"><span class="co">// vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb22-50" title="50"><span class="co">// 音ノ木坂学院生徒</span></a>
-<a class="sourceLine" id="cb22-51" title="51"><span class="co">// name: 園田海未</span></a>
-<a class="sourceLine" id="cb22-52" title="52"><span class="co">// age: 16</span></a>
-<a class="sourceLine" id="cb22-53" title="53"><span class="co">// 浦の星女学院生徒</span></a>
-<a class="sourceLine" id="cb22-54" title="54"><span class="co">// name: ヨハネ</span></a>
-<a class="sourceLine" id="cb22-55" title="55"><span class="co">// age: 15</span></a>
-<a class="sourceLine" id="cb22-56" title="56"><span class="co">// みかんのこと好き？: false</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">interface</span> Student {}</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">class</span> OtonokiStudent <span class="kw">implements</span> Student {</span>
+<span id="cb22-3"><a href="#cb22-3"></a>	<span class="kw">public</span> <span class="bu">String</span> name;</span>
+<span id="cb22-4"><a href="#cb22-4"></a>	<span class="kw">public</span> <span class="dt">int</span> age;</span>
+<span id="cb22-5"><a href="#cb22-5"></a>	<span class="kw">public</span> <span class="fu">OtonokiStudent</span>(<span class="bu">String</span> name, <span class="dt">int</span> age) {</span>
+<span id="cb22-6"><a href="#cb22-6"></a>		<span class="kw">this</span>.<span class="fu">name</span> = name;</span>
+<span id="cb22-7"><a href="#cb22-7"></a>		<span class="kw">this</span>.<span class="fu">age</span> = age;</span>
+<span id="cb22-8"><a href="#cb22-8"></a>	}</span>
+<span id="cb22-9"><a href="#cb22-9"></a>}</span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="kw">class</span> UranohoshiStudent <span class="kw">implements</span> Student {</span>
+<span id="cb22-11"><a href="#cb22-11"></a>	<span class="kw">public</span> <span class="bu">String</span> name;</span>
+<span id="cb22-12"><a href="#cb22-12"></a>	<span class="kw">public</span> <span class="dt">int</span> age;</span>
+<span id="cb22-13"><a href="#cb22-13"></a>	<span class="kw">public</span> <span class="dt">boolean</span> likeMikan;</span>
+<span id="cb22-14"><a href="#cb22-14"></a>	<span class="kw">public</span> <span class="fu">UranohoshiStudent</span>(<span class="bu">String</span> name, <span class="dt">int</span> age, <span class="dt">boolean</span> likeMikan) {</span>
+<span id="cb22-15"><a href="#cb22-15"></a>		<span class="kw">this</span>.<span class="fu">name</span> = name;</span>
+<span id="cb22-16"><a href="#cb22-16"></a>		<span class="kw">this</span>.<span class="fu">age</span> = age;</span>
+<span id="cb22-17"><a href="#cb22-17"></a>		<span class="kw">this</span>.<span class="fu">likeMikan</span> = likeMikan;</span>
+<span id="cb22-18"><a href="#cb22-18"></a>	}</span>
+<span id="cb22-19"><a href="#cb22-19"></a>}</span>
+<span id="cb22-20"><a href="#cb22-20"></a></span>
+<span id="cb22-21"><a href="#cb22-21"></a><span class="kw">class</span> StudentFunctions {</span>
+<span id="cb22-22"><a href="#cb22-22"></a>	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">prettyPrintStudent</span>(Student she) {</span>
+<span id="cb22-23"><a href="#cb22-23"></a>		<span class="kw">if</span> (she <span class="kw">instanceof</span> OtonokiStudent) {</span>
+<span id="cb22-24"><a href="#cb22-24"></a>			OtonokiStudent otonokiGirl = (OtonokiStudent)she;</span>
+<span id="cb22-25"><a href="#cb22-25"></a>			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;音ノ木坂学院生徒&quot;</span>);</span>
+<span id="cb22-26"><a href="#cb22-26"></a>			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;name: &quot;</span> + otonokiGirl.<span class="fu">name</span>);</span>
+<span id="cb22-27"><a href="#cb22-27"></a>			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;age: &quot;</span> + otonokiGirl.<span class="fu">age</span>);</span>
+<span id="cb22-28"><a href="#cb22-28"></a>		} <span class="kw">else</span> <span class="kw">if</span>(she <span class="kw">instanceof</span> UranohoshiStudent) {</span>
+<span id="cb22-29"><a href="#cb22-29"></a>			UranohoshiStudent uranohoshiGirl = (UranohoshiStudent)she;</span>
+<span id="cb22-30"><a href="#cb22-30"></a>			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;浦の星女学院生徒&quot;</span>);</span>
+<span id="cb22-31"><a href="#cb22-31"></a>			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;name: &quot;</span> + uranohoshiGirl.<span class="fu">name</span>);</span>
+<span id="cb22-32"><a href="#cb22-32"></a>			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;age: &quot;</span> + uranohoshiGirl.<span class="fu">age</span>);</span>
+<span id="cb22-33"><a href="#cb22-33"></a>			<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;みかんのこと好き？: &quot;</span> + uranohoshiGirl.<span class="fu">likeMikan</span>);</span>
+<span id="cb22-34"><a href="#cb22-34"></a>		} <span class="kw">else</span> {</span>
+<span id="cb22-35"><a href="#cb22-35"></a>			<span class="kw">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span>(<span class="st">&quot;undefined behavior is detected&quot;</span>);</span>
+<span id="cb22-36"><a href="#cb22-36"></a>		}</span>
+<span id="cb22-37"><a href="#cb22-37"></a>	}</span>
+<span id="cb22-38"><a href="#cb22-38"></a>}</span>
+<span id="cb22-39"><a href="#cb22-39"></a></span>
+<span id="cb22-40"><a href="#cb22-40"></a><span class="kw">public</span> <span class="kw">class</span> Program {</span>
+<span id="cb22-41"><a href="#cb22-41"></a>	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</span>
+<span id="cb22-42"><a href="#cb22-42"></a>		Student umi = <span class="kw">new</span> <span class="fu">OtonokiStudent</span>(<span class="st">&quot;園田海未&quot;</span>, <span class="dv">16</span>);</span>
+<span id="cb22-43"><a href="#cb22-43"></a>		Student yoshiko = <span class="kw">new</span> <span class="fu">UranohoshiStudent</span>(<span class="st">&quot;ヨハネ&quot;</span>, <span class="dv">15</span>, <span class="kw">false</span>);</span>
+<span id="cb22-44"><a href="#cb22-44"></a>		StudentFunctions.<span class="fu">prettyPrintStudent</span>(umi);</span>
+<span id="cb22-45"><a href="#cb22-45"></a>		StudentFunctions.<span class="fu">prettyPrintStudent</span>(yoshiko);</span>
+<span id="cb22-46"><a href="#cb22-46"></a>	}</span>
+<span id="cb22-47"><a href="#cb22-47"></a>}</span>
+<span id="cb22-48"><a href="#cb22-48"></a></span>
+<span id="cb22-49"><a href="#cb22-49"></a><span class="co">// vvv 出力 vvv</span></span>
+<span id="cb22-50"><a href="#cb22-50"></a><span class="co">// 音ノ木坂学院生徒</span></span>
+<span id="cb22-51"><a href="#cb22-51"></a><span class="co">// name: 園田海未</span></span>
+<span id="cb22-52"><a href="#cb22-52"></a><span class="co">// age: 16</span></span>
+<span id="cb22-53"><a href="#cb22-53"></a><span class="co">// 浦の星女学院生徒</span></span>
+<span id="cb22-54"><a href="#cb22-54"></a><span class="co">// name: ヨハネ</span></span>
+<span id="cb22-55"><a href="#cb22-55"></a><span class="co">// age: 15</span></span>
+<span id="cb22-56"><a href="#cb22-56"></a><span class="co">// みかんのこと好き？: false</span></span></code></pre></div>
 <p>ことり「表現はHaskellに準拠してるよ」</p>
 <p>穂乃果「なるほど……<code>Student</code>クラスを継承することで、その子としての属性を与えるんだね……」<br />
 ことり「うん。　共通フィールドである<code>name</code>と<code>age</code>を<code>Student</code>に与えてあげてもよあったんだけど、Haskellに合わせて書いてみると、だいたい誰が書いてもこうなるかな」</p>
@@ -487,16 +492,15 @@
 <script src="../js/facebook-sdk-2.8.js"></script>
 
 
-        <div class="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
-            and more (<a href="../licenses.html">about licenses</a>).
-        </div>
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
 
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
-        <script type="text/javascript" src="../js/highlight.pack.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
 </html>

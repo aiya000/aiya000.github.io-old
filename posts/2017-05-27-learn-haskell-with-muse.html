@@ -1,55 +1,60 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-        <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta property="og:url" content="https://aiya000.github.io" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」" />
-        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta property="og:site_name" content="galaxy-sixth-sensey" />
-        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@public_ai000ya" />
-        <meta name="twitter:creator" content="@public_ai000ya">
-        <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」" />
-        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
-                </div>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="nav-link" href="../">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../about.html">About</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../products.html">Products</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../archive.html">Archive</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
     <title>galaxy-sixth-sensey - ことり、穂乃果と一緒に学ぶHaskell（入門）その4「型クラスの定義と実装」</title>
@@ -105,21 +110,21 @@
 ことり「えっ……♡♡」</p>
 <hr />
 <p>ことり「Cの構造体みたいなデータ型、あれは直積型って言うよ！」</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span></a>
-<a class="sourceLine" id="cb1-2" title="2">  {<span class="ot"> name ::</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb1-3" title="3">  ,<span class="ot"> age ::</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb1-4" title="4">  }</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">data</span> <span class="dt">Member</span> <span class="ot">=</span> <span class="dt">Member</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  {<span class="ot"> name ::</span> <span class="dt">String</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  ,<span class="ot"> age ::</span> <span class="dt">Int</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  }</span></code></pre></div>
 <p>ことり「オブジェクト指向のクラスと比べた<strong>代数的データ型の最大の利点は、その網羅性</strong>って言われたりするくらいだしね」<br />
 ことり「その裏付けをするのがパターンマッチだよ」</p>
 <hr />
 <p>ことり「列挙型について」<br />
 ことり「わたしたちμ’ｓは、こうやって書けるよ」</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">data</span> <span class="dt">Muse</span> <span class="ot">=</span> <span class="dt">Hanayo</span> <span class="op">|</span> <span class="dt">Rin</span> <span class="op">|</span> <span class="dt">Maki</span> <span class="op">|</span> <span class="dt">Umi</span> <span class="op">|</span> <span class="dt">Kotori</span> <span class="op">|</span> <span class="dt">Honoka</span> <span class="op">|</span> <span class="dt">Eli</span> <span class="op">|</span> <span class="dt">Nico</span> <span class="op">|</span> <span class="dt">Nozomi</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">data</span> <span class="dt">Muse</span> <span class="ot">=</span> <span class="dt">Hanayo</span> <span class="op">|</span> <span class="dt">Rin</span> <span class="op">|</span> <span class="dt">Maki</span> <span class="op">|</span> <span class="dt">Umi</span> <span class="op">|</span> <span class="dt">Kotori</span> <span class="op">|</span> <span class="dt">Honoka</span> <span class="op">|</span> <span class="dt">Eli</span> <span class="op">|</span> <span class="dt">Nico</span> <span class="op">|</span> <span class="dt">Nozomi</span></span></code></pre></div>
 <hr />
 <p>ことり「直和型は、列挙型と直積型が合わさったようなもので、列挙子がフィールドを持ちます！」</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">data</span> <span class="dt">Student</span> <span class="ot">=</span> <span class="dt">OtonokiStudent</span> <span class="dt">String</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb3-2" title="2">             <span class="op">|</span> <span class="dt">UranohoshiStudent</span> <span class="dt">String</span> <span class="dt">Int</span> <span class="dt">Bool</span></a>
-<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">deriving</span> (<span class="dt">Show</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">data</span> <span class="dt">Student</span> <span class="ot">=</span> <span class="dt">OtonokiStudent</span> <span class="dt">String</span> <span class="dt">Int</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>             <span class="op">|</span> <span class="dt">UranohoshiStudent</span> <span class="dt">String</span> <span class="dt">Int</span> <span class="dt">Bool</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
 <h1 id="型クラス">型クラス</h1>
 <p>ことり「こんにちは〜」<br />
 穂乃果「<a href="https://twitter.com/hashtag/%E6%97%A5%E6%9B%9C%E3%81%8A%E6%97%A5%E6%A7%98%E7%A9%82%E4%B9%83%E6%9E%9C%E3%81%A1%E3%82%83%E3%82%93">日曜おひさま ほのHaskell</a>だよ！」<br />
@@ -129,62 +134,62 @@
 <p>ことり「型クラスは<code>class</code>キーワードで定義するよ♪」<br />
 穂乃果「<code>class</code>？　Javaにも<code>class</code>キーワードがあったけど、Haskellでは型クラスに使うんだー！」<br />
 ことり「うん！　Javaの<code>class</code>はわからないけど、Haskellの<code>class</code>は『classify（分類する）』から来てるって説があるね」</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">class</span> <span class="dt">GobiPersons</span> a <span class="kw">where</span></a>
-<a class="sourceLine" id="cb4-2" title="2">  <span class="co">-- 人を受け取って、その人の語尾を返す関数</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="ot">  say ::</span> a <span class="ot">-&gt;</span> <span class="dt">String</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">class</span> <span class="dt">GobiPersons</span> a <span class="kw">where</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="co">-- 人を受け取って、その人の語尾を返す関数</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="ot">  say ::</span> a <span class="ot">-&gt;</span> <span class="dt">String</span></span></code></pre></div>
 <p>ことり「これは『<a href="http://dic.pixiv.net/a/%E5%8D%97%E3%81%BF%E3%82%8C%E3%81%83">語尾</a>持ちとしての性質』を表す型クラスだよ！」<br />
 穂乃果「うーん？？　凛ちゃんとかにこちゃんとか……希ちゃんもかな？……かな？」<br />
 ことり「うん！　希ちゃんの『やん！』とか『やねっ！』が語尾かは微妙だけど……ちょうど希ちゃんとにこちゃんはサブグループやってたよね」</p>
 <p><a href="http://books.rakuten.co.jp/rb/11612277/">乙女式れんあい塾</a><br />
 <a href="http://books.rakuten.co.jp/rb/11612277/"><img src="http://shop.r10s.jp/book/cabinet/9433/4540774409433.jpg" alt="乙女式れんあい塾" /></a></p>
 <p>ことり「はいっ」</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">data</span> <span class="dt">NozoNico</span> <span class="ot">=</span> <span class="dt">Nozomi</span> <span class="op">|</span> <span class="dt">Nico</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">data</span> <span class="dt">NozoNico</span> <span class="ot">=</span> <span class="dt">Nozomi</span> <span class="op">|</span> <span class="dt">Nico</span></span></code></pre></div>
 <p>ことり「そうしたら、<code>NozoNico</code>を<code>GobiPersons</code>インスタンスで定義するよ」</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">instance</span> <span class="dt">GobiPersons</span> <span class="dt">NozoNico</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb6-2" title="2">  say <span class="dt">Nozomi</span> <span class="ot">=</span>  <span class="st">&quot;やねっ！&quot;</span></a>
-<a class="sourceLine" id="cb6-3" title="3">  say <span class="dt">Nico</span> <span class="ot">=</span>  <span class="st">&quot;ニコッ！&quot;</span></a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb7-2" title="2">main <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb7-3" title="3">  <span class="fu">putStrLn</span> (say <span class="dt">Nozomi</span>)</a>
-<a class="sourceLine" id="cb7-4" title="4">  <span class="fu">putStrLn</span> (say <span class="dt">Nico</span>)</a>
-<a class="sourceLine" id="cb7-5" title="5"></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">-- vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co">-- やねっ！</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="co">-- ニコッ！</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">instance</span> <span class="dt">GobiPersons</span> <span class="dt">NozoNico</span> <span class="kw">where</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  say <span class="dt">Nozomi</span> <span class="ot">=</span>  <span class="st">&quot;やねっ！&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  say <span class="dt">Nico</span> <span class="ot">=</span>  <span class="st">&quot;ニコッ！&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb7-2"><a href="#cb7-2"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">putStrLn</span> (say <span class="dt">Nozomi</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">putStrLn</span> (say <span class="dt">Nico</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">-- vvv 出力 vvv</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">-- やねっ！</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">-- ニコッ！</span></span></code></pre></div>
 <p>ことり「たまに『型クラスはインターフェースに似ている』とか言われるんだ。　……賛否両論が多数あるけどね」<br />
 穂乃果「あー、でも確かに少し似てるかも……？　こんな感じかな？」</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">interface</span> GobiPersons {</a>
-<a class="sourceLine" id="cb8-2" title="2">	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">say</span>();</a>
-<a class="sourceLine" id="cb8-3" title="3">}</a>
-<a class="sourceLine" id="cb8-4" title="4"></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="kw">enum</span> NozoNico <span class="kw">implements</span> GobiPersons {</a>
-<a class="sourceLine" id="cb8-6" title="6">	Nozomi, Nico;</a>
-<a class="sourceLine" id="cb8-7" title="7"></a>
-<a class="sourceLine" id="cb8-8" title="8">	<span class="at">@Override</span></a>
-<a class="sourceLine" id="cb8-9" title="9">	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">say</span>() {</a>
-<a class="sourceLine" id="cb8-10" title="10">		<span class="kw">if</span> (<span class="kw">this</span> == Nozomi) {</a>
-<a class="sourceLine" id="cb8-11" title="11">			<span class="kw">return</span> <span class="st">&quot;やねっ！&quot;</span>;</a>
-<a class="sourceLine" id="cb8-12" title="12">		} <span class="kw">else</span> <span class="kw">if</span> (<span class="kw">this</span> == Nico) {</a>
-<a class="sourceLine" id="cb8-13" title="13">			<span class="kw">return</span> <span class="st">&quot;ニコッ！&quot;</span>;</a>
-<a class="sourceLine" id="cb8-14" title="14">		} <span class="kw">else</span> {</a>
-<a class="sourceLine" id="cb8-15" title="15">			<span class="kw">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span>();</a>
-<a class="sourceLine" id="cb8-16" title="16">		}</a>
-<a class="sourceLine" id="cb8-17" title="17">	}</a>
-<a class="sourceLine" id="cb8-18" title="18">}</a>
-<a class="sourceLine" id="cb8-19" title="19"></a>
-<a class="sourceLine" id="cb8-20" title="20"><span class="kw">public</span> <span class="kw">class</span> Program {</a>
-<a class="sourceLine" id="cb8-21" title="21">	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</a>
-<a class="sourceLine" id="cb8-22" title="22">		NozoNico nozomi = NozoNico.<span class="fu">Nozomi</span>;</a>
-<a class="sourceLine" id="cb8-23" title="23">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(nozomi.<span class="fu">say</span>());</a>
-<a class="sourceLine" id="cb8-24" title="24"></a>
-<a class="sourceLine" id="cb8-25" title="25">		NozoNico nico = NozoNico.<span class="fu">Nico</span>;</a>
-<a class="sourceLine" id="cb8-26" title="26">		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(nico.<span class="fu">say</span>());</a>
-<a class="sourceLine" id="cb8-27" title="27">	}</a>
-<a class="sourceLine" id="cb8-28" title="28">}</a>
-<a class="sourceLine" id="cb8-29" title="29"></a>
-<a class="sourceLine" id="cb8-30" title="30"><span class="co">// vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb8-31" title="31"><span class="co">// やねっ！</span></a>
-<a class="sourceLine" id="cb8-32" title="32"><span class="co">// ニコッ！</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">interface</span> GobiPersons {</span>
+<span id="cb8-2"><a href="#cb8-2"></a>	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">say</span>();</span>
+<span id="cb8-3"><a href="#cb8-3"></a>}</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">enum</span> NozoNico <span class="kw">implements</span> GobiPersons {</span>
+<span id="cb8-6"><a href="#cb8-6"></a>	Nozomi, Nico;</span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>	<span class="at">@Override</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>	<span class="kw">public</span> <span class="bu">String</span> <span class="fu">say</span>() {</span>
+<span id="cb8-10"><a href="#cb8-10"></a>		<span class="kw">if</span> (<span class="kw">this</span> == Nozomi) {</span>
+<span id="cb8-11"><a href="#cb8-11"></a>			<span class="kw">return</span> <span class="st">&quot;やねっ！&quot;</span>;</span>
+<span id="cb8-12"><a href="#cb8-12"></a>		} <span class="kw">else</span> <span class="kw">if</span> (<span class="kw">this</span> == Nico) {</span>
+<span id="cb8-13"><a href="#cb8-13"></a>			<span class="kw">return</span> <span class="st">&quot;ニコッ！&quot;</span>;</span>
+<span id="cb8-14"><a href="#cb8-14"></a>		} <span class="kw">else</span> {</span>
+<span id="cb8-15"><a href="#cb8-15"></a>			<span class="kw">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span>();</span>
+<span id="cb8-16"><a href="#cb8-16"></a>		}</span>
+<span id="cb8-17"><a href="#cb8-17"></a>	}</span>
+<span id="cb8-18"><a href="#cb8-18"></a>}</span>
+<span id="cb8-19"><a href="#cb8-19"></a></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="kw">public</span> <span class="kw">class</span> Program {</span>
+<span id="cb8-21"><a href="#cb8-21"></a>	<span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</span>
+<span id="cb8-22"><a href="#cb8-22"></a>		NozoNico nozomi = NozoNico.<span class="fu">Nozomi</span>;</span>
+<span id="cb8-23"><a href="#cb8-23"></a>		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(nozomi.<span class="fu">say</span>());</span>
+<span id="cb8-24"><a href="#cb8-24"></a></span>
+<span id="cb8-25"><a href="#cb8-25"></a>		NozoNico nico = NozoNico.<span class="fu">Nico</span>;</span>
+<span id="cb8-26"><a href="#cb8-26"></a>		<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(nico.<span class="fu">say</span>());</span>
+<span id="cb8-27"><a href="#cb8-27"></a>	}</span>
+<span id="cb8-28"><a href="#cb8-28"></a>}</span>
+<span id="cb8-29"><a href="#cb8-29"></a></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="co">// vvv 出力 vvv</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="co">// やねっ！</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="co">// ニコッ！</span></span></code></pre></div>
 <p>ことり「Congratulation！」<br />
 穂乃果「えへへ〜」</p>
 <h1 id="型クラスとインターフェースって何が違うの">型クラスとインターフェースって、何が違うの？</h1>
@@ -194,33 +199,33 @@
 穂乃果「？？？　どういうこと？」</p>
 <p>ことり「例を見てみよう。　穂乃果ちゃん、ちょっと<code>NozoNico</code>データ型をもう1回書いてみてもらってもいい？」<br />
 穂乃果「うん！　やってみるね！」</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">data</span> <span class="dt">NozoNico</span> <span class="ot">=</span> <span class="dt">Nozomi</span> <span class="op">|</span> <span class="dt">Nico</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">data</span> <span class="dt">NozoNico</span> <span class="ot">=</span> <span class="dt">Nozomi</span> <span class="op">|</span> <span class="dt">Nico</span></span></code></pre></div>
 <p>ことり「じゃあ次は<code>GobiPersons</code>インスタンスももう1回書いてくれるかな」<br />
 穂乃果「はーい」</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">instance</span> <span class="dt">GobiPersons</span> <span class="dt">NozoNico</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb10-2" title="2">  say <span class="dt">Nozomi</span> <span class="ot">=</span>  <span class="st">&quot;やねっ！&quot;</span></a>
-<a class="sourceLine" id="cb10-3" title="3">  say <span class="dt">Nico</span> <span class="ot">=</span>  <span class="st">&quot;ニコッ！&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">instance</span> <span class="dt">GobiPersons</span> <span class="dt">NozoNico</span> <span class="kw">where</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  say <span class="dt">Nozomi</span> <span class="ot">=</span>  <span class="st">&quot;やねっ！&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  say <span class="dt">Nico</span> <span class="ot">=</span>  <span class="st">&quot;ニコッ！&quot;</span></span></code></pre></div>
 <p>ことり「ほら、具体データ型の定義とインスタンス定義。　2つの工程が明確に分割されてるんだ」<br />
 ことり「対してJavaのインターフェース実装は、必ずクラス定義と同時に行わなくちゃいけない。　って感じかな」</p>
 <p>穂乃果「あ、確かに。　でもそれって、便利なの？」<br />
 ことり「うん、とても便利だよ！　例えば……ある性質を持つ型クラスをここに定義しました」</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" title="1"><span class="co">-- aとaを足し合わせることができる性質</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw">class</span> <span class="dt">Magma</span> a <span class="kw">where</span></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="ot">  magAppend ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">-- aとaを足し合わせることができる性質</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">class</span> <span class="dt">Magma</span> a <span class="kw">where</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="ot">  magAppend ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</span></code></pre></div>
 <p>ことり「Intって足し算ができるよね？」<br />
 穂乃果「うん。　足し算できる」<br />
 ことり「でもIntは標準で定義されてるから、後から定義を変更すること……Intに<code>implements Magma</code>みたいなのを付け足すことができないんだ」<br />
 穂乃果「……あっ！」</p>
 <p>ことり「そう、ここで『インスタンス定義が独立していること』が効いてくるよ」</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">instance</span> <span class="dt">Magma</span> <span class="dt">Int</span> <span class="kw">where</span>  <span class="co">-- 任意の時点でIntのインスタンス定義ができる</span></a>
-<a class="sourceLine" id="cb12-2" title="2">  magAppend x y <span class="ot">=</span> x <span class="op">+</span> y</a>
-<a class="sourceLine" id="cb12-3" title="3"></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb12-5" title="5">main <span class="ot">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb12-6" title="6">  <span class="fu">print</span> (magAppend <span class="dv">10</span> <span class="dv">20</span><span class="ot"> ::</span> <span class="dt">Int</span>)</a>
-<a class="sourceLine" id="cb12-7" title="7"></a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="co">-- vvv 出力 vvv</span></a>
-<a class="sourceLine" id="cb12-9" title="9"><span class="co">-- 30</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">instance</span> <span class="dt">Magma</span> <span class="dt">Int</span> <span class="kw">where</span>  <span class="co">-- 任意の時点でIntのインスタンス定義ができる</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  magAppend x y <span class="ot">=</span> x <span class="op">+</span> y</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb12-5"><a href="#cb12-5"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">print</span> (magAppend <span class="dv">10</span> <span class="dv">20</span><span class="ot"> ::</span> <span class="dt">Int</span>)</span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">-- vvv 出力 vvv</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">-- 30</span></span></code></pre></div>
 <p>穂乃果「ほんとうだ！　Haskellすごーい！　Haskellすごーい！！」<br />
 ことり「でしょー！　えへへ」照れり</p>
 <h1 id="マグマってだれですか">マグマってだれですか？</h1>
@@ -271,16 +276,15 @@
 <script src="../js/facebook-sdk-2.8.js"></script>
 
 
-        <div class="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
-            and more (<a href="../licenses.html">about licenses</a>).
-        </div>
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
 
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
-        <script type="text/javascript" src="../js/highlight.pack.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
 </html>

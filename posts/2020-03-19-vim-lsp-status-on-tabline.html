@@ -1,0 +1,216 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - Vimのtablineに、vim-lspのrunningなserversを表示する</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Vimのtablineに、vim-lspのrunningなserversを表示する" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Vimのtablineに、vim-lspのrunningなserversを表示する" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Vimのtablineに、vim-lspのrunningなserversを表示する</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2020-03-19-vim-lsp-status-on-tabline.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Vimのtablineに、vim-lspのrunningなserversを表示する" />
+    <meta property="og:description" content="Vimのtablineに、vim-lspのrunningなserversを表示する" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Vimのtablineに、vim-lspのrunningなserversを表示する" />
+    <meta name="twitter:description" content="Vimのtablineに、vim-lspのrunningなserversを表示する" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2020/03/19</div>
+    
+
+    <div class="post-title">Vimのtablineに、vim-lspのrunningなserversを表示する</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Vim.html">Vim</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <figure>
+<img src="../images/posts/2020-03-19-vim-lsp-status-on-tabline/example.png" alt /><figcaption>example</figcaption>
+</figure>
+<ul>
+<li><a href="https://github.com/aiya000/dotfiles/commit/335e5227b04295ad97d011b0cb985a94e6afcac1">僕の.vimrcでの対応コミット</a></li>
+</ul>
+<hr />
+<p>以下を設定すると、できる。</p>
+<p>.vimrc</p>
+<pre class="vim"><code>set tabline=%!vimrc#tabline#make()</code></pre>
+<p>autoload/vimrc/tabline.vim</p>
+<pre class="vim"><code>&quot; 大事なところ！
+function vimrc#tabline#make() abort
+  let running_lsp_servers = execute(':LspStatus')
+    \ -&gt;split('\n')
+    \ -&gt;filter({ _, x -&gt;
+      \ x !~# 'not running$'
+    \ })
+    \ -&gt;map({ _, x -&gt; x-&gt;split(':')[0] })
+    \ -&gt;join(', ')
+
+  return '%1*[%{tabpagenr(&quot;$&quot;)}]%* '
+    \. s:tabs() . ' =&gt; '
+    \. printf('%6*[${%s}]%*', running_lsp_servers)
+endfunction
+
+&quot; 以下、その他設定
+
+&quot; NOTE: http://d.hatena.ne.jp/thinca/20111204/1322932585
+function s:tabs()
+  let titles = map(range(1, tabpagenr('$')), { _, tabnr -&gt;
+    \ vimrc#tabline#tabpage_label(tabnr)
+  \ })
+  return join(titles) . '%#TabLineFill#%T'
+endfunction
+
+function vimrc#tabline#tabpage_label(tabnr)
+  let title = gettabvar(a:tabnr, 'title')
+  if title !=# ''
+    return title
+  endif
+  let focused_winnr = tabpagewinnr(a:tabnr)
+  let curbufnr = tabpagebuflist(a:tabnr)[focused_winnr - 1]
+  let file_name = fnamemodify(bufname(curbufnr), ':t')
+  let file_name =
+    \ (file_name == '')
+      \ ? '[NoName]' :
+    \ (len(file_name) &gt; 20)
+      \ ? (file_name[0:7] . '...' . file_name[-10:-1]) :
+    \ file_name
+
+  &quot; Please see `:h TabLineSel` and `:h TabLine`
+  let window_num = '[' . len(tabpagebuflist(a:tabnr)) . ']'
+  let label_of_a_buf = s:is_stayed_tab(a:tabnr)
+    \ ? ('%#TabLineSel#[* ' . s:get_mod_mark_for_window(focused_winnr) . window_num . file_name . ' *]')
+    \ : ('%#TabLine#[' . s:get_mod_mark_for_tab(a:tabnr) . window_num . file_name . ']')
+
+  return '%' . a:tabnr . 'T' . label_of_a_buf . '%T%#TabLineFill#'
+endfunction
+
+&quot; Do you staying the specified tab?
+function s:is_stayed_tab(tabnr) abort
+  return a:tabnr is tabpagenr()
+endfunction
+
+&quot; Return '+' if the buffer of the specified window is modified
+function s:get_mod_mark_for_window(winnr) abort
+  return getbufvar(winbufnr(a:winnr), '&amp;modified') ? '+' : ''
+endfunction
+
+&quot; Return '+' if one or more a modified non terminal buffer is existent in the taken tab
+function s:get_mod_mark_for_tab(tabnr) abort
+  let term_buffers = term_list()
+  let modified_buffer = s:List.find(tabpagebuflist(a:tabnr), v:null, { bufnr_at_tab -&gt;
+    \ !s:List.has(term_buffers, bufnr_at_tab) &amp;&amp;
+    \ getbufvar(bufnr_at_tab, '&amp;modified')
+  \ })
+  return (modified_buffer is v:null) ? '' : '+'
+endfunction</code></pre>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2020-03-19-vim-lsp-status-on-tabline.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Vimのtablineに、vim-lspのrunningなserversを表示する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2020-03-19-vim-lsp-status-on-tabline.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2020-03-19-vim-lsp-status-on-tabline.md">Vimのtablineに、vim-lspのrunningなserversを表示する - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
+
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

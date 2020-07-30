@@ -1,55 +1,60 @@
 <!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
 
 <html>
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-        <title>galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta property="og:url" content="https://aiya000.github.io" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」" />
-        <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta property="og:site_name" content="galaxy-sixth-sensey" />
-        <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@public_ai000ya" />
-        <meta name="twitter:creator" content="@public_ai000ya">
-        <meta name="twitter:title" content="galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」" />
-        <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
-        <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand-xl navbar-light bg-light navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
-                </div>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="nav-link" href="../">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../about.html">About</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../products.html">Products</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../archive.html">Archive</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <link rel="stylesheet" type="text/css" href="../css/post.css" />
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
     <title>galaxy-sixth-sensey - にこ、希と一緒に学ぶHaskell（番外）「あまり知られていないGHC拡張の紹介」</title>
@@ -150,28 +155,28 @@
 <p>希「<code>MultiParamTypeClasses</code>については、にこっち多分知っとると思うんやけど」<br />
 にこ「ええ」<br />
 希「これって、0個の型に対するインスタンスも定義できるらしいやね」</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">{-# LANGUAGE MultiParamTypeClasses #-}</span></a>
-<a class="sourceLine" id="cb1-2" title="2"></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">class</span> <span class="dt">Nullary</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">instance</span> <span class="dt">Nullary</span></a>
-<a class="sourceLine" id="cb1-5" title="5"></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb1-7" title="7">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="ot">{-# LANGUAGE MultiParamTypeClasses #-}</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">class</span> <span class="dt">Nullary</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">instance</span> <span class="dt">Nullary</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb1-7"><a href="#cb1-7"></a>main <span class="ot">=</span> <span class="fu">return</span> ()</span></code></pre></div>
 <p>にこ「！？ 型クラスの受け取る型を、1個以上…… じゃなくて0個以上として一般化する拡張だったのね……」</p>
 <p>にこ「これ、何にどうやって使うのかしら」<br />
 希「うーん、わからへん……」</p>
 <h1 id="constrainedclassmethods">ConstrainedClassMethods</h1>
 <p>にこ「なにこれ、しらないわ」<br />
 希「型クラスの関数に、型制約を設けることができるようになるみたいやね」</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">{-# LANGUAGE ConstrainedClassMethods #-}</span></a>
-<a class="sourceLine" id="cb2-2" title="2"></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw">class</span> <span class="dt">UnitedConvertible</span> a <span class="kw">where</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="ot">  toItself ::</span> a <span class="ot">-&gt;</span> a</a>
-<a class="sourceLine" id="cb2-5" title="5">  <span class="co">-- ConstrainedClassMethods allows to restrict constraints in the type class function</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="ot">  toString ::</span> <span class="dt">Show</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb2-7" title="7"></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb2-9" title="9">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="ot">{-# LANGUAGE ConstrainedClassMethods #-}</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">class</span> <span class="dt">UnitedConvertible</span> a <span class="kw">where</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="ot">  toItself ::</span> a <span class="ot">-&gt;</span> a</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">-- ConstrainedClassMethods allows to restrict constraints in the type class function</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="ot">  toString ::</span> <span class="dt">Show</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb2-9"><a href="#cb2-9"></a>main <span class="ot">=</span> <span class="fu">return</span> ()</span></code></pre></div>
 <p>希「Haskell98は型クラス関数に型制約を設けることを禁止してるらしくって」<br />
 希「それの回避策らしいみたい。 Haskell98がそれを禁止してるの、なんでやろな？」<br />
 にこ「Haskell reportは実装に言及しないらしいし、実装都合じゃあなさそうね。 なんでかしら」</p>
@@ -179,32 +184,32 @@
 <h1 id="rebindablesyntax">RebindableSyntax</h1>
 <p>にこ「名前からして面白そうね」<br />
 希「やね！ふむふむこれは…… Haskel reportでは以下の変換規則が規定されているらしいんやけど」</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="dv">1</span></a>
-<a class="sourceLine" id="cb3-2" title="2">↓</a>
-<a class="sourceLine" id="cb3-3" title="3">Prelude.fromInteger (<span class="dv">1</span><span class="ot"> ::</span> <span class="dt">Integer</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>↓</span>
+<span id="cb3-3"><a href="#cb3-3"></a>Prelude.fromInteger (<span class="dv">1</span><span class="ot"> ::</span> <span class="dt">Integer</span>)</span></code></pre></div>
 <p>希「それを以下の変換規則に付け替えるんやって。」</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="dv">1</span></a>
-<a class="sourceLine" id="cb4-2" title="2">↓</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="fu">fromInteger</span> (<span class="dv">1</span><span class="ot"> ::</span> <span class="dt">Integer</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>↓</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">fromInteger</span> (<span class="dv">1</span><span class="ot"> ::</span> <span class="dt">Integer</span>)</span></code></pre></div>
 <p>にこ「ふむふむ、Preludeの定義を参照はずのものを、ローカルの定義への参照に変えられるのね」</p>
 <p>にこ「うわっ、<code>putStrLn 1</code>式を合法にできた……」</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">{-# LANGUAGE RebindableSyntax #-}</span></a>
-<a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co">-- RebindableSyntax turns on NoImplicitPrelude</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="kw">import</span> <span class="dt">Prelude</span> <span class="kw">hiding</span> (fromInteger)</a>
-<a class="sourceLine" id="cb5-5" title="5"></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co">-- In the Haskell report specification,</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co">-- a literal `1` is expanded to `Prelude.fromInteger (1 :: Integer)`.</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">--</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co">-- RebindableSyntax changes it to that is expanded to `fromInteger (1 :: Integer)`,</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co">-- also it means `1`'s convertion is able to rebind.</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="fu">fromInteger</span><span class="ot"> ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="fu">fromInteger</span> _ <span class="ot">=</span> <span class="st">&quot;;P&quot;</span></a>
-<a class="sourceLine" id="cb5-13" title="13"></a>
-<a class="sourceLine" id="cb5-14" title="14"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb5-15" title="15">main <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="co">-- {output}</span></a>
-<a class="sourceLine" id="cb5-17" title="17"><span class="co">-- ;P</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1"></a><span class="ot">{-# LANGUAGE RebindableSyntax #-}</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">-- RebindableSyntax turns on NoImplicitPrelude</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">import</span> <span class="dt">Prelude</span> <span class="kw">hiding</span> (fromInteger)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">-- In the Haskell report specification,</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">-- a literal `1` is expanded to `Prelude.fromInteger (1 :: Integer)`.</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">--</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">-- RebindableSyntax changes it to that is expanded to `fromInteger (1 :: Integer)`,</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">-- also it means `1`'s convertion is able to rebind.</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="fu">fromInteger</span><span class="ot"> ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">String</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="fu">fromInteger</span> _ <span class="ot">=</span> <span class="st">&quot;;P&quot;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb5-15"><a href="#cb5-15"></a>main <span class="ot">=</span> <span class="fu">putStrLn</span> <span class="dv">1</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">-- {output}</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">-- ;P</span></span></code></pre></div>
 <p>希「<code>putStrLn 1</code>、字面がすごいわ……。 ああこれ、<code>NoImplicitPrelude</code>も有効になるんね」</p>
 <p>希「他にはこんな変換規則を付け替えられるみたいやね」</p>
 <table class="table table-bordered">
@@ -244,13 +249,13 @@
 </tbody>
 </table>
 <p>希「あとは<code>do</code>, <code>mdo</code>, リスト内包記と<code>Arrows</code>についても変換規則があるみたいやけど、明記はされてないんね。 <code>do</code>は多分こんな感じかなあ。 本当は多分パターンマッチまで考慮してそうやね」</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">do</span></a>
-<a class="sourceLine" id="cb6-2" title="2">  x' <span class="ot">&lt;-</span> x</a>
-<a class="sourceLine" id="cb6-3" title="3">  y</a>
-<a class="sourceLine" id="cb6-4" title="4">  z</a>
-<a class="sourceLine" id="cb6-5" title="5">↓</a>
-<a class="sourceLine" id="cb6-6" title="6">x <span class="op">Prelude.&gt;&gt;=</span> \x' <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb6-7" title="7">y <span class="op">Prelude.&gt;&gt;</span> z</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">do</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  x' <span class="ot">&lt;-</span> x</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  y</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  z</span>
+<span id="cb6-5"><a href="#cb6-5"></a>↓</span>
+<span id="cb6-6"><a href="#cb6-6"></a>x <span class="op">Prelude.&gt;&gt;=</span> \x' <span class="ot">-&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>y <span class="op">Prelude.&gt;&gt;</span> z</span></code></pre></div>
 <ul>
 <li><a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#rebindable-syntax-and-the-implicit-prelude-import">10.3.15. Rebindable syntax and the implicit Prelude import - 10.1. Language options - Glasgow Haskell Compiler 8.2.2 User’s Guide</a></li>
 </ul>
@@ -262,18 +267,18 @@
 <h1 id="instancesigs">InstanceSigs</h1>
 <p>にこ「これは、インスタンスを定義するときに、型クラスの関数の具体的シグネチャをインスタンス側で書けるやつね」<br />
 希「さすがにこっちやね、知っとったか」</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="ot">{-# LANGUAGE InstanceSigs #-}</span></a>
-<a class="sourceLine" id="cb7-2" title="2"></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw">class</span> <span class="dt">Identical</span> a <span class="kw">where</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="ot">  id' ::</span> a <span class="ot">-&gt;</span> a</a>
-<a class="sourceLine" id="cb7-5" title="5"></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="kw">instance</span> <span class="dt">Identical</span> <span class="dt">Int</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb7-7" title="7">  <span class="co">-- InstanceSigs allows this type declaration</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="ot">  id' ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb7-9" title="9">  id' <span class="ot">=</span> <span class="fu">id</span></a>
-<a class="sourceLine" id="cb7-10" title="10"></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb7-12" title="12">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">{-# LANGUAGE InstanceSigs #-}</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">class</span> <span class="dt">Identical</span> a <span class="kw">where</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ot">  id' ::</span> a <span class="ot">-&gt;</span> a</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">instance</span> <span class="dt">Identical</span> <span class="dt">Int</span> <span class="kw">where</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="co">-- InstanceSigs allows this type declaration</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="ot">  id' ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  id' <span class="ot">=</span> <span class="fu">id</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb7-12"><a href="#cb7-12"></a>main <span class="ot">=</span> <span class="fu">return</span> ()</span></code></pre></div>
 <p>にこ「ええ。 インスタンス側の型クラス関数が、そのときに使いたい型になっているか不安なときに使ったりするわ」<br />
 にこ「でも、一度コンパイルが通ったら消しちゃうことも少なくないわ…… コンパイル速度が落ちそうな気がしちゃって」</p>
 <p>希「どうなんやろな？」</p>
@@ -284,23 +289,23 @@
 <ul>
 <li><a href="https://ghc.haskell.org/trac/ghc/wiki/ImpredicativePolymorphism">ImpredicativePolymorphism - GHC</a></li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1"><span class="ot">{-# LANGUAGE ImpredicativeTypes #-}</span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="ot">{-# LANGUAGE RankNTypes #-}</span></a>
-<a class="sourceLine" id="cb8-3" title="3"></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="ot">f ::</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b</a>
-<a class="sourceLine" id="cb8-5" title="5">f <span class="ot">=</span> <span class="fu">const</span> <span class="fu">id</span></a>
-<a class="sourceLine" id="cb8-6" title="6"></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="ot">g ::</span> (<span class="kw">forall</span> a<span class="op">.</span> a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb8-8" title="8">g <span class="ot">=</span> <span class="fu">undefined</span> <span class="co">--const 10</span></a>
-<a class="sourceLine" id="cb8-9" title="9"></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="ot">foo ::</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb8-11" title="11">foo x <span class="ot">=</span> g <span class="op">$</span> f x</a>
-<a class="sourceLine" id="cb8-12" title="12"></a>
-<a class="sourceLine" id="cb8-13" title="13"><span class="co">--foo' :: Bool -&gt; Int</span></a>
-<a class="sourceLine" id="cb8-14" title="14"><span class="co">--foo' = g . f</span></a>
-<a class="sourceLine" id="cb8-15" title="15"></a>
-<a class="sourceLine" id="cb8-16" title="16"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb8-17" title="17">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1"></a><span class="ot">{-# LANGUAGE ImpredicativeTypes #-}</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ot">{-# LANGUAGE RankNTypes #-}</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="ot">f ::</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b</span>
+<span id="cb8-5"><a href="#cb8-5"></a>f <span class="ot">=</span> <span class="fu">const</span> <span class="fu">id</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="ot">g ::</span> (<span class="kw">forall</span> a<span class="op">.</span> a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> <span class="dt">Int</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>g <span class="ot">=</span> <span class="fu">undefined</span> <span class="co">--const 10</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="ot">foo ::</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>foo x <span class="ot">=</span> g <span class="op">$</span> f x</span>
+<span id="cb8-12"><a href="#cb8-12"></a></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">--foo' :: Bool -&gt; Int</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">--foo' = g . f</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb8-17"><a href="#cb8-17"></a>main <span class="ot">=</span> <span class="fu">return</span> ()</span></code></pre></div>
 <p>にこ「なるほど、うーん。 多分、<code>f</code>の型変数<code>b</code>と、<code>g</code>の<strong>ランク2多相</strong>の型変数<code>a</code>が、同一のものとして具体化できるか というのが問題っぽいわね」</p>
 <p>希「<code>ImpredicativeTypes</code>を使うと、こんな感じの型変数<code>x</code>が決定できる？」</p>
 <pre><code>      f
@@ -323,30 +328,30 @@ Bool --&gt; (x -&gt; x)
 <h1 id="explicitnamespaces">ExplicitNamespaces</h1>
 <p>にこ「ああ、型演算子を作った時に、 importとmoduleでのエクスポートで<code>type</code>って書けるのは この子のおかげだったのね」</p>
 <p>Helper.hs</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" title="1"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="ot">{-# LANGUAGE TypeOperators #-}</span></a>
-<a class="sourceLine" id="cb10-3" title="3"></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="kw">module</span> <span class="dt">Helper</span></a>
-<a class="sourceLine" id="cb10-5" title="5">  ( <span class="kw">type</span> (<span class="op">-&lt;|</span>)</a>
-<a class="sourceLine" id="cb10-6" title="6">  , (<span class="op">-&lt;|</span>)</a>
-<a class="sourceLine" id="cb10-7" title="7">  ) <span class="kw">where</span></a>
-<a class="sourceLine" id="cb10-8" title="8"></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="kw">type</span> <span class="kw">family</span> (<span class="op">-&lt;|</span>) a b <span class="kw">where</span></a>
-<a class="sourceLine" id="cb10-10" title="10">  x <span class="op">-&lt;|</span> _ <span class="ot">=</span> x</a>
-<a class="sourceLine" id="cb10-11" title="11"></a>
-<a class="sourceLine" id="cb10-12" title="12"><span class="ot">(-&lt;|) ::</span> a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> a</a>
-<a class="sourceLine" id="cb10-13" title="13">(<span class="op">-&lt;|</span>) <span class="ot">=</span> <span class="fu">const</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1"></a><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ot">{-# LANGUAGE TypeOperators #-}</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">module</span> <span class="dt">Helper</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  ( <span class="kw">type</span> (<span class="op">-&lt;|</span>)</span>
+<span id="cb10-6"><a href="#cb10-6"></a>  , (<span class="op">-&lt;|</span>)</span>
+<span id="cb10-7"><a href="#cb10-7"></a>  ) <span class="kw">where</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="kw">type</span> <span class="kw">family</span> (<span class="op">-&lt;|</span>) a b <span class="kw">where</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>  x <span class="op">-&lt;|</span> _ <span class="ot">=</span> x</span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="ot">(-&lt;|) ::</span> a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> a</span>
+<span id="cb10-13"><a href="#cb10-13"></a>(<span class="op">-&lt;|</span>) <span class="ot">=</span> <span class="fu">const</span></span></code></pre></div>
 <p>Main.hs</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" title="1"><span class="ot">{-# LANGUAGE ExplicitNamespaces #-}</span></a>
-<a class="sourceLine" id="cb11-2" title="2"></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="co">-- `ExplicitNamespaces` allows 'type' keyword in import/export</span></a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="kw">import</span> <span class="dt">Helper</span> (type (-&lt;|), (-&lt;|))</a>
-<a class="sourceLine" id="cb11-5" title="5"></a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="ot">x ::</span> (<span class="op">-&lt;|</span>) <span class="dt">Int</span> <span class="dt">Char</span></a>
-<a class="sourceLine" id="cb11-7" title="7">x <span class="ot">=</span> <span class="dv">10</span> <span class="op">-&lt;|</span> <span class="ch">'a'</span></a>
-<a class="sourceLine" id="cb11-8" title="8"></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb11-10" title="10">main <span class="ot">=</span> <span class="fu">return</span> ()</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1"></a><span class="ot">{-# LANGUAGE ExplicitNamespaces #-}</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">-- `ExplicitNamespaces` allows 'type' keyword in import/export</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">import</span> <span class="dt">Helper</span> (type (-&lt;|), (-&lt;|))</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="ot">x ::</span> (<span class="op">-&lt;|</span>) <span class="dt">Int</span> <span class="dt">Char</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>x <span class="ot">=</span> <span class="dv">10</span> <span class="op">-&lt;|</span> <span class="ch">'a'</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb11-10"><a href="#cb11-10"></a>main <span class="ot">=</span> <span class="fu">return</span> ()</span></code></pre></div>
 <p>希「この<code>type</code>ってなんなん？」</p>
 <p>にこ「このHelper.hsで、<code>(-&lt;|)</code>は型レベルと値レベルのどちらでも定義されてるでしょ？」<br />
 にこ「それだとエクスポート時に<code>module Helper ((-&lt;|)) where</code>って書いたときと、 import時に<code>import Helper ((-&lt;|))</code>って書いたとき」<br />
@@ -406,16 +411,15 @@ Bool --&gt; (x -&gt; x)
 <script src="../js/facebook-sdk-2.8.js"></script>
 
 
-        <div class="footer">
-            (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
-            and more (<a href="../licenses.html">about licenses</a>).
-        </div>
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
 
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
-        <script type="text/javascript" src="../js/highlight.pack.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
 </html>
