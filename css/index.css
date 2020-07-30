@@ -50,6 +50,13 @@
     padding: 8px;
 }
 
+.index-another-links {
+    border-radius: 8px;
+    border-style: solid;
+    margin-top: 16px;
+    padding: 16px;
+}
+
 .index-affiliates {
     border-radius: 8px;
     border-style: solid;
