@@ -88,3 +88,8 @@ ul.bookmarkers li {
 .someone-says {
     font-size: 140%;
 }
+
+div.wrap-fluid img {
+    width: 60vw;
+    height: auto;
+}
