@@ -1,0 +1,240 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法" />
+    <meta property="og:description" content="WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法" />
+    <meta name="twitter:description" content="WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2020/08/02</div>
+    
+
+    <div class="post-title">WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/VRChat.html">VRChat</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Unity.html">Unity</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <h2 id="初めに">初めに</h2>
+<p>この記事では、下記のシークエンスを解説します。</p>
+<ol type="1">
+<li>あるアバターから、頭部を切り出す</li>
+<li>ある素体（アバターのうち胴体）と、切り出した頭部を結合する</li>
+</ol>
+<p>また手順は全てUnity上で行い、<strong>Blenderは使用いたしません</strong>！ （重要。筆者はまだBlenderと和解できておりません 🤔 ）</p>
+<ul>
+<li>用意すべきもの
+<ul>
+<li>アバター</li>
+<li>素体</li>
+</ul></li>
+</ul>
+<p>今回は一例として、下記の構成で説明します。</p>
+<ul>
+<li>「用意すべきもの」の構成
+<ul>
+<li>アバター =&gt; <a href="https://booth.pm/ja/items/2147191">NecoMaid-RICH</a></li>
+<li>素体 =&gt; <a href="https://booth.pm/ja/items/2259630">QuQu日帰り温泉プラン</a></li>
+</ul></li>
+</ul>
+<h2 id="special-thanks">Special Thanks</h2>
+<p>まず初めに。</p>
+<p>この記事は、先日<a href="https://twitter.com/EkuriVr">えくり様</a>に教えていただいたことを、そのまま文字化したものです。 記事化の許可を快く許していただきました。 ありがとうございます！</p>
+<p>えくり様はアバター改変の有償サポートをしてくださっています！</p>
+<p>「改変したアバターを納入」する形ではなく「アバター改変のノウハウ教えてくださる」のが特徴です。 ここで得た知識は、次から自分で生かせるので、大変お得になっています。</p>
+<blockquote class="twitter-tweet">
+<p lang="ja" dir="ltr">
+☆えくり流改変サポート☆<br>あなたのカワイイ･カッコイイを形にするお手伝いをいたします！<br>アバターを弄りたいけどやり方がわからない･･･<br>Unityとか複雑でよくわからない･･･<br>自分で調べる時間がもったいない！<br>そんな方にオススメです！気軽にご相談ください！<a href="https://twitter.com/hashtag/VRC?src=hash&amp;ref_src=twsrc%5Etfw">#VRC</a> <a href="https://twitter.com/hashtag/VRChat?src=hash&amp;ref_src=twsrc%5Etfw">#VRChat</a> <a href="https://twitter.com/hashtag/Unity?src=hash&amp;ref_src=twsrc%5Etfw">#Unity</a> <a href="https://twitter.com/hashtag/VRoid?src=hash&amp;ref_src=twsrc%5Etfw">#VRoid</a> <a href="https://t.co/zzpl8cjtC7">pic.twitter.com/zzpl8cjtC7</a>
+</p>
+— えくり＠改変サポート受付窓口 (<span class="citation" data-cites="EkuriVr">@EkuriVr</span>) <a href="https://twitter.com/EkuriVr/status/1218919490781450241?ref_src=twsrc%5Etfw">January 19, 2020</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>気になった方はぜひ。おすすめです！</p>
+<h2 id="下準備">下準備</h2>
+<p>まずは下記を行っていきます。</p>
+<ol type="1">
+<li>基盤のインポート
+<ul>
+<li>VRCSDK2</li>
+<li>DynamicBone（必要な場合）</li>
+<li>UTS2等（必要な場合）</li>
+</ul></li>
+</ol>
+<p>「基盤のインポート」については記事がありふれていますので、説明を省略します。</p>
+<h2 id="素体の準備">素体の準備</h2>
+<h3 id="素体のインポート">素体のインポート</h3>
+<p>素体の<code>.fbx</code>を含んだフォルダごと、ProjectにD&amp;Dします。 （今回の場合は<code>QuQuonsen</code>です。）</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/1.PNG" /></p>
+<p>（ QuQuonsenの場合、 このようなよくわからないダイアログがでてきたので、 とりあえず<strong>Fix now</strong>しました。</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/2.PNG" /> ）</p>
+<h3 id="素体fbxのhumanoid化">素体fbxのHumanoid化</h3>
+<p>Projectで<code>Assets/QuQuonsen/onsen</code>をクリックすると、 Inspecorが下記のような状態になります。</p>
+<p>そこで<strong>Rig</strong>を選択し、 ’Animation Type’を<strong>Humanoid</strong>に変更。 その後<strong>Apply</strong>を押します。</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/3.PNG" /></p>
+<p>ここで’Configure’クリックすると、 Inspectorが次のような状態になります。</p>
+<p>ここで各ボーンが正常に、 Humanoid形式に設定されているかが確認できます。</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/4.PNG" /></p>
+<p>いずれかのボーンが正常に設定されていない場合、 そのボーン部分が赤く表示されます。 （次の画像は’Hips’が’None’に設定されてしまっている場合。）</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/5.PNG" /></p>
+<p>その場合は’Hierarchy’に表示されているアバターのボーン （今回の場合<code>onsen(Clone)</code>の<code>Armature &gt; Hips</code>） をInspectorのHipsにD&amp;Dしてあげてください。</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/6.PNG" /></p>
+<p>確認したら’Apply’あるいは’Revert’ &amp; ’Done’を押して、元のInspector画面に戻りましょう。</p>
+<h3 id="素体fbxのmaterial調整">素体fbxのMaterial調整</h3>
+<p>次にInspectorの’Materials’タブをクリックし、 <code>Location</code>を<strong>Use External Material</strong>した後、 また<code>Location</code>を<strong>Use Embedded Material</strong>に戻して、 そして’Apply’を押してください。</p>
+<p>これはBlenderで作成したMaterialを、 Unityに引き継ぐために行うもの、 とのことです。</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/7.PNG" /></p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/8.PNG" /></p>
+<h3 id="素体シェーダーの設定">素体シェーダーの設定</h3>
+<p>さてようやくですが、 素体fbxをHierarchyに追加（D&amp;D）しましょう。</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/9.PNG" /></p>
+<p>次にその素体配下の、 Armature以外のオブジェクトのシェーダーを<strong>UTS2のToon_DoubleShadeWithFeather</strong>等に変更します。</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/10.PNG" /></p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/12.PNG" /></p>
+<hr />
+<p>ここでシェーダーが変更できない場合があるようです。</p>
+<p>僕は下記サイトを参考に</p>
+<ul>
+<li><a href="https://sirohood.exp.jp/20190219-1973/">Unityでマテリアルが変更できない時 - Sirohood</a></li>
+</ul>
+<p>先ほど設定した<code>Materials</code>の<code>Location</code>を<strong>Use External Materials (Legacy)</strong>に変更することで、 シェーダーを変更できるようにしました。</p>
+<p><img src="../images/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody/11.PNG" /></p>
+<hr />
+<p>TODO: 続き書く</p>
+<p>TODO: 各画像の幅を設定する</p>
+<h2 id="アバターのインポート">アバターのインポート</h2>
+<p>アバターの<code>.fbx</code>や<code>.prefab</code>をインポートします。 以下、NecoMaid-RICHちゃんの場合です。</p>
+<p><code>NecoMaidRICH1.1.unitypackage</code>（現時点での最新版）ファイルをUnityにインポートします。</p>
+<p>TODO: 続き書く</p>
+<hr />
+<blockquote class="twitter-tweet">
+<p lang="ja" dir="ltr">
+💥💥💥💥💥💥💥💥💥💥💥💥💥<br>💥 Blenderと和解ガチャ発動！ 💥<br>💥💥💥💥💥💥💥💥💥💥💥💥💥<br><br>🆘⚠️💞 ﾄｩﾙﾙﾝ<br><br>⚠️💞⚠️ ﾄｩﾙﾝ<br><br>💞💞🆘 ﾄｩﾙﾝ<br><br>ﾄｩﾙﾙ ﾙﾙ ﾙﾙ……<br><br>🆘🆘🆘 ﾄﾞｰﾝ!!<br><br>✋✋✋✋✋<br>B l e n d e r と<br>和 解 で き ま せ ん<br>で し た<br>✋✋✋✋✋<a href="https://twitter.com/hashtag/VRChat?src=hash&amp;ref_src=twsrc%5Etfw">#VRChat</a>
+</p>
+— ⿻あいや⿻ VRChat＆言語自作＆技術書典「せつラボ」 (<span class="citation" data-cites="public_ai000ya">@public_ai000ya</span>) <a href="https://twitter.com/public_ai000ya/status/1289179437150244870?ref_src=twsrc%5Etfw">July 31, 2020</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody.html" class="hatena-bookmark-button" data-hatena-bookmark-title="WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2020-08-02-without-blender-composing-avatar-head-and-nbody.md">WIP【Blender未使用】UnityでVRChatアバターの素体（胴体）を入れ替える方法 - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
+
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
