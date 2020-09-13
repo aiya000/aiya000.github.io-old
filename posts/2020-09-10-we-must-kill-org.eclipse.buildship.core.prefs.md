@@ -1,5 +1,5 @@
 ---
-title: Spring Tool Suite 4でorg.eclipse.buildship.core.prefsのせいでJAVA\_HOMEが設定できなかった
+title: Spring Tool Suite 4でorg.eclipse.buildship.core.prefsのせいでJAVA_HOMEが設定できなかった
 tags: Java
 ---
 
