@@ -93,3 +93,8 @@ div.wrap-fluid img {
     width: 60vw;
     height: auto;
 }
+
+img {
+  margin: 8px;
+  border: solid 1px black;
+}
