@@ -3,7 +3,21 @@ title: 【Avatar3.0】初心者におすすめのアバター改変【段階別�
 tags: VRChat, Unity
 ---
 
-TODO: toc作る
+# 目次
+
+- [初めに](#%E5%88%9D%E3%82%81%E3%81%AB)
+- [今回の内容](#%E4%BB%8A%E5%9B%9E%E3%81%AE%E5%86%85%E5%AE%B9)
+- [まとめ](#%E3%81%BE%E3%81%A8%E3%82%81)
+- [Visitor編 - アバターワールド](#visitor%E7%B7%A8---%E3%82%A2%E3%83%90%E3%82%BF%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89)
+- [New User編 - NecoMaid RICH](#new-user%E7%B7%A8---necomaid-rich)
+  - [アバター改変](#%E3%82%A2%E3%83%90%E3%82%BF%E3%83%BC%E6%94%B9%E5%A4%89)
+  - [キッシュちゃん素体](#%E3%82%AD%E3%83%83%E3%82%B7%E3%83%A5%E3%81%A1%E3%82%83%E3%82%93%E7%B4%A0%E4%BD%93)
+  - [できました](#%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%97%E3%81%9F)
+- [Avatar 3.0](#avatar-30)
+- [終わり](#%E7%B5%82%E3%82%8F%E3%82%8A)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 # 初めに
 
@@ -44,9 +58,11 @@ VRChatはじめたての頃って、「アバターってなに？」って感�
 識者の方々に蛇足は必要ないと思いますので、本稿の趣旨の結論から先に書きます。
 
 1. Lua Avatar WorldからLuaちゃんをもらってくる
+    - とにかくアバターワールドをたのしもう！
 1. NecoMaid-RICHちゃんを買う
+    - 初めてのアバターに最適！
 1. Mesh Deleter With Textureとキッシュちゃん素体を使ってジャージを着る
-    - オリジナリティの獲得
+    - **オリジナリティの獲得**
 1. Avatar3.0を使う
     - A3Box + RadialInventory
 
@@ -140,7 +156,9 @@ Blenderで解決できることもありますが、……:point_up:
 ……とはいえ、それだけだとオリジナリティがなくて、その、体が……
 **意識**[^self]に適合しませんよね！
 
-[^self]: もしかしたらもう「もっと可愛い女の子になりたい！」という意識が目覚めているかもしれません。その意識に合わせて、改変をしてあげましょう:sparkles:
+[^self]: もしかしたらもう「もっと可愛い女の子になりたい！」という意識……
+内なる**kawaii**が目覚めているかもしれません。
+その意識に合わせて、改変をしてあげましょう:sparkles:
 
 それならば、よし、服です～～！
 自分で選んだ可愛い服を、自分に着せてあげるんです！
@@ -148,13 +166,19 @@ Blenderで解決できることもありますが、……:point_up:
 楽しくBoothウィンドウショッピングをして、服を探しましょう。
 すごい楽しいですよ。Boothウィンドウショッピング！
 
+<div class="wrap-fluid">
+![Booth画面](/images/posts/2020-12-09-vrchat-my-avatar-structure-and-history/window-shopping-on-booth.png)
+</div>
+
 ## キッシュちゃん素体
 
 ……と、その前に、RICHちゃんの素体は今は手に入らないのでした。
 服を着せるには、素体（服を着ていない体）が必要になります。
 ですので、どうにかせねばなりません。
 
-服を着るには、体がなければいけません。
+「服を着るには、体がなければいけません。」 [^no-naked-no-wearing]
+
+[^no-naked-no-wearing]: これ、格言になりませんか？
 
 ここで私は「RICHちゃんから頭をとってきて、キッシュちゃん素体につける」という方法を選びました。
 
@@ -165,9 +189,15 @@ Blenderで解決できることもありますが、……:point_up:
 
 ともあれ体が手に入ったので、服を着れます。
 
+<div class="wrap-fluid">
+![](/images/posts/2020-12-09-vrchat-my-avatar-structure-and-history/necomaid-rich-quche-nbody.png)
+</div>
+
 服を選ぶよー！！
 
-## Mesh Deleter With Texture
+## できました
+
+というわけで、できましたーー！:sparkles:
 
 私が選んだのは、このジャージです。
 
@@ -185,17 +215,68 @@ Blenderで解決できることもありますが、……:point_up:
 
 ていうか、このジャージ可愛いし！
 
-……ということで、Mesh Deleter With Texture RICHちゃんの
+ここでは以下のようなことを行いました。
 
-# まとまるロング（髪）
+- [Mesh Deleter With Texture](https://booth.pm/ja/items/1501527)で体を削り取る
+- ジャージを着せる
+- 髪を[まとまるロング](https://booth.pm/ja/items/2362976)に変える
+
+おめでとうございます。
+この行程を超えたあなたは、きっとあなたの内なる**kawaii**に、バーチャルボディが追いついたことでしょう。
+
+ようこそ、ブシドーへ。 [^bushido]
+
+[^bushido]: kawaiiは武士道。
+
 # Avatar 3.0
-# そしておしゃれへ
-# その他、アバター改変に使っている技術
 
-- A3Box
-- RadialInventory
-- Bookmarks
-- Playでアニメーション
-- 4点カメラ
-    - いつも見えてるとじゃまなので、Play時に起動するようにした
-- DynamicBone Collider
+最後にAvatar3.0対応をします。
+わーい！ [^necomaid-sdk-version]
+
+[^necomaid-sdk-version]: NecoMaid RICHちゃんはAvatar2.0対応なので、自前でAvatar3.0に移行する必要がありました。Avatar3.0使いたい！
+
+技術的なことは、先日ろーてくちゃんが記事を書いてくれましたので、そちらをご参照ください:sparkles:
+
+- [オリオンちゃんでわかる初心者向けAvatars3.0セットアップ](https://lowteq.fanbox.cc/posts/1693812)
+
+Avatar3.0では、Playable Layersというものが導入されました。
+
+Playable LayersではExpressions Menuという特別なメニューに、様々なロジックを組むことができます。
+しかしながらこれはそこそこ手間がかかるので、既存の用意された環境を使います。
+
+- [A3Box - Booth](https://booth.pm/ja/items/2357888)
+- [Radial Inventory System V2](https://booth.pm/ja/items/2278448)
+
+Radial Inventory Systemはアバターに「オブジェクトを出し入れする機能」を追加します。
+例えば武器やバリアー・耳かきやハムスターなど。
+なんと服を着替えたりもできます！
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">あいやのお着換えです💖✨✨<br>案外うまくできてるでしょ！ <a href="https://t.co/QE3p7mvWjE">pic.twitter.com/QE3p7mvWjE</a></p>&mdash; あいや@VRChat＆ボイトレ (@aiya000_vrchat) <a href="https://twitter.com/aiya000_vrchat/status/1338037778672570369?ref_src=twsrc%5Etfw">December 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+A3BoxにもObjectSwitchという機能がありますが、Radial Inventory Systemは排他的な切り替えが楽にできたので、そちらを使うことにしました。[^exclusive-toggle]
+
+[^exclusive-toggle]:
+例えば服を着替えるときには、「カジュアルなパーカーと鎧を同時に着る」ということはないですよね。
+そういうときに「排他的な切り替え」は便利です。
+現実では「鎧の下にパーカーを着る」というシチュはありえるかもしれませんが、鎧を着たらパーカーが見えなくなるので、バーチャルでは意味がない！
+
+A3BoxはObjectSwitch以外にもいくつかの機能を持ちます。
+それぞれ以下のようなものです。
+
+- ハンドジェスチャー設定機能
+    - Avatar2.0ではハンドジェスチャーも自前で設定しなければいけません
+    - A3Boxのこれをそのまま使うだけで、Avatar2.0と同じようにハンドジェスチャーによる表情切り替えなどが行えます
+- EmoteBox
+    - Avatar2.0でのEmoteと同じ機能
+        - Avatar3.0でExpressions Menuを用意するときは、Emote機能を自前で用意する必要があります
+    - A3Boxでは32個のEmoteが同梱されています
+        - 最強:pray::heart:
+- FaceBox
+    - 表情をメニューで選択し、切り替えを行う機能
+    - 「笑顔とピースサインで写真を撮りたいけど、ピースサインはハンドジェスチャーで怒り顔に設定している」というときに便利です[^aaaaaaaaaaa]
+
+[^aaaaaaaaaaa]: ピースサインで怒り顔の人以外……つまり表情とハンドジェスチャーを独立させたい人の全員に便利です
+
+# 終わり
+
+TODO
