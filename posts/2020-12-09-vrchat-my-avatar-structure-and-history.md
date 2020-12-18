@@ -16,9 +16,6 @@ tags: VRChat, Unity
 - [Avatar 3.0](#avatar-30)
 - [終わり](#%E7%B5%82%E3%82%8F%E3%82%8A)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-
 # 初めに
 
 本稿は「VRChat Advent Calendar 2020」にむけた記事です！:tada:
@@ -35,16 +32,19 @@ VRChatはじめたての頃って、「アバターってなに？」って感�
 
 今回は「【Avatar3.0】初心者におすすめのアバター改変【段階別】」と称しまして、その魅力の一片を見ていただければと思います！:sparkles:
 
-- 本稿の内容
-    - 「VRChatはじめてみました」からの、**段階別おすすめアバター**
-        - Visitor編
-        - New User編
-        - 「その後」編
-    - あるいは単に、筆者の過去・現在の**使用アバターの紹介**
+- - - - -
+
+## 本稿の内容
+
+- 「VRChatはじめてみました」からの、**段階別おすすめアバター**
+    - Visitor編
+    - New User編
+    - 「その後」編
+- あるいは単に、筆者の過去・現在の**使用アバターの紹介**
 
 具体的な技術詳細は省かせていただきますので、読み物寄りの内容となっております。
 
-- - -
+- - - - -
 
 ちなみに、今の私のアバターはこのような感じです:point_down:
 
@@ -60,19 +60,21 @@ VRChatはじめたての頃って、「アバターってなに？」って感�
 1. Lua Avatar WorldからLuaちゃんをもらってくる
     - とにかくアバターワールドをたのしもう！
 1. NecoMaid-RICHちゃんを買う
-    - 初めてのアバターに最適！
+    - **初めてのアバターに最適！**
 1. Mesh Deleter With Textureとキッシュちゃん素体を使ってジャージを着る
     - **オリジナリティの獲得**
 1. Avatar3.0を使う
     - A3Box + RadialInventory
+    - A3BoxのObjectSwitchの代わりにRadialInventoryを使うことで、**作業が楽＆排他的切り替えが楽**
 
 # Visitor編 - アバターワールド
 
-さて「VRChatはじめてみました」の段階、Visitorは誰もがVRChatの魅力に惚れひれ伏すか、あるいは戸惑うものかと思います。
+さて「VRChatはじめてみました」の段階。
+Visitorは誰もがVRChatの魅力に惚れひれ伏すか、あるいは戸惑うものかと思います。
 
 私的には「最初期ってとにかく楽しめる段階だから、ぼっちでもいいから、とにかくワールド巡ったりしてくれ～～！」って感じですが、本稿の本題から外れますので、ここは引き下がります……。
 
-もしこの記事を見てくれているVisitorさんがいれば、「**アバターワールド**」と呼ばれるワールドを巡ってみて、おすすめのアバターを見つけてみてください:sparkles:
+ぜひVisitorさんは「**アバターワールド**」と呼ばれるワールドを巡ってみて、おすすめのアバターを見つけてみてください:sparkles:
 
 ここで私はLua Avatar Worldで、Luaちゃんと出会いました！
 
@@ -94,12 +96,12 @@ Visitorさんはぜひ、アバターワールドを探してみてね:sparkles:
 
 さてあなたはようやっとVisitorを抜け出し、VRChatに歓迎されました:tada:
 
+New User。
 そう、ついにアバターとワールドがアップロードできるようになったのです。
 
-でもそう。
-やっぱり……アバターって有料だし、最初は気が引けちゃいますよね。
+でもやっぱり……アバターって有料だし、最初は気が引けちゃいますよね。
 
-そこで**NecoMaid RICH**ちゃんです！
+そこで私のおすすめは、**NecoMaid RICH**ちゃんです！
 
 - [NecoMaid RICH - Booth](https://booth.pm/ja/items/2147191)
 
@@ -122,27 +124,9 @@ Visitorさんはぜひ、アバターワールドを探してみてね:sparkles:
 アバターにお金を出すのがまだ億劫な人には、最高の値段。
 今だからこそ「値段でアバターを決めるのはもったいない」と思いますが、当時の価値観にとって、うってつけの選択肢でした。
 
-　　　　　　　　　↓私の '微' 改変済みRICHちゃん↓
-
 <div class="wrap-fluid">
-![](/images/posts/2020-12-09-vrchat-my-avatar-structure-and-history/necomaid-rich-example.png)
+![私の '微' 改変済みRICHちゃん](/images/posts/2020-12-09-vrchat-my-avatar-structure-and-history/necomaid-rich-example.png)
 </div>
-
-RICHちゃんに限らず、NecoMaidちゃんたち[^necomaids]の欠点は「素体が今は売ってないので、専用服[^special-cloths]がまったくないこと」です。
-[^counter-for-clothing]
-
-[^necomaids]:
-NecoMaidには、無印・RICH・Premiumの3人がいます。
-私の脳内設定では――無印ちゃんはRICHちゃんの若干幼いころで、PremiumちゃんはRICHちゃんの姉。
-
-[^counter-for-clothing]:
-これは後述の**Mesh Deleter With Texture**で解決します。
-あるいはBlenderで解決していいかもしれませんが、私は小物を作るくらいしか、Blenderを使えない！:sob:
-
-[^special-cloths]:
-専用服というのは「このモデル向けに作ったので、このモデルに着せる分には簡単な設定だけで着れるよ」というものです。
-非専用服は後述の**Mesh Deleter With Texture**を使うなどの方法で着せる必要があります。
-Blenderで解決できることもありますが、……:point_up:
 
 ちなみに「**DynamicBone**は絶対に買った方がいい」と誰もかれもに言われたので、ここでDynamicBoneはがんばって買いました。
 （今ではやはりこれも、安い買い物だったと思います。）
@@ -164,7 +148,7 @@ Blenderで解決できることもありますが、……:point_up:
 自分で選んだ可愛い服を、自分に着せてあげるんです！
 
 楽しくBoothウィンドウショッピングをして、服を探しましょう。
-すごい楽しいですよ。Boothウィンドウショッピング！
+すごい楽しいんです。Boothウィンドウショッピング！
 
 <div class="wrap-fluid">
 ![Booth画面](/images/posts/2020-12-09-vrchat-my-avatar-structure-and-history/window-shopping-on-booth.png)
@@ -172,9 +156,29 @@ Blenderで解決できることもありますが、……:point_up:
 
 ## キッシュちゃん素体
 
-……と、その前に、RICHちゃんの素体は今は手に入らないのでした。
-服を着せるには、素体（服を着ていない体）が必要になります。
-ですので、どうにかせねばなりません。
+……と、その前に。
+
+体に服を着せるには、基本的に**素体**と呼ばれるものが必要です。
+素体とはおおまかに「裸や下着姿のアバター」のことですです。
+
+実はNecoMaid RICHちゃんやNecoMaidちゃんたち[^necomaids]は、「素体が今は売ってないので、専用服[^special-cloths]がまったくない」という欠点を持ちます。
+[^counter-for-clothing]
+
+[^necomaids]:
+NecoMaidには、無印・RICH・Premiumの3人がいます。
+私の脳内設定では――無印ちゃんはRICHちゃんの若干幼いころで、PremiumちゃんはRICHちゃんの姉。
+
+[^counter-for-clothing]:
+これは後述の**Mesh Deleter With Texture**で解決します。
+あるいはBlenderで解決していいかもしれませんが、私は小物を作るくらいしか、Blenderを使えない！:sob:
+
+[^special-cloths]:
+専用服というのは「このモデル向けに作ったので、このモデルに着せる分には簡単な設定だけで着れるよ」というものです。
+非専用服は後述の**Mesh Deleter With Texture**を使うなどの方法で着せる必要があります。
+Blenderで解決できることもありますが、……:point_up:
+
+服を着せるには、素体が必要になります。
+ですので、どうにかしなきゃいけません。
 
 「服を着るには、体がなければいけません。」 [^no-naked-no-wearing]
 
@@ -215,7 +219,7 @@ Blenderで解決できることもありますが、……:point_up:
 
 ていうか、このジャージ可愛いし！
 
-ここでは以下のようなことを行いました。
+やはり技術的詳細は他で紹介され尽くしているため省略しますが、ここでは以下のようなことを行いました。
 
 - [Mesh Deleter With Texture](https://booth.pm/ja/items/1501527)で体を削り取る
 - ジャージを着せる
@@ -224,16 +228,19 @@ Blenderで解決できることもありますが、……:point_up:
 おめでとうございます。
 この行程を超えたあなたは、きっとあなたの内なる**kawaii**に、バーチャルボディが追いついたことでしょう。
 
-ようこそ、ブシドーへ。 [^bushido]
+歓迎いたします。ようこそ、ブシドーへ。 [^bushido]
 
-[^bushido]: kawaiiは武士道。
+[^bushido]: kawaiiは武士道　―　**ブシドー**　―　。
 
 # Avatar 3.0
 
 最後にAvatar3.0対応をします。
 わーい！ [^necomaid-sdk-version]
 
-[^necomaid-sdk-version]: NecoMaid RICHちゃんはAvatar2.0対応なので、自前でAvatar3.0に移行する必要がありました。Avatar3.0使いたい！
+[^necomaid-sdk-version]:
+NecoMaid RICHちゃんはAvatar2.0対応なので、自前でAvatar3.0に移行する必要がありました。
+Avatar3.0使いたい！
+Avatar3.0を使うと、後述のExpressions Menuというもので、たのしいことがいっぱいできます！
 
 技術的なことは、先日ろーてくちゃんが記事を書いてくれましたので、そちらをご参照ください:sparkles:
 
@@ -279,4 +286,24 @@ A3BoxはObjectSwitch以外にもいくつかの機能を持ちます。
 
 # 終わり
 
-TODO
+あなたのkawaiiは見つかりましたか？
+あるいはkakkoiiかもしれませんし、もっと他のものかもしれません。
+
+そう、芽生え始めたor芽生えるかもしれない、あなたの**バーチャルに対する意識**のことです。
+あえて**バーチャル自我**とでも言い直しましょうか:hearts:
+
+あなたのバーチャル自我としあわせ・平穏が、ありますよう祈っております:sparkles:
+
+<div class="wrap-fluid">
+![](/images/posts/2020-12-09-vrchat-my-avatar-structure-and-history/my-avatar-1.jpg)
+</div>
+
+<div class="wrap-fluid">
+![](/images/posts/2020-12-09-vrchat-my-avatar-structure-and-history/my-avatar-2.jpg)
+</div>
+
+<div class="wrap-fluid">
+![](/images/posts/2020-12-09-vrchat-my-avatar-structure-and-history/my-avatar-3.png)
+</div>
+
+おわり。
