@@ -1,0 +1,295 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - Udon#でUdonSyncedを使わない方法</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Udon#でUdonSyncedを使わない方法" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Udon#でUdonSyncedを使わない方法" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Udon#でUdonSyncedを使わない方法</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2020-09-13-vrchat-udonsharp-how-to-avoid-udonsynced.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Udon#でUdonSyncedを使わない方法" />
+    <meta property="og:description" content="Udon#でUdonSyncedを使わない方法" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Udon#でUdonSyncedを使わない方法" />
+    <meta name="twitter:description" content="Udon#でUdonSyncedを使わない方法" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2020/09/13</div>
+    
+
+    <div class="post-title">Udon#でUdonSyncedを使わない方法</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/VRChat.html">VRChat</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/Udon#.html">Udon#</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <h1 id="目標">目標</h1>
+<p>Udon#コードで<code>UdonSynced</code>を使わずに、各ネットワークユーザーの<code>bool</code>の値を同期する。 <code>int</code>もがんばってみる（ただし<code>int</code>に対しては、不完全な対応になります）。</p>
+<h1 id="まとめ">まとめ</h1>
+<p>以下のようなコードでがんばります。</p>
+<ul>
+<li><code>bool</code>向け対応</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cs"><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">using</span> UdonSharp;</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> UnityEngine;</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> VRC.<span class="fu">Udon</span>.<span class="fu">Common</span>.<span class="fu">Interfaces</span>;</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">using</span> VRC.<span class="fu">Udon</span>;</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">/// </span><span class="kw">&lt;summary&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">/// Sets a value with network users.</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">///</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">/// </span><span class="al">NOTE</span><span class="co">:</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">/// Don't use DoSetValueTo*() directly.</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">/// Please use Set() instead.</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">/// </span><span class="kw">&lt;/summary&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">public</span> <span class="kw">class</span> BoolSync : UdonSharpBehaviour {</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="kw">private</span> <span class="dt">bool</span> val = <span class="kw">false</span>;</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">Set</span>(<span class="dt">bool</span> val) {</span>
+<span id="cb1-17"><a href="#cb1-17"></a>        <span class="kw">this</span>.<span class="fu">SendCustomNetworkEvent</span>(NetworkEventTarget.<span class="fu">All</span>, <span class="st">&quot;DoSetValueTo&quot;</span> + val);</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    }</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">DoSetValueToTrue</span>() {</span>
+<span id="cb1-21"><a href="#cb1-21"></a>        <span class="kw">this</span>.<span class="fu">val</span> = <span class="kw">true</span>;</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    }</span>
+<span id="cb1-23"><a href="#cb1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">DoSetValueToFalse</span>() {</span>
+<span id="cb1-25"><a href="#cb1-25"></a>        <span class="kw">this</span>.<span class="fu">val</span> = <span class="kw">false</span>;</span>
+<span id="cb1-26"><a href="#cb1-26"></a>    }</span>
+<span id="cb1-27"><a href="#cb1-27"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a>    <span class="kw">public</span> <span class="dt">bool</span> <span class="fu">Get</span>() =&gt; <span class="kw">this</span>.<span class="fu">val</span>;</span>
+<span id="cb1-29"><a href="#cb1-29"></a>}</span></code></pre></div>
+<ul>
+<li><code>int</code>向け対応
+<ul>
+<li><code>-1, ..., maxValue</code>という範囲への限定的な対応</li>
+<li>メタプログラミングがんばれば<code>int.MinValue, ..., int.MAX_VALUE</code>くらいも可能ではあると思う（Udon#でメタプログラミングできるかは不明）</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cs"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">using</span> UdonSharp;</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> UnityEngine;</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">using</span> VRC.<span class="fu">Udon</span>.<span class="fu">Common</span>.<span class="fu">Interfaces</span>;</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">using</span> VRC.<span class="fu">Udon</span>;</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">public</span> <span class="kw">class</span> IntSync : UdonSharpBehaviour {</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="kw">private</span> <span class="kw">readonly</span> <span class="dt">int</span> MAX_VALUE = something;  <span class="co">// 最大値</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="kw">private</span> <span class="dt">int</span> val = <span class="dv">0</span>;</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">Set</span>(<span class="dt">int</span> val) {</span>
+<span id="cb2-12"><a href="#cb2-12"></a>        <span class="kw">if</span> (val &gt; <span class="dv">-1</span> &amp;&amp; <span class="kw">this</span>.<span class="fu">MAX_VALUE</span> &lt; val) {</span>
+<span id="cb2-13"><a href="#cb2-13"></a>            Debug.<span class="fu">Log</span>($<span class="st">&quot;Illegal argument (the argument must be -1~{this.MAX_VALUE}): {val}&quot;</span>);</span>
+<span id="cb2-14"><a href="#cb2-14"></a>            <span class="kw">return</span>;</span>
+<span id="cb2-15"><a href="#cb2-15"></a>        }</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a>        <span class="kw">if</span> (val == <span class="dv">-1</span>) {</span>
+<span id="cb2-18"><a href="#cb2-18"></a>            <span class="kw">this</span>.<span class="fu">SendCustomNetworkEvent</span>(NetworkEventTarget.<span class="fu">All</span>, <span class="st">&quot;DoSetValueToNothing&quot;</span>);</span>
+<span id="cb2-19"><a href="#cb2-19"></a>        } <span class="kw">else</span> {</span>
+<span id="cb2-20"><a href="#cb2-20"></a>            <span class="kw">this</span>.<span class="fu">SendCustomNetworkEvent</span>(NetworkEventTarget.<span class="fu">All</span>, <span class="st">&quot;DoSetValueTo&quot;</span> + val);</span>
+<span id="cb2-21"><a href="#cb2-21"></a>        }</span>
+<span id="cb2-22"><a href="#cb2-22"></a>    }</span>
+<span id="cb2-23"><a href="#cb2-23"></a></span>
+<span id="cb2-24"><a href="#cb2-24"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">Get</span>() =&gt; <span class="kw">this</span>.<span class="fu">val</span>;</span>
+<span id="cb2-25"><a href="#cb2-25"></a></span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="co">/* - - vvvvvvvvvvvvvvv - - */</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>    <span class="co">/* - - v UNDERGROUND v - - */</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>    <span class="co">/* - - vvvvvvvvvvvvvvv - - */</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a></span>
+<span id="cb2-30"><a href="#cb2-30"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">DoSetValueToNothing</span>() {</span>
+<span id="cb2-31"><a href="#cb2-31"></a>        <span class="kw">this</span>.<span class="fu">val</span> = <span class="dv">-1</span>;</span>
+<span id="cb2-32"><a href="#cb2-32"></a>    }</span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">DoSetValueTo0</span>() {</span>
+<span id="cb2-35"><a href="#cb2-35"></a>        <span class="kw">this</span>.<span class="fu">val</span> = <span class="dv">0</span>;</span>
+<span id="cb2-36"><a href="#cb2-36"></a>    }</span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">DoSetValueTo1</span>() {</span>
+<span id="cb2-39"><a href="#cb2-39"></a>        <span class="kw">this</span>.<span class="fu">val</span> = <span class="dv">1</span>;</span>
+<span id="cb2-40"><a href="#cb2-40"></a>    }</span>
+<span id="cb2-41"><a href="#cb2-41"></a></span>
+<span id="cb2-42"><a href="#cb2-42"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">DoSetValueTo2</span>() {</span>
+<span id="cb2-43"><a href="#cb2-43"></a>        <span class="kw">this</span>.<span class="fu">val</span> = <span class="dv">2</span>;</span>
+<span id="cb2-44"><a href="#cb2-44"></a>    }</span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
+<span id="cb2-46"><a href="#cb2-46"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">DoSetValueTo3</span>() {</span>
+<span id="cb2-47"><a href="#cb2-47"></a>        <span class="kw">this</span>.<span class="fu">val</span> = <span class="dv">3</span>;</span>
+<span id="cb2-48"><a href="#cb2-48"></a>    }</span>
+<span id="cb2-49"><a href="#cb2-49"></a></span>
+<span id="cb2-50"><a href="#cb2-50"></a>    <span class="co">/* 以下、対応させたい値まで各 */</span></span>
+<span id="cb2-51"><a href="#cb2-51"></a>}</span></code></pre></div>
+<p>ある<code>UdonSharpBehaviour</code>でそれぞれを使う。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cs"><code class="sourceCode cs"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">public</span> <span class="kw">class</span> Foo : UdonSharpBehaviour {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="kw">public</span> BoolSync paused;</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="kw">public</span> BoolSync unPaused;</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="kw">public</span> IntSync playing;</span>
+<span id="cb3-5"><a href="#cb3-5"></a>}</span></code></pre></div>
+<p>これらのためのGameObjectを作る。</p>
+<p><img src="../images/posts/2020-09-13-vrchat-udonsharp-how-to-avoid-udonsynced/setup-x-sync-as-gameobjects.PNG" /></p>
+<p><code>Foo</code>のInspectorでそれらをD&amp;Dして参照させる。</p>
+<p><img src="../images/posts/2020-09-13-vrchat-udonsharp-how-to-avoid-udonsynced/using-x-sync.PNG" /></p>
+<h1 id="導入">導入</h1>
+<p>先日、VRChat（VRCSDK3）向け音楽プレイヤーをリリースしました <span class="emoji" data-emoji="tada">🎉</span><span class="emoji" data-emoji="sparkles">✨</span><span class="emoji" data-emoji="sparkles">✨</span></p>
+<ul>
+<li><a href="https://aiya000.booth.pm/items/2328424">【無料・設定・改変しやすい】EasyAudioPlayer【音楽再生VRChatオブジェクト】</a></li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HOQmMhuBhUE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>これのネットワーク同期を実装するにあたって、「<code>UdonSynced</code>が同期されたりされなかったりする」という問題が起きました。</p>
+<blockquote class="twitter-tweet">
+<p lang="ja" dir="ltr">
+UdonSyncedなintが同期されない件、解決しました✨😊<br><br>// これで解決する<br>for (var i = 0; i &lt; 100000; i++) {} <a href="https://t.co/j5CQiHmpr4">pic.twitter.com/j5CQiHmpr4</a>
+</p>
+— ⿻あいや⿻ VRChat＆言語自作＆技術書典「せつラボ」 (<span class="citation" data-cites="public_ai000ya">@public_ai000ya</span>) <a href="https://twitter.com/public_ai000ya/status/1302519775604604928?ref_src=twsrc%5Etfw">September 6, 2020</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>おそロシア。</p>
+<p>また<code>UdonSynced</code>についての仕様が見つからなかったので（どういうことなの？？）、<code>UdonSynced</code>を捨てる覚悟を決めました。</p>
+<h1 id="解説">解説</h1>
+<p>これに対して上記「まとめ」に書いたように、対応しました。</p>
+<p><code>int</code>に関しては読者様に納得していただけるような対応ではないと思いますが、今回の用途ではこれで十分だったため、このようにしました。</p>
+<p>「<code>IntSync</code>って言ってるけど<code>int</code>じゃないじゃん！」…… はい、まったくもってその通りでござる。</p>
+<p>……。</p>
+<h2 id="設定方法">設定方法</h2>
+<p>まず最初の難解な部分は、<code>BoolSync</code>および<code>IntSync</code>が<code>UdonSharpBehaviour</code>であることでしょうか。</p>
+<p>これは現時点（2020-09-13）でUdon#が<code>UdonSharpBehaviour</code>以外のクラスを作成できないためです。</p>
+<p>そのためのワークアラウンドを示していきます。</p>
+<p>ここで<code>BoolSync</code>や<code>IntSync</code>を使いたいUdonBehaviorのあるGameObjectを<code>Foo</code>と呼び、次のように定義しておきます。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cs"><code class="sourceCode cs"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">public</span> <span class="kw">class</span> Foo : UdonSharpBehaviour {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="kw">public</span> BoolSync paused;</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="kw">public</span> BoolSync unPaused;</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="kw">public</span> IntSync playing;</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="kw">public</span> <span class="kw">override</span> <span class="dt">void</span> <span class="fu">Interact</span>() {</span>
+<span id="cb4-7"><a href="#cb4-7"></a>        Debug.<span class="fu">Log</span>(<span class="kw">this</span>.<span class="fu">paused</span>.<span class="fu">Get</span>());</span>
+<span id="cb4-8"><a href="#cb4-8"></a>        Debug.<span class="fu">Log</span>(<span class="kw">this</span>.<span class="fu">unPaused</span>.<span class="fu">Get</span>());</span>
+<span id="cb4-9"><a href="#cb4-9"></a>        Debug.<span class="fu">Log</span>(<span class="kw">this</span>.<span class="fu">playing</span>.<span class="fu">Get</span>());</span>
+<span id="cb4-10"><a href="#cb4-10"></a>    }</span>
+<span id="cb4-11"><a href="#cb4-11"></a>}</span></code></pre></div>
+<p>ここでそれぞれのフィールドは<code>public</code>である必要があります。 それはそれぞれを、UnityのInspectorで設定してあげる必要があるからです。 （その方法を、次に示します。）</p>
+<p>次にそれぞれのフィールドの値を保持するものを、GameObjectとして作成してあげます。 （今回はEmpty Objectの中にまとめて作りました。）</p>
+<p><img src="../images/posts/2020-09-13-vrchat-udonsharp-how-to-avoid-udonsynced/setup-x-sync-as-gameobjects.PNG" /></p>
+<p>その後、<code>Foo</code>を設定されているGameObjectをクリックし、Public VariablesにそれぞれをD&amp;Dしてあげます。</p>
+<p><img src="../images/posts/2020-09-13-vrchat-udonsharp-how-to-avoid-udonsynced/using-x-sync.PNG" /></p>
+<p>設定は以上です。</p>
+<p>あとは<code>Foo#Interact()</code>などで、<code>this.paused</code>・<code>this.unPaused</code>・<code>this.playing</code>の<code>Set()</code>・<code>Get()</code>メソッドを使ってあげてください。</p>
+<p>（余談: setter/getterを使ってないのも、Udon#がそれをサポートしてくれてないから……。）</p>
+<hr />
+<p>以上です。</p>
+<p>ありがとう！</p>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2020-09-13-vrchat-udonsharp-how-to-avoid-udonsynced.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Udon#でUdonSyncedを使わない方法 - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2020-09-13-vrchat-udonsharp-how-to-avoid-udonsynced.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2020-09-13-vrchat-udonsharp-how-to-avoid-udonsynced.md">Udon#でUdonSyncedを使わない方法 - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
+
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

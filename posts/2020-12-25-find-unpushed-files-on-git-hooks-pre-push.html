@@ -1,0 +1,189 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>galaxy-sixth-sensey - gitでまだpushしていないファイルを検出する</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="galaxy-sixth-sensey - gitでまだpushしていないファイルを検出する" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - gitでまだpushしていないファイルを検出する" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - gitでまだpushしていないファイルを検出する</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2020-12-25-find-unpushed-files-on-git-hooks-pre-push.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - gitでまだpushしていないファイルを検出する" />
+    <meta property="og:description" content="gitでまだpushしていないファイルを検出する" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - gitでまだpushしていないファイルを検出する" />
+    <meta name="twitter:description" content="gitでまだpushしていないファイルを検出する" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2020/12/25</div>
+    
+
+    <div class="post-title">gitでまだpushしていないファイルを検出する</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/git.html">git</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <p>重要なやつ <span class="emoji" data-emoji="point_down">👇</span></p>
+<p>project/scripts/get-root-branch.sh</p>
+<pre class="shell-session"><code>#!/bin/bash
+
+# 今いるブランチのリモートブランチ名、もしくは分岐元のブランチ名を取得する。
+# （今いるブランチから直近の、push済みのブランチ名を取得する。）
+
+# NOTE:
+# remoteが複数ある場合の動作は実装していないので、
+# `remote=upstream`のように直接代入するか、適切に実装してね！
+
+if [[ $(git remote | wc -l) -gt 1 ]] ; then
+    echo &quot;Specifying for a remote is not implemented yet. A head remote name will be used instead.&quot; &gt; /dev/stderr
+fi
+remote=$(git remote | head -1)
+
+git log --decorate --all --oneline | grep &quot;$remote&quot; | head -1 | sed -r 's/\w+ \(([^\)]+)\) .*/\1/'</code></pre>
+<p>実際に、pushされていないファイルを検出するやつ <span class="emoji" data-emoji="point_down">👇</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="va">root_dir=$(</span><span class="fu">git</span> rev-parse --show-toplevel<span class="va">)</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="va">remote_latest_branch=$(</span><span class="fu">bash</span> -c <span class="st">&quot;</span><span class="va">$root_dir</span><span class="st">/scripts/get-root-branch.sh&quot;</span><span class="va">)</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="va">current_branch=$(</span><span class="fu">git</span> branch --show-current<span class="va">)</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="va">unpushed_files=$(</span><span class="fu">git</span> diff --stat <span class="st">&quot;</span><span class="va">$remote_latest_branch</span><span class="st">..</span><span class="va">$current_branch</span><span class="st">&quot;</span> --name-only<span class="va">)</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># Use $unpushed_files</span></span></code></pre></div>
+<h2 id="使用例">使用例</h2>
+<p>~/.git/hooks/pre-push <span class="emoji" data-emoji="point_down">👇</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># textlint for markdown</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="va">unpushed_markdown_files=$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$unpushed_files</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">'\.md$'</span><span class="va">)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">if</span> ! <span class="ex">npx</span> textlint --config <span class="st">&quot;</span><span class="va">$root_dir</span><span class="st">/.textlintrc&quot;</span> <span class="st">&quot;</span><span class="va">$unpushed_markdown_files</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">then</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">fi</span></span></code></pre></div>
+<p>実行される様子 <span class="emoji" data-emoji="point_down">👇</span></p>
+<pre class="shell-session"><code>$ git branch
+main
+
+$ npx textlint pushed.md  # push済み、かつtextlintにひっかかるファイル
+（textlintにひっかかる）
+
+$ git switch -c foo
+$ echo 'GitHubおおおおおん' &gt; new.md  # 未pushの、textlintにひっかかるファイル（ja-space-between-half-and-full-width）
+
+$ git add new.md
+$ git commit -m poi
+
+$ git push -u origin/foo
+
+ここでpushed.mdはpre-pushのtextlintにひっかからず、new.mdだけひっかかる。</code></pre>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2020-12-25-find-unpushed-files-on-git-hooks-pre-push.html" class="hatena-bookmark-button" data-hatena-bookmark-title="gitでまだpushしていないファイルを検出する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2020-12-25-find-unpushed-files-on-git-hooks-pre-push.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2020-12-25-find-unpushed-files-on-git-hooks-pre-push.md">gitでまだpushしていないファイルを検出する - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
+
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
