@@ -1,0 +1,193 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する - galaxy-sixth-sensey</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する - galaxy-sixth-sensey" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2021-01-09-google-cloud-functions-requires-dependencies-not-as-devDependencies.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する" />
+    <meta property="og:description" content="Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する" />
+    <meta name="twitter:description" content="Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2021/01/09</div>
+    
+
+    <div class="post-title">Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/node.html">node</a>
+            </li>
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/GCP.html">GCP</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <h1 id="結">結</h1>
+<p>Google Cloud Functionsのプロジェクトでは<code>npm install --save-dev</code>や<code>yarn add --dev</code>は使わずに、<code>npm install</code>や<code>yarn add</code>を使うこと。</p>
+<p>もししてしまっても、<code>package.json</code>の<code>devDependencies</code>を手動で<code>dependencies</code>に移せば大丈夫。</p>
+<h1 id="問題">問題</h1>
+<p>これになる <span class="emoji" data-emoji="point_down">👇</span></p>
+<pre class="shell-session"><code>$ yarn deploy
+yarn run v1.22.5
+$ firebase deploy --only functions
+
+=== Deploying to 'foo'...
+
+i  deploying functions
+Running command: yarn build
+$ tsc
+
+...
+
+✔  functions: . folder uploaded successfully
+i  functions: updating Node.js 12 function bar(us-central1)...
+⚠  functions[bar(us-central1)]: Deployment error.
+Function failed on loading user code. This is likely due to a bug in the user code.
+Error message: Error: please examine your function logs to see the error cause: https://cloud.google.com/functions/docs/monitoring/logging#viewing_logs.
+Additional troubleshooting documentation can be found at https://cloud.google.com/functions/docs/troubleshooting#logging.
+Please visit https://cloud.google.com/functions/docs/troubleshooting for in-depth troubleshooting documentation.
+
+...</code></pre>
+<p>package.jsonの一部</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1"></a>  <span class="er">&quot;devDependencies&quot;:</span> <span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="dt">&quot;request-promise-native&quot;</span><span class="fu">:</span> <span class="st">&quot;^1.0.9&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">}</span><span class="er">,</span></span></code></pre></div>
+<h1 id="解決">解決</h1>
+<p>長らく悩んで GCPのログエクスプローラーを見てみると、ちゃんと書いてあった……。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="dt">&quot;textPayload&quot;</span><span class="fu">:</span> <span class="st">&quot;Did you list all required modules in the package.json dependencies?&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">&quot;insertId&quot;</span><span class="fu">:</span> <span class="st">&quot;000000-ad829364-20bb-4471-96d7-51b483614caf&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">&quot;resource&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;cloud_function&quot;</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="dt">&quot;labels&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>      <span class="dt">&quot;project_id&quot;</span><span class="fu">:</span> <span class="st">&quot;foo&quot;</span><span class="fu">,</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>      <span class="dt">&quot;function_name&quot;</span><span class="fu">:</span> <span class="st">&quot;bar&quot;</span><span class="fu">,</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>      <span class="dt">&quot;region&quot;</span><span class="fu">:</span> <span class="st">&quot;us-central1&quot;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="fu">}</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">},</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-01-09T13:54:40.865Z&quot;</span><span class="fu">,</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="dt">&quot;labels&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="dt">&quot;execution_id&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="fu">},</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>  <span class="dt">&quot;logName&quot;</span><span class="fu">:</span> <span class="st">&quot;projects/foo/logs/cloudfunctions.googleapis.com%2Fcloud-functions&quot;</span><span class="fu">,</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>  <span class="dt">&quot;receiveTimestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-01-09T13:54:42.400107672Z&quot;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="fu">}</span></span></code></pre></div>
+<p>ぴえんでございます！！！！！</p>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2021-01-09-google-cloud-functions-requires-dependencies-not-as-devDependencies.html" class="hatena-bookmark-button" data-hatena-bookmark-title="Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2021-01-09-google-cloud-functions-requires-dependencies-not-as-devDependencies.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2021-01-09-google-cloud-functions-requires-dependencies-not-as-devDependencies.md">Google Cloud Functionsでnode.jsを使う場合、devDependenciesを使うとデプロイが失敗する - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
+
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
