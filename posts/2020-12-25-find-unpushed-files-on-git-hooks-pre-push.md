@@ -7,22 +7,67 @@ tags: git
 
 project/scripts/get-root-branch.sh
 
-```shell-session
+```bash
 #!/bin/bash
 
-# 今いるブランチのリモートブランチ名、もしくは分岐元のブランチ名を取得する。
-# （今いるブランチから直近の、push済みのブランチ名を取得する。）
+# もし現在のgitブランチ（ここでfooとします。）がpushされていれば、{remote_name}/fooを返します。
+# そうでなければこのブランチのルートとなるブランチ（分岐元）を取得し、それを返します。
+#
+# このプログラムはまず、リモート名を取得します。
+# remoteが複数登録されている場合の適切な処理は未定義です。
+# 現在は1番目のリモートを使用するようになっています。
 
-# NOTE:
-# remoteが複数ある場合の動作は実装していないので、
-# `remote=upstream`のように直接代入するか、適切に実装してね！
+# Returns tags and branches names of the root revision of current.
+function root_names () {
+  local remote=$1 rev char_not_delim names
+
+  # Parser items
+  rev='\w+'
+  char_not_delim='[^\)]'
+  names="($char_not_delim+)" # 'names' means tags and branches names
+
+  git log --decorate --all --oneline | grep "$remote" | head -1 | sed -r "s/$rev \(($names)\) .*/\1/"
+}
+
+# NOTE: Please use nameref feature `local -n result=$1` instead of this global variable if you can use that feature.
+names_array=()
+
+# Put given names of glob $2 into $names_array1.
+function make_array_of_names() {
+  local names=$1 ifs xs i
+
+  # Convert names what are split by ',' to an array.
+  ifs=$IFS
+  IFS=,
+  # shellcheck disable=SC2206
+  xs=($names)
+  IFS=$ifs
+
+  # Trim heading and trailing spaces
+  for (( i=0; i < ${#xs[@]}; i++ )) ; do
+    x=$(echo "${xs[$i]}" | sed 's/^ *\| *$//')
+    names_array+=("$x")
+  done
+}
 
 if [[ $(git remote | wc -l) -gt 1 ]] ; then
-    echo "Specifying for a remote is not implemented yet. A head remote name will be used instead." > /dev/stderr
+  echo "Specifying for a remote is not implemented yet. A head remote name will be used instead." > /dev/stderr
 fi
 remote=$(git remote | head -1)
 
-git log --decorate --all --oneline | grep "$remote" | head -1 | sed -r 's/\w+ \(([^\)]+)\) .*/\1/'
+names=$(root_names "$remote")
+make_array_of_names "$names"
+
+for (( i=0; i < ${#names_array[@]}; i++ )) ; do
+  name=${names_array[$i]}
+
+  if echo "$name" | grep "^$remote/" > /dev/null ; then
+    echo "$name"
+    exit 0
+  fi
+done
+
+exit 1
 ```
 
 実際に、pushされていないファイルを検出するやつ :point_down:
