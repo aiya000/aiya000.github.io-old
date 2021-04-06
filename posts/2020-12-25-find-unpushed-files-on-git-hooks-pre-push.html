@@ -91,21 +91,66 @@
 <div class="post-body">
     <p>重要なやつ <span class="emoji" data-emoji="point_down">👇</span></p>
 <p>project/scripts/get-root-branch.sh</p>
-<pre class="shell-session"><code>#!/bin/bash
-
-# 今いるブランチのリモートブランチ名、もしくは分岐元のブランチ名を取得する。
-# （今いるブランチから直近の、push済みのブランチ名を取得する。）
-
-# NOTE:
-# remoteが複数ある場合の動作は実装していないので、
-# `remote=upstream`のように直接代入するか、適切に実装してね！
-
-if [[ $(git remote | wc -l) -gt 1 ]] ; then
-    echo &quot;Specifying for a remote is not implemented yet. A head remote name will be used instead.&quot; &gt; /dev/stderr
-fi
-remote=$(git remote | head -1)
-
-git log --decorate --all --oneline | grep &quot;$remote&quot; | head -1 | sed -r 's/\w+ \(([^\)]+)\) .*/\1/'</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># もし現在のgitブランチ（ここでfooとします。）がpushされていれば、{remote_name}/fooを返します。</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># そうでなければこのブランチのルートとなるブランチ（分岐元）を取得し、それを返します。</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># このプログラムはまず、リモート名を取得します。</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># remoteが複数登録されている場合の適切な処理は未定義です。</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># 現在は1番目のリモートを使用するようになっています。</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># Returns tags and branches names of the root revision of current.</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">function</span><span class="fu"> root_names ()</span> <span class="kw">{</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="bu">local</span> <span class="va">remote=$1</span> <span class="va">rev</span> <span class="va">char_not_delim</span> <span class="va">names</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="co"># Parser items</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="va">rev=</span><span class="st">'\w+'</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="va">char_not_delim=</span><span class="st">'[^\)]'</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="va">names=</span><span class="st">&quot;(</span><span class="va">$char_not_delim</span><span class="st">+)&quot;</span> <span class="co"># 'names' means tags and branches names</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">git</span> log --decorate --all --oneline <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;</span><span class="va">$remote</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">head</span> -1 <span class="kw">|</span> <span class="fu">sed</span> -r <span class="st">&quot;s/</span><span class="va">$rev</span><span class="st"> \((</span><span class="va">$names</span><span class="st">)\) .*/\1/&quot;</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">}</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: Please use nameref feature `local -n result=$1` instead of this global variable if you can use that feature.</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="va">names_array=()</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co"># Put given names of glob $2 into $names_array1.</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="kw">function</span><span class="fu"> make_array_of_names()</span> <span class="kw">{</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  <span class="bu">local</span> <span class="va">names=$1</span> <span class="va">ifs</span> <span class="va">xs</span> <span class="va">i</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a></span>
+<span id="cb1-29"><a href="#cb1-29"></a>  <span class="co"># Convert names what are split by ',' to an array.</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>  <span class="va">ifs=$IFS</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>  <span class="va">IFS=</span>,</span>
+<span id="cb1-32"><a href="#cb1-32"></a>  <span class="co"># shellcheck disable=SC2206</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>  <span class="va">xs=($names)</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>  <span class="va">IFS=$ifs</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a></span>
+<span id="cb1-36"><a href="#cb1-36"></a>  <span class="co"># Trim heading and trailing spaces</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a>  <span class="kw">for</span> <span class="kw">((</span> i=0; i &lt; <span class="va">${#xs[@]}</span>; i++ <span class="kw">))</span> ; <span class="kw">do</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a>    <span class="va">x=$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${xs[$i]}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/^ *\| *$//'</span><span class="va">)</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a>    <span class="va">names_array+=(</span><span class="st">&quot;</span><span class="va">$x</span><span class="st">&quot;</span><span class="va">)</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a>  <span class="kw">done</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="kw">}</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a></span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="kw">if [[</span> <span class="va">$(</span><span class="fu">git</span> remote <span class="kw">|</span> <span class="fu">wc</span> -l<span class="va">)</span> <span class="ot">-gt</span> 1<span class="kw"> ]]</span> ; <span class="kw">then</span></span>
+<span id="cb1-44"><a href="#cb1-44"></a>  <span class="bu">echo</span> <span class="st">&quot;Specifying for a remote is not implemented yet. A head remote name will be used instead.&quot;</span> <span class="op">&gt;</span> /dev/stderr</span>
+<span id="cb1-45"><a href="#cb1-45"></a><span class="kw">fi</span></span>
+<span id="cb1-46"><a href="#cb1-46"></a><span class="va">remote=$(</span><span class="fu">git</span> remote <span class="kw">|</span> <span class="fu">head</span> -1<span class="va">)</span></span>
+<span id="cb1-47"><a href="#cb1-47"></a></span>
+<span id="cb1-48"><a href="#cb1-48"></a><span class="va">names=$(</span><span class="ex">root_names</span> <span class="st">&quot;</span><span class="va">$remote</span><span class="st">&quot;</span><span class="va">)</span></span>
+<span id="cb1-49"><a href="#cb1-49"></a><span class="ex">make_array_of_names</span> <span class="st">&quot;</span><span class="va">$names</span><span class="st">&quot;</span></span>
+<span id="cb1-50"><a href="#cb1-50"></a></span>
+<span id="cb1-51"><a href="#cb1-51"></a><span class="kw">for</span> <span class="kw">((</span> i=0; i &lt; <span class="va">${#names_array[@]}</span>; i++ <span class="kw">))</span> ; <span class="kw">do</span></span>
+<span id="cb1-52"><a href="#cb1-52"></a>  <span class="va">name=${names_array[$i]}</span></span>
+<span id="cb1-53"><a href="#cb1-53"></a></span>
+<span id="cb1-54"><a href="#cb1-54"></a>  <span class="kw">if</span> <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$name</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;^</span><span class="va">$remote</span><span class="st">/&quot;</span> <span class="op">&gt;</span> /dev/null <span class="kw">;</span> <span class="kw">then</span></span>
+<span id="cb1-55"><a href="#cb1-55"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$name</span><span class="st">&quot;</span></span>
+<span id="cb1-56"><a href="#cb1-56"></a>    <span class="bu">exit</span> 0</span>
+<span id="cb1-57"><a href="#cb1-57"></a>  <span class="kw">fi</span></span>
+<span id="cb1-58"><a href="#cb1-58"></a><span class="kw">done</span></span>
+<span id="cb1-59"><a href="#cb1-59"></a></span>
+<span id="cb1-60"><a href="#cb1-60"></a><span class="bu">exit</span> 1</span></code></pre></div>
 <p>実際に、pushされていないファイルを検出するやつ <span class="emoji" data-emoji="point_down">👇</span></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
