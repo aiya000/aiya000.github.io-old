@@ -1,3 +1,25 @@
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width:320px) {
+  html {
+    font-size: 22px;
+  }
+}
+
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width:641px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+/* hi-res laptops and desktops */
+@media (min-width:1281px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+
 body {
     background: linear-gradient(90deg, #2c3d4e, #231917);
     line-height: 180%;
