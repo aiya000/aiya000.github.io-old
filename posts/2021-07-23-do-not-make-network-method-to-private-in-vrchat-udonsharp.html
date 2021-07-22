@@ -1,0 +1,156 @@
+<!-- htmlhint id-class-value:false / avoid the warnings to bootstrap names -->
+
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <title>UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない - galaxy-sixth-sensey</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:url" content="https://aiya000.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない - galaxy-sixth-sensey" />
+    <meta property="og:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない" />
+    <meta name="twitter:description" content="ギャラクシー・シックス・センスワイ - プログラミング・数学・一次創作" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/ogp-twitter-card-large.png" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.js/atom-one-dark.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="../">galaxy-sixth-sensey</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="../">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../profile.html">Profile</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../products.html">Products</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../archive.html">Archive</a>
+          </li>
+        </ul>
+
+        <div>
+          <script async src="https://cse.google.com/cse.js?cx=005952339784006396697:rdanbqy7tbq"></script>
+          <div class="gcse-search"></div>
+        </div>
+      </div>
+    </nav>
+
+    <link rel="stylesheet" type="text/css" href="../css/post.css" />
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <title>galaxy-sixth-sensey - UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない</title>
+    <meta property="og:url" content="https://aiya000.github.io/posts/2021-07-23-do-not-make-network-method-to-private-in-vrchat-udonsharp.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="galaxy-sixth-sensey - UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない" />
+    <meta property="og:description" content="UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない" />
+    <meta property="og:site_name" content="galaxy-sixth-sensey" />
+    <meta property="og:image" content="https://aiya000.github.io/images/mu-icon.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@public_ai000ya" />
+    <meta name="twitter:creator" content="@public_ai000ya">
+    <meta name="twitter:title" content="galaxy-sixth-sensey - UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない" />
+    <meta name="twitter:description" content="UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない" />
+    <meta name="twitter:image" content="https://aiya000.github.io/images/mu-icon.png" />
+</head>
+
+<div class="post-info">
+    <div class="post-date">2021/07/23</div>
+    
+
+    <div class="post-title">UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない</div>
+
+    <ul class="post-tags">
+        
+            <li>
+                <i class="fas fa-tag"></i>
+                <a href="../tags/VRChat.html">VRChat</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="post-body">
+    <p><span class="emoji" data-emoji="x">❌</span> 「<code>howdy :)</code>」が表示されない</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cs"><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">Start</span>() {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">this</span>.<span class="fu">SendCustomNetworkEvent</span>(NetworkEventTarget.<span class="fu">All</span>, <span class="st">&quot;Foo&quot;</span>);</span>
+<span id="cb1-3"><a href="#cb1-3"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">private</span> <span class="dt">void</span> <span class="fu">Foo</span>() {</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  Debug.<span class="fu">LogError</span>(<span class="st">&quot;howdy :)&quot;</span>);</span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span></code></pre></div>
+<p><span class="emoji" data-emoji="o">⭕</span> 「<code>howdy :)</code>」が表示される</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cs"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">Start</span>() {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">this</span>.<span class="fu">SendCustomNetworkEvent</span>(NetworkEventTarget.<span class="fu">All</span>, <span class="st">&quot;Foo&quot;</span>);</span>
+<span id="cb2-3"><a href="#cb2-3"></a>}</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">// Not `private`</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">Foo</span>() {</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  Debug.<span class="fu">LogError</span>(<span class="st">&quot;howdy :)&quot;</span>);</span>
+<span id="cb2-8"><a href="#cb2-8"></a>}</span></code></pre></div>
+<p>当たり前だけど！！！</p>
+<p>すごいなやんだぞ～～！！！！(つ﹏&lt;)･ﾟ｡</p>
+
+    <hr />
+
+    <ul class="bookmarkers">
+        <li> <!-- See https://about.twitter.com/ja/resources/buttons -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="public_ai000ya" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+
+        <li> <!-- See http://b.hatena.ne.jp/guide/bbutton -->
+            <a href="http://b.hatena.ne.jp/entry/aiya000.github.io/posts/2021-07-23-do-not-make-network-method-to-private-in-vrchat-udonsharp.html" class="hatena-bookmark-button" data-hatena-bookmark-title="UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない - あいや☆ぱぶりっしゅぶろぐ！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li> <!-- See https://developers.facebook.com/docs/plugins/like-button?locale=ja_JP#configurator -->
+            <div class="fb-like" data-href="https://aiya000.github.io/posts/2021-07-23-do-not-make-network-method-to-private-in-vrchat-udonsharp.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </li>
+
+        <li> <!-- See https://getpocket.com/publisher/button -->
+            <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="ja"></a>
+            <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+    </ul>
+
+    <p class="about-pr">
+        この記事はこちらから修正リクエストを送ることができます。 <br />
+        <a href="https://github.com/aiya000/aiya000.github.io/blob/src/posts/2021-07-23-do-not-make-network-method-to-private-in-vrchat-udonsharp.md">UdonSharpでメソッドをthis.SendCustomNetworkEvent()で呼び出すときは、メソッドをprivateにしない - github</a> <br />
+        ゴミ箱ボタンの左にある、鉛筆ボタンを押してね！
+    </p>
+</div>
+
+<script src="../js/facebook-sdk-2.8.js"></script>
+
+
+    <div class="footer">
+      (*^o^) { This blog powerd by Haskell <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+      and more (<a href="../licenses.html">about licenses</a>).
+    </div>
+
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
