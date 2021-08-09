@@ -125,7 +125,7 @@
 <p>（VRChat始めてから一か月ですが、もう足りなくなりました……。みなさん、すてきなワールドをありがとうございます <span class="emoji" data-emoji="hearts">♥️</span>）</p>
 <p>全てのワールドfavoriteをポータルに移植できたので、ワールドfavoriteを全て削除したいと思います。</p>
 <p>それは次のCLIコマンドで実現できます。</p>
-<pre class="shell-session"><code>$ hash=$(echo -n 'aiya000:vrchatPasswd000' | base64)
+<pre class="shell-session"><code>$ hash=$(echo -n 'aiya000:password' | base64)
 $ curl \
     -H &quot;Authorization: Basic $hash&quot; \
     'https://api.vrchat.cloud/api/1/worlds/favorites?apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26' \
