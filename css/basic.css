@@ -17,3 +17,7 @@ div.basic-content {
     height: auto;
     object-fit: contain;
 }
+
+.wrap-rounded img {
+  border-radius: 16px;
+}
