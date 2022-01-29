@@ -31,9 +31,15 @@ ul.vertical-enum {
   display: table-row;
 }
 
-ul.vertical-enum li {
+ul.vertical-enum > li {
   float: left;
   margin-right: 16px;
+}
+
+ul.vertical-enum > li > a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 hr.short-bar {
