@@ -89,8 +89,13 @@ ul.bookmarkers li {
   font-size: 140%;
 }
 
-div.wrap-fluid img {
+.wrap-fluid img {
   width: 60vw;
+  height: auto;
+}
+
+.wrap-fluid-small img {
+  width: 30vw;
   height: auto;
 }
 
