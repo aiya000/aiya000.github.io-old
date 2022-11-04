@@ -5,11 +5,11 @@
 import Control.Lens ((<&>))
 import Data.List (delete)
 import Data.Monoid ((<>))
+import GHC.IO.Encoding (setLocaleEncoding, utf8)
 import Hakyll
 import Text.Highlighting.Kate (styleToCss, pygments)
 import Text.HTML.TagSoup (Tag(..), isTagOpenName, Attribute)
 import Text.Pandoc.Options (ReaderOptions(readerExtensions), Extension(Ext_emoji), extensionsFromList)
-
 
 -- See http://mattwetmore.me/posts/hakyll-list-metadata.html
 --
@@ -28,108 +28,110 @@ listContextWith context thisFieldName targetFieldName = listField thisFieldName 
     twice f x = f x x
 
 main :: IO ()
-main = hakyllWith conf $ do
-  tags <- buildTags "posts/*" $ fromCapture "tags/*.html"
-  tagsRules tags $ \tag pat -> do
-    route idRoute
-    compile $ do
-      let posts   = loadAll pat >>= recentFirst
-      let context = constField "tag" tag <>
-                    constField "title" ("Posts tagged " ++ tag) <>
-                    listField "posts" post posts <>
-                    defaultContext
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/tag.html" context
-        >>= loadAndApplyTemplate "templates/basic.html" context
-        >>= loadAndApplyTemplate "templates/default.html" context
+main = do
+  setLocaleEncoding utf8
+  hakyllWith conf $ do
+    tags <- buildTags "posts/*" $ fromCapture "tags/*.html"
+    tagsRules tags $ \tag pat -> do
+      route idRoute
+      compile $ do
+        let posts   = loadAll pat >>= recentFirst
+        let context = constField "tag" tag <>
+                      constField "title" ("Posts tagged " ++ tag) <>
+                      listField "posts" post posts <>
+                      defaultContext
+        makeItem ""
+          >>= loadAndApplyTemplate "templates/tag.html" context
+          >>= loadAndApplyTemplate "templates/basic.html" context
+          >>= loadAndApplyTemplate "templates/default.html" context
+          >>= relativizeUrls
+
+    match "images/**" $ do
+      route idRoute
+      compile copyFileCompiler
+
+    match "css/**" $ do
+      route idRoute
+      compile compressCssCompiler
+
+    match "js/*" $ do
+      route idRoute
+      compile copyFileCompiler
+
+    match "node_modules/**/*" $ do
+      route idRoute
+      compile copyFileCompiler
+
+    match "about.md" $ do
+      route $ setExtension "html"
+      compile $ modernPandocCompiler
+        >>= loadAndApplyTemplate "templates/basic.html" defaultContext
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
-  match "images/**" $ do
-    route idRoute
-    compile copyFileCompiler
-
-  match "css/**" $ do
-    route idRoute
-    compile compressCssCompiler
-
-  match "js/*" $ do
-    route idRoute
-    compile copyFileCompiler
-
-  match "node_modules/**/*" $ do
-    route idRoute
-    compile copyFileCompiler
-
-  match "about.md" $ do
-    route $ setExtension "html"
-    compile $ modernPandocCompiler
-      >>= loadAndApplyTemplate "templates/basic.html" defaultContext
-      >>= loadAndApplyTemplate "templates/default.html" defaultContext
-      >>= relativizeUrls
-
-  match "licenses.md" $ do
-    route $ setExtension "html"
-    compile $ modernPandocCompiler
-      >>= loadAndApplyTemplate "templates/basic.html" defaultContext
-      >>= loadAndApplyTemplate "templates/default.html" defaultContext
-      >>= relativizeUrls
-
-  match "profile.html" $ do
-    route idRoute
-    compile $ getResourceBody
-      >>= loadAndApplyTemplate "templates/basic.html" defaultContext
-      >>= loadAndApplyTemplate "templates/default.html" defaultContext
-      >>= relativizeUrls
-
-  match "posts/*" $ do
-    route $ setExtension "html"
-    compile $ modernPandocCompiler
-      >>= loadAndApplyTemplate "templates/post.html" post
-      >>= loadAndApplyTemplate "templates/default.html" post
-      >>= relativizeUrls
-
-  -- To deploy ./node_modules
-  create [".nojekyll"] $ do
-    route idRoute
-    compile $ makeItem @String ""
-
-  create ["archive.html"] $ do
-    route idRoute
-    compile $ do
-      let posts   = loadAll "posts/*" >>= recentFirst
-      let context = listField "posts" post posts <>
-                    constField "title" "Archives" <>
-                    defaultContext
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/archive.html" context
-        >>= loadAndApplyTemplate "templates/basic.html" context
-        >>= loadAndApplyTemplate "templates/default.html" context
+    match "licenses.md" $ do
+      route $ setExtension "html"
+      compile $ modernPandocCompiler
+        >>= loadAndApplyTemplate "templates/basic.html" defaultContext
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
-  match "index.html" $ do
-    route idRoute
-    compile $ do
-      tagCloud <- renderTagCloud 80.0 200.0 tags
-      let posts   = loadAll "posts/*" >>= fmap (take 30) . recentFirst
-      let context = listField "posts" post posts <>
-                    constField "title" "Home" <>
-                    constField "tagcloud" tagCloud <>
-                    defaultContext
-      getResourceBody
-        >>= applyAsTemplate context
-        >>= loadAndApplyTemplate "templates/basic.html" context
-        >>= loadAndApplyTemplate "templates/default.html" context
+    match "profile.html" $ do
+      route idRoute
+      compile $ getResourceBody
+        >>= loadAndApplyTemplate "templates/basic.html" defaultContext
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
-  match "templates/*" $
-    compile templateCompiler
+    match "posts/*" $ do
+      route $ setExtension "html"
+      compile $ modernPandocCompiler
+        >>= loadAndApplyTemplate "templates/post.html" post
+        >>= loadAndApplyTemplate "templates/default.html" post
+        >>= relativizeUrls
 
-  match "products.md" $ do
-    route $ setExtension "html"
-    compile $ modernPandocCompiler
-      >>= loadAndApplyTemplate "templates/products.html" defaultContext
-      >>= loadAndApplyTemplate "templates/default.html" defaultContext
-      >>= relativizeUrls
+    -- To deploy ./node_modules
+    create [".nojekyll"] $ do
+      route idRoute
+      compile $ makeItem @String ""
+
+    create ["archive.html"] $ do
+      route idRoute
+      compile $ do
+        let posts   = loadAll "posts/*" >>= recentFirst
+        let context = listField "posts" post posts <>
+                      constField "title" "Archives" <>
+                      defaultContext
+        makeItem ""
+          >>= loadAndApplyTemplate "templates/archive.html" context
+          >>= loadAndApplyTemplate "templates/basic.html" context
+          >>= loadAndApplyTemplate "templates/default.html" context
+          >>= relativizeUrls
+
+    match "index.html" $ do
+      route idRoute
+      compile $ do
+        tagCloud <- renderTagCloud 80.0 200.0 tags
+        let posts   = loadAll "posts/*" >>= fmap (take 30) . recentFirst
+        let context = listField "posts" post posts <>
+                      constField "title" "Home" <>
+                      constField "tagcloud" tagCloud <>
+                      defaultContext
+        getResourceBody
+          >>= applyAsTemplate context
+          >>= loadAndApplyTemplate "templates/basic.html" context
+          >>= loadAndApplyTemplate "templates/default.html" context
+          >>= relativizeUrls
+
+    match "templates/*" $
+      compile templateCompiler
+
+    match "products.md" $ do
+      route $ setExtension "html"
+      compile $ modernPandocCompiler
+        >>= loadAndApplyTemplate "templates/products.html" defaultContext
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
+        >>= relativizeUrls
   where
     -- See /posts/*.md and templates/post.html
     post :: Context String
